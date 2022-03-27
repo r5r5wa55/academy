@@ -114,65 +114,119 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-       
-          <label for="formGroupExampleInput">รหัสบุคลากร</label>
-          <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร">
-          <label for="formGroupExampleInput">ชื่อ</label>
-          <input type="text" class="form-control"  name="PERSONNEL_NAME" placeholder="ชื่อ">
-          <label for="formGroupExampleInput">นามสกุล</label>
-          <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
-          <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
-          <input type="text" class="form-control"  name="PERSONNEL_NAME_EN" placeholder="ชื่อภาษาอังกฤษ">
-          <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
-          <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
-          <label for="formGroupExampleInput">อีเมล</label>
-          <input type="text" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
-          <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
-          <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
-          <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
-          <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
-          <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
-          <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
-          <label for="formGroupExampleInput">เพศ</label>
-          <input type="text" class="form-control"  name="PERSONNEL_SEX" placeholder="เพศ">
-          <label for="formGroupExampleInput">รหัสผู้สร้างบุคลากร</label>
-          <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="รหัสผู้สร้างบุคลากร">
-          <label for="formGroupExampleInput">วันที่สร้าง</label>
-          <input type="text" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
+          <div class="form-group">
+            <div class="row">    
+              <div class="col-md-6">
+                <label for="formGroupExampleInput">รหัสผู้สร้างบุคลากร</label>
+                <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="รหัสผู้สร้างบุคลากร" readonly >
 
-  
+                
+                <label for="formGroupExampleInput">ไอดี</label>
+                <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ไอดี">
 
-          <label for="formGroupExampleInput">แผนก</label>
-          <select class="form-control" name="DEPARTMENT_ID" >
-            <?php foreach($departments as $key=>$value): ?>
-              <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
-            <?php endforeach; ?>
-          </select>
-          <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
-          <select class="form-control" name="PERSONNEL_TYPE_ID">
-            <?php foreach($personnel_types as $key=>$value): ?>
-              <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
-            <?php endforeach; ?>
-          </select>
-          <label for="formGroupExampleInput">สถานะการทำงาน</label>
-          <select class="form-control" name="PERSONNEL_STATUS_ID">
-            <?php foreach($personnel_statuses as $key=>$value): ?>
-              <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
-            <?php endforeach; ?>
-          </select>
- 
-          <label for="formGroupExampleInput">สายงาน</label>
-          <select class="form-control" name="PERSONNEL_CATEGORY_ID" >
-            <?php foreach($personnel_categories as $key=>$value): ?>
-              <option value="<?php echo $value['PERSONNEL_CATEGORY_ID'];?>"><?php echo $value['PERSONNEL_CATEGORY_DETAIL'];?></option>
-            <?php endforeach; ?>
-          </select>
-          <label for="formGroupExampleInput">ไอดี</label>
-          <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ไอดี">
-          <label for="formGroupExampleInput">รหัสผ่าน</label>
-          <input type="text" class="form-control"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
-     
+                
+                <label for="formGroupExampleInput">ชื่อ</label>
+                <input type="text" class="form-control"  name="PERSONNEL_NAME" placeholder="ชื่อ">
+
+                <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
+                <input type="text" class="form-control"  name="PERSONNEL_NAME_EN" placeholder="ชื่อภาษาอังกฤษ">
+
+                <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
+                <div class="row radioinput">    
+                  <div class="col-md-6">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="">
+                      <label class="form-check-label">ชาย</label>
+                    </div>
+                  </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="">
+                      <label class="form-check-label">หญิง</label>
+                    </div>
+                </div>  
+
+               
+
+
+                <label for="formGroupExampleInput">อีเมล</label>
+                <input type="text" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
+
+                <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
+                <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
+
+                
+
+              
+                
+                <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
+              <select class="form-control" name="PERSONNEL_TYPE_ID">
+                <?php foreach($personnel_types as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+          
+
+              <label for="formGroupExampleInput">สายงาน</label>
+              <select class="form-control" name="PERSONNEL_CATEGORY_ID" >
+                <?php foreach($personnel_categories as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_CATEGORY_ID'];?>"><?php echo $value['PERSONNEL_CATEGORY_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+              </div>
+              <div class="col-md-6">
+                <label for="formGroupExampleInput" >รหัสบุคลากร</label>
+                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร">
+
+                <label for="formGroupExampleInput">รหัสผ่าน</label>
+                <input type="text" class="form-control"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
+
+               
+
+                <label for="formGroupExampleInput">นามสกุล</label>
+                <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
+
+                <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
+                <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
+
+                  <div class="form-group">
+                    <label>วันที่สร้าง</label>
+                      <div class="input-group date" name="PERSONNEL_CRETTE_DATE" id="reservationdate" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
+                          <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <div div  div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                          </div>
+                      </div>
+                  </div>
+
+              
+
+                <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
+
+                <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
+
+           
+
+              <label for="formGroupExampleInput">สถานะการทำงาน</label>
+              <select class="form-control" name="PERSONNEL_STATUS_ID">
+                <?php foreach($personnel_statuses as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+    
+              <label for="formGroupExampleInput">แผนก</label>
+              <select class="form-control" name="DEPARTMENT_ID" >
+                <?php foreach($departments as $key=>$value): ?>
+                  <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+
+            </div>    
+          </div>  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -262,7 +316,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_js')?>
 <script>
   $( document ).ready(function() {
-
+    $('.datetimepicker-input').datepicker({
+    autoclose: true,
+    todayHighlight: true
+});
   });
 </script>
 </body>

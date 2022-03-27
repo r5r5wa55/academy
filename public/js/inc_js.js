@@ -888,6 +888,7 @@ var main = {
     var url = window.location.origin+"/academy/index.php/Home/add_personnels";
     // console.log(window.location.origin);
     // return false
+    $('input').removeClass('red')
     if(PERSONNEL_ID==""){
       $('#add_personnels [name=PERSONNEL_ID]').addClass("red")
       return false;

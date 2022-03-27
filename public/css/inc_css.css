@@ -13,3 +13,6 @@
 .red {
   border: 1px solid red;
 }
+.row.radioinput {
+  height: 38px;
+}
