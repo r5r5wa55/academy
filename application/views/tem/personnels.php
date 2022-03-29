@@ -140,7 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                   </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="2">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX"  value="2">
                       <label class="form-check-label">หญิง</label>
                     </div>
                 </div>  
@@ -269,7 +269,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
 
 
-            <label for="formGroupExampleInput">SEX</label>
+            <label for="formGroupExampleInput">เพศ</label>
                 <div class="row radioinput">    
                   <div class="col-md-6">  
                     <div class="form-check">
