@@ -1328,5 +1328,17 @@ var main = {
       }
     })
   },
+  checkcountinput(obj){
+    var num = $(obj).val(); // เก็บตัวแปลเข้า num
+    num = num.replace(/ /g, '');   ///ลบspacebar
+    if(num.length>6){
+        var num_replace = num.slice(0,6);  ///รีเซ็ทเมือจำนวนถึง 6 slice(0,6)การตัดข้อความตั้งแต่่ตัวที่ 1+6
+        console.log(num_replace);
+        $(obj).val(num_replace) ///ยัดค่าเข้าตัวมันเอง
+    }
+    var element = obj  
+    element.value = element.value.replace(/[^0-9]/gi, "");  
+    // $(obj).val(element.value = element.value.replace(/[^0-9]/gi, ""));
 
+  }
 }
