@@ -177,7 +177,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="col-md-6">
                 <label for="formGroupExampleInput" >รหัสบุคลากร</label>
-                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร">
+                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">
 
                 <label for="formGroupExampleInput">รหัสผ่าน</label>
                 <input type="password" class="form-control"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
