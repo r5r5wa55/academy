@@ -888,7 +888,7 @@ var main = {
     var url = window.location.origin+"/academy/index.php/Home/add_personnels";
     // console.log(PERSONNEL_CRETTE_DATE);
     // console.log(PERSONNEL_PASSWORD);
-    return false
+    // return false
     $('input').removeClass('red')
     if(PERSONNEL_ID==""){
       $('#add_personnels [name=PERSONNEL_ID]').addClass("red")
