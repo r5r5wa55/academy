@@ -253,11 +253,11 @@ class Home extends CI_Controller {
 		// echo "</pre>";
 		// exit(); 
 		$this->load->view('tem/personnels',$data); 
-		} 
+	} 
 	public function add_personnels(){
 		$data = $this->mhome->add_personnels($_POST);
 		echo json_encode($data);
-		}
+	}
 	public function edit_personnels(){
 		$data = $this->mhome->edit_personnels($_POST);
 		// 	echo "<pre>";

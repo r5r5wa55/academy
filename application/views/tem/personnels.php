@@ -131,16 +131,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
                 <input type="text" class="form-control"  name="PERSONNEL_NAME_EN" placeholder="ชื่อภาษาอังกฤษ">
 
-                <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
+                <label for="formGroupExampleInput">เพศ</label>
                 <div class="row radioinput">    
                   <div class="col-md-6">  
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="">
-                      <label class="form-check-label">ชาย</label>
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="1">
+                      <label class="form-check-label" >ชาย</label>
                     </div>
                   </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="2">
                       <label class="form-check-label">หญิง</label>
                     </div>
                 </div>  
@@ -180,7 +180,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร">
 
                 <label for="formGroupExampleInput">รหัสผ่าน</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
+                <input type="password" class="form-control"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
 
                
 
@@ -267,8 +267,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
           <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
             <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
+
+
+            <label for="formGroupExampleInput">เพศ</label>
+                <div class="row radioinput">    
+                  <div class="col-md-6">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" value="1">
+                      <label class="form-check-label">ชาย</label>
+                    </div>
+                  </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" value="2">
+                      <label class="form-check-label">หญิง</label>
+                    </div>
+                </div>  
+
           <label for="formGroupExampleInput">เพศ</label>
             <input type="text" class="form-control"  name="PERSONNEL_SEX" placeholder="เพศ">
+
+
           <label for="formGroupExampleInput">รหัสผู้สร้างบุคลากร</label>
             <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="รหัสผู้สร้างบุคลากร">
           <label for="formGroupExampleInput">วันที่สร้าง</label>
@@ -314,13 +332,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- ./wrapper -->
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
-<script>
-  $( document ).ready(function() {
-    $('.datetimepicker-input').datepicker({
-    autoclose: true,
-    todayHighlight: true
-});
-  });
-</script>
+<script></script>
 </body>
 </html>

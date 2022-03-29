@@ -205,11 +205,13 @@ class Home_model extends CI_Model {
       'personnels' => $personnels['personnels'],
       'departments' => $departments['departments']
     );
+    // var_dump($DATA);
     // echo "<pre>";
-		// print_r($management_positions);
+		// // print_r($management_positions);
+    // var_dump($DATA);
 		// echo "</pre>";
-		// exit(); 
-    // หน้า network
+		// // exit(); 
+    // // หน้า network
     return $DATA;
   }
   public function add_management_positions($data){
@@ -467,9 +469,30 @@ class Home_model extends CI_Model {
     // // หน้า network
     return $DATA;
   }
+  
   public function add_personnels($data){
-    $st = array('st'=>0);
-    if(is_array($data) && $data['PERSONNEL_CATEGORY_ID']!="" && $data['PERSONNEL_ID']!=""){
+    $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
+
+    $this->db->select('PERSONNEL_ID,PERSONNEL_USERNAME');
+    $this->db->from('personnels');
+    $this->db->where('PERSONNEL_ID', $data['PERSONNEL_ID']);
+    $this->db->or_where('PERSONNEL_ID', $data['PERSONNEL_ID']);
+    $personnels_check = $this->db->get();
+    $personnels_check = $personnels_check->row_array();
+    $PERSONNEL_ID_check = isset($personnels_check['PERSONNEL_ID'])?$personnels_check['PERSONNEL_ID']:"";
+    $PERSONNEL_USERNAME_check = isset($personnels_check['PERSONNEL_USERNAME'])?$personnels_check['PERSONNEL_USERNAME']:"";
+    
+    
+
+    if($PERSONNEL_ID_check == $data['PERSONNEL_ID']){
+      $st = array('st'=>0,'ms'=>$PERSONNEL_ID_check.' ซ้ำ','name'=>'PERSONNEL_ID');
+    }
+
+    if($PERSONNEL_USERNAME_check == $data['PERSONNEL_USERNAME']){
+      $st = array('st'=>0,'ms'=>$PERSONNEL_USERNAME_check.' ซ้ำ','name'=>'PERSONNEL_USERNAME');
+    }
+   
+    if(is_array($data) && $data['PERSONNEL_CATEGORY_ID']!="" && $data['PERSONNEL_ID']!="" && $PERSONNEL_ID_check == ""){
       $data = array(
         'PERSONNEL_ID' => $data['PERSONNEL_ID'],
         'PERSONNEL_NAME' => $data['PERSONNEL_NAME'],
@@ -491,8 +514,9 @@ class Home_model extends CI_Model {
         'PERSONNEL_PASSWORD' => $data['PERSONNEL_PASSWORD'],
       );
       $data = $this->db->insert('personnels', $data);
-      $st = array('st'=>1);
+      $st = array('st'=>1,'ms'=>'สำเร็จ');
     }
+  
     return $st;
   }
   public function edit_personnels($data){

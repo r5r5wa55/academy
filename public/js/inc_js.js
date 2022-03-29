@@ -876,7 +876,7 @@ var main = {
     var PERSONNEL_MOBILE = $('#add_personnels [name=PERSONNEL_MOBILE]').val()
     var PERSONNEL_PHONE = $('#add_personnels [name=PERSONNEL_PHONE]').val()
     var PERSONNEL_PHONE_EXTENSION = $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').val()
-    var PERSONNEL_SEX = $('#add_personnels [name=PERSONNEL_SEX]').val()
+    var PERSONNEL_SEX = $('#add_personnels [name=PERSONNEL_SEX]:checked').val()
     var PERSONNEL_CREATE_BY = $('#add_personnels [name=PERSONNEL_CREATE_BY]').val()
     var PERSONNEL_CRETTE_DATE = $('#add_personnels [name=PERSONNEL_CRETTE_DATE]').val()
     var DEPARTMENT_ID =$('#add_personnels [name=DEPARTMENT_ID] option:selected').val();
@@ -929,11 +929,14 @@ var main = {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
       },
     }).done(function(resp) {
+
       if(resp.st == 1){
-        alert('บันทึกสำเร็จ')
+        alert(resp.ms)
         location.reload();
       }else{
-        alert('บันทึกไม่สำเร็จ')
+        alert(resp.ms)
+        $('#add_personnels [name='+resp.name+']').addClass("red")
+        return false;
       }
     })
   }, 
@@ -951,8 +954,21 @@ var main = {
     $('#edit_personnels [name=PERSONNEL_EMAIL]').val(PERSONNEL_EMAIL);
     $('#edit_personnels [name=PERSONNEL_MOBILE]').val(PERSONNEL_MOBILE);
     $('#edit_personnels [name=PERSONNEL_PHONE]').val(PERSONNEL_PHONE);
-    $('#edit_personnels [name=PERSONNEL_PHONE_EXTENSION]').val(PERSONNEL_PHONE_EXTENSION);  
-    $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#edit_personnels [name=PERSONNEL_PHONE_EXTENSION]').val(PERSONNEL_PHONE_EXTENSION); 
+     
+    // $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#edit_personnels [name=PERSONNEL_SEX]').each(function(key,value){
+      
+      if($(value).val()==PERSONNEL_SEX){
+        // console.log($(value).val());
+        // console.log(PERSONNEL_SEX);
+        $(value).prop( "checked", true );
+        
+      }
+      
+
+    })
+    
     $('#edit_personnels [name=PERSONNEL_CREATE_BY]').val(PERSONNEL_CREATE_BY);
     $('#edit_personnels [name=PERSONNEL_CRETTE_DATE]').val(PERSONNEL_CRETTE_DATE);
     $('#edit_personnels [name=DEPARTMENT_ID] option').each(function(key,value){
@@ -989,7 +1005,7 @@ var main = {
     var PERSONNEL_MOBILE = $('#edit_personnels [name=PERSONNEL_MOBILE]').val()
     var PERSONNEL_PHONE = $('#edit_personnels [name=PERSONNEL_PHONE]').val()
     var PERSONNEL_PHONE_EXTENSION = $('#edit_personnels [name=PERSONNEL_PHONE_EXTENSION]').val()
-    var PERSONNEL_SEX = $('#edit_personnels [name=PERSONNEL_SEX]').val()
+    var PERSONNEL_SEX = $('#edit_personnels [name=PERSONNEL_SEX]:checked').val()
     var PERSONNEL_CREATE_BY = $('#edit_personnels [name=PERSONNEL_CREATE_BY]').val()
     var PERSONNEL_CRETTE_DATE = $('#edit_personnels [name=PERSONNEL_CRETTE_DATE]').val()
     var PERSONNEL_USERNAME = $('#edit_personnels [name=PERSONNEL_USERNAME]').val()
@@ -1024,6 +1040,7 @@ var main = {
       'PERSONNEL_CATEGORY_ID':PERSONNEL_CATEGORY_ID,
       'DEPARTMENT_ID':DEPARTMENT_ID
     }
+
     $.ajax({
       url : url,
       method : 'POST',
