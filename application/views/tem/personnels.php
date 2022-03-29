@@ -269,7 +269,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
 
 
-            <label for="formGroupExampleInput">เพศ</label>
+            <label for="formGroupExampleInput">SEX</label>
                 <div class="row radioinput">    
                   <div class="col-md-6">  
                     <div class="form-check">
