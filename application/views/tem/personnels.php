@@ -178,29 +178,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="col-md-6">
                 <label for="formGroupExampleInput" >รหัสบุคลากร</label>
                 <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">
-
+                  
                 <label for="formGroupExampleInput">รหัสผ่าน</label>
-                <input type="password" class="form-control"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
-
-               
-
+                <div class="input-group input-group-md">
+                  <input type="password" class="form-control"  id="myInput"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
+                  <span class="input-group-append">
+                    <button type="checkbox" class="btn btn-info btn-flat"name="PERSONNEL_PASSWORD"  onclick="myFunction()" id="myInput">แสดง</button>
+                  </span>
+                </div>
                 <label for="formGroupExampleInput">นามสกุล</label>
                 <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
 
                 <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
                 <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
 
-                  <div class="form-group">
-                    <label>วันที่สร้าง</label>
-                      <div class="input-group date" name="PERSONNEL_CRETTE_DATE" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
-                          <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                            <div div  div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                          </div>
-                      </div>
-                  </div>
-
-              
+                <label for="formGroupExampleInput">วันที่สร้าง</label>
+                <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
                 <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
@@ -332,6 +325,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- ./wrapper -->
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
-<script></script>
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+
 </body>
 </html>

@@ -878,7 +878,7 @@ var main = {
     var PERSONNEL_PHONE_EXTENSION = $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').val()
     var PERSONNEL_SEX = $('#add_personnels [name=PERSONNEL_SEX]:checked').val()
     var PERSONNEL_CREATE_BY = $('#add_personnels [name=PERSONNEL_CREATE_BY]').val()
-    var PERSONNEL_CRETTE_DATE = $('#add_personnels [name=PERSONNEL_CRETTE_DATE]').val()
+    var PERSONNEL_CRETTE_DATE = $('#add_personnels [name=PERSONNEL_CRETTE_DATE] ').val()
     var DEPARTMENT_ID =$('#add_personnels [name=DEPARTMENT_ID] option:selected').val();
     var PERSONNEL_CATEGORY_ID =$('#add_personnels [name=PERSONNEL_CATEGORY_ID] option:selected').val();
     var PERSONNEL_STATUS_ID  = $('#add_personnels [name=PERSONNEL_STATUS_ID] option:selected').val();
@@ -886,8 +886,9 @@ var main = {
     var PERSONNEL_USERNAME = $('#add_personnels [name=PERSONNEL_USERNAME]').val()
     var PERSONNEL_PASSWORD = $('#add_personnels [name=PERSONNEL_PASSWORD]').val()
     var url = window.location.origin+"/academy/index.php/Home/add_personnels";
-    // console.log(window.location.origin);
-    // return false
+    // console.log(PERSONNEL_CRETTE_DATE);
+    // console.log(PERSONNEL_PASSWORD);
+    return false
     $('input').removeClass('red')
     if(PERSONNEL_ID==""){
       $('#add_personnels [name=PERSONNEL_ID]').addClass("red")
