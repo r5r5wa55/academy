@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?php echo base_url()."public/"?>dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  <img class="animation__shake" src="<?php echo base_url()."public/"?>dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <?php $this->load->view('tem/inc_head_menu.php')?>
@@ -45,17 +45,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <!-- /.content-header -->
 
+  
+    
+
     <div class="content">
       <div class="row">
-    
         <div class="col-lg-1 hade-show">รหัส</div>
         <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
+        <div class="col-lg-2 hade-show">นามสกุล</div>
         <div class="col-lg-2 hade-show">ขื่อ</div>
         <div class="col-lg-2 hade-show">แสดงข้อมูล</div>
         <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-1 hade-show">ลบข้อมูล</div>
-       
       </div>
       <?php foreach($personnels as $key=>$value): ?>
         <div class="row">
@@ -121,8 +122,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="รหัสผู้สร้างบุคลากร" readonly >
 
                 
-                <label for="formGroupExampleInput">ไอดี</label>
-                <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ไอดี">
+                <label for="formGroupExampleInput">ชื่อผู้ใช้</label>
+                <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ชื่อผู้ใช้">
 
                 
                 <label for="formGroupExampleInput">ชื่อ</label>
@@ -145,27 +146,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>  
 
-               
-
-
                 <label for="formGroupExampleInput">อีเมล</label>
                 <input type="text" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
                 <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
 
-                
-
-              
-                
                 <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
               <select class="form-control" name="PERSONNEL_TYPE_ID">
                 <?php foreach($personnel_types as $key=>$value): ?>
                   <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
                 <?php endforeach; ?>
               </select>
-
-          
 
               <label for="formGroupExampleInput">สายงาน</label>
               <select class="form-control" name="PERSONNEL_CATEGORY_ID" >
@@ -176,7 +168,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               </div>
               <div class="col-md-6">
-                <label for="formGroupExampleInput" >รหัสบุคลากร</label>
+                <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
                 <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">
                   
                 <label for="formGroupExampleInput">รหัสผ่าน</label>
@@ -199,9 +191,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
-
-           
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >
 
               <label for="formGroupExampleInput">สถานะการทำงาน</label>
               <select class="form-control" name="PERSONNEL_STATUS_ID">
