@@ -878,7 +878,7 @@ var main = {
     var PERSONNEL_PHONE_EXTENSION = $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').val()
     var PERSONNEL_SEX = $('#add_personnels [name=PERSONNEL_SEX]:checked').val()
     var PERSONNEL_CREATE_BY = $('#add_personnels [name=PERSONNEL_CREATE_BY]').val()
-    var PERSONNEL_CRETTE_DATE = $('#add_personnels [name=PERSONNEL_CRETTE_DATE] ').val()
+    var PERSONNEL_CRETTE_DATE = $('#add_personnels [name=PERSONNEL_CRETTE_DATE]').val()
     var DEPARTMENT_ID =$('#add_personnels [name=DEPARTMENT_ID] option:selected').val();
     var PERSONNEL_CATEGORY_ID =$('#add_personnels [name=PERSONNEL_CATEGORY_ID] option:selected').val();
     var PERSONNEL_STATUS_ID  = $('#add_personnels [name=PERSONNEL_STATUS_ID] option:selected').val();
@@ -894,11 +894,53 @@ var main = {
       $('#add_personnels [name=PERSONNEL_ID]').addClass("red")
       return false;
     }
+    if(PERSONNEL_USERNAME==""){
+      $('#add_personnels [name=PERSONNEL_USERNAME]').addClass("red")
+      return false;
+    }
+
+    if(PERSONNEL_PASSWORD==""){
+      $('#add_personnels [name=PERSONNEL_PASSWORD]').addClass("red")
+      return false;
+    }
     if(PERSONNEL_NAME==""){
       $('#add_personnels [name=PERSONNEL_NAME]').addClass("red")
       return false;
     }
+    if(PERSONNEL_SURNAME==""){
+      $('#add_personnels [name=PERSONNEL_SURNAME]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_NAME_EN==""){
+      $('#add_personnels [name=PERSONNEL_NAME_EN]').addClass("red")
+      return false;
+    }
 
+    if(PERSONNEL_SURNAME_EN==""){
+      $('#add_personnels [name=PERSONNEL_SURNAME_EN').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_CRETTE_DATE==""){
+      $('#add_personnels [name=PERSONNEL_CRETTE_DATE').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_EMAIL==""){
+      $('#add_personnels [name=PERSONNEL_EMAIL]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_PHONE==""){
+      $('#add_personnels [name=PERSONNEL_PHONE]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_MOBILE==""){
+      $('#add_personnels [name=PERSONNEL_MOBILE]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_PHONE_EXTENSION==""){
+      $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').addClass("red")
+      return false;
+    }
+   
 
     var data = {
       'PERSONNEL_ID':PERSONNEL_ID,
