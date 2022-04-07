@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <!-- /.content-header -->
 
-    <div class="content">
+  <div class="content">
       <div class="row">
          <div class="col-lg-2 "></div>
         <div class="col-lg-2 hade-show">รหัส</div>
