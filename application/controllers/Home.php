@@ -198,11 +198,15 @@ class Home extends CI_Controller {
   	public function add_faculties(){
 		$data = $this->mhome->add_faculties($_POST);
 		echo json_encode($data);
-		}
+	}
   	public function edit_faculties(){
 		$data = $this->mhome->edit_faculties($_POST);
 		echo json_encode($data);
 	} 
+	public function delete_faculties(){
+		$data = $this->mhome->delete_faculties($_POST);
+		echo json_encode($data);
+	}
 ///	departments
  	public function departments(){
 		$data = $this->mhome->select_departments();
@@ -220,6 +224,10 @@ class Home extends CI_Controller {
     	$data = $this->mhome->edit_departments($_POST);
 		echo json_encode($data);
  	}
+	public function delete_departments(){
+		$data = $this->mhome->delete_departments($_POST);
+		echo json_encode($data);
+	}
 ///	academic_positions
 	public function academic_positions(){
 		$data = $this->mhome->select_academic_positions();

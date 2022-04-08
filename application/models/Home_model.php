@@ -393,6 +393,14 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  public function delete_faculties($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ID_F']!=""){
+      $this->db->delete('faculties', array('ID_F' => $data['ID_F'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
   ///
   public function select_departments(){
     $this->db->select('*');
@@ -441,6 +449,14 @@ class Home_model extends CI_Model {
   
     return $st;
   }
+  public function delete_departments($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ID_DEP']!=""){
+      $this->db->delete('departments', array('ID_DEP' => $data['ID_DEP'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
   ///
   public function select_personnels(){
     $this->db->select('*');
@@ -469,7 +485,6 @@ class Home_model extends CI_Model {
     // // หน้า network
     return $DATA;
   }
-
   public function add_personnels($data){
     $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
 
