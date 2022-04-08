@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">personnel_statuses</li>
+              <li class="breadcrumb-item active">สถานะการทำงาน</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
