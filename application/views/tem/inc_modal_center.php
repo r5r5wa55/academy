@@ -395,9 +395,13 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ตารางคณะ</label>
-          <input type="text" class="form-control m-2 p-2"  name="FACULTY_ID" placeholder="ไอดีคณะ"> 
-          <input type="text" class="form-control m-2 p-2" name="FACUALTY_NAME_TH" placeholder="ชื่อคณะ">
+          <label for="formGroupExampleInput">ไอดีคณะ</label>
+          <input type="text" class="form-control m-2 p-2" class="FACULTY_ID" name="FACULTY_ID" placeholder="ไอดีคณะ">
+          <label for="formGroupExampleInput">ชื่อคณะ</label>
+
+          <input type="text" class="form-control m-2 p-2" class="FACUALTY_NAME_TH" name="FACUALTY_NAME_TH" placeholder="ชื่อคณะ">
+          <label for="formGroupExampleInput">ชื่อคณะภาษาอังกฤษ</label>
+
           <input type="text" class="form-control m-2 p-2" name="FACUALTY_NAME_EN" placeholder="ชื่อคณะภาษาอังกฤษ">
         </div>
         <div class="modal-footer">
@@ -419,10 +423,12 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ชื่อคณะ</label>
+        <label for="formGroupExampleInput">ไอดีคณะ</label>
           <input type="text" class="form-control"  name="FACULTY_ID" placeholder="ชื่อคณะ">
+          <label for="formGroupExampleInput">ชื่อคณะ</label>
           <input type="text" class="form-control"  name="FACUALTY_NAME_TH" placeholder="ชื่อคณะ">
-          <input type="text" class="form-control"  name="FACUALTY_NAME_EN" placeholder="ชื่อคณะ">
+          <label for="formGroupExampleInput">ชื่อคณะภาษาอังกฤษ</label>
+          <input type="text" class="form-control"  name="FACUALTY_NAME_EN" placeholder="ชื่อคณะภาษาอังกฤษ">
           <input type="hidden"   name="ID_F">
         </div>
         <div class="modal-footer">

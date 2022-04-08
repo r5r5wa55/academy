@@ -717,6 +717,21 @@ var main = {
     var url = window.location.origin+"/academy/index.php/Home/add_faculties";
     // console.log(window.location.origin);
     // return false;
+    $('input').removeClass('red')
+    if(FACULTY_ID==""){
+      $('#add_faculties [name=FACULTY_ID]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(FACUALTY_NAME_TH==""){
+      $('#add_faculties [name=FACUALTY_NAME_TH]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(FACUALTY_NAME_EN==""){
+      $('#add_faculties [name=FACUALTY_NAME_EN]').addClass("red")
+      return false;
+    }
     var data = {
       'FACULTY_ID':FACULTY_ID,
       'FACUALTY_NAME_TH':FACUALTY_NAME_TH,
@@ -732,11 +747,14 @@ var main = {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
       },
     }).done(function(resp) {
+
       if(resp.st == 1){
-        alert('บันทึกสำเร็จ')
+        alert(resp.ms)
         location.reload();
       }else{
-        alert('บันทึกไม่สำเร็จ')
+        alert(resp.ms)
+        $('#add_personnels [name='+resp.name+']').addClass("red")
+        return false;
       }
     })
   },
