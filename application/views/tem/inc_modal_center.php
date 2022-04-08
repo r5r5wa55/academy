@@ -298,15 +298,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล personnel_statuses</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล สถานะการทำงาน</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ชื่ออาจารย์</label>
-          <input type="text" class="form-control"  name="PERSONNEL_STATUS_DETAIL" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">สถานะการทำงาน</label>
+          <input type="text" class="form-control"  name="PERSONNEL_STATUS_DETAIL" placeholder="สถานะการทำงาน">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -320,15 +320,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล ตารางวิชาการ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล สถานะการทำงาน</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ชื่ออาจารย์</label>
-          <input type="text" class="form-control"  name="PERSONNEL_STATUS_DETAIL" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">สถานะการทำงาน</label>
+          <input type="text" class="form-control"  name="PERSONNEL_STATUS_DETAIL" placeholder="สถานะการทำงาน">
           <input type="hidden"   name="PERSONNEL_STATUS_ID">
         </div>
         <div class="modal-footer">
@@ -343,15 +343,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล personnel_statuses</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล รูปแบบการทำงาน</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ชื่ออาจารย์</label>
-          <input type="text" class="form-control"  name="PERSONNEL_TYPE_DETAIL" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">รูปแบบการทำงาน</label>
+          <input type="text" class="form-control"  name="PERSONNEL_TYPE_DETAIL" placeholder="รูปแบบการทำงาน">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -365,15 +365,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล personnel_types</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล รูปแบบการทำงาน</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ชื่ออาจารย์</label>
-          <input type="text" class="form-control"  name="PERSONNEL_TYPE_DETAIL" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">รูปแบบการทำงาน</label>
+          <input type="text" class="form-control"  name="PERSONNEL_TYPE_DETAIL" placeholder="รูปแบบการทำงาน">
           <input type="hidden"   name="PERSONNEL_TYPE_ID">
         </div>
         <div class="modal-footer">
