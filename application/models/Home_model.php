@@ -469,7 +469,7 @@ class Home_model extends CI_Model {
     // // หน้า network
     return $DATA;
   }
-  
+
   public function add_personnels($data){
     $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
 
@@ -481,6 +481,7 @@ class Home_model extends CI_Model {
     $personnels_check = $personnels_check->row_array();
     $PERSONNEL_ID_check = isset($personnels_check['PERSONNEL_ID'])?$personnels_check['PERSONNEL_ID']:"";
     $PERSONNEL_USERNAME_check = isset($personnels_check['PERSONNEL_USERNAME'])?$personnels_check['PERSONNEL_USERNAME']:"";
+    
     
     
 
@@ -533,6 +534,7 @@ class Home_model extends CI_Model {
       $this->db->set('PERSONNEL_PHONE_EXTENSION', $data['PERSONNEL_PHONE_EXTENSION']);
       $this->db->set('PERSONNEL_SEX', $data['PERSONNEL_SEX']);
       $this->db->set('PERSONNEL_CREATE_BY',  $data['PERSONNEL_CREATE_BY']);
+      $this->db->set('PERSONNEL_CRETTE_DATE',  $data['PERSONNEL_CRETTE_DATE']);
       $this->db->set('DEPARTMENT_ID',  $data['DEPARTMENT_ID']);
       $this->db->set('PERSONNEL_CATEGORY_ID', $data['PERSONNEL_CATEGORY_ID']);
       $this->db->set('PERSONNEL_STATUS_ID', $data['PERSONNEL_STATUS_ID']);

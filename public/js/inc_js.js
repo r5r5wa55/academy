@@ -987,7 +987,7 @@ var main = {
     PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,
     PERSONNEL_CREATE_BY,PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
     PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD){
-    // console.log(DEPARTMENT_ID);
+    // console.log(PERSONNEL_CRETTE_DATE);
     // return false;
     $('#edit_personnels [name=PERSONNEL_ID]').val(PERSONNEL_ID); 
     $('#edit_personnels [name=PERSONNEL_NAME]').val(PERSONNEL_NAME); 
@@ -998,7 +998,7 @@ var main = {
     $('#edit_personnels [name=PERSONNEL_MOBILE]').val(PERSONNEL_MOBILE);
     $('#edit_personnels [name=PERSONNEL_PHONE]').val(PERSONNEL_PHONE);
     $('#edit_personnels [name=PERSONNEL_PHONE_EXTENSION]').val(PERSONNEL_PHONE_EXTENSION); 
-     
+      
     // $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
     $('#edit_personnels [name=PERSONNEL_SEX]').each(function(key,value){
       
@@ -1034,9 +1034,67 @@ var main = {
         $(value).attr("selected","selected")
       }
     });
+  
     $('#edit_personnels [name=PERSONNEL_USERNAME]').val(PERSONNEL_USERNAME);
     $('#edit_personnels [name=PERSONNEL_PASSWORD]').val(PERSONNEL_PASSWORD);
     $('#edit_personnels').modal('show'); 
+   ;
+  }, 
+  get_show_personnels(PERSONNEL_ID,PERSONNEL_NAME,PERSONNEL_SURNAME,PERSONNEL_NAME_EN,PERSONNEL_SURNAME_EN,
+    PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,
+    PERSONNEL_CREATE_BY,PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
+    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD){
+    // console.log(PERSONNEL_CRETTE_DATE);
+    // return false;
+    $('#show_personnels [name=PERSONNEL_ID]').val(PERSONNEL_ID); 
+    $('#show_personnels [name=PERSONNEL_NAME]').val(PERSONNEL_NAME); 
+    $('#show_personnels [name=PERSONNEL_SURNAME]').val(PERSONNEL_SURNAME);
+    $('#show_personnels [name=PERSONNEL_NAME_EN]').val(PERSONNEL_NAME_EN);
+    $('#show_personnels [name=PERSONNEL_SURNAME_EN]').val(PERSONNEL_SURNAME_EN);
+    $('#show_personnels [name=PERSONNEL_EMAIL]').val(PERSONNEL_EMAIL);
+    $('#show_personnels [name=PERSONNEL_MOBILE]').val(PERSONNEL_MOBILE);
+    $('#show_personnels [name=PERSONNEL_PHONE]').val(PERSONNEL_PHONE);
+    $('#show_personnels [name=PERSONNEL_PHONE_EXTENSION]').val(PERSONNEL_PHONE_EXTENSION); 
+    // $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#show_personnels [name=PERSONNEL_SEX]').each(function(key,value){
+      
+      if($(value).val()==PERSONNEL_SEX){
+        // console.log($(value).val());
+        // console.log(PERSONNEL_SEX);
+        $(value).prop( "checked", true );
+        
+      }
+      
+
+    })
+    
+    $('#show_personnels .PERSONNEL_CREATE_BY').text(PERSONNEL_CREATE_BY); 
+
+  
+    $('#show_personnels [name=PERSONNEL_CRETTE_DATE]').val(PERSONNEL_CRETTE_DATE);
+    $('#show_personnels [name=DEPARTMENT_ID] option').each(function(key,value){
+      if(DEPARTMENT_ID === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#show_personnels [name=PERSONNEL_TYPE_ID] option').each(function(key,value){
+      if(PERSONNEL_TYPE_ID === $(value).val()){
+        $(value).attr("selected","selected")
+       }
+    });
+    $('#show_personnels [name=PERSONNEL_STATUS_ID] option').each(function(key,value){
+      if(PERSONNEL_STATUS_ID === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#show_personnels [name=PERSONNEL_CATEGORY_ID] option').each(function(key,value){
+      if(PERSONNEL_CATEGORY_ID === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#show_personnels [name=PERSONNEL_USERNAME]').val(PERSONNEL_USERNAME);
+    $('#show_personnels [name=PERSONNEL_PASSWORD]').val(PERSONNEL_PASSWORD);
+    $('#show_personnels').modal('show'); 
   }, 
   edit_personnels(){
     var PERSONNEL_ID = $('#edit_personnels [name=PERSONNEL_ID]').val()
@@ -1060,6 +1118,58 @@ var main = {
     var url = window.location.origin+"/academy/index.php/Home/edit_personnels";
     // console.log(window.location.origin);
     // return false;
+    $('input').removeClass('red')
+    if(PERSONNEL_ID==""){
+      $('#edit_personnels [name=PERSONNEL_ID]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_USERNAME==""){
+      $('#edit_personnels [name=PERSONNEL_USERNAME]').addClass("red")
+      return false;
+    }
+
+    if(PERSONNEL_PASSWORD==""){
+      $('#edit_personnels [name=PERSONNEL_PASSWORD]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_NAME==""){
+      $('#edit_personnels [name=PERSONNEL_NAME]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_SURNAME==""){
+      $('#edit_personnels [name=PERSONNEL_SURNAME]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_NAME_EN==""){
+      $('#edit_personnels [name=PERSONNEL_NAME_EN]').addClass("red")
+      return false;
+    }
+
+    if(PERSONNEL_SURNAME_EN==""){
+      $('#edit_personnels [name=PERSONNEL_SURNAME_EN').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_CRETTE_DATE==""){
+      $('#edit_personnels [name=PERSONNEL_CRETTE_DATE').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_EMAIL==""){
+      $('#edit_personnels [name=PERSONNEL_EMAIL]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_PHONE==""){
+      $('#edit_personnels [name=PERSONNEL_PHONE]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_MOBILE==""){
+      $('#edit_personnels [name=PERSONNEL_MOBILE]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_PHONE_EXTENSION==""){
+      $('#edit_personnels [name=PERSONNEL_PHONE_EXTENSION]').addClass("red")
+      return false;
+    }
+   
     var data = {
       'PERSONNEL_ID':PERSONNEL_ID,
       'PERSONNEL_NAME':PERSONNEL_NAME,

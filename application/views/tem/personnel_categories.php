@@ -27,12 +27,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0" >personnel_categories</h1>
+            <h1 class="m-0" >ข้อมูลสายงาน</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -46,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- /.content-header -->
 
   <div class="content">
-      <div class="row">
+      <div class="row" >
          <div class="col-lg-2 "></div>
         <div class="col-lg-2 hade-show">รหัส</div>
         <div class="col-lg-2 hade-show">ขื่อ</div>

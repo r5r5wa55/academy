@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">ตารางวิชาการ</li>
+              <li class="breadcrumb-item active">บุคุุคลากร</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -55,8 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 hade-show">รหัส</div>
         <div class="col-lg-2 hade-show">ขื่อ</div>
         <div class="col-lg-2 hade-show">นามสกุล</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-     
+        <div class="col-lg-2 hade-show">สถานะการทำงาน</div>
         <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 hade-show">ลบข้อมูล</div>
       </div>
@@ -138,12 +137,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="row radioinput">    
                   <div class="col-md-6">  
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="1" value="1">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="1">
                       <label class="form-check-label" >ชาย</label>
                     </div>
                   </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="1" value="2">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="2">
                       <label class="form-check-label">หญิง</label>
                     </div>
                 </div>  

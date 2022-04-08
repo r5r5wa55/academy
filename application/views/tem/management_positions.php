@@ -48,21 +48,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="content">
       <div class="row">
-        <div class="col-lg-1 hade-show">รหัส</div>
+        <div class="col-lg-2 hade-show">รหัส</div>
         <div class="col-lg-2 hade-show">ขื่อ</div>
         <div class="col-lg-2 hade-show">นามสกุล</div>
         <div class="col-lg-2 hade-show">ตำแหน่ง</div>
-        <div class="col-lg-2 hade-show">แสดงข้อมูล</div>
         <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-1 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($management_positions as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-1 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
+          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['MANAGEMENT_NAME'];?></div>
-          <div class="col-lg-2 hade-show">แสดงข้อมูล</div>
 
           <div class="col-lg-2 body-show">
             <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_management_positions( 
@@ -74,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </button>
           </div>
 
-          <div class="col-lg-1 body-show">
+          <div class="col-lg-2 body-show">
             <button type="button" class="btn btn-block btn-danger" onclick="main.delete_management_positions('<?php echo $value['MANAGEMENT_POSITION_ID'];?>')">ลบข้อมูล</button>
           </div>
         </div>
