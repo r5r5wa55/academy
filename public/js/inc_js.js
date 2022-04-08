@@ -779,12 +779,30 @@ var main = {
     // console.log(FACUALTY_NAME_EN);
     // return false หยุดการทำงาน 
     var url = window.location.origin+"/academy/index.php/Home/edit_faculties";
+
+    $('input').removeClass('red')
+    if(FACULTY_ID==""){
+      $('#edit_faculties [name=FACULTY_ID]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(FACUALTY_NAME_TH==""){
+      $('#edit_faculties [name=FACUALTY_NAME_TH]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(FACUALTY_NAME_EN==""){
+      $('#edit_faculties [name=FACUALTY_NAME_EN]').addClass("red")
+      return false;
+    }
+
     var data = {
       'ID_F':ID_F,
       'FACULTY_ID':FACULTY_ID,
       'FACUALTY_NAME_TH':FACUALTY_NAME_TH,
       'FACUALTY_NAME_EN':FACUALTY_NAME_EN
     }
+
     $.ajax({
       url : url,
       method : 'POST',
