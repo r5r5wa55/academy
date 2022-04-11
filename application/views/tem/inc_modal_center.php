@@ -208,15 +208,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล managements</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล ประเภทตำแหน่งผู้บริหาร</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">managements</label>
-          <input type="text" class="form-control"  name="MANAGEMENT_NAME" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">ประเภทตำแหน่งผู้บริหาร</label>
+          <input type="text" class="form-control"  name="MANAGEMENT_NAME" placeholder="ชื่อประเภทตำแหน่งผู้บริหาร">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -230,15 +230,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล managements</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล ประเภทตำแหน่งผู้บริหาร</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">managements</label>
-          <input type="text" class="form-control"  name="MANAGEMENT_NAME" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">ประเภทตำแหน่งผู้บริหาร</label>
+          <input type="text" class="form-control"  name="MANAGEMENT_NAME" placeholder="ชื่อประเภทตำแหน่งผู้บริหาร">
           <input type="hidden"   name="MANAGEMENT_ID">
         </div>
         <div class="modal-footer">
