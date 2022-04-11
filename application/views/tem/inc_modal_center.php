@@ -2,15 +2,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล ตารางวิชาการ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล ประเภทตำแหน่งทางวิชาการ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ชื่ออาจารย์</label>
-          <input type="text" class="form-control"  name="ACADEMIC_NAME" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">ประเภทตำแหน่งทางวิชาการ</label>
+          <input type="text" class="form-control"  name="ACADEMIC_NAME" placeholder="ประเภทตำแหน่งทางวิชาการ">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -24,15 +24,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล ตารางวิชาการ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล ประเภทตำแหน่งทางวิชาการ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">ชื่ออาจารย์</label>
-          <input type="text" class="form-control"  name="ACADEMIC_NAME" placeholder="ชื่ออาจารย์">
+          <label for="formGroupExampleInput">ประเภทตำแหน่งทางวิชาการ</label>
+          <input type="text" class="form-control"  name="ACADEMIC_NAME" placeholder="ประเภทตำแหน่งทางวิชาการ">
           <input type="hidden"   name="ACADEMIC_ID">
         </div>
         <div class="modal-footer">

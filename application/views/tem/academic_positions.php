@@ -92,7 +92,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล คณะ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล คณตำแหน่งทางวิชาการ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -131,21 +131,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล คณะ</h5>
+        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล ตำแหน่งทางวิชาการ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-        <label for="formGroupExampleInput">ACADEMIC_ID</label>
+        <label for="formGroupExampleInput">กรุณาเลือก ตำแหน่งทางวิชาการ</label>
           <select class="form-control" name="ACADEMIC_ID" >
             <option value="">กรุณาเลือก</option>
             <?php foreach($academics as $key=>$value): ?>
               <option value="<?php echo $value['ACADEMIC_ID'];?>"><?php echo $value['ACADEMIC_NAME'];?></option>
             <?php endforeach; ?>
           </select>
-          <label for="formGroupExampleInput">PERSONNEL_ID</label>
+          <label for="formGroupExampleInput">กรุณาเลือก ชิ่อ-นามสกุล</label>
           <select class="form-control" name="PERSONNEL_ID" >
             <option value="">กรุณาเลือก</option>
             <?php foreach($personnels as $key=>$value): ?>
