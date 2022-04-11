@@ -62,7 +62,7 @@ var main = {
       'ACADEMIC_ID':ACADEMIC_ID
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -153,7 +153,7 @@ var main = {
       'ACTIVITY_CATEGORY_ID':ACTIVITY_CATEGORY_ID 
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -241,7 +241,7 @@ var main = {
       'ACTIVITY_TYPE_ID':ACTIVITY_TYPE_ID  
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ยืนยันการลบข้อมูล") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -342,7 +342,7 @@ var main = {
       'LEAVE_TYPE_ID':LEAVE_TYPE_ID
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -427,7 +427,7 @@ var main = {
       'MANAGEMENT_ID':MANAGEMENT_ID  
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ยืนยันการลบข้อมูล") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -512,7 +512,7 @@ var main = {
       'PERSONNEL_CATEGORY_ID':PERSONNEL_CATEGORY_ID  
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -599,7 +599,7 @@ var main = {
       'PERSONNEL_STATUS_ID':PERSONNEL_STATUS_ID
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -687,7 +687,7 @@ var main = {
       'PERSONNEL_TYPE_ID':PERSONNEL_TYPE_ID  
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -732,6 +732,7 @@ var main = {
       $('#add_faculties [name=FACUALTY_NAME_EN]').addClass("red")
       return false;
     }
+
     var data = {
       'FACULTY_ID':FACULTY_ID,
       'FACUALTY_NAME_TH':FACUALTY_NAME_TH,
@@ -747,13 +748,12 @@ var main = {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
       },
     }).done(function(resp) {
-
       if(resp.st == 1){
-        alert(resp.ms)
+        alert('บันทึกสำเร็จ')
         location.reload();
       }else{
         alert(resp.ms)
-        $('#add_personnels [name='+resp.name+']').addClass("red")
+        $('#add_faculties [name='+resp.name+']').addClass("red")
         return false;
       }
     })
@@ -821,6 +821,33 @@ var main = {
       }
     })
   },
+  delete_faculties(ID_F){
+    var url = window.location.origin+"/academy/index.php/Home/delete_faculties";
+    var data = {
+      'ID_F':ID_F 
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
 /////
   add_departments(){
     var DEPARTMENT_ID = $('#add_departments [name=DEPARTMENT_ID]').val()
@@ -830,6 +857,26 @@ var main = {
     var url = window.location.origin+"/academy/index.php/Home/add_departments";
     // console.log(window.location.origin);
     // return false;
+    $('input').removeClass('red')
+    if(DEPARTMENT_ID==""){
+      $('#add_departments [name=DEPARTMENT_ID]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(DEPARTMENT_NAME_TH==""){
+      $('#add_departments [name=DEPARTMENT_NAME_TH]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(DEPARTMENT_NAME_EN==""){
+      $('#add_departments [name=DEPARTMENT_NAME_EN]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(FACULTY_ID==""){
+      $('#add_departments [name=FACULTY_ID]').addClass("red")
+      return false;
+    }
     var data = {
       'DEPARTMENT_ID':DEPARTMENT_ID,
       'DEPARTMENT_NAME_TH':DEPARTMENT_NAME_TH,
@@ -850,9 +897,12 @@ var main = {
         alert('บันทึกสำเร็จ')
         location.reload();
       }else{
-        alert('บันทึกไม่สำเร็จ')
+        alert(resp.ms)
+        $('#add_departments [name='+resp.name+']').addClass("red")
+        return false;
       }
     })
+
   },  
   get_edit_departments(ID_DEP,DEPARTMENT_ID,DEPARTMENT_NAME_TH,DEPARTMENT_NAME_EN,FACULTY_ID){
     // console.log(ID_DEP,DEPARTMENT_ID,DEPARTMENT_NAME_TH,DEPARTMENT_NAME_EN,FACULTY_ID)
@@ -876,6 +926,27 @@ var main = {
     var url = window.location.origin+"/academy/index.php/Home/edit_departments";
     // console.log(window.location.origin);
     // return false;
+    $('input').removeClass('red')
+    if(DEPARTMENT_ID==""){
+      $('#edit_departments [name=DEPARTMENT_ID]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(DEPARTMENT_NAME_TH==""){
+      $('#edit_departments [name=DEPARTMENT_NAME_TH]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(DEPARTMENT_NAME_EN==""){
+      $('#edit_departments [name=DEPARTMENT_NAME_EN]').addClass("red")
+      return false;
+    }
+    $('input').removeClass('red')
+    if(FACULTY_ID==""){
+      $('#edit_departments [name=FACULTY_ID]').addClass("red")
+      return false;
+    }
+
     var data = {
       'ID_DEP':ID_DEP,
       'DEPARTMENT_ID':DEPARTMENT_ID,
@@ -897,7 +968,37 @@ var main = {
         alert('บันทึกสำเร็จ')
         location.reload();
       }else{
-        alert('บันทึกไม่สำเร็จ')
+        alert(resp.ms)
+        $('#edit_departments [name='+resp.name+']').addClass("red")
+        return false;
+      }
+    })
+
+  },
+  delete_departments(ID_DEP){
+    var url = window.location.origin+"/academy/index.php/Home/delete_departments";
+    var data = {
+      'ID_DEP':ID_DEP 
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
       }
     })
   },
@@ -1254,7 +1355,7 @@ var main = {
       'PERSONNEL_ID':PERSONNEL_ID 
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -1381,7 +1482,7 @@ var main = {
       'MANAGEMENT_POSITION_ID':MANAGEMENT_POSITION_ID 
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
@@ -1496,7 +1597,7 @@ var main = {
       'ACADEMIC_POSITION_ID':ACADEMIC_POSITION_ID 
     }
     var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
-    if(confirm("ท่านต้องการลบข้อมูลนี้หรือไม่") === false){
+    if(confirm("ยืนยันการลบ") === false){
       return false;
     }
     $.ajax({
