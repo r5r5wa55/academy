@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_faculties('<?php echo $value['ID_F'];?>','<?php echo $value['FACULTY_ID'];?>','<?php echo $value['FACUALTY_NAME_TH'];?>','<?php echo $value['FACUALTY_NAME_EN'];?>');">แก้ไขข้อมูล</button>
           </div>
           <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_faculties('<?php echo $value['FACULTY_ID'];?>')">ลบข้อมูล</button>
+            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_faculties('<?php echo $value['ID_F'];?>')">ลบข้อมูล</button>
              <div class="col-lg-1 "></div>
           </div>
         </div>
