@@ -439,4 +439,49 @@
     </div>
   </div>
 </div>
+<div class="modal  fade" id="add_counseling_types" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล ประเภทการให้คำปรีกษา</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="formGroupExampleInput">ประเภทการให้คำปรีกษา</label>
+          <input type="text" class="form-control"  name="COUNSELING_NAME" placeholder="ประเภทการให้คำปรีกษา">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="main.add_counseling_types();">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="edit_counseling_types" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล ประเภทการให้คำปรีกษา</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="formGroupExampleInput">ประเภทการให้คำปรีกษา</label>
+          <input type="text" class="form-control"  name="COUNSELING_NAME" placeholder="ประเภทการให้คำปรีกษา">
+          <input type="hidden"   name="COUNSELING_TYPE_ID">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="main.edit_counseling_types();">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 

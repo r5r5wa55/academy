@@ -278,8 +278,39 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_personnels($_POST);
 		echo json_encode($data);
 	}
-		
+	///
+	public function individual_counseling_services(){
+		$data = $this->mhome->select_individual_counseling_services();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/individual_counseling_services',$data); 
+	} 
+	///	
 
-}	
+
+	public function counseling_types(){
+		$data['counseling_types'] = $this->mhome->select_counseling_types();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/counseling_types',$data); 
+	}
+	public function add_counseling_types(){
+		$data = $this->mhome->add_counseling_types($_POST);
+		echo json_encode($data);
+	} 
+	public function edit_counseling_types(){
+		$data = $this->mhome->edit_counseling_types($_POST);
+		echo json_encode($data);
+	} 
+	public function delete_counseling_types(){
+		$data = $this->mhome->delete_counseling_types($_POST);
+	echo json_encode($data);
+  }
+
+} 
 
 

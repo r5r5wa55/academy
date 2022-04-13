@@ -635,4 +635,64 @@ class Home_model extends CI_Model {
     return $st;
   }
 
+///
+  public function select_individual_counseling_services(){
+    $this->db->select('*');
+    $this->db->from('individual_counseling_services');
+    $this->db->join('counseling_types', 'counseling_types.PERSONNEL_CATEGORY_ID = individual_counseling_services.PERSONNEL_CATEGORY_ID');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID  = individual_counseling_services.ADVISOR_ID');
+ 
+    $individual_counseling_services = $this->db->get();
+    $individual_counseling_services = $individual_counseling_services->result_array();
+    $counseling_types = $this->select_counseling_types();
+    $personnels = $this->select_personnels();
+  
+    $DATA = array(
+      'individual_counseling_services'=>$individual_counseling_services,
+      'counseling_types' => $counseling_types,
+      'personnels' => $personnels['personnels']
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+////
+  public function select_counseling_types(){
+    $query = $this->db->get('counseling_types');
+    $query = $query->result_array();
+    return $query;
+  }
+  public function add_counseling_types($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['COUNSELING_NAME']!=""){
+      $data = array(
+        'COUNSELING_NAME' => $data['COUNSELING_NAME'],
+      );
+      $data = $this->db->insert('counseling_types', $data);
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
+  public function edit_counseling_types($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['COUNSELING_NAME']!=""){
+      $this->db->set('COUNSELING_NAME',  $data['COUNSELING_NAME']);
+      $this->db->where('COUNSELING_TYPE_ID', $data['COUNSELING_TYPE_ID']);
+      $this->db->update('counseling_types');
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
+  public function delete_counseling_types($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['COUNSELING_TYPE_ID']!=""){
+      $this->db->delete('counseling_types', array('COUNSELING_TYPE_ID' => $data['COUNSELING_TYPE_ID'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
+
 }

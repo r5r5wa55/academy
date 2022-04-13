@@ -1618,6 +1618,94 @@ var main = {
       }
     })
   },
+  ///
+  add_counseling_types(){
+    var COUNSELING_NAME = $('[name=COUNSELING_NAME]').val()
+    console.log (COUNSELING_NAME)
+    var url = window.location.origin+"/academy/index.php/Home/add_counseling_types";
+    // console.log(window.location.origin);
+    // return false;
+    var data = {
+      'COUNSELING_NAME':COUNSELING_NAME
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  get_edit_counseling_types(COUNSELING_TYPE_ID,COUNSELING_NAME){
+    $('#edit_counseling_types [name=COUNSELING_NAME]').val(COUNSELING_NAME);
+    $('#edit_counseling_types [name=COUNSELING_TYPE_ID]').val(COUNSELING_TYPE_ID);
+    $('#edit_counseling_types').modal('show');
+  },
+  edit_counseling_types(){
+    var COUNSELING_NAME = $('#edit_counseling_types [name=COUNSELING_NAME]').val()
+    var COUNSELING_TYPE_ID = $('#edit_counseling_types [name=COUNSELING_TYPE_ID]').val()
+    var url = window.location.origin+"/academy/index.php/Home/edit_counseling_types";
+    var data = {
+      'COUNSELING_NAME':COUNSELING_NAME,
+      'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('แก้ใขสำเร็จ')
+        location.reload();
+      }else{
+        alert('เเก้ไขไม่สำเร็จ')
+      }
+    })
+  },
+  delete_counseling_types(COUNSELING_TYPE_ID){
+    var url = window.location.origin+"/academy/index.php/Home/delete_counseling_types";
+    var data = {
+      'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
+
+  ////
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num
     num = num.replace(/ /g, '');   ///ลบspacebar
