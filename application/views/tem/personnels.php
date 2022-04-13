@@ -154,7 +154,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
 
                 <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
-              <select class="form-control" name="PERSONNEL_TYPE_ID">
+                <select class="form-control" name="PERSONNEL_TYPE_ID">
+                  <option value="">กรุณาเลือก</option>
                 <?php foreach($personnel_types as $key=>$value): ?>
                   <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
                 <?php endforeach; ?>
@@ -162,6 +163,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               <label for="formGroupExampleInput">สายงาน</label>
               <select class="form-control" name="PERSONNEL_CATEGORY_ID" >
+               <option value="">กรุณาเลือก</option>
                 <?php foreach($personnel_categories as $key=>$value): ?>
                   <option value="<?php echo $value['PERSONNEL_CATEGORY_ID'];?>"><?php echo $value['PERSONNEL_CATEGORY_DETAIL'];?></option>
                 <?php endforeach; ?>
@@ -196,6 +198,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               <label for="formGroupExampleInput">สถานะการทำงาน</label>
               <select class="form-control" name="PERSONNEL_STATUS_ID">
+                <option value="">กรุณาเลือก</option>
                 <?php foreach($personnel_statuses as $key=>$value): ?>
                   <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
                 <?php endforeach; ?>
@@ -203,6 +206,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
               <label for="formGroupExampleInput">แผนก</label>
               <select class="form-control" name="DEPARTMENT_ID" >
+                <option value="">กรุณาเลือก</option>
                 <?php foreach($departments as $key=>$value): ?>
                   <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
                 <?php endforeach; ?>
