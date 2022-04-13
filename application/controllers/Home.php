@@ -300,6 +300,14 @@ class Home extends CI_Controller {
 		$data = $this->mhome->add_individual_counseling_services($_POST);
 		echo json_encode($data);
 	}
+	public function edit_individual_counseling_services(){
+		$data = $this->mhome->edit_individual_counseling_services($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
 	///	
 
 

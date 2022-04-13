@@ -668,7 +668,6 @@ class Home_model extends CI_Model {
     // // หน้า network
     return $DATA;
   }
-    
   public function add_individual_counseling_services($data){
     if(is_array($data) && $data['ADVISOR_ID']!="" && $data['STUDENT_ID']!=""){
       $data = array(
@@ -690,7 +689,33 @@ class Home_model extends CI_Model {
   
     return $st;
   }
+  public function edit_individual_counseling_services($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ADVISOR_ID']!=""){
+      $this->db->where('INDIVIDUAL_COUNSELING_ID', $data['INDIVIDUAL_COUNSELING_ID']);
+      $this->db->set('ADVISOR_ID', $data['ADVISOR_ID']);
+      $this->db->set('STUDENT_ID',  $data['STUDENT_ID']);
+      $this->db->set('COUNSELING_TYPE_ID', $data['COUNSELING_TYPE_ID']);
+      $this->db->set('COUNSELING_PROBLEM', $data['COUNSELING_PROBLEM']);
+      $this->db->set('COUNSELING_DETAIL', $data['COUNSELING_DETAIL']);
+      $this->db->set('COUNSELING_SOLVE',  $data['COUNSELING_SOLVE']);
+      $this->db->set('COUNSELING_RESULT', $data['COUNSELING_RESULT']);
+      $this->db->set('COUNSELING_CREATE_DATE', $data['COUNSELING_CREATE_DATE']);
+      $this->db->set('COUNSELING_DATE', $data['COUNSELING_DATE']);
+      $this->db->set('STUDEN_DATE', $data['STUDEN_DATE']);
 
+
+      $this->db->update('individual_counseling_services');
+      $st = array('st'=>1);
+    }
+  
+    //   echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
 
 ////
   public function select_counseling_types(){
