@@ -1077,7 +1077,22 @@ var main = {
       $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').addClass("red")
       return false;
     }
-   
+    if(PERSONNEL_TYPE_ID==""){
+      $('#add_personnels [name=PERSONNEL_TYPE_ID]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_STATUS_ID==""){
+      $('#add_personnels [name=PERSONNEL_STATUS_ID]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_CATEGORY_ID==""){
+      $('#add_personnels [name=PERSONNEL_CATEGORY_ID]').addClass("red")
+      return false;
+    }
+    if(DEPARTMENT_ID==""){
+      $('#add_personnels [name=DEPARTMENT_ID]').addClass("red")
+      return false;
+    }
 
     var data = {
       'PERSONNEL_ID':PERSONNEL_ID,
@@ -1704,7 +1719,113 @@ var main = {
       }
     })
   },
+    ///
+  add_individual_counseling_services(){
+    var ADVISOR_ID =$('#add_individual_counseling_services [name=ADVISOR_ID] option:selected').val();
+    var STUDENT_ID =$('#add_individual_counseling_services [name=STUDENT_ID] option:selected').val();
+    var COUNSELING_TYPE_ID =$('#add_individual_counseling_services [name=COUNSELING_TYPE_ID] option:selected').val();
 
+    var COUNSELING_PROBLEM = $('#add_individual_counseling_services [name=COUNSELING_PROBLEM]').val()
+    var COUNSELING_DETAIL = $('#add_individual_counseling_services [name=COUNSELING_DETAIL]').val()
+    var COUNSELING_SOLVE = $('#add_individual_counseling_services [name=COUNSELING_SOLVE  ]').val()
+    var COUNSELING_RESULT = $('#add_individual_counseling_services [name=COUNSELING_RESULT]').val()
+    var COUNSELING_CREATE_DATE = $('#add_individual_counseling_services [name=COUNSELING_CREATE_DATE]').val()
+    var COUNSELING_DATE = $('#add_individual_counseling_services [name=COUNSELING_DATE]').val()
+    var STUDEN_DATE = $('#add_individual_counseling_services [name=STUDEN_DATE]').val()
+    
+    var url = window.location.origin+"/academy/index.php/Home/add_individual_counseling_services";
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_DETAIL);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE);
+    // console.log(STUDEN_DATE);
+    // return false
+    
+    $('input').removeClass('red')
+    if(ADVISOR_ID==""){
+      $('#add_individual_counseling_services [name=ADVISOR_ID]').addClass("red")
+      return false;
+    }
+    if(STUDENT_ID==""){
+      $('#add_individual_counseling_services [name=STUDENT_ID]').addClass("red")
+      return false;
+    }
+
+    if(COUNSELING_TYPE_ID==""){
+      $('#add_individual_counseling_services [name=COUNSELING_TYPE_ID]').addClass("red")
+      return false;
+    }
+    if(COUNSELING_CREATE_DATE==""){
+      $('#add_individual_counseling_services [name=COUNSELING_CREATE_DATE').addClass("red")
+      return false;
+    }
+    if(COUNSELING_PROBLEM==""){
+      $('#add_individual_counseling_services [name=COUNSELING_PROBLEM]').addClass("red")
+      return false;
+    }
+    if(COUNSELING_DETAIL==""){
+      $('#add_individual_counseling_services [name=COUNSELING_DETAIL]').addClass("red")
+      return false;
+    }
+    if(COUNSELING_SOLVE==""){
+      $('#add_individual_counseling_services [name=COUNSELING_SOLVE]').addClass("red")
+      return false;
+    }
+
+    if(COUNSELING_RESULT==""){
+      $('#add_individual_counseling_services [name=COUNSELING_RESULT').addClass("red")
+      return false;
+    }
+  
+    if(COUNSELING_DATE==""){
+      $('#add_individual_counseling_services [name=COUNSELING_DATE]').addClass("red")
+      return false;
+    }
+    if(STUDEN_DATE==""){
+      $('#add_individual_counseling_services [name=STUDEN_DATE]').addClass("red")
+      return false;
+    }
+    
+  
+
+    var data = {
+      'ADVISOR_ID':ADVISOR_ID,
+      'STUDENT_ID':STUDENT_ID,
+      'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID,
+      'COUNSELING_PROBLEM':COUNSELING_PROBLEM,
+      'COUNSELING_DETAIL':COUNSELING_DETAIL,
+      'COUNSELING_SOLVE':COUNSELING_SOLVE,
+      'COUNSELING_RESULT':COUNSELING_RESULT,
+      'COUNSELING_CREATE_DATE':COUNSELING_CREATE_DATE,
+      'COUNSELING_DATE':COUNSELING_DATE,
+      'STUDEN_DATE':STUDEN_DATE
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+
+      if(resp.st == 1){
+        alert(resp.ms)
+        location.reload();
+      }else{
+        alert(resp.ms)
+        $('#add_individual_counseling_services [name='+resp.name+']').addClass("red")
+        return false;
+      }
+    })
+  }, 
   ////
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num

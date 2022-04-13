@@ -634,22 +634,31 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-
+/// select_students เอาไว้เชื่อมตารางยังไม่ได้ใข้ทำอะไีร
+  public function select_students(){
+    $query = $this->db->get('students');
+    $query = $query->result_array();
+    return $query;
+  }
 ///
   public function select_individual_counseling_services(){
     $this->db->select('*');
     $this->db->from('individual_counseling_services');
-    $this->db->join('counseling_types', 'counseling_types.PERSONNEL_CATEGORY_ID = individual_counseling_services.PERSONNEL_CATEGORY_ID');
+    $this->db->join('counseling_types', 'counseling_types.COUNSELING_TYPE_ID = individual_counseling_services.COUNSELING_TYPE_ID');
     $this->db->join('personnels', 'personnels.PERSONNEL_ID  = individual_counseling_services.ADVISOR_ID');
+    $this->db->join('students', 'students.STUDENT_ID  = individual_counseling_services.STUDENT_ID');
+
  
     $individual_counseling_services = $this->db->get();
     $individual_counseling_services = $individual_counseling_services->result_array();
     $counseling_types = $this->select_counseling_types();
     $personnels = $this->select_personnels();
+    $students = $this->select_students();
   
     $DATA = array(
       'individual_counseling_services'=>$individual_counseling_services,
       'counseling_types' => $counseling_types,
+      'students' => $students,
       'personnels' => $personnels['personnels']
     );
     // echo "<pre>";
@@ -659,6 +668,30 @@ class Home_model extends CI_Model {
     // // หน้า network
     return $DATA;
   }
+    
+  public function add_individual_counseling_services($data){
+    if(is_array($data) && $data['ADVISOR_ID']!="" && $data['STUDENT_ID']!=""){
+      $data = array(
+        'ADVISOR_ID' => $data['ADVISOR_ID'],
+        'STUDENT_ID' => $data['STUDENT_ID'],
+        'COUNSELING_TYPE_ID' => $data['COUNSELING_TYPE_ID'],
+        'COUNSELING_PROBLEM' => $data['COUNSELING_PROBLEM'],
+        'COUNSELING_DETAIL' => $data['COUNSELING_DETAIL'],
+        'COUNSELING_SOLVE' => $data['COUNSELING_SOLVE'],
+        'COUNSELING_RESULT' => $data['COUNSELING_RESULT'],
+        'COUNSELING_CREATE_DATE' => $data['COUNSELING_CREATE_DATE'],
+        'COUNSELING_DATE' => $data['COUNSELING_DATE'],
+        'STUDEN_DATE' => $data['STUDEN_DATE'],
+    
+      );
+      $data = $this->db->insert('individual_counseling_services', $data);
+      $st = array('st'=>1,'ms'=>'สำเร็จ');
+    }
+  
+    return $st;
+  }
+
+
 ////
   public function select_counseling_types(){
     $query = $this->db->get('counseling_types');

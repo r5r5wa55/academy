@@ -279,6 +279,15 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	///
+	public function students(){
+		$data['students'] = $this->mhome->select_students();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/students',$data); 
+	}
+	///
 	public function individual_counseling_services(){
 		$data = $this->mhome->select_individual_counseling_services();
 		// 	echo "<pre>";
@@ -287,6 +296,10 @@ class Home extends CI_Controller {
 		// exit(); 
 		$this->load->view('tem/individual_counseling_services',$data); 
 	} 
+	public function add_individual_counseling_services(){
+		$data = $this->mhome->add_individual_counseling_services($_POST);
+		echo json_encode($data);
+	}
 	///	
 
 
