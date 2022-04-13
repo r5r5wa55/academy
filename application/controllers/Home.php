@@ -308,6 +308,10 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
+	public function delete_individual_counseling_services(){
+		$data = $this->mhome->delete_individual_counseling_services($_POST);
+		echo json_encode($data);
+	}
 	///	
 
 

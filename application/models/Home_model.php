@@ -716,6 +716,14 @@ class Home_model extends CI_Model {
 
     return $st;
   }
+  public function delete_individual_counseling_services($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['INDIVIDUAL_COUNSELING_ID']!=""){
+      $this->db->delete('individual_counseling_services', array('INDIVIDUAL_COUNSELING_ID' => $data['INDIVIDUAL_COUNSELING_ID'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
 
 ////
   public function select_counseling_types(){

@@ -85,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_individual_counseling_services('<?php echo $value['PERSONNEL_ID'];?>')">ลบข้อมูล</button>
+            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_individual_counseling_services('<?php echo $value['INDIVIDUAL_COUNSELING_ID'];?>')">ลบข้อมูล</button>
         </div>
       </div>
       <?php endforeach; ?>

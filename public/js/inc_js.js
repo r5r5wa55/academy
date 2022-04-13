@@ -1952,6 +1952,33 @@ var main = {
       }
     })
   },
+  delete_individual_counseling_services(INDIVIDUAL_COUNSELING_ID){
+    var url = window.location.origin+"/academy/index.php/Home/delete_individual_counseling_services";
+    var data = {
+      'INDIVIDUAL_COUNSELING_ID':INDIVIDUAL_COUNSELING_ID  
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
   ////
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num
