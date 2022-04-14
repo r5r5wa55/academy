@@ -313,8 +313,23 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	///	
-
-
+	public function services(){
+		$data = $this->mhome->select_services();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/services',$data); 
+	} 
+	public function add_services(){
+		$data = $this->mhome->add_services($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	////
 	public function counseling_types(){
 		$data['counseling_types'] = $this->mhome->select_counseling_types();
 		// 	echo "<pre>";

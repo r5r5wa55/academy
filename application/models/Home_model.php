@@ -725,6 +725,47 @@ class Home_model extends CI_Model {
     return $st;
   }
 
+  public function select_services(){
+    $this->db->select('*');
+    $this->db->from('services');
+  
+    $services = $this->db->get();
+    $services = $services->result_array();
+  
+  
+    $DATA = array(
+      'services'=>$services
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  public function add_services($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['SERVICE_TITLE']!="" && $data['SERVICE_PLACE']!=""){
+      $data = array(
+        'SERVICE_TITLE' => $data['SERVICE_TITLE'],
+        'SERVICE_PLACE' => $data['SERVICE_PLACE'],
+         
+        'SERVICE_OWNER' => $data['SERVICE_OWNER'],
+        'PARTICIPANT_TYPE' => $data['PARTICIPANT_TYPE'], 
+        'PARTICIPANT' => $data['PARTICIPANT'],
+        'TOTAL_PARTICIPANT' => $data['TOTAL_PARTICIPANT'], 
+        'TOTAL_HOUR' => $data['TOTAL_HOUR'],
+        'SERVICE_START_DATE' => $data['SERVICE_START_DATE'], 
+        'SERVICE_END_DATE' => $data['SERVICE_END_DATE'],
+        'FILE_DOCUMENT' => $data['FILE_DOCUMENT'], 
+      );
+     
+      $data = $this->db->insert('services', $data);
+      $st = array('st'=>1);
+    }
+  
+    return $st;
+  }
 ////
   public function select_counseling_types(){
     $query = $this->db->get('counseling_types');

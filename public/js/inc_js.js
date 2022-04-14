@@ -1980,6 +1980,54 @@ var main = {
     })
   },
   ////
+  add_services(){
+    var SERVICE_TITLE = $('#add_services [name=SERVICE_TITLE]' ).val();
+    var SERVICE_PLACE = $('#add_services [name=SERVICE_PLACE]').val();
+    var SERVICE_OWNER = $('#add_services [name=SERVICE_OWNER]').val();
+    var PARTICIPANT_TYPE = $('#add_services [name=PARTICIPANT_TYPE]').val();
+    var PARTICIPANT = $('#add_services [name=PARTICIPANT]').val();
+    var TOTAL_PARTICIPANT = $('#add_services [name=TOTAL_PARTICIPANT]').val();
+    var TOTAL_HOUR = $('#add_services [name=TOTAL_HOUR]').val();
+    var SERVICE_START_DATE = $('#add_services [name=SERVICE_START_DATE]').val();
+    var SERVICE_END_DATE = $('#add_services [name=SERVICE_END_DATE]').val();
+    var FILE_DOCUMENT = $('#add_services [name=FILE_DOCUMENT]').val();
+  
+    var url = window.location.origin+"/academy/index.php/Home/add_services";
+    // console.log(FILE_DOCUMENT);
+    // return false;
+    var data = {
+      'SERVICE_TITLE':SERVICE_TITLE,
+      'SERVICE_PLACE':SERVICE_PLACE,
+      'SERVICE_OWNER':SERVICE_OWNER,
+      'PARTICIPANT_TYPE':PARTICIPANT_TYPE,
+      'PARTICIPANT':PARTICIPANT,
+      'TOTAL_PARTICIPANT':TOTAL_PARTICIPANT,
+      'TOTAL_HOUR':TOTAL_HOUR,
+      'SERVICE_START_DATE':SERVICE_START_DATE,
+      'SERVICE_END_DATE':SERVICE_END_DATE,
+      'FILE_DOCUMENT':FILE_DOCUMENT
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  }, 
+  ///
+
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num
     num = num.replace(/ /g, '');   ///ลบspacebar
