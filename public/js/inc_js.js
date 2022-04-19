@@ -2181,8 +2181,18 @@ var main = {
       $('#add_service_participants [name=PERSONNEL_ID]').addClass("red")
       return false;
     }
-    
-
+    if(SERVICE_START_DATE==""){
+      $('#add_service_participants [name=SERVICE_START_DATE]').addClass("red")
+      return false;
+    }
+    if(SERVICE_END_DATE==""){
+      $('#add_service_participants [name=SERVICE_END_DATE]').addClass("red")
+      return false;
+    }
+    if(TOTAL_HOUR==""){
+      $('#add_service_participants [name=TOTAL_HOUR]').addClass("red")
+      return false;
+    }
     // console.log(SERVICE_ID);
     // console.log(PERSONNEL_ID);
     // console.log(TOTAL_HOUR);
