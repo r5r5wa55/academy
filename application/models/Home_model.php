@@ -766,7 +766,84 @@ class Home_model extends CI_Model {
   
     return $st;
   }
-////
+  public function edit_services($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['SERVICE_TITLE']!=""){
+      $this->db->where('SERVICE_ID', $data['SERVICE_ID']);
+      $this->db->set('SERVICE_TITLE', $data['SERVICE_TITLE']);
+      $this->db->set('SERVICE_PLACE',  $data['SERVICE_PLACE']);
+      $this->db->set('SERVICE_OWNER', $data['SERVICE_OWNER']);
+      $this->db->set('PARTICIPANT_TYPE', $data['PARTICIPANT_TYPE']);
+      $this->db->set('PARTICIPANT', $data['PARTICIPANT']);
+      $this->db->set('TOTAL_PARTICIPANT',  $data['TOTAL_PARTICIPANT']);
+      $this->db->set('TOTAL_HOUR', $data['TOTAL_HOUR']);
+      $this->db->set('SERVICE_START_DATE', $data['SERVICE_START_DATE']);
+      $this->db->set('SERVICE_END_DATE', $data['SERVICE_END_DATE']);
+      $this->db->set('FILE_DOCUMENT', $data['FILE_DOCUMENT']);
+
+
+      $this->db->update('services');
+      $st = array('st'=>1);
+    }
+  
+    //   echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
+  public function delete_services($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['SERVICE_ID']!=""){
+      $this->db->delete('services', array('SERVICE_ID' => $data['SERVICE_ID'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
+  ///
+
+  public function select_service_participants(){
+    $this->db->select('*');
+    $this->db->from('service_participants');
+    $this->db->join('services', 'services.SERVICE_ID = service_participants.SERVICE_ID');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = service_participants.PERSONNEL_ID');
+    $service_participants = $this->db->get();
+    $service_participants = $service_participants->result_array();
+    $services = $this->select_services();
+    $personnels = $this->select_personnels();
+    $DATA = array(
+      'service_participants'=>$service_participants,
+      'services' => $services['services'],
+      'personnels' => $personnels['personnels']
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  public function add_service_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['SERVICE_ID']!="" && $data['PERSONNEL_ID']!=""){
+      $data = array(
+        'SERVICE_ID' => $data['SERVICE_ID'],
+        'PERSONNEL_ID' => $data['PERSONNEL_ID'],
+        'TOTAL_HOUR' => $data['TOTAL_HOUR'],
+        'SERVICE_START_DATE' => $data['SERVICE_START_DATE'], 
+        'SERVICE_END_DATE' => $data['SERVICE_END_DATE'],
+      
+      );
+     
+      $data = $this->db->insert('service_participants', $data);
+      $st = array('st'=>1);
+    }
+  
+    return $st;
+  }
+
+  ///
   public function select_counseling_types(){
     $query = $this->db->get('counseling_types');
     $query = $query->result_array();

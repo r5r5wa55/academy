@@ -2026,8 +2026,197 @@ var main = {
       }
     })
   }, 
-  ///
+  get_edit_services(SERVICE_ID,SERVICE_TITLE,SERVICE_PLACE,SERVICE_OWNER,PARTICIPANT_TYPE,PARTICIPANT,
+    TOTAL_PARTICIPANT,TOTAL_HOUR,SERVICE_START_DATE,SERVICE_END_DATE,FILE_DOCUMENT){
+    //   console.log(SERVICE_ID);
+    // console.log(SERVICE_TITLE);
+    // console.log(SERVICE_PLACE);
+    // console.log(SERVICE_OWNER);
+    // console.log(PARTICIPANT_TYPE);
+    // console.log(PARTICIPANT);
+    // console.log(TOTAL_PARTICIPANT);
+    // console.log(TOTAL_HOUR);
+    // console.log(SERVICE_START_DATE);
+    // console.log(SERVICE_END_DATE);
+    // console.log(FILE_DOCUMENT);
+    // return false
+    $('#edit_services [name=SERVICE_ID]').val(SERVICE_ID);
+    $('#edit_services [name=SERVICE_TITLE]').val(SERVICE_TITLE);
+    $('#edit_services [name=SERVICE_PLACE]').val(SERVICE_PLACE);
+    $('#edit_services [name=SERVICE_OWNER]').val(SERVICE_OWNER);
+    $('#edit_services [name=PARTICIPANT_TYPE]').val(PARTICIPANT_TYPE);
+    $('#edit_services [name=PARTICIPANT]').val(PARTICIPANT);
+    $('#edit_services [name=TOTAL_PARTICIPANT]').val(TOTAL_PARTICIPANT);
+    $('#edit_services [name=TOTAL_HOUR]').val(TOTAL_HOUR);
+    $('#edit_services [name=SERVICE_START_DATE]').val(SERVICE_START_DATE);
+    $('#edit_services [name=SERVICE_END_DATE]').val(SERVICE_END_DATE);
+    $('#edit_services [name=FILE_DOCUMENT]').val(FILE_DOCUMENT);
+    $('#edit_services').modal('show'); 
+   ;
+  },
+  edit_services(){
 
+    var SERVICE_ID = $('#edit_services [name=SERVICE_ID]').val()
+    var SERVICE_TITLE = $('#edit_services [name=SERVICE_TITLE]').val()
+    var SERVICE_PLACE = $('#edit_services [name=SERVICE_PLACE]').val()
+    var SERVICE_OWNER = $('#edit_services [name=SERVICE_OWNER]').val()
+    var PARTICIPANT_TYPE = $('#edit_services [name=PARTICIPANT_TYPE]').val()
+    var PARTICIPANT = $('#edit_services [name=PARTICIPANT]').val()
+    var TOTAL_PARTICIPANT = $('#edit_services [name=TOTAL_PARTICIPANT]').val()
+    var TOTAL_HOUR = $('#edit_services [name=TOTAL_HOUR]').val()
+    var SERVICE_START_DATE = $('#edit_services [name=SERVICE_START_DATE]').val()
+    var SERVICE_END_DATE = $('#edit_services [name=SERVICE_END_DATE]').val()
+    var FILE_DOCUMENT = $('#edit_services [name=FILE_DOCUMENT]').val()
+  
+
+    var url = window.location.origin+"/academy/index.php/Home/edit_services";
+       //   console.log(SERVICE_ID);
+    // console.log(SERVICE_TITLE);
+    // console.log(SERVICE_PLACE);
+    // console.log(SERVICE_OWNER);
+    // console.log(PARTICIPANT_TYPE);
+    // console.log(PARTICIPANT);
+    // console.log(TOTAL_PARTICIPANT);
+    // console.log(TOTAL_HOUR);
+    // console.log(SERVICE_START_DATE);
+    // console.log(SERVICE_END_DATE);
+    // console.log(FILE_DOCUMENT);
+    // return false
+  
+
+    // $('input').removeClass('red')
+
+    // if(COUNSELING_CREATE_DATE==""){
+    //   $('#edit_individual_counseling_services [name=COUNSELING_CREATE_DATE').addClass("red")
+    //   return false;
+    // }
+    // if(COUNSELING_DATE==""){
+    //   $('#edit_individual_counseling_services [name=COUNSELING_DATE]').addClass("red")
+    //   return false;
+    // }
+    // if(STUDEN_DATE==""){
+    //   $('#edit_individual_counseling_services [name=STUDEN_DATE]').addClass("red")
+    //   return false;
+    // }
+
+   
+    var data = {
+      
+      'SERVICE_ID':SERVICE_ID,
+      'SERVICE_TITLE':SERVICE_TITLE,
+      'SERVICE_PLACE':SERVICE_PLACE,
+      'SERVICE_OWNER':SERVICE_OWNER,
+
+      'PARTICIPANT_TYPE':PARTICIPANT_TYPE,
+      'PARTICIPANT':PARTICIPANT,
+      'TOTAL_PARTICIPANT':TOTAL_PARTICIPANT,
+      'TOTAL_HOUR':TOTAL_HOUR,
+      'SERVICE_START_DATE':SERVICE_START_DATE,
+      'SERVICE_END_DATE':SERVICE_END_DATE,
+      'FILE_DOCUMENT':FILE_DOCUMENT
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  delete_services(SERVICE_ID ){
+    var url = window.location.origin+"/academy/index.php/Home/delete_services";
+    var data = {
+      'SERVICE_ID':SERVICE_ID  
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
+  ///
+  add_service_participants(){
+    var SERVICE_ID = $('#add_service_participants [name=SERVICE_ID] option:selected').val();
+    var PERSONNEL_ID = $('#add_service_participants [name=PERSONNEL_ID] option:selected').val();
+    var TOTAL_HOUR = $('#add_service_participants [name=TOTAL_HOUR]').val();
+    var SERVICE_START_DATE = $('#add_service_participants [name=SERVICE_END_DATE]').val();
+    var SERVICE_END_DATE = $('#add_service_participants [name=SERVICE_END_DATE]').val();
+  
+  
+    var url = window.location.origin+"/academy/index.php/Home/add_service_participants";
+    // //    $('input').removeClass('red')
+    $('input').removeClass('red')
+    if(SERVICE_ID==""){
+      $('#add_service_participants [name=SERVICE_ID]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_ID==""){
+      $('#add_service_participants [name=PERSONNEL_ID]').addClass("red")
+      return false;
+    }
+    
+
+    // console.log(SERVICE_ID);
+    // console.log(PERSONNEL_ID);
+    // console.log(TOTAL_HOUR);
+    // console.log(SERVICE_START_DATE);
+    // console.log(SERVICE_END_DATE);
+    // return false;
+    var data = {
+      'SERVICE_ID':SERVICE_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+      'TOTAL_HOUR':TOTAL_HOUR,
+      'SERVICE_START_DATE':SERVICE_START_DATE,
+      'SERVICE_END_DATE':SERVICE_END_DATE
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  }, 
+  ///
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num
     num = num.replace(/ /g, '');   ///ลบspacebar

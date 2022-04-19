@@ -329,6 +329,35 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
+	public function edit_services(){
+		$data = $this->mhome->edit_services($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function delete_services(){
+		$data = $this->mhome->delete_services($_POST);
+		echo json_encode($data);
+	}
+	///
+	public function service_participants(){
+		$data = $this->mhome->select_service_participants();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/service_participants',$data); 
+	}
+	public function add_service_participants(){
+		$data = $this->mhome->add_service_participants($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
 	////
 	public function counseling_types(){
 		$data['counseling_types'] = $this->mhome->select_counseling_types();
@@ -348,8 +377,8 @@ class Home extends CI_Controller {
 	} 
 	public function delete_counseling_types(){
 		$data = $this->mhome->delete_counseling_types($_POST);
-	echo json_encode($data);
-  }
+		echo json_encode($data);
+  	}
 
 } 
 
