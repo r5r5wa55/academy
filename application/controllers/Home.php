@@ -358,6 +358,18 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
+	public function edit_service_participants(){
+		$data = $this->mhome->edit_service_participants($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function delete_service_participants(){
+		$data = $this->mhome->delete_service_participants($_POST);
+		echo json_encode($data);
+	}
 	////
 	public function counseling_types(){
 		$data['counseling_types'] = $this->mhome->select_counseling_types();

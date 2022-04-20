@@ -830,9 +830,9 @@ class Home_model extends CI_Model {
       $data = array(
         'SERVICE_ID' => $data['SERVICE_ID'],
         'PERSONNEL_ID' => $data['PERSONNEL_ID'],
-        'TOTAL_HOUR' => $data['TOTAL_HOUR'],
-        'SERVICE_START_DATE' => $data['SERVICE_START_DATE'], 
-        'SERVICE_END_DATE' => $data['SERVICE_END_DATE'],
+        'TOTAL_HOUR_SERVICE_P' => $data['TOTAL_HOUR_SERVICE_P'],
+        'SERVICE_P_START_DATE' => $data['SERVICE_P_START_DATE'], 
+        'SERVICE_P_END_DATE' => $data['SERVICE_P_END_DATE'],
       
       );
      
@@ -842,7 +842,36 @@ class Home_model extends CI_Model {
   
     return $st;
   }
+  public function edit_service_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['SERVICE_ID']!=""){
+      $this->db->where('ID', $data['ID']);
+      $this->db->set('SERVICE_ID', $data['SERVICE_ID']);
+      $this->db->set('PERSONNEL_ID', $data['PERSONNEL_ID']);
+      $this->db->set('TOTAL_HOUR_SERVICE_P',  $data['TOTAL_HOUR_SERVICE_P']);
+      $this->db->set('SERVICE_P_START_DATE', $data['SERVICE_P_START_DATE']);
+      $this->db->set('SERVICE_P_END_DATE', $data['SERVICE_P_END_DATE']);
 
+
+      $this->db->update('service_participants');
+      $st = array('st'=>1);
+    }
+  
+    // echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
+  public function delete_service_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ID']!=""){
+      $this->db->delete('service_participants', array('ID' => $data['ID'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
   ///
   public function select_counseling_types(){
     $query = $this->db->get('counseling_types');
