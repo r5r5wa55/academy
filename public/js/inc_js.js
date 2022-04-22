@@ -2340,8 +2340,206 @@ var main = {
       }
     })
   },
+  ///
+  add_activities(){
+
+    var ACTIVITY_TYPE_ID = $('#add_activities [name=ACTIVITY_TYPE_ID]').val();
+    var ACTIVITY_CATEGORY_ID = $('#add_activities [name=ACTIVITY_CATEGORY_ID]').val();
+    var ACTIVITY_NAME = $('#add_activities [name=ACTIVITY_NAME]').val();
+    var ACTIVITY_DATE = $('#add_activities [name=ACTIVITY_DATE]').val();
+    var ACTIVITY_PLACE = $('#add_activities [name=ACTIVITY_PLACE]').val();
+    var ACTIVITY_DETAIL = $('#add_activities [name=ACTIVITY_DETAIL]').val();
+    var ACTIVITY_OWNER_ID = $('#add_activities [name=ACTIVITY_OWNER_ID]').val();
+    var ACTIVITIES_FILE = $('#add_activities [name=ACTIVITIES_FILE]').val();
+  
+    var url = window.location.origin+"/academy/index.php/Home/add_activities";
+    $('input').removeClass('red')
+        
+    if(ACTIVITY_NAME==""){
+      $('#add_activities [name=ACTIVITY_NAME]').addClass("red")
+      return false;
+    }
+    if(ACTIVITY_DATE==""){
+      $('#add_activities [name=ACTIVITY_DATE]').addClass("red")
+      return false;
+    }
+    if(ACTIVITY_TYPE_ID==""){
+      $('#add_activities [name=ACTIVITY_TYPE_ID]').addClass("red")
+      return false;
+    }
+    if(ACTIVITY_CATEGORY_ID==""){
+      $('#add_activities [name=ACTIVITY_CATEGORY_ID]').addClass("red")
+      return false;
+    }
+    if(ACTIVITY_PLACE==""){
+      $('#add_activities [name=ACTIVITY_PLACE]').addClass("red")
+      return false;
+    }
+    if(ACTIVITY_DETAIL==""){
+      $('#add_activities [name=ACTIVITY_DETAIL]').addClass("red")
+      return false;
+    }
+    if(ACTIVITY_OWNER_ID==""){
+      $('#add_activities [name=ACTIVITY_OWNER_ID]').addClass("red")
+      return false;
+    }
+    // console.log(ACTIVITY_TYPE_ID);
+    // console.log(ACTIVITY_CATEGORY_ID);
+    // console.log(ACTIVITY_NAME);
+    // console.log(ACTIVITY_DATE);
+    // console.log(ACTIVITY_PLACE);
+    // console.log(ACTIVITY_DETAIL);
+    // console.log(ACTIVITY_OWNER_ID);
+    // console.log(ACTIVITIES_FILE);
+
+    // return false;
+    var data = {
+  
+      'ACTIVITY_TYPE_ID':ACTIVITY_TYPE_ID,
+      'ACTIVITY_CATEGORY_ID':ACTIVITY_CATEGORY_ID,
+      'ACTIVITY_NAME':ACTIVITY_NAME,
+      'ACTIVITY_DATE':ACTIVITY_DATE,
+      'ACTIVITY_PLACE':ACTIVITY_PLACE,
+      'ACTIVITY_DETAIL':ACTIVITY_DETAIL,
+      'ACTIVITY_OWNER_ID':ACTIVITY_OWNER_ID,
+      'ACTIVITIES_FILE':ACTIVITIES_FILE
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  get_edit_activities(ACTIVITY_ID,ACTIVITY_TYPE_ID,ACTIVITY_CATEGORY_ID,ACTIVITY_NAME,ACTIVITY_DATE,
+    ACTIVITY_PLACE,ACTIVITY_DETAIL,ACTIVITY_OWNER_ID,ACTIVITIES_FILE){
+
+          // console.log(ACTIVITY_ID);
+          // console.log(ACTIVITY_TYPE_ID);
+          // console.log(ACTIVITY_CATEGORY_ID);
+          // console.log(ACTIVITY_NAME);
+          // console.log(ACTIVITY_DATE);
+          // console.log(ACTIVITY_PLACE);
+          // console.log(ACTIVITY_DETAIL);
+          // console.log(ACTIVITY_OWNER_ID);
+          // console.log(ACTIVITIES_FILE);
+
+          // return false;
 
 
+    $('#edit_activities [name=ACTIVITY_ID]').val(ACTIVITY_ID);
+    $('#edit_activities [name=ACTIVITY_TYPE_ID]').val(ACTIVITY_TYPE_ID);
+    $('#edit_activities [name=ACTIVITY_CATEGORY_ID]').val(ACTIVITY_CATEGORY_ID);
+    $('#edit_activities [name=ACTIVITY_NAME]').val(ACTIVITY_NAME);
+    $('#edit_activities [name=ACTIVITY_DATE]').val(ACTIVITY_DATE);
+    $('#edit_activities [name=ACTIVITY_PLACE]').val(ACTIVITY_PLACE);
+    $('#edit_activities [name=ACTIVITY_DETAIL]').val(ACTIVITY_DETAIL);
+    $('#edit_activities [name=ACTIVITY_OWNER_ID]').val(ACTIVITY_OWNER_ID);
+    $('#edit_activities [name=ACTIVITIES_FILE]').val(ACTIVITIES_FILE);
+
+    $('#edit_activities').modal('show'); 
+   ;
+  },
+  edit_activities(){
+
+    var ACTIVITY_ID = $('#edit_activities [name=ACTIVITY_ID]').val()
+    var ACTIVITY_TYPE_ID = $('#edit_activities [name=ACTIVITY_TYPE_ID]').val()
+    var ACTIVITY_CATEGORY_ID = $('#edit_activities [name=ACTIVITY_CATEGORY_ID]').val()
+    var ACTIVITY_NAME = $('#edit_activities [name=ACTIVITY_NAME]').val()
+    var ACTIVITY_DATE = $('#edit_activities [name=ACTIVITY_DATE]').val()
+    var ACTIVITY_PLACE = $('#edit_activities [name=ACTIVITY_PLACE]').val()
+    var TOTAL_PARTICIPANT = $('#edit_activities [name=TOTAL_PARTICIPANT]').val()
+    var ACTIVITY_DETAIL = $('#edit_activities [name=ACTIVITY_DETAIL]').val()
+    var ACTIVITY_OWNER_ID = $('#edit_activities [name=ACTIVITY_OWNER_ID]').val()
+    var ACTIVITIES_FILE = $('#edit_activities [name=ACTIVITIES_FILE]').val()
+  
+
+    var url = window.location.origin+"/academy/index.php/Home/edit_activities";
+
+          // console.log(ACTIVITY_ID);
+          // console.log(ACTIVITY_TYPE_ID);
+          // console.log(ACTIVITY_CATEGORY_ID);
+          // console.log(ACTIVITY_NAME);
+          // console.log(ACTIVITY_DATE);
+          // console.log(ACTIVITY_PLACE);
+          // console.log(ACTIVITY_DETAIL);
+          // console.log(ACTIVITY_OWNER_ID);
+          // console.log(ACTIVITIES_FILE);
+
+          // return false;
+
+   
+    var data = {
+      
+      'ACTIVITY_ID':ACTIVITY_ID,
+      'ACTIVITY_TYPE_ID':ACTIVITY_TYPE_ID,
+      'ACTIVITY_CATEGORY_ID':ACTIVITY_CATEGORY_ID,
+      'ACTIVITY_NAME':ACTIVITY_NAME,
+
+      'ACTIVITY_DATE':ACTIVITY_DATE,
+      'ACTIVITY_PLACE':ACTIVITY_PLACE,
+      'ACTIVITY_DETAIL':ACTIVITY_DETAIL,
+      'ACTIVITY_OWNER_ID':ACTIVITY_OWNER_ID,
+      'ACTIVITIES_FILE':ACTIVITIES_FILE
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  delete_activities(ACTIVITY_ID ){
+    var url = window.location.origin+"/academy/index.php/Home/delete_activities";
+    var data = {
+      'ACTIVITY_ID':ACTIVITY_ID  
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
   ///
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num

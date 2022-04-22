@@ -873,6 +873,89 @@ class Home_model extends CI_Model {
     return $st;
   }
   ///
+  public function select_activities(){
+    $this->db->select('*');
+    $this->db->from('activities');
+    $this->db->join('activity_categories', 'activity_categories.ACTIVITY_CATEGORY_ID  = activities.ACTIVITY_CATEGORY_ID');
+    $this->db->join('activity_types', 'activity_types.ACTIVITY_TYPE_ID  = activities.ACTIVITY_TYPE_ID');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = activities.ACTIVITY_OWNER_ID');
+
+    $activities = $this->db->get();
+    $activities = $activities->result_array();
+    $activity_categories = $this->select_activity_categories();
+    $activity_types = $this->select_activity_types();
+    $personnels = $this->select_personnels();
+
+    $DATA = array(
+      'activities'=>$activities,
+      'activity_categories' => $activity_categories,
+      'activity_types' => $activity_types,
+      'personnels' => $personnels['personnels']
+
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  public function add_activities($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ACTIVITY_TYPE_ID']!="" && $data['ACTIVITY_CATEGORY_ID']!=""){
+      $data = array(
+        'ACTIVITY_TYPE_ID' => $data['ACTIVITY_TYPE_ID'],
+        'ACTIVITY_CATEGORY_ID' => $data['ACTIVITY_CATEGORY_ID'],
+
+        'ACTIVITY_NAME' => $data['ACTIVITY_NAME'],
+        'ACTIVITY_DATE' => $data['ACTIVITY_DATE'], 
+        'ACTIVITY_PLACE' => $data['ACTIVITY_PLACE'],
+        'ACTIVITY_DETAIL' => $data['ACTIVITY_DETAIL'],
+        'ACTIVITY_OWNER_ID' => $data['ACTIVITY_OWNER_ID'],
+    
+      );
+     
+      $data = $this->db->insert('activities', $data);
+      $st = array('st'=>1);
+    }
+  
+    return $st;
+  }
+  public function edit_activities($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ACTIVITY_ID']!=""){
+      $this->db->where('ACTIVITY_ID', $data['ACTIVITY_ID']);
+      $this->db->set('ACTIVITY_TYPE_ID', $data['ACTIVITY_TYPE_ID']);
+      $this->db->set('ACTIVITY_CATEGORY_ID',  $data['ACTIVITY_CATEGORY_ID']);
+      $this->db->set('ACTIVITY_NAME', $data['ACTIVITY_NAME']);
+      $this->db->set('ACTIVITY_DATE', $data['ACTIVITY_DATE']);
+      $this->db->set('ACTIVITY_PLACE', $data['ACTIVITY_PLACE']);
+      $this->db->set('ACTIVITY_DETAIL',  $data['ACTIVITY_DETAIL']);
+      $this->db->set('ACTIVITY_OWNER_ID', $data['ACTIVITY_OWNER_ID']);
+   
+
+
+      $this->db->update('activities');
+      $st = array('st'=>1);
+    }
+  
+    //   echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
+  public function delete_activities($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ACTIVITY_ID']!=""){
+      $this->db->delete('activities', array('ACTIVITY_ID' => $data['ACTIVITY_ID'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
+  
+  ///
   public function select_counseling_types(){
     $query = $this->db->get('counseling_types');
     $query = $query->result_array();

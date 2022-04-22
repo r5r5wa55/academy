@@ -370,6 +370,35 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_service_participants($_POST);
 		echo json_encode($data);
 	}
+	///
+	public function activities(){
+		$data = $this->mhome->select_activities();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/activities',$data); 
+	} 
+	public function add_activities(){
+		$data = $this->mhome->add_activities($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function edit_activities(){
+		$data = $this->mhome->edit_activities($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function delete_activities(){
+		$data = $this->mhome->delete_activities($_POST);
+		echo json_encode($data);
+	}
 	////
 	public function counseling_types(){
 		$data['counseling_types'] = $this->mhome->select_counseling_types();
