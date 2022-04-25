@@ -954,6 +954,77 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  ///
+  public function select_activity_participants(){
+    $this->db->select('*');
+    $this->db->from('activity_participants');
+    $this->db->join('activities', 'activities.ACTIVITY_ID  = activity_participants.ACTIVITY_ID');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = activity_participants.PERSONNEL_ID');
+
+    $activity_participants = $this->db->get();
+    $activity_participants = $activity_participants->result_array();
+    $activities = $this->select_activities();
+    $personnels = $this->select_personnels();
+
+    $DATA = array(
+      'activity_participants'=>$activity_participants,
+      'activities' => $activities['activities'],
+      
+      'personnels' => $personnels['personnels']
+
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  public function add_activity_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ACTIVITY_ID']!="" && $data['PERSONNEL_ID']!=""){
+      $data = array(
+        'ACTIVITY_ID' => $data['ACTIVITY_ID'],
+        'PERSONNEL_ID' => $data['PERSONNEL_ID'],
+      
+      );
+     
+      $data = $this->db->insert('activity_participants', $data);
+      $st = array('st'=>1);
+    }
+  
+    return $st;
+  }
+  public function edit_activity_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ID_ACTIVITY_PARTICIPANTS']!=""){
+      $this->db->where('ID_ACTIVITY_PARTICIPANTS', $data['ID_ACTIVITY_PARTICIPANTS']);
+      $this->db->set('ACTIVITY_ID', $data['ACTIVITY_ID']);
+      $this->db->set('PERSONNEL_ID', $data['PERSONNEL_ID']);
+
+   
+   
+
+
+      $this->db->update('activity_participants');
+      $st = array('st'=>1);
+    }
+  
+    //   echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
+  public function delete_activity_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ID_ACTIVITY_PARTICIPANTS']!=""){
+      $this->db->delete('activity_participants', array('ID_ACTIVITY_PARTICIPANTS' => $data['ID_ACTIVITY_PARTICIPANTS'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
   
   ///
   public function select_counseling_types(){

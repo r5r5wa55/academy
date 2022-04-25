@@ -2541,6 +2541,141 @@ var main = {
     })
   },
   ///
+  add_activity_participants(){
+
+    var ACTIVITY_ID = $('#add_activity_participants [name=ACTIVITY_ID]').val();
+    var PERSONNEL_ID = $('#add_activity_participants [name=PERSONNEL_ID]').val();
+   
+  
+    var url = window.location.origin+"/academy/index.php/Home/add_activity_participants";
+    // console.log(ACTIVITY_ID);
+    // console.log(PERSONNEL_ID);
+
+
+    // return false;
+    var data = {
+  
+      'ACTIVITY_ID':ACTIVITY_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  get_edit_activity_participants(ACTIVITY_ID,PERSONNEL_ID,ID_ACTIVITY_PARTICIPANTS){
+
+          // console.log(ACTIVITY_ID);
+          // console.log(PERSONNEL_ID);
+          // console.log(ID_ACTIVITY_PARTICIPANTS );
+
+          // return false;
+
+    $('#edit_activity_participants [name=ACTIVITY_ID] option').each(function(key,value){
+      if(ACTIVITY_ID === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#edit_activity_participants [name=PERSONNEL_ID] option').each(function(key,value){
+      if(PERSONNEL_ID === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#edit_activity_participants [name=ID_ACTIVITY_PARTICIPANTS]').val(ID_ACTIVITY_PARTICIPANTS);
+
+  
+
+    $('#edit_activity_participants').modal('show'); 
+   ;
+  },
+  edit_activity_participants(){
+
+    var ACTIVITY_ID = $('#edit_activity_participants [name=ACTIVITY_ID] option:selected').val()
+    var PERSONNEL_ID = $('#edit_activity_participants [name=PERSONNEL_ID] option:selected').val()
+    var ID_ACTIVITY_PARTICIPANTS = $('#edit_activity_participants [name=ID_ACTIVITY_PARTICIPANTS]').val()
+
+
+
+  
+
+    var url = window.location.origin+"/academy/index.php/Home/edit_activity_participants";
+
+          // console.log(ACTIVITY_ID);
+          // console.log(PERSONNEL_ID);
+          // console.log(ID_ACTIVITY_PARTICIPANTS);
+   
+
+          // return false;
+
+   
+    var data = {
+      
+      'ACTIVITY_ID':ACTIVITY_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+      'ID_ACTIVITY_PARTICIPANTS':ID_ACTIVITY_PARTICIPANTS
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  delete_activity_participants(ID_ACTIVITY_PARTICIPANTS){
+    var url = window.location.origin+"/academy/index.php/Home/delete_activity_participants";
+    var data = {
+      'ID_ACTIVITY_PARTICIPANTS':ID_ACTIVITY_PARTICIPANTS  
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
+  
+  ///
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num
     num = num.replace(/ /g, '');   ///ลบspacebar
