@@ -61,8 +61,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <?php foreach($activities as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-2 body-show"><?php echo $value['ACTIVITY_TYPE_NAME'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['ACTIVITY_CATEGORY_NAME'];?></div>
+          <div class="col-lg-2 body-show"><?php echo $value['ACTIVITY_TYPE_NAME'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['ACTIVITY_NAME'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['ACTIVITY_DATE'];?></div>
          
