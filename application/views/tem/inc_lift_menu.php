@@ -474,7 +474,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?php echo base_url()?>index.php/Home/"  class="nav-link">
+                  <a href="<?php echo base_url()?>index.php/Home/trainings"  class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
                     </a>
@@ -493,7 +493,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?php echo base_url()?>index.php/Home/"  class="nav-link">
+                  <a href="<?php echo base_url()?>index.php/Home/training_participants"  class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
                     </a>

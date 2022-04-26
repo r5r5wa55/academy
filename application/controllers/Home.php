@@ -428,8 +428,37 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_activity_participants($_POST);
 		echo json_encode($data);
 	}
-	
 	///
+	public function trainings(){
+		$data = $this->mhome->select_trainings();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/trainings',$data); 
+	} 
+	public function add_trainings(){
+		$data = $this->mhome->add_trainings($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function edit_trainings(){
+		$data = $this->mhome->edit_trainings($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function delete_trainings(){
+		$data = $this->mhome->delete_trainings($_POST);
+		echo json_encode($data);
+	}
+	///
+
 	public function counseling_types(){
 		$data['counseling_types'] = $this->mhome->select_counseling_types();
 		// 	echo "<pre>";

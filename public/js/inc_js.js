@@ -2541,6 +2541,178 @@ var main = {
     })
   },
   ///
+  add_trainings(){
+
+    var TRAINING_TITLE = $('#add_trainings [name=TRAINING_TITLE]').val();
+    var TRAINING_PLACE = $('#add_trainings [name=TRAINING_PLACE]').val();
+    var TRAINING_OWNER = $('#add_trainings [name=TRAINING_OWNER]').val();
+    var TRAINING_COMMENT = $('#add_trainings [name=TRAINING_COMMENT]').val();
+    var TOTAL_HOUR_TRAINING = $('#add_trainings [name=TOTAL_HOUR_TRAINING]').val();
+    var TRAINING_START_DATE = $('#add_trainings [name=TRAINING_START_DATE]').val();
+    var TRAINING_END_DATE = $('#add_trainings [name=TRAINING_END_DATE]').val();
+    var FILE_TAINING = $('#add_trainings [name=FILE_TAINING]').val();
+  
+    var url = window.location.origin+"/academy/index.php/Home/add_trainings";
+  
+ 
+
+    // console.log(TRAINING_TITLE);
+    // console.log(TRAINING_PLACE);
+    // console.log(TRAINING_OWNER);
+    // console.log(TRAINING_COMMENT);
+    // console.log(TOTAL_HOUR_TRAINING);
+    // console.log(TRAINING_START_DATE);
+    // console.log(TRAINING_END_DATE);
+    // console.log(FILE_TAINING);
+
+
+    // return false;
+    var data = {
+  
+      'TRAINING_TITLE':TRAINING_TITLE,
+      'TRAINING_PLACE':TRAINING_PLACE,
+      'TRAINING_OWNER':TRAINING_OWNER,
+      'TRAINING_COMMENT':TRAINING_COMMENT,
+      'TOTAL_HOUR_TRAINING':TOTAL_HOUR_TRAINING,
+      'TRAINING_START_DATE':TRAINING_START_DATE,
+      'TRAINING_END_DATE':TRAINING_END_DATE,
+      'FILE_TAINING':FILE_TAINING
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  get_edit_trainings(TRAINING_ID,TRAINING_TITLE,TRAINING_PLACE,TRAINING_OWNER,TRAINING_COMMENT,TOTAL_HOUR_TRAINING,
+    TRAINING_START_DATE,TRAINING_END_DATE,FILE_TAINING){
+
+    // console.log(TRAINING_ID);
+    // console.log(TRAINING_TITLE);
+    // console.log(TRAINING_PLACE);
+    // console.log(TRAINING_OWNER);
+    // console.log(TRAINING_COMMENT);
+    // console.log(TOTAL_HOUR_TRAINING);
+    // console.log(TRAINING_START_DATE);
+    // console.log(TRAINING_END_DATE);
+    // console.log(FILE_TAINING);
+
+    //       return false;
+
+    $('#edit_trainings [name=TRAINING_ID]').val(TRAINING_ID);
+    $('#edit_trainings [name=TRAINING_TITLE]').val(TRAINING_TITLE);
+    $('#edit_trainings [name=TRAINING_PLACE]').val(TRAINING_PLACE);
+    $('#edit_trainings [name=TRAINING_OWNER]').val(TRAINING_OWNER);
+    $('#edit_trainings [name=TRAINING_COMMENT]').val(TRAINING_COMMENT);
+    $('#edit_trainings [name=TOTAL_HOUR_TRAINING]').val(TOTAL_HOUR_TRAINING);
+    $('#edit_trainings [name=TRAINING_START_DATE]').val(TRAINING_START_DATE);
+    $('#edit_trainings [name=TRAINING_END_DATE]').val(TRAINING_END_DATE);
+    $('#edit_trainings [name=FILE_TAINING]').val(FILE_TAINING);
+
+    $('#edit_trainings').modal('show'); 
+   ;
+  },
+  edit_trainings(){
+
+    var TRAINING_ID = $('#edit_trainings [name=TRAINING_ID]').val()
+    var TRAINING_TITLE = $('#edit_trainings [name=TRAINING_TITLE]').val()
+    var TRAINING_PLACE = $('#edit_trainings [name=TRAINING_PLACE]').val()
+    var TRAINING_OWNER = $('#edit_trainings [name=TRAINING_OWNER]').val()
+    var TRAINING_COMMENT = $('#edit_trainings [name=TRAINING_COMMENT]').val()
+    var TOTAL_HOUR_TRAINING = $('#edit_trainings [name=TOTAL_HOUR_TRAINING]').val()
+    var TRAINING_START_DATE = $('#edit_trainings [name=TRAINING_START_DATE]').val()
+    var TRAINING_END_DATE = $('#edit_trainings [name=TRAINING_END_DATE]').val()
+    var FILE_TAINING = $('#edit_trainings [name=FILE_TAINING]').val()
+  
+
+    var url = window.location.origin+"/academy/index.php/Home/edit_trainings";
+
+    // console.log(TRAINING_ID);
+    // console.log(TRAINING_TITLE);
+    // console.log(TRAINING_PLACE);
+    // console.log(TRAINING_OWNER);
+    // console.log(TRAINING_COMMENT);
+    // console.log(TOTAL_HOUR_TRAINING);
+    // console.log(TRAINING_START_DATE);
+    // console.log(TRAINING_END_DATE);
+    // console.log(FILE_TAINING);
+
+    //       return false;
+
+   
+    var data = {
+      
+      'TRAINING_ID':TRAINING_ID,
+      'TRAINING_TITLE':TRAINING_TITLE,
+      'TRAINING_PLACE':TRAINING_PLACE,
+      'TRAINING_OWNER':TRAINING_OWNER,
+
+      'TRAINING_COMMENT':TRAINING_COMMENT,
+      'TOTAL_HOUR_TRAINING':TOTAL_HOUR_TRAINING,
+      'TRAINING_START_DATE':TRAINING_START_DATE,
+      'TRAINING_END_DATE':TRAINING_END_DATE,
+      'FILE_TAINING':FILE_TAINING
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  delete_trainings(TRAINING_ID){
+    var url = window.location.origin+"/academy/index.php/Home/delete_trainings";
+    var data = {
+      'TRAINING_ID':TRAINING_ID  
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
+  ///
   add_activity_participants(){
 
     var ACTIVITY_ID = $('#add_activity_participants [name=ACTIVITY_ID]').val();
@@ -2674,6 +2846,8 @@ var main = {
       }
     })
   },
+  ///
+ 
   
   ///
   checkcountinput(obj){

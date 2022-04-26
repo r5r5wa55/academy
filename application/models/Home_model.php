@@ -1025,7 +1025,90 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  ///
+  public function select_trainings(){
+    $this->db->select('*');
+    $this->db->from('trainings');
+    $this->db->join('personnels','personnels.PERSONNEL_ID = trainings.TRAINING_OWNER');
+
+
+    $trainings = $this->db->get();
+    $trainings = $trainings->result_array();
+    $personnels = $this->select_personnels();
+
+
+    $DATA = array(
+    'trainings'=>$trainings,
+    'personnels' => $personnels['personnels']
+
+
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  public function add_trainings($data){
+    $st = array('st'=>0);
+
+
+    if(is_array($data) && $data['TRAINING_TITLE']!="" && $data['TRAINING_PLACE']!=""){
+      $data = array(
+        'TRAINING_TITLE' => $data['TRAINING_TITLE'],
+        'TRAINING_PLACE' => $data['TRAINING_PLACE'],
+
+        'TRAINING_OWNER' => $data['TRAINING_OWNER'],
+        'TRAINING_COMMENT' => $data['TRAINING_COMMENT'], 
+        'TOTAL_HOUR_TRAINING' => $data['TOTAL_HOUR_TRAINING'],
+        'TRAINING_START_DATE' => $data['TRAINING_START_DATE'],
+        'TRAINING_END_DATE' => $data['TRAINING_END_DATE'],
+        'FILE_TAINING' => $data['FILE_TAINING'],
+      );
+     
+      $data = $this->db->insert('trainings', $data);
+      $st = array('st'=>1);
+    }
   
+    return $st;
+  }
+  public function edit_trainings($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['TRAINING_ID']!=""){
+      $this->db->where('TRAINING_ID', $data['TRAINING_ID']);
+      $this->db->set('TRAINING_TITLE', $data['TRAINING_TITLE']);
+      $this->db->set('TRAINING_PLACE',  $data['TRAINING_PLACE']);
+      $this->db->set('TRAINING_OWNER', $data['TRAINING_OWNER']);
+      $this->db->set('TRAINING_COMMENT', $data['TRAINING_COMMENT']);
+      $this->db->set('TOTAL_HOUR_TRAINING', $data['TOTAL_HOUR_TRAINING']);
+      $this->db->set('TRAINING_START_DATE',  $data['TRAINING_START_DATE']);
+      $this->db->set('TRAINING_END_DATE', $data['TRAINING_END_DATE']);
+      $this->db->set('FILE_TAINING', $data['FILE_TAINING']);
+
+   
+
+
+      $this->db->update('trainings');
+      $st = array('st'=>1);
+    }
+  
+    //   echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
+  public function delete_trainings($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['TRAINING_ID']!=""){
+      $this->db->delete('trainings', array('TRAINING_ID' => $data['TRAINING_ID'])); 
+      $st = array('st'=>1);
+    }
+    return $st;
+  }
+ 
   ///
   public function select_counseling_types(){
     $query = $this->db->get('counseling_types');
