@@ -2,22 +2,64 @@
 if (!defined('BASEPATH'))
 exit('No direct script access allowed');
 class Home_model extends CI_Model {
+  public function select_admin_login(){
+    $this->db->select('*');
+    $this->db->from('admin_login');
+    $this->db->join('personnels','personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
+
+
+    $admin_login = $this->db->get();
+    $admin_login = $admin_login->result_array();
+    $personnels = $this->select_personnels();
+
+
+    $DATA = array(
+    'admin_login'=>$admin_login,
+    'personnels' => $personnels['personnels']
+
+
+    );
+    // echo "<pre>";
+    // print_r($admin_login);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  
+  //
   public function select_data(){
+    // echo '<pre>';
+    // print_r ($data);
+    // echo '</pre>';
+    // exit;
     $query = $this->db->get('academics');
+   
     $query = $query->result_array();
     return $query;
   }
   public function select_academics(){
+    
     $query = $this->db->get('academics');
+    
     $query = $query->result_array();
+    // echo '<pre>';
+    // print_r ($query);
+    // echo '</pre>';
+    // exit;
     return $query;
   }
   public function add_academics($data){
     $st = array('st'=>0);
     if(is_array($data) && $data['ACADEMIC_NAME']!=""){
+      // echo '<pre>';
+      // print_r ($data);
+      // echo '</pre>';
+      // exit;
       $data = array(
         'ACADEMIC_NAME' => $data['ACADEMIC_NAME'],
-      );
+      ) ;
+    
       $data = $this->db->insert('academics', $data);
       $st = array('st'=>1);
     }
@@ -41,7 +83,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-///
+  //
+
   public function select_activity_categories(){
     $query = $this->db->get('activity_categories');
     $query = $query->result_array();
@@ -77,7 +120,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
+
   public function select_activity_types(){
     $query = $this->db->get('activity_types');
     $query = $query->result_array();
@@ -112,7 +156,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
+
   public function select_leave_types(){
     $query = $this->db->get('leave_types');
     $query = $query->result_array();
@@ -122,7 +167,7 @@ class Home_model extends CI_Model {
     $st = array('st'=>0);
     if(is_array($data) && $data['LEAVE_TYPE']!=""){
       $data = array(
-        'LEAVE_TYPE_ID' => $data['LEAVE_TYPE_ID'],
+       
         'LEAVE_TYPE' => $data['LEAVE_TYPE'],
         'LEAVE_TYPE_MAX' => $data['LEAVE_TYPE_MAX'],
      
@@ -151,7 +196,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
+
   public function select_managements(){
     $query = $this->db->get('managements');
     $query = $query->result_array();
@@ -186,7 +232,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
+
   public function select_management_positions(){
     $this->db->select('*');
     $this->db->from('management_positions');
@@ -256,7 +303,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
+
   public function select_personnel_categories(){
     $query = $this->db->get('personnel_categories');
     $query = $query->result_array();
@@ -291,7 +339,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+
+  //
   public function select_personnel_statuses(){
     $query = $this->db->get('personnel_statuses');
     $query = $query->result_array();
@@ -326,7 +375,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+
+  //
   public function select_personnel_types(){
     $query = $this->db->get('personnel_types');
     $query = $query->result_array();
@@ -361,7 +411,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  
+  //
   public function select_faculties(){
     $query = $this->db->get('faculties');
     $query = $query->result_array();
@@ -401,7 +452,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+
+  //
   public function select_departments(){
     $this->db->select('*');
     $this->db->from('departments');
@@ -457,7 +509,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+
+  //
   public function select_personnels(){
     $this->db->select('*');
     $this->db->from('personnels');
@@ -536,8 +589,9 @@ class Home_model extends CI_Model {
     return $st;
   }
   public function edit_personnels($data){
-    $st = array('st'=>0);
-    if(is_array($data) && $data['PERSONNEL_ID']!=""){
+    
+    $st1 = array('st'=>0);
+    if(is_array($data) && $data['PERSONNEL_ID']!="456"){
       $this->db->where('PERSONNEL_ID', $data['PERSONNEL_ID']);
       $this->db->set('PERSONNEL_NAME', $data['PERSONNEL_NAME']);
       $this->db->set('PERSONNEL_SURNAME',  $data['PERSONNEL_SURNAME']);
@@ -557,14 +611,14 @@ class Home_model extends CI_Model {
       $this->db->set('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME']);
       $this->db->set('PERSONNEL_PASSWORD', $data['PERSONNEL_PASSWORD']);
       $this->db->update('personnels');
-      $st = array('st'=>1);
+      $st1 = array('st'=>1);
     }
     //   echo "<pre>";
 		// print_r($st);
 		// echo "</pre>";
 		// exit(); 
 
-    return $st;
+    return $st1;
   }
   public function delete_personnels($data){
     $st = array('st'=>0);
@@ -574,7 +628,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+
+  //
   public function select_academic_positions(){
     $this->db->select('*');
     $this->db->from('academic_positions');
@@ -634,13 +689,13 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-/// select_students เอาไว้เชื่อมตารางยังไม่ได้ใข้ทำอะไีร
+  // select_students เอาไว้เชื่อมตารางยังไม่ได้ใข้ทำอะไีร
   public function select_students(){
     $query = $this->db->get('students');
     $query = $query->result_array();
     return $query;
   }
-///
+  //
   public function select_individual_counseling_services(){
     $this->db->select('*');
     $this->db->from('individual_counseling_services');
@@ -801,7 +856,7 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
 
   public function select_service_participants(){
     $this->db->select('*');
@@ -872,7 +927,8 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
+
   public function select_activities(){
     $this->db->select('*');
     $this->db->from('activities');
@@ -906,13 +962,12 @@ class Home_model extends CI_Model {
       $data = array(
         'ACTIVITY_TYPE_ID' => $data['ACTIVITY_TYPE_ID'],
         'ACTIVITY_CATEGORY_ID' => $data['ACTIVITY_CATEGORY_ID'],
-
         'ACTIVITY_NAME' => $data['ACTIVITY_NAME'],
         'ACTIVITY_DATE' => $data['ACTIVITY_DATE'], 
         'ACTIVITY_PLACE' => $data['ACTIVITY_PLACE'],
         'ACTIVITY_DETAIL' => $data['ACTIVITY_DETAIL'],
         'ACTIVITY_OWNER_ID' => $data['ACTIVITY_OWNER_ID'],
-    
+  
       );
      
       $data = $this->db->insert('activities', $data);
@@ -932,9 +987,6 @@ class Home_model extends CI_Model {
       $this->db->set('ACTIVITY_PLACE', $data['ACTIVITY_PLACE']);
       $this->db->set('ACTIVITY_DETAIL',  $data['ACTIVITY_DETAIL']);
       $this->db->set('ACTIVITY_OWNER_ID', $data['ACTIVITY_OWNER_ID']);
-   
-
-
       $this->db->update('activities');
       $st = array('st'=>1);
     }
@@ -954,13 +1006,13 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+  //
+  
   public function select_activity_participants(){
     $this->db->select('*');
     $this->db->from('activity_participants');
     $this->db->join('activities', 'activities.ACTIVITY_ID  = activity_participants.ACTIVITY_ID');
     $this->db->join('personnels', 'personnels.PERSONNEL_ID = activity_participants.PERSONNEL_ID');
-
     $activity_participants = $this->db->get();
     $activity_participants = $activity_participants->result_array();
     $activities = $this->select_activities();
@@ -969,9 +1021,7 @@ class Home_model extends CI_Model {
     $DATA = array(
       'activity_participants'=>$activity_participants,
       'activities' => $activities['activities'],
-      
       'personnels' => $personnels['personnels']
-
     );
     // echo "<pre>";
     // print_r($departments['departments']);
@@ -1001,11 +1051,6 @@ class Home_model extends CI_Model {
       $this->db->where('ID_ACTIVITY_PARTICIPANTS', $data['ID_ACTIVITY_PARTICIPANTS']);
       $this->db->set('ACTIVITY_ID', $data['ACTIVITY_ID']);
       $this->db->set('PERSONNEL_ID', $data['PERSONNEL_ID']);
-
-   
-   
-
-
       $this->db->update('activity_participants');
       $st = array('st'=>1);
     }
@@ -1025,23 +1070,18 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
-  ///
+
+  //
   public function select_trainings(){
     $this->db->select('*');
     $this->db->from('trainings');
     $this->db->join('personnels','personnels.PERSONNEL_ID = trainings.TRAINING_OWNER');
-
-
     $trainings = $this->db->get();
     $trainings = $trainings->result_array();
     $personnels = $this->select_personnels();
-
-
     $DATA = array(
-    'trainings'=>$trainings,
-    'personnels' => $personnels['personnels']
-
-
+      'trainings'=>$trainings,
+     'personnels' => $personnels['personnels']
     );
     // echo "<pre>";
     // print_r($departments['departments']);
@@ -1052,8 +1092,6 @@ class Home_model extends CI_Model {
   }
   public function add_trainings($data){
     $st = array('st'=>0);
-
-
     if(is_array($data) && $data['TRAINING_TITLE']!="" && $data['TRAINING_PLACE']!=""){
       $data = array(
         'TRAINING_TITLE' => $data['TRAINING_TITLE'],
@@ -1085,15 +1123,11 @@ class Home_model extends CI_Model {
       $this->db->set('TRAINING_START_DATE',  $data['TRAINING_START_DATE']);
       $this->db->set('TRAINING_END_DATE', $data['TRAINING_END_DATE']);
       $this->db->set('FILE_TAINING', $data['FILE_TAINING']);
-
-   
-
-
       $this->db->update('trainings');
       $st = array('st'=>1);
     }
   
-    //   echo "<pre>";
+    // echo "<pre>";
 		// print_r($st);
 		// echo "</pre>";
 		// exit(); 
@@ -1108,8 +1142,74 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
- 
+
   ///
+  public function select_training_participants(){
+    $this->db->select('*');
+    $this->db->from('training_participants');
+    $this->db->join('trainings', 'trainings.TRAINING_ID  = training_participants.TRAINING_ID');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = training_participants.PERSONNEL_ID');
+
+    $training_participants = $this->db->get();
+    $training_participants = $training_participants->result_array();
+    $trainings = $this->select_trainings();
+    $personnels = $this->select_personnels();
+
+    $DATA = array(
+      'training_participants'=>$training_participants,
+      'trainings' => $trainings['trainings'],
+      'personnels' => $personnels['personnels']
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  public function add_training_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['TRAINING_ID']!="" && $data['PERSONNEL_ID']!=""){
+      $data = array(
+        'TRAINING_ID' => $data['TRAINING_ID'],
+        'TRAINING_BUDGET	' => $data['TRAINING_BUDGET'],
+        'TRAINING_RESULT' => $data['TRAINING_RESULT'],
+        'TRAINING_EVALUATION_RESULT' => $data['TRAINING_EVALUATION_RESULT'],
+        'TRAINING_ASSESSOR_ID' => $data['TRAINING_ASSESSOR_ID'],
+        'PERSONNEL_ID' => $data['PERSONNEL_ID'],
+      );
+     
+      $data = $this->db->insert('training_participants', $data);
+      $st = array('st'=>1);
+    }
+  
+    return $st;
+  }
+  public function edit_training_participants($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['ID_TRAINING_PARTICIPANTS']!=""){
+      $this->db->where('ID_TRAINING_PARTICIPANTS', $data['ID_TRAINING_PARTICIPANTS']);
+      $this->db->set('TRAINING_ID', $data['TRAINING_ID']);
+      $this->db->set('TRAINING_BUDGET', $data['TRAINING_BUDGET']);
+      $this->db->set('TRAINING_RESULT', $data['TRAINING_RESULT']);
+      $this->db->set('TRAINING_EVALUATION_RESULT', $data['TRAINING_EVALUATION_RESULT']);
+      $this->db->set('TRAINING_ASSESSOR_ID', $data['TRAINING_ASSESSOR_ID']);
+      $this->db->set('PERSONNEL_ID', $data['PERSONNEL_ID']);
+  
+
+      $this->db->update('training_participants');
+      $st = array('st'=>1);
+    }
+  
+    // echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
+
+  //
   public function select_counseling_types(){
     $query = $this->db->get('counseling_types');
     $query = $query->result_array();
@@ -1118,9 +1218,7 @@ class Home_model extends CI_Model {
   public function add_counseling_types($data){
     $st = array('st'=>0);
     if(is_array($data) && $data['COUNSELING_NAME']!=""){
-      $data = array(
-        'COUNSELING_NAME' => $data['COUNSELING_NAME'],
-      );
+      $data = array('COUNSELING_NAME' => $data['COUNSELING_NAME'],);
       $data = $this->db->insert('counseling_types', $data);
       $st = array('st'=>1);
     }
@@ -1144,5 +1242,183 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  //
+  public function select_leaves(){
+    $this->db->select('*');
+    $this->db->from('leaves');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
+    $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
 
+
+    $leaves = $this->db->get();
+    $leaves = $leaves->result_array();
+    $personnels = $this->select_personnels();
+    $leave_types = $this->select_leave_types();
+
+
+    $DATA = array(
+      'leaves'=>$leaves,
+      'personnels' => $personnels['personnels'],
+      'leave_types' => $leave_types
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  public function add_leaves($data){
+    $st = array('st'=>0);
+    if(is_array($data) && $data['LEAVE_TYPE_ID']!="" && $data['OFFICER']!=""){
+      $data = array(
+        'LEAVE_TYPE_ID' => $data['LEAVE_TYPE_ID'],
+        'WRITE_PLACE' => $data['WRITE_PLACE'],
+         
+        'WRITE_DATE' => $data['WRITE_DATE'],
+        'LEAVE_START_DATE' => $data['LEAVE_START_DATE'], 
+        'LEAVE_END_DATE' => $data['LEAVE_END_DATE'],
+        'LEAVE_TOAL' => $data['LEAVE_TOAL'], 
+        'LAST_LEAVE_TYPE_ID' => $data['LAST_LEAVE_TYPE_ID'],
+        'LAST_LEAVE_START_DATE' => $data['LAST_LEAVE_START_DATE'], 
+        'LAST_LEAVE_END_DATE' => $data['LAST_LEAVE_END_DATE'],
+        'LAST_LEAVE_TOAL' => $data['LAST_LEAVE_TOAL'], 
+        'PERSONNEL_ID' => $data['PERSONNEL_ID'],
+        'OFFICER' => $data['OFFICER'],
+        'SUPERVISOR_ID' => $data['SUPERVISOR_ID'], 
+        'SUPERVISOR_OPINION' => $data['SUPERVISOR_OPINION'],
+        'LEAVE_STATUS' => $data['LEAVE_STATUS'], 
+        'LEAVE_FILE' => $data['LEAVE_FILE'], 
+      );
+     
+
+      // console.log(LEAVE_TYPE_ID);
+    // console.log(WRITE_PLACE);
+    // console.log(WRITE_DATE);
+    // console.log(LEAVE_START_DATE);
+    // console.log(LEAVE_END_DATE);
+    // console.log(LEAVE_TOAL);
+    // console.log(LAST_LEAVE_TYPE_ID);
+    // console.log(PERSONNEL_ID);
+
+    // console.log(LAST_LEAVE_END_DATE);
+    // console.log(LAST_LEAVE_TOAL);
+    // console.log(OFFICER);
+    // console.log(SUPERVISOR_ID);
+    // console.log(SUPERVISOR_OPINION);
+    // console.log(LEAVE_STATUS);
+    // console.log(LEAVE_FILE);
+
+    // return false;
+
+
+
+
+
+      $data = $this->db->insert('leaves', $data);
+      $st = array('st'=>1);
+    }
+  
+    return $st;
+  }
+  //
+
+  public function check_login($data){
+    $this->db->select('ADMIN_USER,ADMIN_PASS');
+    $this->db->from('admin_login');
+    $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
+    $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
+    // echo '<pre>';
+    // print_r ($data);
+    // echo '</pre>';
+    // exit;
+    $check_login = $this->db->get();
+    
+    // echo '<pre>';
+    // print_r ($check_login);
+    // echo '</pre>';
+    
+    $check_login = $check_login->row_array();
+    // echo '<pre>';
+    // print_r ($check_login);
+    // // echo '</pre>';
+    // exit;
+   
+    $ADMIN_USER_check = isset($check_login['ADMIN_USER'])?$check_login['ADMIN_USER']:"";
+    $ADMIN_PASS_check = isset($check_login['ADMIN_PASS'])?$check_login['ADMIN_PASS']:"";
+    // $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
+    // $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
+   
+    
+    // print_r (isset($check_login['ADMIN_USER']));
+    // print_r ($check_login['ADMIN_USER']);
+    // echo "\n";
+    // echo '..........';
+    // echo "\n";
+    // print_r (isset($check_login['ADMIN_USER']));
+    // exit;
+
+    $st = array(
+      'st'=>0,
+      'msg'=>'ไม่มี user ในระบบ'
+    ); 
+    if($ADMIN_USER_check != "" && $ADMIN_PASS_check != ""){
+      $st = array(
+        'st'=>1,
+        'msg'=>'login สำเร็จ'
+      );
+    }
+
+    return $st;
+  }
+  public function select_login(){
+    $this->db->select('*');
+    $this->db->from('admin_login');
+    $this->db->join('personnels','personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
+    $admin_login = $this->db->get();
+    $admin_login = $admin_login->result_array();
+    $personnels = $this->select_personnels();
+    $DATA = array(
+      'admin_login'=>$admin_login,
+      'personnels' => $personnels['personnels']
+    );
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  //
+
+
+  public function select_service_participants_pic(){
+    $this->db->select('*');
+    
+    $this->db->from('service_participants_pic');
+
+
+
+
+    $this->db->join('service_participants', 'service_participants.SERVICE_ID = service_participants_pic.SERVICE_ID');
+    $service_participants_pic = $this->db->get();
+    $service_participants_pic = $service_participants_pic->result_array();
+    $service_participants = $this->select_service_participants();
+    //     echo "<pre>";
+    // print_r($service_participants);
+    // echo "</pre>";
+    // exit();
+    $DATA = array(
+      'service_participants_pic'=>$service_participants_pic,
+      'service_participants' => $service_participants['service_participants']
+    );
+    // echo "<pre>";
+    // print_r($service_participants_pic);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+    return $DATA;
+  }
+  
+  
 }

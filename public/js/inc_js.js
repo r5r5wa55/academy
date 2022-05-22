@@ -1,12 +1,16 @@
 var main = {
   add_academics(){
     var ACADEMIC_NAME = $('[name=ACADEMIC_NAME]').val()
-    var url = window.location.origin+"/academy/index.php/Home/add_academics";
-    // console.log(window.location.origin);
+    // console.log($('[name=ACADEMIC_NAME]').val());
+    // return false;
+    var url = window.location.origin+"/index.php/Home/add_academics";
+    // console.log(url);
     // return false;
     var data = {
-      'ACADEMIC_NAME':ACADEMIC_NAME
+      'ACADEMIC_NAME':ACADEMIC_NAME 
     }
+    // console.log(ACADEMIC_NAME);
+    // return false;
     $.ajax({
       url : url,
       method : 'POST',
@@ -15,6 +19,8 @@ var main = {
       cache : false,
       beforeSend: function(jqXHR, settings) {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        // console.log(data);
+        // return false;
       },
     }).done(function(resp) {
       if(resp.st == 1){
@@ -33,7 +39,7 @@ var main = {
   edit_academics(){
     var ACADEMIC_NAME = $('#edit_academics [name=ACADEMIC_NAME]').val()
     var ACADEMIC_ID = $('#edit_academics [name=ACADEMIC_ID]').val()
-    var url = window.location.origin+"/academy/index.php/Home/edit_academics";
+    var url = window.location.origin+"/index.php/Home/edit_academics";
     var data = {
       'ACADEMIC_NAME':ACADEMIC_NAME,
       'ACADEMIC_ID':ACADEMIC_ID
@@ -57,7 +63,7 @@ var main = {
     })
   },
   delete_academics(ACADEMIC_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_academics";
+    var url = window.location.origin+"/index.php/Home/delete_academics";
     var data = {
       'ACADEMIC_ID':ACADEMIC_ID
     }
@@ -83,11 +89,11 @@ var main = {
       }
     })
   },
-///
+  //
   add_activity_categories(){
     var ACTIVITY_CATEGORY_NAME = $('[name=ACTIVITY_CATEGORY_NAME]').val()
     console.log (ACTIVITY_CATEGORY_NAME)
-    var url = window.location.origin+"/academy/index.php/Home/add_activity_categories";
+    var url = window.location.origin+"/index.php/Home/add_activity_categories";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -124,7 +130,7 @@ var main = {
   edit_activity_categories(){
     var ACTIVITY_CATEGORY_NAME	= $('#edit_activity_categories [name=ACTIVITY_CATEGORY_NAME]').val()
     var ACTIVITY_CATEGORY_ID = $('#edit_activity_categories [name=ACTIVITY_CATEGORY_ID]').val()
-    var url = window.location.origin+"/academy/index.php/Home/edit_activity_categories";
+    var url = window.location.origin+"/index.php/Home/edit_activity_categories";
     var data = {
       'ACTIVITY_CATEGORY_NAME':ACTIVITY_CATEGORY_NAME,
       'ACTIVITY_CATEGORY_ID':ACTIVITY_CATEGORY_ID
@@ -148,7 +154,7 @@ var main = {
     })
   },
   delete_activity_categories(ACTIVITY_CATEGORY_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_activity_categories";
+    var url = window.location.origin+"/index.php/Home/delete_activity_categories";
     var data = {
       'ACTIVITY_CATEGORY_ID':ACTIVITY_CATEGORY_ID 
     }
@@ -177,7 +183,7 @@ var main = {
 ///
   add_activity_types(){
     var ACTIVITY_TYPE_NAME = $('[name=ACTIVITY_TYPE_NAME]').val()
-    var url = window.location.origin+"/academy/index.php/Home/add_activity_types";
+    var url = window.location.origin+"/index.php/Home/add_activity_types";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -212,7 +218,7 @@ var main = {
     var ACTIVITY_TYPE_ID  = $('#edit_activity_types [name=ACTIVITY_TYPE_ID]').val()
     console.log(ACTIVITY_TYPE_NAME),
     console.log(ACTIVITY_TYPE_ID);
-    var url = window.location.origin+"/academy/index.php/Home/edit_activity_types";
+    var url = window.location.origin+"/index.php/Home/edit_activity_types";
     var data = {
       'ACTIVITY_TYPE_NAME':ACTIVITY_TYPE_NAME,
       'ACTIVITY_TYPE_ID':ACTIVITY_TYPE_ID
@@ -236,7 +242,7 @@ var main = {
     })
   },
   delete_activity_types(ACTIVITY_TYPE_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_activity_types";
+    var url = window.location.origin+"/index.php/Home/delete_activity_types";
     var data = {
       'ACTIVITY_TYPE_ID':ACTIVITY_TYPE_ID  
     }
@@ -267,7 +273,7 @@ var main = {
     var LEAVE_TYPE = $('[name=LEAVE_TYPE]').val()
     var LEAVE_TYPE_MAX = $('[name=LEAVE_TYPE_MAX]').val()
     console.log (LEAVE_TYPE,LEAVE_TYPE_MAX)
-    var url = window.location.origin+"/academy/index.php/Home/add_leave_types";
+    var url = window.location.origin+"/index.php/Home/add_leave_types";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -312,7 +318,7 @@ var main = {
     // console.log(LEAVE_TYPE),
     // console.log(LEAVE_TYPE_MAX);
     // return false หยุดการทำงาน 
-    var url = window.location.origin+"/academy/index.php/Home/edit_leave_types";
+    var url = window.location.origin+"/index.php/Home/edit_leave_types";
     var data = {
       'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
       'LEAVE_TYPE':LEAVE_TYPE,
@@ -337,7 +343,7 @@ var main = {
     })
   },
   delete_leave_types(LEAVE_TYPE_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_leave_types";
+    var url = window.location.origin+"/index.php/Home/delete_leave_types";
     var data = {
       'LEAVE_TYPE_ID':LEAVE_TYPE_ID
     }
@@ -366,7 +372,7 @@ var main = {
 ///
   add_managements(){
     var MANAGEMENT_NAME = $('[name=MANAGEMENT_NAME]').val()
-    var url = window.location.origin+"/academy/index.php/Home/add_managements";
+    var url = window.location.origin+"/index.php/Home/add_managements";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -398,7 +404,7 @@ var main = {
   edit_managements(){
     var MANAGEMENT_NAME	= $('#edit_managements [name=MANAGEMENT_NAME]').val()
     var MANAGEMENT_ID = $('#edit_managements [name=MANAGEMENT_ID]').val()
-    var url = window.location.origin+"/academy/index.php/Home/edit_managements";
+    var url = window.location.origin+"/index.php/Home/edit_managements";
     var data = {
       'MANAGEMENT_NAME':MANAGEMENT_NAME,
       'MANAGEMENT_ID':MANAGEMENT_ID
@@ -422,7 +428,7 @@ var main = {
     })
   },
   delete_managements(MANAGEMENT_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_managements";
+    var url = window.location.origin+"/index.php/Home/delete_managements";
     var data = {
       'MANAGEMENT_ID':MANAGEMENT_ID  
     }
@@ -451,7 +457,7 @@ var main = {
 ///
   add_personnel_categories(){
     var PERSONNEL_CATEGORY_DETAIL = $('[name=PERSONNEL_CATEGORY_DETAIL]').val()
-    var url = window.location.origin+"/academy/index.php/Home/add_personnel_categories";
+    var url = window.location.origin+"/index.php/Home/add_personnel_categories";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -483,7 +489,7 @@ var main = {
   edit_personnel_categories(){
     var PERSONNEL_CATEGORY_DETAIL	= $('#edit_personnel_categories [name=PERSONNEL_CATEGORY_DETAIL]').val()
     var PERSONNEL_CATEGORY_ID = $('#edit_personnel_categories [name=PERSONNEL_CATEGORY_ID]').val()
-    var url = window.location.origin+"/academy/index.php/Home/edit_personnel_categories";
+    var url = window.location.origin+"/index.php/Home/edit_personnel_categories";
     var data = {
       'PERSONNEL_CATEGORY_DETAIL':PERSONNEL_CATEGORY_DETAIL,
       'PERSONNEL_CATEGORY_ID':PERSONNEL_CATEGORY_ID
@@ -507,7 +513,7 @@ var main = {
     })
   },
   delete_personnel_categories(PERSONNEL_CATEGORY_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_personnel_categories";
+    var url = window.location.origin+"/index.php/Home/delete_personnel_categories";
     var data = {
       'PERSONNEL_CATEGORY_ID':PERSONNEL_CATEGORY_ID  
     }
@@ -536,7 +542,7 @@ var main = {
  ///
   add_personnel_statuses(){
     var PERSONNEL_STATUS_DETAIL = $('[name=PERSONNEL_STATUS_DETAIL]').val()
-    var url = window.location.origin+"/academy/index.php/Home/add_personnel_statuses";
+    var url = window.location.origin+"/index.php/Home/add_personnel_statuses";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -568,7 +574,7 @@ var main = {
   edit_personnel_statuses(){
     var PERSONNEL_STATUS_DETAIL = $('#edit_personnel_statuses [name=PERSONNEL_STATUS_DETAIL]').val()
     var PERSONNEL_STATUS_ID = $('#edit_personnel_statuses [name=PERSONNEL_STATUS_ID]').val()
-    var url = window.location.origin+"/academy/index.php/Home/edit_personnel_statuses";
+    var url = window.location.origin+"/index.php/Home/edit_personnel_statuses";
     var data = {
       'PERSONNEL_STATUS_DETAIL':PERSONNEL_STATUS_DETAIL,
       'PERSONNEL_STATUS_ID':PERSONNEL_STATUS_ID
@@ -594,7 +600,7 @@ var main = {
     })
   },
   delete_personnel_statuses(PERSONNEL_STATUS_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_personnel_statuses";
+    var url = window.location.origin+"/index.php/Home/delete_personnel_statuses";
     var data = {
       'PERSONNEL_STATUS_ID':PERSONNEL_STATUS_ID
     }
@@ -624,7 +630,7 @@ var main = {
   add_personnel_types(){
     var PERSONNEL_TYPE_DETAIL = $('[name=PERSONNEL_TYPE_DETAIL]').val()
     console.log (PERSONNEL_TYPE_DETAIL)
-    var url = window.location.origin+"/academy/index.php/Home/add_personnel_types";
+    var url = window.location.origin+"/index.php/Home/add_personnel_types";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -656,7 +662,7 @@ var main = {
   edit_personnel_types(){
     var PERSONNEL_TYPE_DETAIL = $('#edit_personnel_types [name=PERSONNEL_TYPE_DETAIL]').val()
     var PERSONNEL_TYPE_ID = $('#edit_personnel_types [name=PERSONNEL_TYPE_ID]').val()
-    var url = window.location.origin+"/academy/index.php/Home/edit_personnel_types";
+    var url = window.location.origin+"/index.php/Home/edit_personnel_types";
     var data = {
       'PERSONNEL_TYPE_DETAIL':PERSONNEL_TYPE_DETAIL,
       'PERSONNEL_TYPE_ID':PERSONNEL_TYPE_ID
@@ -682,7 +688,7 @@ var main = {
     })
   },
   delete_personnel_types(PERSONNEL_TYPE_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_personnel_types";
+    var url = window.location.origin+"/index.php/Home/delete_personnel_types";
     var data = {
       'PERSONNEL_TYPE_ID':PERSONNEL_TYPE_ID  
     }
@@ -714,7 +720,7 @@ var main = {
     var FACUALTY_NAME_TH = $('[name=FACUALTY_NAME_TH]').val()
     var FACUALTY_NAME_EN = $('[name=FACUALTY_NAME_EN]').val()
     console.log (FACULTY_ID,FACUALTY_NAME_TH,FACUALTY_NAME_EN)
-    var url = window.location.origin+"/academy/index.php/Home/add_faculties";
+    var url = window.location.origin+"/index.php/Home/add_faculties";
     // console.log(window.location.origin);
     // return false;
     $('input').removeClass('red')
@@ -778,7 +784,7 @@ var main = {
     // console.log(FACUALTY_NAME_TH),
     // console.log(FACUALTY_NAME_EN);
     // return false หยุดการทำงาน 
-    var url = window.location.origin+"/academy/index.php/Home/edit_faculties";
+    var url = window.location.origin+"/index.php/Home/edit_faculties";
 
     $('input').removeClass('red')
     if(FACULTY_ID==""){
@@ -822,7 +828,7 @@ var main = {
     })
   },
   delete_faculties(ID_F){
-    var url = window.location.origin+"/academy/index.php/Home/delete_faculties";
+    var url = window.location.origin+"/index.php/Home/delete_faculties";
     var data = {
       'ID_F':ID_F 
     }
@@ -854,7 +860,7 @@ var main = {
     var DEPARTMENT_NAME_TH = $('#add_departments [name=DEPARTMENT_NAME_TH]').val()
     var DEPARTMENT_NAME_EN = $('#add_departments [name=DEPARTMENT_NAME_EN]').val()
     var FACULTY_ID = $('#add_departments [name=FACULTY_ID] option:selected').val();
-    var url = window.location.origin+"/academy/index.php/Home/add_departments";
+    var url = window.location.origin+"/index.php/Home/add_departments";
     // console.log(window.location.origin);
     // return false;
     $('input').removeClass('red')
@@ -923,7 +929,7 @@ var main = {
     var DEPARTMENT_NAME_TH = $('#edit_departments [name=DEPARTMENT_NAME_TH]').val()
     var DEPARTMENT_NAME_EN = $('#edit_departments [name=DEPARTMENT_NAME_EN]').val()
     var FACULTY_ID = $('#edit_departments [name=FACULTY_ID] option:selected').val();
-    var url = window.location.origin+"/academy/index.php/Home/edit_departments";
+    var url = window.location.origin+"/index.php/Home/edit_departments";
     // console.log(window.location.origin);
     // return false;
     $('input').removeClass('red')
@@ -976,7 +982,7 @@ var main = {
 
   },
   delete_departments(ID_DEP){
-    var url = window.location.origin+"/academy/index.php/Home/delete_departments";
+    var url = window.location.origin+"/index.php/Home/delete_departments";
     var data = {
       'ID_DEP':ID_DEP 
     }
@@ -1022,7 +1028,7 @@ var main = {
     var PERSONNEL_TYPE_ID = $('#add_personnels [name=PERSONNEL_TYPE_ID] option:selected').val();
     var PERSONNEL_USERNAME = $('#add_personnels [name=PERSONNEL_USERNAME]').val()
     var PERSONNEL_PASSWORD = $('#add_personnels [name=PERSONNEL_PASSWORD]').val()
-    var url = window.location.origin+"/academy/index.php/Home/add_personnels";
+    var url = window.location.origin+"/index.php/Home/add_personnels";
     // console.log(PERSONNEL_CRETTE_DATE);
     // console.log(PERSONNEL_PASSWORD);
     // return false
@@ -1267,7 +1273,7 @@ var main = {
     var PERSONNEL_TYPE_ID = $('#edit_personnels [name=PERSONNEL_TYPE_ID] option:selected').val();
     var PERSONNEL_CATEGORY_ID = $('#edit_personnels [name=PERSONNEL_CATEGORY_ID] option:selected').val();
     var DEPARTMENT_ID = $('#edit_personnels [name=DEPARTMENT_ID] option:selected').val();
-    var url = window.location.origin+"/academy/index.php/Home/edit_personnels";
+    var url = window.location.origin+"/index.php/Home/edit_personnels";
     // console.log(window.location.origin);
     // return false;
     $('input').removeClass('red')
@@ -1356,6 +1362,8 @@ var main = {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
       },
     }).done(function(resp) {
+      // console.log(resp);
+      // return false;
       if(resp.st == 1){
         alert('บันทึกสำเร็จ')
         location.reload();
@@ -1365,7 +1373,7 @@ var main = {
     })
   },
   delete_personnels(PERSONNEL_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_personnels";
+    var url = window.location.origin+"/index.php/Home/delete_personnels";
     var data = {
       'PERSONNEL_ID':PERSONNEL_ID 
     }
@@ -1397,7 +1405,7 @@ var main = {
     var MANAGEMENT_ID = $('#add_management_positions [name=MANAGEMENT_ID] option:selected').val();
     var PERSONNEL_ID = $('#add_management_positions [name=PERSONNEL_ID] option:selected').val();
     var DEPARTMENT_ID = $('#add_management_positions [name=DEPARTMENT_ID] option:selected').val();
-    var url = window.location.origin+"/academy/index.php/Home/add_management_positions";
+    var url = window.location.origin+"/index.php/Home/add_management_positions";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -1456,7 +1464,7 @@ var main = {
     var DEPARTMENT_ID = $('#edit_management_positions [name=DEPARTMENT_ID] option:selected').val();
     var MANAGEMENT_POSITION_ID = $('#edit_management_positions [name=MANAGEMENT_POSITION_ID]').val()
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_management_positions";
+    var url = window.location.origin+"/index.php/Home/edit_management_positions";
     // console.log(MANAGEMENT_ID),
     // console.log(PERSONNEL_ID);
     // console.log(DEPARTMENT_ID);
@@ -1492,7 +1500,7 @@ var main = {
   delete_management_positions(MANAGEMENT_POSITION_ID){
     //  console.log(MANAGEMENT_POSITION_ID);
     // return false 
-    var url = window.location.origin+"/academy/index.php/Home/delete_management_positions";
+    var url = window.location.origin+"/index.php/Home/delete_management_positions";
     var data = {
       'MANAGEMENT_POSITION_ID':MANAGEMENT_POSITION_ID 
     }
@@ -1522,7 +1530,7 @@ var main = {
   add_academic_positions(){
     var ACADEMIC_ID = $('#add_academic_positions [name=ACADEMIC_ID] option:selected').val();
     var PERSONNEL_ID = $('#add_academic_positions [name=PERSONNEL_ID] option:selected').val();
-    var url = window.location.origin+"/academy/index.php/Home/add_academic_positions";
+    var url = window.location.origin+"/index.php/Home/add_academic_positions";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -1574,7 +1582,7 @@ var main = {
     var ACADEMIC_ID = $('#edit_academic_positions [name=ACADEMIC_ID] option:selected').val();
     var PERSONNEL_ID = $('#edit_academic_positions [name=PERSONNEL_ID] option:selected').val();
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_academic_positions";
+    var url = window.location.origin+"/index.php/Home/edit_academic_positions";
     // console.log(MANAGEMENT_ID),
     // console.log(PERSONNEL_ID);
     // console.log(DEPARTMENT_ID);
@@ -1607,7 +1615,7 @@ var main = {
     })
   },
   delete_academic_positions(ACADEMIC_POSITION_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_academic_positions";
+    var url = window.location.origin+"/index.php/Home/delete_academic_positions";
     var data = {
       'ACADEMIC_POSITION_ID':ACADEMIC_POSITION_ID 
     }
@@ -1637,7 +1645,7 @@ var main = {
   add_counseling_types(){
     var COUNSELING_NAME = $('[name=COUNSELING_NAME]').val()
     console.log (COUNSELING_NAME)
-    var url = window.location.origin+"/academy/index.php/Home/add_counseling_types";
+    var url = window.location.origin+"/index.php/Home/add_counseling_types";
     // console.log(window.location.origin);
     // return false;
     var data = {
@@ -1669,7 +1677,7 @@ var main = {
   edit_counseling_types(){
     var COUNSELING_NAME = $('#edit_counseling_types [name=COUNSELING_NAME]').val()
     var COUNSELING_TYPE_ID = $('#edit_counseling_types [name=COUNSELING_TYPE_ID]').val()
-    var url = window.location.origin+"/academy/index.php/Home/edit_counseling_types";
+    var url = window.location.origin+"/index.php/Home/edit_counseling_types";
     var data = {
       'COUNSELING_NAME':COUNSELING_NAME,
       'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID
@@ -1693,7 +1701,7 @@ var main = {
     })
   },
   delete_counseling_types(COUNSELING_TYPE_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_counseling_types";
+    var url = window.location.origin+"/index.php/Home/delete_counseling_types";
     var data = {
       'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID
     }
@@ -1733,7 +1741,7 @@ var main = {
     var COUNSELING_DATE = $('#add_individual_counseling_services [name=COUNSELING_DATE]').val()
     var STUDEN_DATE = $('#add_individual_counseling_services [name=STUDEN_DATE]').val()
     
-    var url = window.location.origin+"/academy/index.php/Home/add_individual_counseling_services";
+    var url = window.location.origin+"/index.php/Home/add_individual_counseling_services";
     // console.log(ADVISOR_ID);
     // console.log(STUDENT_ID);
     // console.log(COUNSELING_TYPE_ID);
@@ -1886,7 +1894,7 @@ var main = {
   
   
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_individual_counseling_services";
+    var url = window.location.origin+"/index.php/Home/edit_individual_counseling_services";
 
     // console.log(INDIVIDUAL_COUNSELING_ID);
     // console.log(ADVISOR_ID);
@@ -1953,7 +1961,7 @@ var main = {
     })
   },
   delete_individual_counseling_services(INDIVIDUAL_COUNSELING_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_individual_counseling_services";
+    var url = window.location.origin+"/index.php/Home/delete_individual_counseling_services";
     var data = {
       'INDIVIDUAL_COUNSELING_ID':INDIVIDUAL_COUNSELING_ID  
     }
@@ -1992,7 +2000,7 @@ var main = {
     var SERVICE_END_DATE = $('#add_services [name=SERVICE_END_DATE]').val();
     var FILE_DOCUMENT = $('#add_services [name=FILE_DOCUMENT]').val();
   
-    var url = window.location.origin+"/academy/index.php/Home/add_services";
+    var url = window.location.origin+"/index.php/Home/add_services";
     // console.log(FILE_DOCUMENT);
     // return false;
     var data = {
@@ -2069,7 +2077,7 @@ var main = {
     var FILE_DOCUMENT = $('#edit_services [name=FILE_DOCUMENT]').val()
   
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_services";
+    var url = window.location.origin+"/index.php/Home/edit_services";
        //   console.log(SERVICE_ID);
     // console.log(SERVICE_TITLE);
     // console.log(SERVICE_PLACE);
@@ -2135,7 +2143,7 @@ var main = {
     })
   },
   delete_services(SERVICE_ID ){
-    var url = window.location.origin+"/academy/index.php/Home/delete_services";
+    var url = window.location.origin+"/index.php/Home/delete_services";
     var data = {
       'SERVICE_ID':SERVICE_ID  
     }
@@ -2171,7 +2179,7 @@ var main = {
     var SERVICE_P_END_DATE = $('#add_service_participants [name=SERVICE_P_END_DATE]').val();
   
   
-    var url = window.location.origin+"/academy/index.php/Home/add_service_participants";
+    var url = window.location.origin+"/index.php/Home/add_service_participants";
     // //    $('input').removeClass('red')
     $('input').removeClass('red')
     if(SERVICE_ID==""){
@@ -2258,7 +2266,7 @@ var main = {
 
   
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_service_participants";
+    var url = window.location.origin+"/index.php/Home/edit_service_participants";
     // console.log(ID);
     // console.log(SERVICE_ID);
     // console.log(PERSONNEL_ID);
@@ -2314,7 +2322,7 @@ var main = {
     })
   },
   delete_service_participants(ID ){
-    var url = window.location.origin+"/academy/index.php/Home/delete_service_participants";
+    var url = window.location.origin+"/index.php/Home/delete_service_participants";
     var data = {
       'ID':ID  
     }
@@ -2352,7 +2360,7 @@ var main = {
     var ACTIVITY_OWNER_ID = $('#add_activities [name=ACTIVITY_OWNER_ID]').val();
     var ACTIVITIES_FILE = $('#add_activities [name=ACTIVITIES_FILE]').val();
   
-    var url = window.location.origin+"/academy/index.php/Home/add_activities";
+    var url = window.location.origin+"/index.php/Home/add_activities";
     $('input').removeClass('red')
         
     if(ACTIVITY_NAME==""){
@@ -2466,7 +2474,7 @@ var main = {
     var ACTIVITIES_FILE = $('#edit_activities [name=ACTIVITIES_FILE]').val()
   
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_activities";
+    var url = window.location.origin+"/index.php/Home/edit_activities";
 
           // console.log(ACTIVITY_ID);
           // console.log(ACTIVITY_TYPE_ID);
@@ -2514,7 +2522,7 @@ var main = {
     })
   },
   delete_activities(ACTIVITY_ID ){
-    var url = window.location.origin+"/academy/index.php/Home/delete_activities";
+    var url = window.location.origin+"/index.php/Home/delete_activities";
     var data = {
       'ACTIVITY_ID':ACTIVITY_ID  
     }
@@ -2552,7 +2560,7 @@ var main = {
     var TRAINING_END_DATE = $('#add_trainings [name=TRAINING_END_DATE]').val();
     var FILE_TAINING = $('#add_trainings [name=FILE_TAINING]').val();
   
-    var url = window.location.origin+"/academy/index.php/Home/add_trainings";
+    var url = window.location.origin+"/index.php/Home/add_trainings";
   
  
 
@@ -2638,7 +2646,7 @@ var main = {
     var FILE_TAINING = $('#edit_trainings [name=FILE_TAINING]').val()
   
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_trainings";
+    var url = window.location.origin+"/index.php/Home/edit_trainings";
 
     // console.log(TRAINING_ID);
     // console.log(TRAINING_TITLE);
@@ -2686,7 +2694,7 @@ var main = {
     })
   },
   delete_trainings(TRAINING_ID){
-    var url = window.location.origin+"/academy/index.php/Home/delete_trainings";
+    var url = window.location.origin+"/index.php/Home/delete_trainings";
     var data = {
       'TRAINING_ID':TRAINING_ID  
     }
@@ -2719,7 +2727,7 @@ var main = {
     var PERSONNEL_ID = $('#add_activity_participants [name=PERSONNEL_ID]').val();
    
   
-    var url = window.location.origin+"/academy/index.php/Home/add_activity_participants";
+    var url = window.location.origin+"/index.php/Home/add_activity_participants";
     // console.log(ACTIVITY_ID);
     // console.log(PERSONNEL_ID);
 
@@ -2784,7 +2792,7 @@ var main = {
 
   
 
-    var url = window.location.origin+"/academy/index.php/Home/edit_activity_participants";
+    var url = window.location.origin+"/index.php/Home/edit_activity_participants";
 
           // console.log(ACTIVITY_ID);
           // console.log(PERSONNEL_ID);
@@ -2820,7 +2828,7 @@ var main = {
     })
   },
   delete_activity_participants(ID_ACTIVITY_PARTICIPANTS){
-    var url = window.location.origin+"/academy/index.php/Home/delete_activity_participants";
+    var url = window.location.origin+"/index.php/Home/delete_activity_participants";
     var data = {
       'ID_ACTIVITY_PARTICIPANTS':ID_ACTIVITY_PARTICIPANTS  
     }
@@ -2847,8 +2855,350 @@ var main = {
     })
   },
   ///
- 
+  add_training_participants(){
+
+    var TRAINING_ID = $('#add_training_participants [name=TRAINING_ID]').val();
+    var TRAINING_BUDGET = $('#add_training_participants [name=TRAINING_BUDGET]').val();
+    var TRAINING_RESULT = $('#add_training_participants [name=TRAINING_RESULT]').val();
+    var TRAINING_EVALUATION_RESULT = $('#add_training_participants [name=TRAINING_EVALUATION_RESULT]').val();
+    var TRAINING_ASSESSOR_ID = $('#add_training_participants [name=TRAINING_ASSESSOR_ID]').val();
+    var PERSONNEL_ID = $('#add_training_participants [name=PERSONNEL_ID]').val();
+   
   
+    var url = window.location.origin+"/index.php/Home/add_training_participants";
+    // console.log(TRAINING_ID);
+    // console.log(TRAINING_BUDGET);
+    // console.log(TRAINING_RESULT);
+    // console.log(TRAINING_EVALUATION_RESULT);
+    // console.log(TRAINING_ASSESSOR_ID);
+    // console.log(PERSONNEL_ID);
+
+
+    // return false;
+    var data = {
+  
+      'TRAINING_ID':TRAINING_ID,
+      'TRAINING_BUDGET':TRAINING_BUDGET,
+      'TRAINING_RESULT':TRAINING_RESULT,
+      'TRAINING_EVALUATION_RESULT':TRAINING_EVALUATION_RESULT,
+      'TRAINING_ASSESSOR_ID':TRAINING_ASSESSOR_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  get_edit_training_participants(ID_TRAINING_PARTICIPANTS,TRAINING_ID,TRAINING_BUDGET,
+    TRAINING_RESULT,TRAINING_EVALUATION_RESULT,TRAINING_ASSESSOR_ID,PERSONNEL_ID){
+
+  
+
+    // console.log(ID_TRAINING_PARTICIPANTS);
+    // console.log(TRAINING_ID);
+    // console.log(TRAINING_BUDGET );3
+    // console.log(TRAINING_RESULT);
+    // console.log(TRAINING_EVALUATION_RESULT);
+    // console.log(TRAINING_ASSESSOR_ID );
+    // console.log(PERSONNEL_ID);
+
+
+    // return false;
+  $('#edit_training_participants [name=TRAINING_ID] option').each(function(key,value){
+  if(TRAINING_ID === $(value).val()){
+    $(value).attr("selected","selected")
+  }
+  });
+  $('#edit_training_participants [name=PERSONNEL_ID] option').each(function(key,value){
+  if(PERSONNEL_ID === $(value).val()){
+    $(value).attr("selected","selected")
+  }
+  });
+  $('#edit_training_participants [name=TRAINING_ASSESSOR_ID] option').each(function(key,value){
+    if(TRAINING_ASSESSOR_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+  });
+$('#edit_training_participants [name=ID_TRAINING_PARTICIPANTS]').val(ID_TRAINING_PARTICIPANTS);
+$('#edit_training_participants [name=TRAINING_BUDGET]').val(TRAINING_BUDGET);
+$('#edit_training_participants [name=TRAINING_RESULT]').val(TRAINING_RESULT);
+$('#edit_training_participants [name=TRAINING_EVALUATION_RESULT]').val(TRAINING_EVALUATION_RESULT);
+
+
+
+
+
+
+
+$('#edit_training_participants').modal('show'); 
+;
+  },
+  edit_training_participants(){
+
+
+
+    var ID_TRAINING_PARTICIPANTS = $('#edit_training_participants [name=ID_TRAINING_PARTICIPANTS]').val()
+
+    
+    
+    var TRAINING_ID = $('#edit_training_participants [name=TRAINING_ID] option:selected').val()
+    var TRAINING_BUDGET = $('#edit_training_participants [name=TRAINING_BUDGET]').val()
+    var TRAINING_RESULT = $('#edit_training_participants [name=TRAINING_RESULT]').val()
+    var TRAINING_EVALUATION_RESULT = $('#edit_training_participants [name=TRAINING_EVALUATION_RESULT]').val()
+    var TRAINING_ASSESSOR_ID = $('#edit_training_participants [name=TRAINING_ASSESSOR_ID] option:selected').val()
+    var PERSONNEL_ID = $('#edit_training_participants [name=PERSONNEL_ID] option:selected').val()
+
+
+
+
+    var url = window.location.origin+"/index.php/Home/edit_training_participants";
+
+       
+
+    // console.log(ID_TRAINING_PARTICIPANTS);
+    // console.log(TRAINING_ID);
+    // console.log(TRAINING_BUDGET );
+    // console.log(TRAINING_RESULT);
+    // console.log(TRAINING_EVALUATION_RESULT);
+    // console.log(TRAINING_ASSESSOR_ID);
+    // console.log(PERSONNEL_ID);
+  
+
+          // return false;
+
+   
+    var data = {
+      
+      'ID_TRAINING_PARTICIPANTS':ID_TRAINING_PARTICIPANTS,
+      'TRAINING_ID':TRAINING_ID,
+      'TRAINING_BUDGET':TRAINING_BUDGET,
+      'TRAINING_RESULT':TRAINING_RESULT,
+      'TRAINING_EVALUATION_RESULT':TRAINING_EVALUATION_RESULT,
+      'TRAINING_ASSESSOR_ID':TRAINING_ASSESSOR_ID,
+      'PERSONNEL_ID':PERSONNEL_ID
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  ///
+  check_login(){
+
+    var ADMIN_USER = $('[name=ADMIN_USER]').val(); 
+    var ADMIN_PASS = $('[name=ADMIN_PASS]').val();
+    var url = window.location.origin+"/index.php/Home/check_login";
+    // console.log(ADMIN_USER);
+    // console.log(ADMIN_PASS);
+    // console.log(url);
+    // return false;
+    var data = {
+      'ADMIN_USER':ADMIN_USER,
+      'ADMIN_PASS':ADMIN_PASS
+    }
+      // console.log(data);
+      //    return false;
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+     
+     
+      beforeSend: function(jqXHR, settings) {
+      
+
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+      
+    }).done(function(resp) {
+      // console.log(resp);
+      // return false;
+      if(resp.st == 1){
+        window.location.href = location.origin+"/index.php/Home/personnels"
+      }else{
+       
+        alert(resp.msg);
+      }
+    })
+  },
+  //
+  add_leaves(){
+
+    var LEAVE_TYPE_ID = $('#add_leaves [name=LEAVE_TYPE_ID]').val();
+    var WRITE_PLACE = $('#add_leaves [name=WRITE_PLACE]').val();
+    var WRITE_DATE = $('#add_leaves [name=WRITE_DATE]').val();
+    var LEAVE_START_DATE = $('#add_leaves [name=LEAVE_START_DATE]').val();
+    var LEAVE_END_DATE = $('#add_leaves [name=LEAVE_END_DATE]').val();
+    var LEAVE_TOAL = $('#add_leaves [name=LEAVE_TOAL]').val();
+    var LAST_LEAVE_TYPE_ID = $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').val();
+    var LAST_LEAVE_START_DATE = $('#add_leaves [name=LAST_LEAVE_START_DATE]').val();
+    var LAST_LEAVE_END_DATE = $('#add_leaves [name=LAST_LEAVE_END_DATE]').val();
+    
+    var LAST_LEAVE_TOAL = $('#add_leaves [name=LAST_LEAVE_TOAL]').val();
+    var OFFICER = $('#add_leaves [name=OFFICER]').val();
+    var SUPERVISOR_ID = $('#add_leaves [name=SUPERVISOR_ID]').val();
+    var SUPERVISOR_OPINION = $('#add_leaves [name=SUPERVISOR_OPINION]').val();
+    var LEAVE_STATUS = $('#add_leaves [name=LEAVE_STATUS]').val();
+    var PERSONNEL_ID = $('#add_leaves [name=PERSONNEL_ID]').val();
+
+    var LEAVE_FILE = $('#add_leaves [name=LEAVE_FILE]').val();
+    var url = window.location.origin+"/index.php/Home/add_leaves";
+  
+
+    // console.log(LEAVE_TYPE_ID);
+    // console.log(WRITE_PLACE);
+    // console.log(WRITE_DATE);
+    // console.log(LEAVE_START_DATE);
+    // console.log(LEAVE_END_DATE);
+    // console.log(LEAVE_TOAL);
+    // console.log(LAST_LEAVE_TYPE_ID);
+    // console.log(LAST_LEAVE_START_DATE);
+
+    // console.log(LAST_LEAVE_END_DATE);
+    // console.log(LAST_LEAVE_TOAL);
+    // console.log(OFFICER);
+    // console.log(SUPERVISOR_ID);
+    // console.log(SUPERVISOR_OPINION);
+        // console.log(PERSONNEL_ID);
+    // console.log(LEAVE_STATUS);
+    // console.log(LEAVE_FILE);
+
+    // return false;
+    var data = {
+  
+      'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
+      'WRITE_PLACE':WRITE_PLACE,
+      'WRITE_DATE':WRITE_DATE,
+      'LEAVE_START_DATE':LEAVE_START_DATE,
+      'LEAVE_END_DATE':LEAVE_END_DATE,
+      'LEAVE_TOAL':LEAVE_TOAL,
+      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
+      'LAST_LEAVE_START_DATE':LAST_LEAVE_START_DATE,
+      'LAST_LEAVE_END_DATE':LAST_LEAVE_END_DATE,
+      'LAST_LEAVE_TOAL':LAST_LEAVE_TOAL,
+      'PERSONNEL_ID':PERSONNEL_ID,
+      'OFFICER':OFFICER,
+      'SUPERVISOR_ID':SUPERVISOR_ID,
+
+      'SUPERVISOR_OPINION':SUPERVISOR_OPINION,
+      'LEAVE_STATUS':LEAVE_STATUS,
+      'LEAVE_FILE':LEAVE_FILE
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  get_edit_leaves(LEAVE_ID,LEAVE_TYPE_ID,WRITE_PLACE,WRITE_DATE,LEAVE_START_DATE,
+    LEAVE_END_DATE,LEAVE_TOAL,LAST_LEAVE_TYPE_ID,LAST_LEAVE_START_DATE,LAST_LEAVE_END_DATE,
+    LAST_LEAVE_TOAL,OFFICER,SUPERVISOR_ID,SUPERVISOR_OPINION,PERSONNEL_ID,LEAVE_STATUS,LEAVE_FILE){
+
+  
+      // console.log(LEAVE_ID);
+      // console.log(LEAVE_TYPE_ID);
+      // console.log(WRITE_PLACE);
+      // console.log(WRITE_DATE);
+      // console.log(LEAVE_START_DATE);
+      // console.log(LEAVE_END_DATE);
+      // console.log(LEAVE_TOAL);
+      // console.log(LAST_LEAVE_TYPE_ID);
+      // console.log(PERSONNEL_ID);
+  
+      // console.log(LAST_LEAVE_END_DATE);
+      // console.log(LAST_LEAVE_TOAL);
+      // console.log(OFFICER);
+      // console.log(SUPERVISOR_ID);
+      // console.log(SUPERVISOR_OPINION);
+      // console.log(LEAVE_STATUS);
+      // console.log(LEAVE_FILE);
+  
+      // return false;
+
+    $('#edit_leaves [name=LEAVE_ID]').val(LEAVE_ID);
+    $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
+    if(LEAVE_TYPE_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+    $('#edit_leaves [name=WRITE_PLACE]').val(WRITE_PLACE);
+    $('#edit_leaves [name=WRITE_DATE]').val(WRITE_DATE);
+    $('#edit_leaves [name=LEAVE_START_DATE]').val(LEAVE_START_DATE);
+    $('#edit_leaves [name=LEAVE_END_DATE]').val(LEAVE_END_DATE);
+    $('#edit_leaves [name=LEAVE_TOAL]').val(LEAVE_TOAL);
+    $('#edit_leaves [name=LAST_LEAVE_TYPE_ID]').val(LAST_LEAVE_TYPE_ID);
+    $('#edit_leaves [name=PERSONNEL_ID]').val(LAST_LEAVE_START_DATE);
+    $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(LAST_LEAVE_END_DATE);
+
+    $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(LAST_LEAVE_TOAL);
+    $('#edit_leaves [name=OFFICER] option').each(function(key,value){
+      if(OFFICER === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#edit_leaves [name=SUPERVISOR_ID] option').each(function(key,value){
+      if(SUPERVISOR_ID === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#edit_leaves [name=SUPERVISOR_OPINION]').val(SUPERVISOR_OPINION);
+    
+    $('#edit_leaves [name=PERSONNEL_ID] option').each(function(key,value){
+      if(PERSONNEL_ID === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#edit_leaves [name=LEAVE_STATUS]').val(LEAVE_STATUS);
+    $('#edit_leaves [name=LEAVE_FILE]').val(LEAVE_FILE);
+    
+
+    
+    $('#edit_leaves').modal('show'); 
+;
+  },
   ///
   checkcountinput(obj){
     var num = $(obj).val(); // เก็บตัวแปลเข้า num

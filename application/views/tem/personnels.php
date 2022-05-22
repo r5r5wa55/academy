@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 hade-show">ลบข้อมูล</div>
       </div>
-      <?php foreach($personnels as $key=>$value): ?>
+      <?php foreach($personnels as $key=>$value):?>
         <div class="row">
           <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
@@ -104,6 +104,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     </div>
     </div>
+
+    
 
 
 <div class="modal fade" id="add_personnels" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -159,7 +161,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php foreach($personnel_types as $key=>$value): ?>
                   <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
                 <?php endforeach; ?>
-              </select>
+                </select>
 
               <label for="formGroupExampleInput">สายงาน</label>
               <select class="form-control" name="PERSONNEL_CATEGORY_ID" >

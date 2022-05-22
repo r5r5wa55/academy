@@ -20,3 +20,8 @@
   <link rel="stylesheet" href="<?php echo base_url()."public/"?>plugins/summernote/summernote-bs4.min.css">
   
   <link rel="stylesheet" href="<?php echo base_url()."public/"?>css/inc_css.css">
+
+
+  <!-- Font Awesome -->
+  <!-- icheck bootstrap -->
+  <!-- Theme style -->

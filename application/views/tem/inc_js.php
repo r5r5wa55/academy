@@ -32,5 +32,5 @@
 <script src="<?php echo base_url()."public/"?>dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url()."public/"?>dist/js/pages/dashboard.js"></script>
-C:\xampp\htdocs\academy\public\js\inc_js.js
+<!-- C:\xampp\htdocs\academy\public\js\inc_js.js -->
 <script src="<?php echo base_url()."public/"?>js\inc_js.js"></script>

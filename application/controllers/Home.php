@@ -7,20 +7,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 	public function __construct() {
 	parent::__construct();
-		$this->load->model('Home_model', 'mhome');
+		$this->load->library('session');
+		$this->load->model('Home_model','mhome');
+		// $this->check_login_session();
+	
 	}  
+	// public function check_login_session(){
+	// 	$ADMIN_USER_check = isset( $_SESSION['ADMIN_USER_check'])? $_SESSION['ADMIN_USER_check']:"";
+	// 	$ADMIN_PASS_check = isset( $_SESSION['ADMIN_PASS_check'])? $_SESSION['ADMIN_PASS_check']:"";
+	// 	if($ADMIN_USER_check == "" && $ADMIN_PASS_check == ""){
+	// 		$data = $this->mhome->select_admin_login();
+	// 		$this->load->view('tem/home',$data);  
+	// 		exit();
+	// 	}
+	// }
 	public function index(){
-		$data['academics'] = 
-		$this->mhome->select_academics();
-		$this->load->view('home',$data);
+		// $data = array(
+		// 	'test1' => 1,
+		// 	'test2' => 2
+		// );
+		// echo '<pre>';
+		// print_r ($data);
+		// echo '</pre>';
+		// exit;
+		// $data = $this->mhome->select_admin_login();
+		$this->load->view('tem/home'); 
+
 	}
+
+	///
 	public function page1(){
+
 		$data['academics'] = $this->mhome->select_data();
 		$this->load->view('tem/page1'); 
 	}
 	public function academics(){
 		$data['academics'] = $this->mhome->select_academics();
+		// $data = $this->mhome->select_academics();
+
+
+		// echo '<pre>';
+    // print_r ($data);
+    // echo '</pre>';
+    // exit;
 		$this->load->view('tem/academics',$data); 
+	
 	}
 	public function add_academics(){
 		$data = $this->mhome->add_academics($_POST);
@@ -34,12 +65,12 @@ class Home extends CI_Controller {
    		 $data = $this->mhome->delete_academics($_POST);
     	echo json_encode($data);
   	}
-///		activity_categories
+	//		activity_categories
  	public function activity_categories(){
     	$data['activity_categories'] = $this->mhome->select_activity_categories();
     	$this->load->view('tem/activity_categories',$data);
  	}
-  	public function add_activity_categories(){
+  public function add_activity_categories(){
 		$data = $this->mhome->add_activity_categories($_POST);
 		echo json_encode($data);
 	}
@@ -51,7 +82,7 @@ class Home extends CI_Controller {
    		$data = $this->mhome->delete_activity_categories($_POST);
     	echo json_encode($data);
   	}
-///  	activity_types
+	//  	activity_types
 	public function activity_types(){
 		$data['activity_types'] = $this->mhome->select_activity_types();
 		$this->load->view('tem/activity_types',$data); 
@@ -68,7 +99,7 @@ class Home extends CI_Controller {
    		$data = $this->mhome->delete_activity_types($_POST);
     	echo json_encode($data);
   	}
-///	leave_types
+	//	leave_types
 	public function leave_types(){
 		$data['leave_types'] = $this->mhome->select_leave_types();
 		$this->load->view('tem/leave_types',$data); 
@@ -85,7 +116,7 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_leave_types($_POST);
 		echo json_encode($data);
 	}
-///	managements
+	//	managements
 	public function managements(){
 		$data['managements'] = $this->mhome->select_managements();
 		$this->load->view('tem/managements',$data); 
@@ -102,7 +133,7 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_managements($_POST);
 		echo json_encode($data);
 	}
-/// management_positions
+	// management_positions
 	public function management_positions(){	
 		$data = $this->mhome->select_management_positions();
 			// echo "<pre>";
@@ -131,7 +162,7 @@ class Home extends CI_Controller {
 			// exit(); 
 		echo json_encode($data);
 	}
-///	personnel_categories
+	//	personnel_categories
 	public function personnel_categories(){
 		$data['personnel_categories'] = $this->mhome->select_personnel_categories();
 		$this->load->view('tem/personnel_categories',$data); 
@@ -148,7 +179,7 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_personnel_categories($_POST);
 		echo json_encode($data);
 	}
-///	personnel_statuses
+	//	personnel_statuses
 	public function personnel_statuses(){
 		$data['personnel_statuses'] = $this->mhome->select_personnel_statuses();
 		$this->load->view('tem/personnel_statuses',$data); 
@@ -165,7 +196,7 @@ class Home extends CI_Controller {
    		$data = $this->mhome->delete_personnel_statuses($_POST);
     	echo json_encode($data);
   	}
-///	personnel_types
+	//	personnel_types
 	public function personnel_types(){
 		$data['personnel_types'] = $this->mhome->select_personnel_types();
 		$this->load->view('tem/personnel_types',$data); 
@@ -186,7 +217,7 @@ class Home extends CI_Controller {
 			// print_r($data);
 			// echo "</pre>";
 			// exit();
-///	faculties
+	//	faculties
 	public function faculties(){
     	$data['faculties'] = $this->mhome->select_faculties();
     	// 	echo "<pre>";
@@ -207,7 +238,7 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_faculties($_POST);
 		echo json_encode($data);
 	}
-///	departments
+	//	departments
  	public function departments(){
 		$data = $this->mhome->select_departments();
     	// echo "<pre>";
@@ -216,11 +247,11 @@ class Home extends CI_Controller {
 		// exit(); 
 		$this->load->view('tem/departments',$data); 
 	}
-  	public function add_departments(){
+  public function add_departments(){
 		$data = $this->mhome->add_departments($_POST);
 		echo json_encode($data);
 	}
-  	public function edit_departments(){
+  public function edit_departments(){
     	$data = $this->mhome->edit_departments($_POST);
 		echo json_encode($data);
  	}
@@ -228,7 +259,7 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_departments($_POST);
 		echo json_encode($data);
 	}
-///	academic_positions
+	//	academic_positions
 	public function academic_positions(){
 		$data = $this->mhome->select_academic_positions();
 		$this->load->view('tem/academic_positions',$data); 
@@ -253,7 +284,7 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_academic_positions($_POST);
 		echo json_encode($data);
 	}
-///	personnel
+	//	personnel
 	public function personnels(){
 		$data = $this->mhome->select_personnels();
 		// 	echo "<pre>";
@@ -457,8 +488,32 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_trainings($_POST);
 		echo json_encode($data);
 	}
+	///	
+	public function training_participants(){
+		$data = $this->mhome->select_training_participants();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/training_participants',$data); 
+	} 
+	public function add_training_participants(){
+		$data = $this->mhome->add_training_participants($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function edit_training_participants(){
+		$data = $this->mhome->edit_training_participants($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
 	///
-
 	public function counseling_types(){
 		$data['counseling_types'] = $this->mhome->select_counseling_types();
 		// 	echo "<pre>";
@@ -476,10 +531,43 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	} 
 	public function delete_counseling_types(){
-		$data = $this->mhome->delete_counseling_types($_POST);
+			$data = $this->mhome->delete_counseling_types($_POST);
+			echo json_encode($data);
+  }
+	//
+	public function leaves(){
+		$data = $this->mhome->select_leaves();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/leaves',$data); 
+	} 
+	public function add_leaves(){
+		$data = $this->mhome->add_leaves($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
 		echo json_encode($data);
-  	}
+	}
+	//
+	public function check_login(){
+		$data = $this->mhome->check_login($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		
+		echo json_encode($data);
+	}
 
+	public function service_participants_pic(){
+		$data = $this->mhome->select_service_participants_pic($_POST);
+			// exit(); 
+		$this->load->view('tem/service_participants_pic',$data); 
+	
+	}
 } 
 
 
