@@ -1504,6 +1504,7 @@ class Home_model extends CI_Model {
         'st'=>1
       );
     }
-    return $data_html;
+    return  $data_html;
+    
   }
 }
