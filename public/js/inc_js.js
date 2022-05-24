@@ -3015,6 +3015,7 @@ $('#edit_training_participants').modal('show');
 
     var ADMIN_USER = $('[name=ADMIN_USER]').val(); 
     var ADMIN_PASS = $('[name=ADMIN_PASS]').val();
+    var level = $('[name=level]').val();
     var url = window.location.origin+"/index.php/Home/check_login";
     // console.log(ADMIN_USER);
     // console.log(ADMIN_PASS);
@@ -3022,7 +3023,8 @@ $('#edit_training_participants').modal('show');
     // return false;
     var data = {
       'ADMIN_USER':ADMIN_USER,
-      'ADMIN_PASS':ADMIN_PASS
+      'ADMIN_PASS':ADMIN_PASS,
+      'level':level
     }
       // console.log(data);
       //    return false;

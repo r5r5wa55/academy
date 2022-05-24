@@ -1324,51 +1324,85 @@ class Home_model extends CI_Model {
   //
 
   public function check_login($data){
-    $this->db->select('ADMIN_USER,ADMIN_PASS');
+    $this->db->select('*');
     $this->db->from('admin_login');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
+
     $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
     $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
+
+ 
     // echo '<pre>';
-    // print_r ($data);
+    // print_r ($this->db->from('admin_login'));
     // echo '</pre>';
     // exit;
     $check_login = $this->db->get();
+    $check_login = $check_login->row_array();
+
+    
     
     // echo '<pre>';
     // print_r ($check_login);
     // echo '</pre>';
-    
-    $check_login = $check_login->row_array();
-    // echo '<pre>';
-    // print_r ($check_login);
-    // // echo '</pre>';
     // exit;
+    // $check_login = $check_login->row_array();
+    $level = $check_login['level'];
+
+    //   echo '<pre>';
+    // print_r ($level);
+    // echo '</pre>';
+    // exit;
+ 
    
+
     $ADMIN_USER_check = isset($check_login['ADMIN_USER'])?$check_login['ADMIN_USER']:"";
     $ADMIN_PASS_check = isset($check_login['ADMIN_PASS'])?$check_login['ADMIN_PASS']:"";
-    // $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
-    // $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
-   
+    $level = isset($check_login['level'])?$check_login['level']:"";
+
+    $PERSONNEL_NAME = isset($check_login['PERSONNEL_NAME'])?$check_login['PERSONNEL_NAME']:"";
+    $PERSONNEL_SURNAME = isset($check_login['PERSONNEL_SURNAME'])?$check_login['PERSONNEL_SURNAME']:"";
+
     
-    // print_r (isset($check_login['ADMIN_USER']));
-    // print_r ($check_login['ADMIN_USER']);
+    $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
+    $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
+    $_SESSION['level'] = $level;
+    $_SESSION['PERSONNEL_NAME'] = $PERSONNEL_NAME;
+    $_SESSION['PERSONNEL_SURNAME'] = $PERSONNEL_SURNAME;
+
+   
+    // echo '<pre>';
+    // print_r ($_SESSION);
+    // echo '</pre>';
+    // exit;
+    // print_r ($_SESSION);
+   
     // echo "\n";
     // echo '..........';
     // echo "\n";
-    // print_r (isset($check_login['ADMIN_USER']));
+    // // print_r ($level);
     // exit;
 
+    // if ($level == "") {
+    //   echo "ไม่ได้กรอกข้อมูล";
+    // } elseif ($level == "1") {
+    //   echo "we";
+    // } else {
+    //   echo "e";
+    // }
+    
     $st = array(
       'st'=>0,
-      'msg'=>'ไม่มี user ในระบบ'
+      'msg'=>'ไม่มี user ในระบบ หรือ กรอกรหัสผ่านผิด กรุณาตรวจสอบ'
     ); 
+
     if($ADMIN_USER_check != "" && $ADMIN_PASS_check != ""){
       $st = array(
         'st'=>1,
         'msg'=>'login สำเร็จ'
       );
     }
-
+  //  print_r ($st);
+  //   exit;
     return $st;
   }
   public function select_login(){
