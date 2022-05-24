@@ -1327,18 +1327,11 @@ class Home_model extends CI_Model {
     $this->db->select('*');
     $this->db->from('admin_login');
     $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
-
     $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
     $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
-
- 
-    // echo '<pre>';
-    // print_r ($this->db->from('admin_login'));
-    // echo '</pre>';
-    // exit;
     $check_login = $this->db->get();
     $check_login = $check_login->row_array();
-
+   
     
     
     // echo '<pre>';
@@ -1346,7 +1339,7 @@ class Home_model extends CI_Model {
     // echo '</pre>';
     // exit;
     // $check_login = $check_login->row_array();
-    $level = $check_login['level'];
+  
 
     //   echo '<pre>';
     // print_r ($level);
@@ -1358,7 +1351,6 @@ class Home_model extends CI_Model {
     $ADMIN_USER_check = isset($check_login['ADMIN_USER'])?$check_login['ADMIN_USER']:"";
     $ADMIN_PASS_check = isset($check_login['ADMIN_PASS'])?$check_login['ADMIN_PASS']:"";
     $level = isset($check_login['level'])?$check_login['level']:"";
-
     $PERSONNEL_NAME = isset($check_login['PERSONNEL_NAME'])?$check_login['PERSONNEL_NAME']:"";
     $PERSONNEL_SURNAME = isset($check_login['PERSONNEL_SURNAME'])?$check_login['PERSONNEL_SURNAME']:"";
 
@@ -1428,31 +1420,90 @@ class Home_model extends CI_Model {
 
   public function select_service_participants_pic(){
     $this->db->select('*');
-    
     $this->db->from('service_participants_pic');
+    // $this->db->join('service_participants', 'service_participants.SERVICE_ID = service_participants_pic.SERVICE_ID');
+    // $this->db->join('service_participants', 'service_participants.SERVICE_ID = service_participants_pic.SERVICE_ID');
 
 
 
-
-    $this->db->join('service_participants', 'service_participants.SERVICE_ID = service_participants_pic.SERVICE_ID');
     $service_participants_pic = $this->db->get();
     $service_participants_pic = $service_participants_pic->result_array();
     $service_participants = $this->select_service_participants();
-    //     echo "<pre>";
-    // print_r($service_participants);
+
+    // echo "<pre>";
+    // print_r($service_participants_pic);
     // echo "</pre>";
     // exit();
     $DATA = array(
-      'service_participants_pic'=>$service_participants_pic,
-      'service_participants' => $service_participants['service_participants']
+      'service_participants' => $service_participants['service_participants'],
+      'service_participants_pic'=>$service_participants_pic
     );
     // echo "<pre>";
-    // print_r($service_participants_pic);
+    // print_r($service_participants);
     // echo "</pre>";
     // exit(); 
     // // หน้า network
     return $DATA;
   }
   
-  
+  public function save_upload($data){
+    // echo '<per>';
+    // print_r($data);
+    // echo '</per>';
+    $this->db->insert_batch('service_participants_pic', $data['img_name']); 
+
+    $this->db->select('*');
+    $this->db->from('service_participants_pic');
+    $this->db->where('SERVICE_ID', $data['SERVICE_ID']);
+
+    $data = $this->db->get();
+    $data = $data->result_array();
+    $output = "";
+    $data_html = array(
+      'html'=>$output,
+      'st'=>0
+    );
+    if($data != array()){
+      foreach ($data as $key => $value) {
+        $output .= '
+          <div class="col-md-3">
+            <img src="'.base_url().'upload/'.$value["PIC_GARRY"].'" class="img-reponsive img-thumbnail box-img-upload"/>
+          </div>
+        ';
+      }
+      $data_html = array(
+        'html'=>$output,
+        'st'=>1
+      );
+    }
+    
+    return $data_html;
+  }
+  public function Mget_img_SERVICE($data){
+    $this->db->select('*');
+    $this->db->from('service_participants_pic');
+    $this->db->where('SERVICE_ID', $data['SERVICE_ID']);
+
+    $data = $this->db->get();
+    $data = $data->result_array();
+    $output = "";
+    $data_html = array(
+      'html'=>$output,
+      'st'=>0
+    );
+    if($data != array()){
+      foreach ($data as $key => $value) {
+        $output .= '
+          <div class="col-md-3">
+            <img src="'.base_url().'upload/'.$value["PIC_GARRY"].'" class="img-reponsive img-thumbnail box-img-upload"/>
+          </div>
+        ';
+      }
+      $data_html = array(
+        'html'=>$output,
+        'st'=>1
+      );
+    }
+    return $data_html;
+  }
 }

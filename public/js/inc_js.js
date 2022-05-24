@@ -3214,5 +3214,105 @@ $('#edit_training_participants').modal('show');
     element.value = element.value.replace(/[^0-9]/gi, "");  
     // $(obj).val(element.value = element.value.replace(/[^0-9]/gi, ""));
 
+  },
+  add_service_participants_pic(){
+    var PIC_GARRY = $('#add_service_participants_pic [name=ACTIVITY_ID]').val();
+    var CREATE_BY_SE = $('#add_service_participants_pic [name=PERSONNEL_ID]').val();
+   
+  
+    var url = window.location.origin+"/index.php/Home/add_activity_participants";
+    // console.log(ACTIVITY_ID);
+    // console.log(PERSONNEL_ID);
+
+
+    // return false;
+    var data = {
+  
+      'ACTIVITY_ID':ACTIVITY_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+    }
+   
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+
+  upload_img(){
+    var files = $('#files')[0].files;
+    var error = '';
+    var form_data = new FormData();
+    for(var count = 0; count<files.length; count++){
+      var name = files[count].name;
+      var extension = name.split('.').pop().toLowerCase();
+      if(jQuery.inArray(extension, ['gif','png','jpg','jpeg','pdf','csv']) == -1){
+        error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ภาพ"
+      }else{
+        form_data.append("files[]", files[count]);
+      }
+    }
+    form_data.append('SERVICE_ID', $('[name=SERVICE_ID]').val());
+   
+    if(error == ''){
+      $.ajax({
+        url:window.location.origin+"/index.php/Home/upload",
+        method:"POST",
+        data:form_data,
+        contentType:false,
+        dataType : 'JSON',
+        cache:false,
+        processData:false,
+        beforeSend:function(){
+          $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+        },
+      }).done(function(data) {
+        if(data.st == 1){
+          $('#uploaded_images').html(data.html)
+        }else{
+          alert('sud')
+        }
+        
+      })
+    }else{
+      alert(error);
+    }
+  },
+
+  open_add_service_participants_pic(SERVICE_ID){
+    $('[name=SERVICE_ID]').val(SERVICE_ID);
+    $.ajax({
+      url:window.location.origin+"/index.php/Home/get_img_SERVICE",
+      method:"POST",
+      dataType : 'JSON',
+      data:{'SERVICE_ID':SERVICE_ID},
+      cache : false,
+      beforeSend:function(){
+        $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+      },
+    }).done(function(data) {
+      if(data.st == 1){
+        $('#uploaded_images').html(data.html)
+        $('#add_service_participants_pic').modal('show')
+      }else{
+        alert('sud')
+      }
+    })
+
+   
   }
 }
+
+

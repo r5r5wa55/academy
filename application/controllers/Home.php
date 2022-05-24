@@ -11,6 +11,7 @@ class Home extends CI_Controller {
 		$this->load->model('Home_model','mhome');
 		$this->load->library('upload');
 		
+		
 	}  
 	public function check_login_session(){
 	
@@ -38,7 +39,6 @@ class Home extends CI_Controller {
 	
 	
 	}
-
 	public function logout(){
 		unset($_SESSION['ADMIN_USER_check']);
 		unset($_SESSION['ADMIN_PASS_check']);
@@ -662,6 +662,8 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 
+
+ 
 	public function service_participants_pic(){
 		$this->check_login_session();
 		$data = $this->mhome->select_service_participants_pic($_POST);
@@ -669,6 +671,49 @@ class Home extends CI_Controller {
 		$this->load->view('tem/service_participants_pic',$data); 
 	
 	}
+	
+	public function upload(){
+
+    if($_FILES["files"]["name"] != '')
+      $output = '';
+      $config["upload_path"] = './upload/';
+      $config["allowed_types"] = './jpg|jpeg|png|gif';
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
+			$img_name = array();
+      for($count = 0; $count<count($_FILES["files"]["name"]); $count ++){
+				$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
+				$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
+				$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
+				$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
+				$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+				
+				if($this->upload->do_upload('file')){
+					$data = $this->upload->data();
+					// $output .= '
+					// <div class="col-md-3">
+					//   <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/>
+					// </div>
+					// ';
+					$img_name[] = array(
+						'PIC_GARRY'=>$data["file_name"],
+						'SERVICE_ID' => $_POST['SERVICE_ID'],
+						'CREATE_BY_SE' => $_SESSION['ADMIN_USER_check'],
+					);
+				}
+			}
+			$data = array(
+				'SERVICE_ID' => $_POST['SERVICE_ID'],
+				'img_name' => $img_name
+			);
+			$data = $this->mhome->save_upload($data);
+			echo json_encode($data);
+  }
+  public function get_img_SERVICE(){
+		$data = $this->mhome->Mget_img_SERVICE($_POST);
+		echo json_encode($data);
+	}
+
 } 
 
 
