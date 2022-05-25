@@ -3307,7 +3307,8 @@ $('#edit_training_participants').modal('show');
         $('#uploaded_images').html(data.html)
         $('#add_service_participants_pic').modal('show')
       }else{
-        alert('sud')
+        $('#uploaded_images').html(data.html)
+        $('#add_service_participants_pic').modal('show')
       }
     })
 
