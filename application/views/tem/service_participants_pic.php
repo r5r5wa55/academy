@@ -56,10 +56,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบรูปภาพ</div>
        
       </div>
-      <?php foreach($service_participants_pic as $key=>$value):?>
+      <?php foreach($services as $key=>$value):?>
         <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['ID_S_P'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['SERVICE_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['SERVICE_TITLE'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show">
             <button type="button" class="btn btn-block btn-outline-primary" onclick="main.open_add_service_participants_pic('<?php echo $value['SERVICE_ID'];?>')">เพืมรูปภาพ</button>
@@ -67,15 +67,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
           <div class="col-lg-2 col-md-2 col-sm-2 body-show">
             <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_service_participants_pic(
-              '<?php echo $value['ID_S_P'];?>',
               '<?php echo $value['SERVICE_ID'];?>',
-              '<?php echo $value['PIC_GARRY'];?>',
-              '<?php echo $value['CREATE_BY_SE'];?>');">
+              '<?php echo $value['SERVICE_TITLE'];?>',
+              '<?php echo $value['SERVICE_TITLE'];?>',
+              '<?php echo $value['SERVICE_TITLE'];?>');">
               แก้ไขข้อมูล
             </button>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_service_participants_pic('<?php echo $value['ID_S_P'];?>')">ลบข้อมูล</button>
+            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_service_participants_pic('<?php echo $value['SERVICE_ID'];?>')">ลบข้อมูล</button>
           </div>
         </div>
       <?php endforeach; ?>
@@ -83,7 +83,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
   </div>
 </div>
-<img src="<?php echo base_url('uploads/แต่งคิ้ว.png'); ?>"/>
 
 <div class="modal fade" id="add_service_participants_pic" tabindex="-1"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog modal-lg" role="document">

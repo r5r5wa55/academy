@@ -1420,23 +1420,14 @@ class Home_model extends CI_Model {
 
   public function select_service_participants_pic(){
     $this->db->select('*');
-    $this->db->from('service_participants_pic');
-    // $this->db->join('service_participants', 'service_participants.SERVICE_ID = service_participants_pic.SERVICE_ID');
-    // $this->db->join('service_participants', 'service_participants.SERVICE_ID = service_participants_pic.SERVICE_ID');
-
-
-
-    $service_participants_pic = $this->db->get();
-    $service_participants_pic = $service_participants_pic->result_array();
-    $service_participants = $this->select_service_participants();
-
-    // echo "<pre>";
-    // print_r($service_participants_pic);
-    // echo "</pre>";
-    // exit();
+    $this->db->from('services');
+  
+    $services = $this->db->get();
+    $services = $services->result_array();
+  
+  
     $DATA = array(
-      'service_participants' => $service_participants['service_participants'],
-      'service_participants_pic'=>$service_participants_pic
+      'services'=>$services
     );
     // echo "<pre>";
     // print_r($service_participants);
