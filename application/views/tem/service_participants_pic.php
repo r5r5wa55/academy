@@ -6,6 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Dashboard</title>
   <?php 
@@ -20,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="<?php echo base_url()."public/"?>dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
-
+  
   <?php $this->load->view('tem/inc_head_menu.php')?>
 
   <?php $this->load->view('tem/inc_lift_menu')?>
