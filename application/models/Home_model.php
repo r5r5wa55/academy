@@ -7,6 +7,7 @@ class Home_model extends CI_Model {
     $this->db->from('admin_login');
     $this->db->join('personnels','personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
 
+    
 
     $admin_login = $this->db->get();
     $admin_login = $admin_login->result_array();
@@ -512,13 +513,24 @@ class Home_model extends CI_Model {
 
   //
   public function select_personnels(){
+    
     $this->db->select('*');
     $this->db->from('personnels');
     $this->db->join('personnel_categories', 'personnel_categories.PERSONNEL_CATEGORY_ID = personnels.PERSONNEL_CATEGORY_ID');
     $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
     $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
     $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
+    $this->db->limit(5, 6);
+
     $personnels = $this->db->get();
+		$config['base_url'] = 'http://academy.com/index.php/Home/personnels';
+		$config['total_rows'] =  5;
+		$config['per_page'] = 1;
+
+		$this->pagination->initialize($config);
+
+
+   
     $personnels = $personnels->result_array();
     $personnel_categories = $this->select_personnel_categories();
     $personnel_statuses = $this->select_personnel_statuses();
@@ -529,7 +541,8 @@ class Home_model extends CI_Model {
       'personnel_categories' => $personnel_categories,
       'personnel_statuses' => $personnel_statuses,
       'personnel_types' => $personnel_types,
-      'departments' => $departments['departments']
+      'departments' => $departments['departments'],
+      'create_links' => $this->pagination->create_links()
     );
     // echo "<pre>";
 		// print_r($departments['departments']);
@@ -1482,6 +1495,7 @@ class Home_model extends CI_Model {
       'html'=>$output,
       'st'=>0
     );
+    
     if($data != array()){
       foreach ($data as $key => $value) {
         $output .= '
@@ -1495,7 +1509,16 @@ class Home_model extends CI_Model {
         'st'=>1
       );
     }
+    // echo  '<pre>';
+    // print_r($data_html);
+    // echo  '</pre>';
+    // exit;
     return  $data_html;
     
   }
+
+  
+
 }
+
+

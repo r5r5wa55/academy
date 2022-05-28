@@ -41,6 +41,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+    <?php if ($_SESSION['level'] === '1'): ?>  <!-- add_personnels ช่อน -->
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_personnels').modal('show');">เพิ่มข้อมูล</button></div>
+          <div class="col-lg-4"></div>
+        </div>
+      <?php endif; ?>
       <!-- /.content-header -->
     <div class="content">
       <div class="row">
@@ -51,6 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 hade-show">ลบข้อมูล</div>
       </div>
+      
       <?php foreach($personnels as $key=>$value):?><!-- show_personnels -->
         <div class="row">
             <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
@@ -85,13 +93,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
       <?php endforeach; ?>
-      <?php if ($_SESSION['level'] === '1'): ?>  <!-- add_personnels ช่อน -->
-        <div class="row">
-          <div class="col-lg-4"></div>
-          <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_personnels').modal('show');">เพิ่มข้อมูล</button></div>
-          <div class="col-lg-4"></div>
-        </div>
-      <?php endif; ?>
+      <?php echo $create_links; ?>
+   
     </div>
   </div>
 </div>

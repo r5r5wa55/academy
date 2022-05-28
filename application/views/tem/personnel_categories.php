@@ -29,7 +29,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="content-wrapper">
     
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <div class="content-header"  >
+    <div class="table-responsive" ></div>
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -81,8 +82,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
 <script>
-  $( document ).ready(function() {
-  });
+
 </script>
 </body>
 </html>

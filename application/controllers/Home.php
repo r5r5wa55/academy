@@ -10,6 +10,7 @@ class Home extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('Home_model','mhome');
 		$this->load->library('upload');
+		$this->load->library('pagination');
 		
 		
 	}  
@@ -44,7 +45,7 @@ class Home extends CI_Controller {
 		unset($_SESSION['ADMIN_PASS_check']);
 			
 		$this->load->helper('url');
-		redirect('Home/index', 'refresh');
+		redirect('http://academy.com/', 'refresh');
 		
 	}
 	//
@@ -351,9 +352,10 @@ class Home extends CI_Controller {
 		$this->check_login_session();
 		$data = $this->mhome->select_personnels();
 		// 	echo "<pre>";
-		// print_r($data);
+		// print_r(count($data['personnels']));
 		// echo "</pre>";
 		// exit(); 
+	
 		$this->load->view('tem/personnels',$data); 
 	} 
 	public function add_personnels(){
@@ -661,9 +663,6 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
-
-
- 
 	public function service_participants_pic(){
 		$this->check_login_session();
 		$data = $this->mhome->select_service_participants_pic($_POST);
@@ -671,7 +670,6 @@ class Home extends CI_Controller {
 		$this->load->view('tem/service_participants_pic',$data); 
 	
 	}
-	
 	public function upload(){
 
     if($_FILES["files"]["name"] != '')
@@ -713,6 +711,18 @@ class Home extends CI_Controller {
 		$data = $this->mhome->Mget_img_SERVICE($_POST);
 		echo json_encode($data);
 	}
+	
+	public function test_pagenation(){
+	
+		// $this->db->get('personnel_categories');
+		// $this->Pagination_bootstrap->offset(10);
+		// $data['results'] = $this->Pagination_bootstrap->config("pagenation/test_pagenation", $sql);
+		$this->load->view('tem/pagenation',$data); 
+
+	}
+	
+ 
+
 
 } 
 
