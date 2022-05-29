@@ -11,8 +11,6 @@ class Home extends CI_Controller {
 		$this->load->model('Home_model','mhome');
 		$this->load->library('upload');
 		$this->load->library('pagination');
-		
-		
 	}  
 	public function check_login_session(){
 	
@@ -49,7 +47,20 @@ class Home extends CI_Controller {
 		
 	}
 	//
-
+	public function search_all(){
+		$search_all = "";
+		if(isset($_GET['search_all']) && $_GET['search_all'] != ""){
+			$search_all = $_GET['search_all'];
+		}
+		return $search_all ;
+	}
+	public function we_search(){
+		$depart = "";
+		if(isset($_GET['search_all']) && $_GET['search_all']  != ""){
+			$depart = $_GET['search_all'];
+		};
+		return $depart;
+	}
 	///
 	public function page1(){
 
@@ -204,7 +215,8 @@ class Home extends CI_Controller {
 	//	personnel_categories
 	public function personnel_categories(){
 		$this->check_login_session();
-		$data['personnel_categories'] = $this->mhome->select_personnel_categories();
+		$data_search = $this->search_all(); 
+		$data['personnel_categories'] = $this->mhome->select_personnel_categories($data_search);
 		$this->load->view('tem/personnel_categories',$data); 
 	}
 	public function add_personnel_categories(){
@@ -225,7 +237,8 @@ class Home extends CI_Controller {
 	//	personnel_statuses
 	public function personnel_statuses(){
 		$this->check_login_session();
-		$data['personnel_statuses'] = $this->mhome->select_personnel_statuses();
+		$data_search = $this->search_all(); 
+		$data['personnel_statuses'] = $this->mhome->select_personnel_statuses($data_search);
 		$this->load->view('tem/personnel_statuses',$data); 
 	}
 	public function add_personnel_statuses(){
@@ -246,7 +259,8 @@ class Home extends CI_Controller {
 	//	personnel_types
 	public function personnel_types(){
 		$this->check_login_session();
-		$data['personnel_types'] = $this->mhome->select_personnel_types();
+		$data_search = $this->search_all(); 
+		$data['personnel_types'] = $this->mhome->select_personnel_types($data_search);
 		$this->load->view('tem/personnel_types',$data); 
 	}
 	public function add_personnel_types(){
@@ -271,11 +285,16 @@ class Home extends CI_Controller {
 	//	faculties
 	public function faculties(){
 		$this->check_login_session();
-    $data['faculties'] = $this->mhome->select_faculties();
-    	// 	echo "<pre>";
-		// print_r($data);
-		// echo "</pre>";
-		// exit();
+
+		$a = "";
+		if(isset($_GET['search_all']) && $_GET['search_all'] != ""){
+			$a = $_GET['search_all'];
+			
+		}
+    $data['faculties'] = $this->mhome->select_faculties($a);
+    
+	
+
     $this->load->view('tem/faculties',$data); 
  	}
   public function add_faculties(){
@@ -296,11 +315,12 @@ class Home extends CI_Controller {
 	//	departments
  	public function departments(){
 		$this->check_login_session();
-		$data = $this->mhome->select_departments();
-    	// echo "<pre>";
-		// print_r($data['faculties']);
-		// echo "</pre>";
-		// exit(); 
+
+		// print_r($_GET['search_all']);
+		// exit;
+		$depart = $this->we_search();
+		$data = $this->mhome->select_departments($depart);
+ 
 		$this->load->view('tem/departments',$data); 
 	}
   public function add_departments(){
@@ -350,12 +370,8 @@ class Home extends CI_Controller {
 	//	personnel
 	public function personnels(){
 		$this->check_login_session();
-		$data = $this->mhome->select_personnels();
-		// 	echo "<pre>";
-		// print_r(count($data['personnels']));
-		// echo "</pre>";
-		// exit(); 
-	
+		$data_search = $this->search_all();
+		$data = $this->mhome->select_personnels($data_search);
 		$this->load->view('tem/personnels',$data); 
 	} 
 	public function add_personnels(){
@@ -712,16 +728,55 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	
-	public function test_pagenation(){
-	
-		// $this->db->get('personnel_categories');
-		// $this->Pagination_bootstrap->offset(10);
-		// $data['results'] = $this->Pagination_bootstrap->config("pagenation/test_pagenation", $sql);
-		$this->load->view('tem/pagenation',$data); 
 
+
+	public	function ajaxsearch(){
+			$this->load->view('tem/ajaxsearch');
 	}
 	
+	public function fetch(){
+		$output = '';
+		$query = '';
+		$this->load->model('Home_model');
+		if($this->input->post('query')){
+			$query = $this->input->post('query');
+		}
+		$data = $this->Home_model->fetch_data($query);
+		$output = '
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<tr>
+					<th>Customer Name</th>
+					<th>Address</th>
+					<th>City</th>
+					<th>Postal Code</th>
+					<th>Country</th>
+					</tr>
+		';
+		if($data->num_rows() > 0){
+			foreach($data->result() as $row){
+				$output .= '
+						<tr>
+						<td>'.$row->ADMIN_USER.'</td>
+						<td>'.$row->ADMIN_PASS.'</td>
+						<td>'.$row->PERSONNEL_ID.'</td>
+						<td>'.$row->level.'</td>
+						
+						<td>'.$row->level.'</td>
+						</tr>
+				';
+				
+			}
+		}else{
+			$output .= '<tr>
+					<td colspan="5">ไม่มีข้อมูล</td>
+					</tr>';
+		}
+			$output .= '</table>';
+			echo $output;
+ }
  
+
 
 
 } 

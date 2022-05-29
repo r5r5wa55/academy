@@ -3313,6 +3313,10 @@ $('#edit_training_participants').modal('show');
     })
 
    
+  },
+  search_all(url){
+    console.log(url);
+    
   }
 }
 

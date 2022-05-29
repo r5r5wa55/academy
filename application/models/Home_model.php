@@ -2,6 +2,50 @@
 if (!defined('BASEPATH'))
 exit('No direct script access allowed');
 class Home_model extends CI_Model {
+  public function paginate_custom($totalpage,$curentpage,$rount){
+    $First_page = $rount;
+    $Last_page =$rount;
+    $html_page = "";
+    if($totalpage == 0){
+      $totalpage = 1;
+    }
+    $url = $rount;
+    $pag = 0;
+    $search = isset($_GET['search_all'])?$_GET['search_all']:"";
+    $search_url = "";
+    if($search != ""){
+      $search_url = '&search_all='.$search;
+    }
+    if($totalpage>0){
+      for ($i=0; $i <$totalpage ; $i++) { 
+        
+        $active = '';
+        if(($i+1)==$curentpage){
+          $active = 'active-1';
+        }
+        $html_page .= '
+          <li class="page-item" data-page="'.($i+1).'"><a class="page-link '.$active.'" href="'.$url.'?page='.($i+1).$search_url.'">'.($i+1).'</a></li>
+        ';
+        $pag++;
+      }
+    }
+    
+    $html_paginate = '
+      <nav aria-label="Page navigation example" class="page-custom" data-curentpage="'.$curentpage.'">
+        <ul class="pagination justify-content-center">
+          <li class="page-item ">
+            <a class="page-link" href="'.$First_page.'" tabindex="-1">First</a>
+          </li>
+          '.$html_page.'
+          <li class="page-item">
+            <a class="page-link" href="'.$url.'?page='.($pag).$search_url.'">Last</a>
+          </li>
+        </ul>
+      </nav>
+    ';
+    
+    return $html_paginate;
+  }
   public function select_admin_login(){
     $this->db->select('*');
     $this->db->from('admin_login');
@@ -306,8 +350,13 @@ class Home_model extends CI_Model {
   }
   //
 
-  public function select_personnel_categories(){
-    $query = $this->db->get('personnel_categories');
+  public function select_personnel_categories($data_search = ""){
+    $this->db->select('*');
+    $this->db->from('personnel_categories');
+    if($data_search != ""){
+      $this->db->like('`personnel_categories`.`PERSONNEL_CATEGORY_DETAIL`', $data_search);
+    };
+    $query = $this->db->get();
     $query = $query->result_array();
     return $query;
   }
@@ -342,8 +391,13 @@ class Home_model extends CI_Model {
   }
 
   //
-  public function select_personnel_statuses(){
-    $query = $this->db->get('personnel_statuses');
+  public function select_personnel_statuses($data_search = ""){
+    $this->db->select('*');
+    $this->db->from('personnel_statuses');
+    if($data_search != ""){
+      $this->db->like('`personnel_statuses`.`PERSONNEL_STATUS_DETAIL`', $data_search);
+    };
+    $query = $this->db->get();
     $query = $query->result_array();
     return $query;
   }
@@ -378,8 +432,13 @@ class Home_model extends CI_Model {
   }
 
   //
-  public function select_personnel_types(){
-    $query = $this->db->get('personnel_types');
+  public function select_personnel_types($data_search = ""){
+    $this->db->select('*');
+    $this->db->from('personnel_types');
+    if($data_search != ""){
+      $this->db->like('`personnel_types`.`PERSONNEL_TYPE_DETAIL`', $data_search);
+    };
+    $query = $this->db->get();
     $query = $query->result_array();
     return $query;
   }
@@ -414,8 +473,16 @@ class Home_model extends CI_Model {
   }
   
   //
-  public function select_faculties(){
-    $query = $this->db->get('faculties');
+  public function select_faculties($a = ""){
+
+    $this->db->select('*');
+    $this->db->from('faculties');
+    if($a != ""){
+      $this->db->like('faculties.FACUALTY_NAME_TH', $a);
+      $this->db->or_like('faculties.FACUALTY_NAME_EN', $a);
+    }
+    
+    $query = $this->db->get();
     $query = $query->result_array();
     return $query;
   }
@@ -455,10 +522,21 @@ class Home_model extends CI_Model {
   }
 
   //
-  public function select_departments(){
+  public function select_departments($depart = ""){
+    
+
+    // print_r($_GET);
+    // exit;
+    
     $this->db->select('*');
     $this->db->from('departments');
     $this->db->join('faculties', 'faculties.FACULTY_ID = departments.FACULTY_ID');
+    
+    if($depart != ""){
+      $this->db->like('departments.DEPARTMENT_ID', $depart);
+      $this->db->or_like('departments.DEPARTMENT_NAME_TH', $depart);
+      $this->db->or_like('departments.DEPARTMENT_NAME_EN', $depart);
+    };
     $departments = $this->db->get();
     $departments = $departments->result_array();
     $faculties = $this->select_faculties();
@@ -471,6 +549,9 @@ class Home_model extends CI_Model {
 		// echo "</pre>";
 		// exit(); 
     // หน้า network
+
+     
+
     return $DATA;
   }
   public function add_departments($data){
@@ -512,25 +593,53 @@ class Home_model extends CI_Model {
   }
 
   //
-  public function select_personnels(){
-    
+  public function select_personnels($data_search = ""){
     $this->db->select('*');
     $this->db->from('personnels');
     $this->db->join('personnel_categories', 'personnel_categories.PERSONNEL_CATEGORY_ID = personnels.PERSONNEL_CATEGORY_ID');
     $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
     $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
     $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
-    $this->db->limit(5, 6);
-
+    if($data_search != ""){
+      $this->db->like('personnels.PERSONNEL_ID', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+      $this->db->or_like('personnel_statuses.PERSONNEL_STATUS_DETAIL', $data_search);
+    };
     $personnels = $this->db->get();
-		$config['base_url'] = 'http://academy.com/index.php/Home/personnels';
-		$config['total_rows'] =  5;
-		$config['per_page'] = 1;
+    $count  = $personnels->num_rows();
+    
+    $rount =$_SERVER['PHP_SELF'];
+    $page = 1;
+    if(isset($_GET['page']) && $_GET['page'] !=""){
+      $page = $_GET['page'];
+    }
+    $totalpage = CEIL($count/5);
+  
+    $create_links = $this->paginate_custom($totalpage,$count,$rount);
+  
+    $this->db->select('*');
+    $this->db->from('personnels');
+    $this->db->join('personnel_categories', 'personnel_categories.PERSONNEL_CATEGORY_ID = personnels.PERSONNEL_CATEGORY_ID');
+    $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
+    $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
+    $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
+    if($data_search != ""){
+      $this->db->like('personnels.PERSONNEL_ID', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+      $this->db->or_like('personnel_statuses.PERSONNEL_STATUS_DETAIL', $data_search);
+    };
+    $pages = 0;
+    if($page > 1){
+      $pages = (int)($page-1) * 5;
+    }
+    
+    // $this->preArray($pages);
+    // exit();
+    $this->db->limit(5, $pages);
+    $personnels = $this->db->get();
 
-		$this->pagination->initialize($config);
-
-
-   
     $personnels = $personnels->result_array();
     $personnel_categories = $this->select_personnel_categories();
     $personnel_statuses = $this->select_personnel_statuses();
@@ -542,7 +651,7 @@ class Home_model extends CI_Model {
       'personnel_statuses' => $personnel_statuses,
       'personnel_types' => $personnel_types,
       'departments' => $departments['departments'],
-      'create_links' => $this->pagination->create_links()
+      'create_links' => $create_links
     );
     // echo "<pre>";
 		// print_r($departments['departments']);
@@ -1516,8 +1625,25 @@ class Home_model extends CI_Model {
     return  $data_html;
     
   }
-
-  
+  public function fetch_data($query){
+    $this->db->select("*");
+    $this->db->from("admin_login");
+    if($query != '')
+    {
+      $this->db->like('ADMIN_USER ', $query);
+      $this->db->or_like('ADMIN_PASS', $query);
+      $this->db->or_like('PERSONNEL_ID', $query);
+      $this->db->or_like('level', $query);
+   
+    }
+    $this->db->order_by('ADMIN_ID ', 'DESC');
+    return $this->db->get();
+  }
+  public function preArray($data = array()){
+    echo "<pre>";
+		print_r($data);
+		echo "</pre>";
+  }
 
 }
 
