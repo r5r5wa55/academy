@@ -458,23 +458,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
 <script>
-function myFunctionedit() {
-  var x = document.getElementById("myInputedit");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
+  function myFunctionedit() {
+    var x = document.getElementById("myInputedit");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
   }
-}
-function myFunction() {
-  var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
+  function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
 
-}
+  }
 </script>
 
 

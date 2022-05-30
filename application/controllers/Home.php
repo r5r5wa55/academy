@@ -20,7 +20,7 @@ class Home extends CI_Controller {
 			$data = $this->mhome->select_personnels();
 			
 			$this->load->helper('url');
-			redirect('Home/index', 'refresh');
+			redirect('http://academy.com/', 'refresh');
 			
 		
 			exit();
@@ -690,7 +690,7 @@ class Home extends CI_Controller {
 
     if($_FILES["files"]["name"] != '')
       $output = '';
-      $config["upload_path"] = './upload/';
+      $config["upload_path"] = './images/upload/';
       $config["allowed_types"] = './jpg|jpeg|png|gif';
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
@@ -730,8 +730,8 @@ class Home extends CI_Controller {
 	
 
 
-	public	function ajaxsearch(){
-			$this->load->view('tem/ajaxsearch');
+	public	function profile(){
+			$this->load->view('tem/profile');
 	}
 	
 	public function fetch(){

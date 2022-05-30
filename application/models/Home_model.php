@@ -1198,9 +1198,11 @@ class Home_model extends CI_Model {
     $this->db->select('*');
     $this->db->from('trainings');
     $this->db->join('personnels','personnels.PERSONNEL_ID = trainings.TRAINING_OWNER');
+    
     $trainings = $this->db->get();
     $trainings = $trainings->result_array();
     $personnels = $this->select_personnels();
+
     $DATA = array(
       'trainings'=>$trainings,
      'personnels' => $personnels['personnels']
@@ -1446,46 +1448,95 @@ class Home_model extends CI_Model {
   //
 
   public function check_login($data){
-    $this->db->select('*');
-    $this->db->from('admin_login');
-    $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
-    $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
-    $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
-    $check_login = $this->db->get();
-    $check_login = $check_login->row_array();
-   
+      // $this->db->select('*');
+      // $this->db->from('admin_login');
+      // $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
+      // $we = $this->db->get();
+      // $we = $we->result_array();
+      // echo '<pre>';
+      // print_r ($we);
+      // // print_r ($data['ADMIN_PASS']);
+      // // print_r ($level['level']);
+      // echo '</pre>';
+      // exit;
+      $this->db->select('*');
+      $this->db->from('admin_login');
+      $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.ADMIN_ID ');
+      $this->db->join('personnel_categories', 'personnel_categories.PERSONNEL_CATEGORY_ID = personnels.PERSONNEL_CATEGORY_ID');
+      $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
+      $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
+      $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
+      $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
+      $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
+      $check_login = $this->db->get();
+      $check_login = $check_login->row_array();
+
+    // $we = $check_login;
+    // $check_login =   $this->db->select('ADMIN_USER,ADMIN_PASS,level,PERSONNEL_ID');
+    // $this->db->from('admin_login');
+    // $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
+    // $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
+    // $check_login = $this->db->get();
+    // $check_login = $check_login->row_array();
     
-    
+ 
+
     // echo '<pre>';
     // print_r ($check_login);
     // echo '</pre>';
     // exit;
+
+    
+  
     // $check_login = $check_login->row_array();
   
 
-    //   echo '<pre>';
-    // print_r ($level);
-    // echo '</pre>';
-    // exit;
  
    
 
     $ADMIN_USER_check = isset($check_login['ADMIN_USER'])?$check_login['ADMIN_USER']:"";
     $ADMIN_PASS_check = isset($check_login['ADMIN_PASS'])?$check_login['ADMIN_PASS']:"";
+    $PERSONNEL_ID = isset($check_login['PERSONNEL_ID'])?$check_login['PERSONNEL_ID']:"";
     $level = isset($check_login['level'])?$check_login['level']:"";
     $PERSONNEL_NAME = isset($check_login['PERSONNEL_NAME'])?$check_login['PERSONNEL_NAME']:"";
     $PERSONNEL_SURNAME = isset($check_login['PERSONNEL_SURNAME'])?$check_login['PERSONNEL_SURNAME']:"";
+    $PIC = isset($check_login['PIC'])?$check_login['PIC']:"";
+    $PERSONNEL_NAME_EN = isset($check_login['PERSONNEL_NAME_EN'])?$check_login['PERSONNEL_NAME_EN']:"";
+    $PERSONNEL_SURNAME_EN = isset($check_login['PERSONNEL_SURNAME_EN'])?$check_login['PERSONNEL_SURNAME_EN']:"";
+    $PERSONNEL_EMAIL = isset($check_login['PERSONNEL_EMAIL'])?$check_login['PERSONNEL_EMAIL']:"";
+    $PERSONNEL_MOBILE = isset($check_login['PERSONNEL_MOBILE'])?$check_login['PERSONNEL_MOBILE']:"";
+    $PERSONNEL_PHONE_EXTENSION = isset($check_login['PERSONNEL_PHONE_EXTENSION'])?$check_login['PERSONNEL_PHONE_EXTENSION']:"";
+    $PERSONNEL_PHONE = isset($check_login['PERSONNEL_PHONE'])?$check_login['PERSONNEL_PHONE']:"";
+    $PERSONNEL_SEX = isset($check_login['PERSONNEL_SEX'])?$check_login['PERSONNEL_SEX']:"";
+    $PERSONNEL_TYPE_DETAIL = isset($check_login['PERSONNEL_TYPE_DETAIL'])?$check_login['PERSONNEL_TYPE_DETAIL']:"";
+    $PERSONNEL_CATEGORY_DETAIL = isset($check_login['PERSONNEL_CATEGORY_DETAIL'])?$check_login['PERSONNEL_CATEGORY_DETAIL']:"";
 
-    
+
+
+
+    $_SESSION['PERSONNEL_ID'] = $PERSONNEL_ID;
     $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
     $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
     $_SESSION['level'] = $level;
     $_SESSION['PERSONNEL_NAME'] = $PERSONNEL_NAME;
     $_SESSION['PERSONNEL_SURNAME'] = $PERSONNEL_SURNAME;
+    $_SESSION['PIC'] = $PIC;
+    $_SESSION['PERSONNEL_NAME_EN'] = $PERSONNEL_NAME_EN;
+    $_SESSION['PERSONNEL_SURNAME_EN'] = $PERSONNEL_SURNAME_EN;
+    $_SESSION['PERSONNEL_EMAIL'] = $PERSONNEL_EMAIL;
+    $_SESSION['PERSONNEL_PHONE_EXTENSION'] = $PERSONNEL_PHONE_EXTENSION;
+    $_SESSION['PERSONNEL_MOBILE'] = $PERSONNEL_MOBILE;
+    $_SESSION['PERSONNEL_PHONE'] = $PERSONNEL_PHONE;
+    $_SESSION['PERSONNEL_SEX'] = $PERSONNEL_SEX;
+    $_SESSION['PERSONNEL_TYPE_DETAIL'] = $PERSONNEL_TYPE_DETAIL;
+    $_SESSION['PERSONNEL_CATEGORY_DETAIL'] = $PERSONNEL_CATEGORY_DETAIL;
+
+    
 
    
     // echo '<pre>';
-    // print_r ($_SESSION);
+    // print_r ( $_SESSION['PERSONNEL_TYPE_DETAIL']);
+    // print_r ( $_SESSION['PERSONNEL_CATEGORY_DETAIL']);
     // echo '</pre>';
     // exit;
     // print_r ($_SESSION);
@@ -1580,7 +1631,7 @@ class Home_model extends CI_Model {
       foreach ($data as $key => $value) {
         $output .= '
           <div class="col-md-3">
-            <img src="'.base_url().'upload/'.$value["PIC_GARRY"].'" class="img-reponsive img-thumbnail box-img-upload"/>
+            <img src="'.base_url().'images/upload/'.$value["PIC_GARRY"].'" class="img-reponsive img-thumbnail box-img-upload"/>
           </div>
         ';
       }
