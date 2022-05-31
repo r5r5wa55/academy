@@ -720,7 +720,57 @@ class Home extends CI_Controller {
 				'SERVICE_ID' => $_POST['SERVICE_ID'],
 				'img_name' => $img_name
 			);
+			// 		echo "<pre>";
+			// print_r($data);
+			// echo "</pre>";
+			// exit(); 
 			$data = $this->mhome->save_upload($data);
+			// echo "<pre>";
+			// print_r($data);
+			// echo "</pre>";
+			// exit(); 
+			echo json_encode($data);
+  }
+	public function upload_profile(){
+
+    if($_FILES["files"]["name"] != '')
+      $output = '';
+      $config["upload_path"] = './images/profile/';
+      $config["allowed_types"] = './jpg|jpeg|png|gif';
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
+			$img_name = array();
+      for($count = 0; $count<count($_FILES["files"]["name"]); $count ++){
+				$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
+				$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
+				$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
+				$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
+				$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+				
+				if($this->upload->do_upload('file')){
+					$data = $this->upload->data();
+					// $output .= '
+					// <div class="col-md-3">
+					//   <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/>
+					// </div>
+					// ';
+					$img_name[] = array(
+						'image'=>$data["file_name"],
+						'ADMIN_ID' => $_POST['ADMIN_ID'],
+						'ADMIN_USER' => $_SESSION['ADMIN_USER_check'],
+
+					);
+				}
+			}
+			$data = array(
+				'ADMIN_ID' => $_POST['ADMIN_ID'],
+				'img_name' => $img_name
+			);
+		// 			echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+			$data = $this->mhome->save_upload_profile($data);
 			echo json_encode($data);
   }
   public function get_img_SERVICE(){

@@ -1493,6 +1493,7 @@ class Home_model extends CI_Model {
 
  
    
+    $ADMIN_ID = isset($check_login['ADMIN_ID'])?$check_login['ADMIN_ID']:"";
 
     $ADMIN_USER_check = isset($check_login['ADMIN_USER'])?$check_login['ADMIN_USER']:"";
     $ADMIN_PASS_check = isset($check_login['ADMIN_PASS'])?$check_login['ADMIN_PASS']:"";
@@ -1500,7 +1501,7 @@ class Home_model extends CI_Model {
     $level = isset($check_login['level'])?$check_login['level']:"";
     $PERSONNEL_NAME = isset($check_login['PERSONNEL_NAME'])?$check_login['PERSONNEL_NAME']:"";
     $PERSONNEL_SURNAME = isset($check_login['PERSONNEL_SURNAME'])?$check_login['PERSONNEL_SURNAME']:"";
-    $PIC = isset($check_login['PIC'])?$check_login['PIC']:"";
+    $image = isset($check_login['image'])?$check_login['image']:"";
     $PERSONNEL_NAME_EN = isset($check_login['PERSONNEL_NAME_EN'])?$check_login['PERSONNEL_NAME_EN']:"";
     $PERSONNEL_SURNAME_EN = isset($check_login['PERSONNEL_SURNAME_EN'])?$check_login['PERSONNEL_SURNAME_EN']:"";
     $PERSONNEL_EMAIL = isset($check_login['PERSONNEL_EMAIL'])?$check_login['PERSONNEL_EMAIL']:"";
@@ -1513,14 +1514,14 @@ class Home_model extends CI_Model {
 
 
 
-
+    $_SESSION['ADMIN_ID'] = $ADMIN_ID;
     $_SESSION['PERSONNEL_ID'] = $PERSONNEL_ID;
     $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
     $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
     $_SESSION['level'] = $level;
     $_SESSION['PERSONNEL_NAME'] = $PERSONNEL_NAME;
     $_SESSION['PERSONNEL_SURNAME'] = $PERSONNEL_SURNAME;
-    $_SESSION['PIC'] = $PIC;
+    $_SESSION['image'] = $image;
     $_SESSION['PERSONNEL_NAME_EN'] = $PERSONNEL_NAME_EN;
     $_SESSION['PERSONNEL_SURNAME_EN'] = $PERSONNEL_SURNAME_EN;
     $_SESSION['PERSONNEL_EMAIL'] = $PERSONNEL_EMAIL;
@@ -1612,8 +1613,10 @@ class Home_model extends CI_Model {
   
   public function save_upload($data){
     // echo '<per>';
-    // print_r($data);
+    // print_r($data['img_name']);
     // echo '</per>';
+    // exit;
+    $this->db-
     $this->db->insert_batch('service_participants_pic', $data['img_name']); 
 
     $this->db->select('*');
@@ -1643,6 +1646,44 @@ class Home_model extends CI_Model {
     
     return $data_html;
   }
+  public function save_upload_profile($data){
+
+    // echo '<per>';
+    // print_r($data['ADMIN_ID']);
+    // echo '</per>';
+    echo '<per>';
+    print_r($data);
+    echo '</per>';
+    exit;
+    $this->db->insert_batch('admin_login', $data['img_name']); 
+
+    $this->db->select('*');
+    $this->db->from('admin_login');
+    $this->db->where('ADMIN_ID', $data['ADMIN_ID']);
+
+    $data = $this->db->get();
+    $data = $data->result_array();
+    $output = "";
+    $data_html = array(
+      'html'=>$output,
+      'st'=>0
+    );
+    if($data != array()){
+      foreach ($data as $key => $value) {
+        $output .= '
+          <div class="col-md-3">
+            <img src="'.base_url().'images/profile/'.$value["image"].'" class="img-reponsive img-thumbnail box-img-upload"/>
+          </div>
+        ';
+      }
+      $data_html = array(
+        'html'=>$output,
+        'st'=>1
+      );
+    }
+    
+    return $data_html;
+  }
   public function Mget_img_SERVICE($data){
     $this->db->select('*');
     $this->db->from('service_participants_pic');
@@ -1660,7 +1701,7 @@ class Home_model extends CI_Model {
       foreach ($data as $key => $value) {
         $output .= '
           <div class="col-md-3">
-            <img src="'.base_url().'upload/'.$value["PIC_GARRY"].'" class="img-reponsive img-thumbnail box-img-upload"/>
+            <img src="'.base_url().'images/upload/'.$value["PIC_GARRY"].'" class="img-reponsive img-thumbnail box-img-upload"/>
           </div>
         ';
       }

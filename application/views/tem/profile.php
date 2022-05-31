@@ -56,7 +56,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img src="<?php echo base_url("upload/".$_SESSION['PIC']);?>" class="img-reponsive img-thumbnail" alt="User profile picture">
+                  <?php if ($_SESSION['image'] == ""): ?>
+                    <input type="file" name="files" id="files">
+                  <?php endif; ?>
+                  <input type="hidden" name="ADMIN_ID"/>
+                  <img src="<?php echo base_url("/images/profile/".$_SESSION['image']);?>" class="img-reponsive img-thumbnail" alt="กรุณาใส่รูป">
                 </div>
 
                 <h3 class="profile-username text-center">ตำแหน่งการทำงาน</h3>
@@ -221,8 +225,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
 <script>
-  $( document ).ready(function() {
-
+  $('#files').change(function(){
+     main.upload_img_profile()   
   });
 </script>
 </body>

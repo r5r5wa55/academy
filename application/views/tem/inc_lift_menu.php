@@ -20,6 +20,7 @@
 
       <!-- SidebarSearch Form -->
  
+      <!-- </?php if //($_SESSION['level'] === '1' || $_SESSION['level'] === '2'): ?> -->
 
       <!-- Sidebar Menu -->
       
@@ -28,7 +29,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-           
+            <?php if ($_SESSION['level'] === '1'): ?>
             <li class="nav-item"><!-- บุคคลากรทั้งหมด -->
               
               <a href="#" class="nav-link">
@@ -41,7 +42,6 @@
              
                 
               
-              <?php if ($_SESSION['level'] === '1' || $_SESSION['level'] === '2'): ?>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -62,8 +62,7 @@
                     </ul>
                   </li>         
                 </ul>
-              <?php endif; ?>
-              <?php if ($_SESSION['level'] === '1'): ?>
+             
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -112,9 +111,8 @@
                     </ul>
                   </li>
                 </ul>
-              <?php endif; ?>
             </li>
-            <li class="nav-item">
+            <li class="nav-item"><!-- ตำแหน่งผู้บริหาร -->
               <a href="#" class="nav-link">
                 
                 <i class="nav-icon fas fa-circle"></i>
@@ -175,7 +173,7 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item"><!-- ตำแหน่งทางวิชาการ -->
               <a href="#" class="nav-link">
                 
                 <i class="nav-icon fas fa-circle"></i>
@@ -223,7 +221,10 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            <?php endif; ?>
+
+            <li class="nav-item"><!-- การให้คำปรึกษา -->
+
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-circle"></i>
                 <p>
@@ -272,7 +273,9 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            <!-- การลา -->
+            <li class="nav-item"><!-- การลา -->
+
               <a href="#" class="nav-link">
                 
                 <i class="nav-icon fas fa-circle"></i>
@@ -322,7 +325,7 @@
               </ul>
             </li>
             <li class="nav-header">การบริการและงานวิจัย</li>
-            <li class="nav-item">
+            <li class="nav-item"><!-- งานวิจัย -->
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-circle"></i>
                 <p>
@@ -371,7 +374,7 @@
                 </li>         
               </ul>  
             </li>
-            <li class="nav-item">
+            <li class="nav-item"><!-- งานวิจัย -->
               <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
                 <i class="fas fa-circle nav-icon"></i>
                 <p>งานวิจัย</p>

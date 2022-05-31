@@ -3290,7 +3290,6 @@ $('#edit_training_participants').modal('show');
       alert(error);
     }
   },
-
   open_add_service_participants_pic(SERVICE_ID){
     $('[name=SERVICE_ID]').val(SERVICE_ID);
     $.ajax({
@@ -3314,10 +3313,53 @@ $('#edit_training_participants').modal('show');
 
    
   },
+  upload_img_profile(){
+    var files = $('#files')[0].files;
+    var error = '';
+    var form_data = new FormData();
+    for(var count = 0; count<files.length; count++){
+      var name = files[count].name;
+      var extension = name.split('.').pop().toLowerCase();
+      if(jQuery.inArray(extension, ['gif','png','jpg','jpeg','pdf','csv']) == -1){
+        error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ภาพ"
+      }else{
+        form_data.append("files[]", files[count]);
+      }
+    }
+    form_data.append('ADMIN_ID', $('[name=ADMIN_ID]').val());
+    // console.log(form_data);
+    // return false
+    if(error == ''){
+      $.ajax({
+        url:window.location.origin+"/index.php/Home/upload_profile",
+        method:"POST",
+        data:form_data,
+        contentType:false,
+        dataType : 'JSON',
+        cache:false,
+        processData:false,
+        beforeSend:function(){
+          $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+        },
+      }).done(function(data) {
+        // console.log(data);
+        // return false;
+        if(data.st == 1){
+          $('#uploaded_images').html(data.html)
+        }else{
+          alert('sud')
+        }
+        
+      })
+    }else{
+      alert(error);
+    }
+  },
   search_all(url){
     console.log(url);
     
   }
+ 
 }
 
 
