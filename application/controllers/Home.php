@@ -102,7 +102,8 @@ class Home extends CI_Controller {
 	//		activity_categories
  	public function activity_categories(){
 		$this->check_login_session();
-    $data['activity_categories'] = $this->mhome->select_activity_categories();
+		$data_search = $this->search_all(); 
+		$data['activity_categories'] = $this->mhome->select_activity_categories($data_search);
     $this->load->view('tem/activity_categories',$data);
  	}
   public function add_activity_categories(){
@@ -123,7 +124,8 @@ class Home extends CI_Controller {
 	//  	activity_types
 	public function activity_types(){
 		$this->check_login_session();
-		$data['activity_types'] = $this->mhome->select_activity_types();
+		$data_search = $this->search_all(); 
+		$data['activity_types'] = $this->mhome->select_activity_types($data_search);
 		$this->load->view('tem/activity_types',$data); 
 	}
 	public function add_activity_types(){
@@ -458,7 +460,8 @@ class Home extends CI_Controller {
 	///	
 	public function services(){
 		$this->check_login_session();
-		$data = $this->mhome->select_services();
+		$data_search = $this->search_all();
+		$data = $this->mhome->select_services($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -491,7 +494,8 @@ class Home extends CI_Controller {
 	///
 	public function service_participants(){
 		$this->check_login_session();
-		$data = $this->mhome->select_service_participants();
+		$data_search = $this->search_all();
+		$data = $this->mhome->select_service_participants($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -524,7 +528,8 @@ class Home extends CI_Controller {
 	///
 	public function activities(){
 		$this->check_login_session();
-		$data = $this->mhome->select_activities();
+		$data_search = $this->search_all();
+		$data = $this->mhome->select_activities($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -556,8 +561,10 @@ class Home extends CI_Controller {
 	}
 	///
 	public function activity_participants(){
+		
 		$this->check_login_session();
-		$data = $this->mhome->select_activity_participants();
+		$data_search = $this->search_all();
+		$data = $this->mhome->select_activity_participants($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -590,7 +597,8 @@ class Home extends CI_Controller {
 	///
 	public function trainings(){
 		$this->check_login_session();
-		$data = $this->mhome->select_trainings();
+		$data_search = $this->search_all();
+		$data = $this->mhome->select_trainings($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -623,7 +631,8 @@ class Home extends CI_Controller {
 	///	
 	public function training_participants(){
 		$this->check_login_session();
-		$data = $this->mhome->select_training_participants();
+		$data_search = $this->search_all();
+		$data = $this->mhome->select_training_participants($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -765,37 +774,21 @@ class Home extends CI_Controller {
       $config["allowed_types"] = './jpg|jpeg|png|gif';
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
-			$img_name = array();
-      for($count = 0; $count<count($_FILES["files"]["name"]); $count ++){
-				$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
-				$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
-				$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
-				$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
-				$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+
+			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
+			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
+			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
+			$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
+			$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
 				
-				if($this->upload->do_upload('file')){
-					$data = $this->upload->data();
-					// $output .= '
-					// <div class="col-md-3">
-					//   <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/>
-					// </div>
-					// ';
-					$img_name[] = array(
-						'PIC'=>$data["file_name"],
-					
-					);
-				}
+			if($this->upload->do_upload('file')){
+				$data = $this->upload->data();
 			}
+
 			$data = array(
-				'img_name' => $img_name
+				'img_name' => $_FILES['files']['name'][0]
 			);
-		// 			echo "<pre>";
-		// print_r($data);
-		// echo "</pre>";
-
 			$data = $this->mhome->save_upload_profile($data);
-
-
 			echo json_encode($data);
   }
   public function get_img_SERVICE(){
@@ -804,6 +797,10 @@ class Home extends CI_Controller {
 	}
 
 	public	function profile(){
+		// echo "<pre>";
+		// print_r($_SESSION);
+		// echo "</pre>";
+		// exit;
 			$this->load->view('tem/profile');
 	}
 	
@@ -868,6 +865,17 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function researchs(){
+		$this->check_login_session();		
+		$data_search = $this->search_all(); 
+		// $data = $this->mhome->select_researchs($data_search);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/researchs',$data); 
+	} 
+	
 } 
 
 

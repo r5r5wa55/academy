@@ -134,7 +134,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <select class="form-control" name="ACTIVITY_OWNER_ID">
                         <option value="">กรุณาเลือก</option>
                     <?php foreach($personnels as $key=>$value): ?>
-                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_NAME'];?></option>
+                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
                     <?php endforeach; ?>
                     </select>
               

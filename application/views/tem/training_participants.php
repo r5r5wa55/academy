@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ชื่อการอบรม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ชื่อผู้เข้าร่วม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">นามสกุลผู้เข้าร่วม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">วันที่จัดกิจกรรม</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">งบประมาณ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ลบข้อมูล</div>
       </div>

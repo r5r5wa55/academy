@@ -56,9 +56,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <?php if ($_SESSION['PIC'] == ""): ?>
                     <input type="file" name="files" id="files">
-                  <?php endif; ?>
+                
                   <input type="hidden" name="PERSONNEL_ID"/>
                   <img src="<?php echo base_url("/images/profile/".$_SESSION['PIC']);?>" class="img-reponsive img-thumbnail" alt="กรุณาใส่รูป">
                 </div>

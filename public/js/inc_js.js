@@ -3375,7 +3375,7 @@ $('#edit_training_participants').modal('show');
         // console.log(data);
         // return false;
         if(data.st == 1){
-          $('#uploaded_images').html(data.html)
+          location.reload();
         }else{
           alert('sud')
         }
