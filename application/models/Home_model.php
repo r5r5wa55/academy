@@ -207,8 +207,16 @@ class Home_model extends CI_Model {
   }
   //
 
-  public function select_leave_types(){
-    $query = $this->db->get('leave_types');
+  public function select_leave_types($data_search = ""){
+ 
+    $this->db->select('*');
+    $this->db->from('leave_types');
+    if($data_search != ""){
+      $this->db->like('`leave_types`.`LEAVE_TYPE`', $data_search);
+      $this->db->or_like('`leave_types`.`LEAVE_TYPE_MAX`', $data_search);
+
+    };
+    $query = $this->db->get();
     $query = $query->result_array();
     return $query;
   }
@@ -1449,10 +1457,16 @@ class Home_model extends CI_Model {
   }
 
   //
-  public function select_counseling_types(){
-    $query = $this->db->get('counseling_types');
+  public function select_counseling_types($data_search = ""){
+    $this->db->select('*');
+    $this->db->from('counseling_types');
+    if($data_search != ""){
+      $this->db->like('`counseling_types`.`COUNSELING_NAME`', $data_search);
+    };
+    $query = $this->db->get();
     $query = $query->result_array();
     return $query;
+
   }
   public function add_counseling_types($data){
     $st = array('st'=>0);
@@ -1528,6 +1542,8 @@ class Home_model extends CI_Model {
       $leaves = $leaves->result_array();
       $personnels = $this->select_personnels();
       $leave_types = $this->select_leave_types();
+  
+
       $DATA = array(
         'leaves'=>$leaves,
         'personnels' => $personnels['personnels'],

@@ -144,7 +144,8 @@ class Home extends CI_Controller {
 	//	leave_types
 	public function leave_types(){
 		$this->check_login_session();
-		$data['leave_types'] = $this->mhome->select_leave_types();
+		$data_search = $this->search_all(); 
+		$data['leave_types'] = $this->mhome->select_leave_types($data_search);
 		$this->load->view('tem/leave_types',$data); 
 	}
 	public function add_leave_types(){
@@ -650,7 +651,9 @@ class Home extends CI_Controller {
 	///
 	public function counseling_types(){
 		$this->check_login_session();
-		$data['counseling_types'] = $this->mhome->select_counseling_types();
+		$data_search = $this->search_all(); 
+		$data['counseling_types'] = $this->mhome->select_counseling_types($data_search);
+
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
