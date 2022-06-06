@@ -69,7 +69,11 @@ class Home extends CI_Controller {
 	}
 	public function academics(){
 		$this->check_login_session();
-		$data['academics'] = $this->mhome->select_academics();
+
+
+		$data_search = $this->search_all(); 
+		$data['academics'] = $this->mhome->select_academics($data_search);
+
 		// $data = $this->mhome->select_academics();
 
 
@@ -161,7 +165,10 @@ class Home extends CI_Controller {
 	//	managements
 	public function managements(){
 		$this->check_login_session();
-		$data['managements'] = $this->mhome->select_managements();
+
+		$data_search = $this->search_all(); 
+		$data['managements'] = $this->mhome->select_managements($data_search);
+
 		$this->load->view('tem/managements',$data); 
 	}
 	public function add_managements(){
@@ -182,7 +189,9 @@ class Home extends CI_Controller {
 	// management_positions
 	public function management_positions(){	
 		$this->check_login_session();
-		$data = $this->mhome->select_management_positions();
+		$data_search = $this->search_all(); 
+		$data = $this->mhome->select_management_positions($data_search);
+
 			// echo "<pre>";
 			// print_r($data);
 			// echo "</pre>";
@@ -340,8 +349,12 @@ class Home extends CI_Controller {
 	}
 	//	academic_positions
 	public function academic_positions(){
+
 		$this->check_login_session();
-		$data = $this->mhome->select_academic_positions();
+		$data_search = $this->search_all(); 
+		$data = $this->mhome->select_academic_positions($data_search);
+
+
 		$this->load->view('tem/academic_positions',$data); 
 	} 	
 	public function add_academic_positions(){
@@ -377,6 +390,11 @@ class Home extends CI_Controller {
 	public function add_personnels(){
 		$this->check_login_session();
 		$data = $this->mhome->add_personnels($_POST);
+
+		// 		echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit();
 		echo json_encode($data);
 	}
 	public function edit_personnels(){
@@ -406,7 +424,11 @@ class Home extends CI_Controller {
 	///
 	public function individual_counseling_services(){
 		$this->check_login_session();
-		$data = $this->mhome->select_individual_counseling_services();
+
+
+		$data_search = $this->search_all(); 
+		$data = $this->mhome->select_individual_counseling_services($data_search);
+	
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -652,8 +674,9 @@ class Home extends CI_Controller {
   }
 	//
 	public function leaves(){
-		$this->check_login_session();
-		$data = $this->mhome->select_leaves();
+		$this->check_login_session();		
+		$data_search = $this->search_all(); 
+		$data = $this->mhome->select_leaves($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
@@ -755,30 +778,27 @@ class Home extends CI_Controller {
 					// </div>
 					// ';
 					$img_name[] = array(
-						'image'=>$data["file_name"],
-						'ADMIN_ID' => $_POST['ADMIN_ID'],
-						'ADMIN_USER' => $_SESSION['ADMIN_USER_check'],
-
+						'PIC'=>$data["file_name"],
+					
 					);
 				}
 			}
 			$data = array(
-				'ADMIN_ID' => $_POST['ADMIN_ID'],
 				'img_name' => $img_name
 			);
 		// 			echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
-		// exit(); 
+
 			$data = $this->mhome->save_upload_profile($data);
+
+
 			echo json_encode($data);
   }
   public function get_img_SERVICE(){
 		$data = $this->mhome->Mget_img_SERVICE($_POST);
 		echo json_encode($data);
 	}
-	
-
 
 	public	function profile(){
 			$this->load->view('tem/profile');
@@ -824,10 +844,26 @@ class Home extends CI_Controller {
 		}
 			$output .= '</table>';
 			echo $output;
- }
+ 	}
  
-
-
+ 	public function admin_login(){
+		$this->check_login_session();
+		$data = $this->mhome->select_where_not_in();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/admin_login',$data); 
+	} 
+	public function add_admin_login(){
+		// $this->check_login_session();
+		$data = $this->mhome->add_admin_login($_POST);
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
 
 } 
 

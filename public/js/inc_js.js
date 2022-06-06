@@ -1028,6 +1028,10 @@ var main = {
     var PERSONNEL_TYPE_ID = $('#add_personnels [name=PERSONNEL_TYPE_ID] option:selected').val();
     var PERSONNEL_USERNAME = $('#add_personnels [name=PERSONNEL_USERNAME]').val()
     var PERSONNEL_PASSWORD = $('#add_personnels [name=PERSONNEL_PASSWORD]').val()
+    var level = $('#add_personnels [name=level]').val()
+    var PERSONNEL_CREATE_BY = $('#add_personnels [name=PERSONNEL_CREATE_BY]').val()
+
+
     var url = window.location.origin+"/index.php/Home/add_personnels";
     // console.log(PERSONNEL_CRETTE_DATE);
     // console.log(PERSONNEL_PASSWORD);
@@ -1046,60 +1050,63 @@ var main = {
       $('#add_personnels [name=PERSONNEL_PASSWORD]').addClass("red")
       return false;
     }
-    if(PERSONNEL_NAME==""){
-      $('#add_personnels [name=PERSONNEL_NAME]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_SURNAME==""){
-      $('#add_personnels [name=PERSONNEL_SURNAME]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_NAME_EN==""){
-      $('#add_personnels [name=PERSONNEL_NAME_EN]').addClass("red")
-      return false;
-    }
+    // if(PERSONNEL_NAME==""){
+    //   $('#add_personnels [name=PERSONNEL_NAME]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_SURNAME==""){
+    //   $('#add_personnels [name=PERSONNEL_SURNAME]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_NAME_EN==""){
+    //   $('#add_personnels [name=PERSONNEL_NAME_EN]').addClass("red")
+    //   return false;
+    // }
 
-    if(PERSONNEL_SURNAME_EN==""){
-      $('#add_personnels [name=PERSONNEL_SURNAME_EN').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_CRETTE_DATE==""){
-      $('#add_personnels [name=PERSONNEL_CRETTE_DATE').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_EMAIL==""){
-      $('#add_personnels [name=PERSONNEL_EMAIL]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_PHONE==""){
-      $('#add_personnels [name=PERSONNEL_PHONE]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_MOBILE==""){
-      $('#add_personnels [name=PERSONNEL_MOBILE]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_PHONE_EXTENSION==""){
-      $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_TYPE_ID==""){
-      $('#add_personnels [name=PERSONNEL_TYPE_ID]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_STATUS_ID==""){
-      $('#add_personnels [name=PERSONNEL_STATUS_ID]').addClass("red")
-      return false;
-    }
-    if(PERSONNEL_CATEGORY_ID==""){
-      $('#add_personnels [name=PERSONNEL_CATEGORY_ID]').addClass("red")
-      return false;
-    }
-    if(DEPARTMENT_ID==""){
-      $('#add_personnels [name=DEPARTMENT_ID]').addClass("red")
-      return false;
-    }
-
+    // if(PERSONNEL_SURNAME_EN==""){
+    //   $('#add_personnels [name=PERSONNEL_SURNAME_EN').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_CRETTE_DATE==""){
+    //   $('#add_personnels [name=PERSONNEL_CRETTE_DATE').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_EMAIL==""){
+    //   $('#add_personnels [name=PERSONNEL_EMAIL]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_PHONE==""){
+    //   $('#add_personnels [name=PERSONNEL_PHONE]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_MOBILE==""){
+    //   $('#add_personnels [name=PERSONNEL_MOBILE]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_PHONE_EXTENSION==""){
+    //   $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_TYPE_ID==""){
+    //   $('#add_personnels [name=PERSONNEL_TYPE_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_STATUS_ID==""){
+    //   $('#add_personnels [name=PERSONNEL_STATUS_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(PERSONNEL_CATEGORY_ID==""){
+    //   $('#add_personnels [name=PERSONNEL_CATEGORY_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(DEPARTMENT_ID==""){
+    //   $('#add_personnels [name=DEPARTMENT_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(level==""){
+    //   $('#add_personnels [name=level]').addClass("red")
+    //   return false;
+    // }
     var data = {
       'PERSONNEL_ID':PERSONNEL_ID,
       'PERSONNEL_NAME':PERSONNEL_NAME,
@@ -1118,7 +1125,9 @@ var main = {
       'PERSONNEL_TYPE_ID':PERSONNEL_TYPE_ID,
       'PERSONNEL_CATEGORY_ID':PERSONNEL_CATEGORY_ID,
       'PERSONNEL_USERNAME':PERSONNEL_USERNAME,
-      'PERSONNEL_PASSWORD':PERSONNEL_PASSWORD
+      'PERSONNEL_PASSWORD':PERSONNEL_PASSWORD,
+      'PERSONNEL_CREATE_BY':PERSONNEL_CREATE_BY,
+      'level':level
     }
     $.ajax({
       url : url,
@@ -1129,8 +1138,10 @@ var main = {
       beforeSend: function(jqXHR, settings) {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
       },
+   
     }).done(function(resp) {
-
+      // console.log(resp.ms);
+      // return false;
       if(resp.st == 1){
         alert(resp.ms)
         location.reload();
@@ -1139,14 +1150,23 @@ var main = {
         $('#add_personnels [name='+resp.name+']').addClass("red")
         return false;
       }
+   
     })
+
   }, 
   get_edit_personnels(PERSONNEL_ID,PERSONNEL_NAME,PERSONNEL_SURNAME,PERSONNEL_NAME_EN,PERSONNEL_SURNAME_EN,
-    PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,
-    PERSONNEL_CREATE_BY,PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
-    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD){
+    PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,PERSONNEL_CREATE_BY,
+    PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
+    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD,level){
     // console.log(PERSONNEL_CRETTE_DATE);
     // return false;
+
+
+
+    
+
+
+
     $('#edit_personnels [name=PERSONNEL_ID]').val(PERSONNEL_ID); 
     $('#edit_personnels [name=PERSONNEL_NAME]').val(PERSONNEL_NAME); 
     $('#edit_personnels [name=PERSONNEL_SURNAME]').val(PERSONNEL_SURNAME);
@@ -1156,7 +1176,8 @@ var main = {
     $('#edit_personnels [name=PERSONNEL_MOBILE]').val(PERSONNEL_MOBILE);
     $('#edit_personnels [name=PERSONNEL_PHONE]').val(PERSONNEL_PHONE);
     $('#edit_personnels [name=PERSONNEL_PHONE_EXTENSION]').val(PERSONNEL_PHONE_EXTENSION); 
-      
+    $('#edit_personnels [name=PERSONNEL_CREATE_BY]').val(PERSONNEL_CREATE_BY); 
+
     // $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
     $('#edit_personnels [name=PERSONNEL_SEX]').each(function(key,value){
       
@@ -1170,7 +1191,6 @@ var main = {
 
     })
     
-    $('#edit_personnels [name=PERSONNEL_CREATE_BY]').val(PERSONNEL_CREATE_BY);
     $('#edit_personnels [name=PERSONNEL_CRETTE_DATE]').val(PERSONNEL_CRETTE_DATE);
     $('#edit_personnels [name=DEPARTMENT_ID] option').each(function(key,value){
       if(DEPARTMENT_ID === $(value).val()){
@@ -1193,8 +1213,18 @@ var main = {
       }
     });
   
+    $('#edit_personnels [name=level] option').each(function(key,value){
+      if(level === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+ 
     $('#edit_personnels [name=PERSONNEL_USERNAME]').val(PERSONNEL_USERNAME);
     $('#edit_personnels [name=PERSONNEL_PASSWORD]').val(PERSONNEL_PASSWORD);
+    $('#edit_personnels [name=level]').val(level);
+
+
+ 
     $('#edit_personnels').modal('show'); 
    ;
   }, 
@@ -3019,7 +3049,7 @@ $('#edit_training_participants').modal('show');
     var url = window.location.origin+"/index.php/Home/check_login";
     // console.log(ADMIN_USER);
     // console.log(ADMIN_PASS);
-    // console.log(url);
+    // console.log(level);
     // return false;
     var data = {
       'ADMIN_USER':ADMIN_USER,
@@ -3326,7 +3356,7 @@ $('#edit_training_participants').modal('show');
         form_data.append("files[]", files[count]);
       }
     }
-    form_data.append('ADMIN_ID', $('[name=ADMIN_ID]').val());
+    form_data.append('PERSONNEL_ID', $('[name=PERSONNEL_ID]').val());
     // console.log(form_data);
     // return false
     if(error == ''){
@@ -3358,7 +3388,41 @@ $('#edit_training_participants').modal('show');
   search_all(url){
     console.log(url);
     
-  }
+  }, 
+
+  add_admin_login(){
+    var ADMIN_ID = $('#add_admin_login [name=ADMIN_ID] option:selected').val();
+    var level = $('#add_admin_login [name=level] option:selected').val();
+    console.log(ADMIN_ID);
+    console.log(PERSONNEL_ID);
+    return false;
+
+    var url = window.location.origin+"/index.php/Home/add_admin_login";
+ 
+    var data = {
+      'ADMIN_ID':ADMIN_ID,
+      'level':level
+    }
+  
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  }, 
+
  
 }
 

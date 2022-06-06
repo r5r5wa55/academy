@@ -56,11 +56,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <?php if ($_SESSION['image'] == ""): ?>
+                  <?php if ($_SESSION['PIC'] == ""): ?>
                     <input type="file" name="files" id="files">
                   <?php endif; ?>
-                  <input type="hidden" name="ADMIN_ID"/>
-                  <img src="<?php echo base_url("/images/profile/".$_SESSION['image']);?>" class="img-reponsive img-thumbnail" alt="กรุณาใส่รูป">
+                  <input type="hidden" name="PERSONNEL_ID"/>
+                  <img src="<?php echo base_url("/images/profile/".$_SESSION['PIC']);?>" class="img-reponsive img-thumbnail" alt="กรุณาใส่รูป">
                 </div>
 
                 <h3 class="profile-username text-center">ตำแหน่งการทำงาน</h3>
@@ -194,7 +194,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                  
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">แก้ไขข้อมูล</button>
+                          <button type="submit" class="btn btn-danger"  onclick="main.get_edit_personnels(
+               
+               '<?php echo $_SESSION['PERSONNEL_ID'];?>',
+               '<?php echo $_SESSION['PERSONNEL_NAME'];?>',
+               '<?php echo $_SESSION['PERSONNEL_SURNAME'];?>',
+               '<?php echo $_SESSION['PERSONNEL_NAME_EN'];?>',
+               '<?php echo $_SESSION['PERSONNEL_SURNAME_EN'];?>',
+               '<?php echo $_SESSION['PERSONNEL_EMAIL'];?>',
+               '<?php echo $_SESSION['PERSONNEL_MOBILE'];?>',
+               '<?php echo $_SESSION['PERSONNEL_PHONE'];?>',
+               '<?php echo $_SESSION['PERSONNEL_PHONE_EXTENSION'];?>',
+               '<?php echo $_SESSION['PERSONNEL_SEX'];?>',
+               '<?php echo $_SESSION['ADMIN_USER_check'];?>',
+               '<?php echo $_SESSION['ADMIN_PASS_check'];?>',
+               '<?php echo $_SESSION['level'];?>');">
+                  แก้ไขข้อมูล</button>
                         </div>
                       </div>
                     </form>
@@ -215,6 +230,122 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
   <!-- /.content-wrapper -->
  
+<div class="modal fade" id="edit_personnels" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล บุคลากร</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <div class="row">    
+              <div class="col-md-6">
+                <label for="formGroupExampleInput">รหัสผู้แก้ไขบุคลากร</label>
+                <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="รหัสผู้แก้ไขบุคลากร" readonly >
+                <label for="formGroupExampleInput">ชื่อผู้ใช้</label>
+                <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ชื่อผู้ใช้">    
+                <label for="formGroupExampleInput">ชื่อ</label>
+                <input type="text" class="form-control"  name="PERSONNEL_NAME" placeholder="ชื่อ">
+                <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
+                <input type="text" class="form-control"  name="PERSONNEL_NAME_EN" placeholder="ชื่อภาษาอังกฤษ">
+
+                <label for="formGroupExampleInput">เพศ</label>
+                <div class="row radioinput">    
+                  <div class="col-md-6">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="1">
+                      <label class="form-check-label" >ชาย</label>
+                    </div>
+                  </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX"  value="2">
+                      <label class="form-check-label">หญิง</label>
+                    </div>
+                </div>  
+
+                <label for="formGroupExampleInput">อีเมล</label>
+                <input type="text" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
+
+                <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
+                <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
+
+                <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
+              <select class="form-control" name="PERSONNEL_TYPE_ID">
+                <?php foreach($personnel_types as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+              <label for="formGroupExampleInput">สายงาน</label>
+              <select class="form-control" name="PERSONNEL_CATEGORY_ID" >
+                <?php foreach($personnel_categories as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_CATEGORY_ID'];?>"><?php echo $value['PERSONNEL_CATEGORY_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+              <label for="formGroupExampleInput">สิทธ์การเข้าถึง</label>
+              <select name="level" class="form-control" id="level">
+                  <option value="1">แอดมิน</option>
+                  <option value="2">ผู้ใช้งาน</option>
+              </select>
+             
+              </div>
+              <div class="col-md-6">
+                <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
+                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">
+                  
+                <label for="formGroupExampleInput">รหัสผ่าน</label>
+                <div class="input-group input-group-md">
+                  <input type="password" class="form-control"  id="myInputedit"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
+                  <span class="input-group-append">
+                    <button type="checkbox" class="btn btn-info btn-flat"name="PERSONNEL_PASSWORD"  onclick="myFunctionedit()" id="myInputedit">แสดง</button>
+                  </span>
+                </div>
+                <label for="formGroupExampleInput">นามสกุล</label>
+                <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
+
+                <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
+                <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
+
+                <label for="formGroupExampleInput">วันที่สร้าง</label>
+                <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
+
+                <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
+
+                <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >
+
+              <label for="formGroupExampleInput">สถานะการทำงาน</label>
+              <select class="form-control" name="PERSONNEL_STATUS_ID">
+                <?php foreach($personnel_statuses as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+    
+              <label for="formGroupExampleInput">แผนก</label>
+              <select class="form-control" name="DEPARTMENT_ID" >
+                <?php foreach($departments as $key=>$value): ?>
+                  <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
+                <?php endforeach; ?>
+              </select>
+         
+
+            </div>    
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="main.edit_personnels();">Save changes</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Control Sidebar -->
  <!-- /.control-sidebar -->

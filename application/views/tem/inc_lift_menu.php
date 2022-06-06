@@ -30,18 +30,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <?php if ($_SESSION['level'] === '1'): ?>
-            <li class="nav-item"><!-- บุคคลากรทั้งหมด -->
-              
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>
-                  <i class="right fas fa-angle-left"></i>
-                  บุคคลากรทั้งหมด
-                </p>
-              </a>
-             
-                
-              
+            <li class="nav-item"><!-- บุคคลากรทั้งหมด -->    
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    <i class="right fas fa-angle-left"></i>
+                    บุคคลากรทั้งหมด
+                  </p>
+                </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -62,7 +58,6 @@
                     </ul>
                   </li>         
                 </ul>
-             
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -252,6 +247,7 @@
                   </ul>
                 </li>         
               </ul>
+              <?php if ($_SESSION['level'] === '1'): ?>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="#" class="nav-link">
@@ -272,6 +268,7 @@
                   </ul>
                 </li>
               </ul>
+              <?php endif; ?>
             </li>
             <!-- การลา -->
             <li class="nav-item"><!-- การลา -->
@@ -304,6 +301,7 @@
                   </ul>
                 </li>         
               </ul>
+              <?php if ($_SESSION['level'] === '1'): ?>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="#" class="nav-link">
@@ -323,6 +321,7 @@
                   </ul>
                 </li>
               </ul>
+              <?php endif; ?>
             </li>
             <li class="nav-header">การบริการและงานวิจัย</li>
             <li class="nav-item"><!-- งานวิจัย -->
@@ -428,6 +427,8 @@
                 </li>         
               </ul>  
               <ul class="nav nav-treeview">
+                <?php if ($_SESSION['level'] === '1'): ?>
+
                 <li class="nav-item">
                 <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -453,7 +454,9 @@
                     </li>
 
                   </ul>
-                </li>         
+                </li> 
+                <?php endif; ?>
+        
               </ul>
             </li>
             <li class="nav-item">

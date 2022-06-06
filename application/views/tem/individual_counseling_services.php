@@ -202,6 +202,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <label for="formGroupExampleInput" >ผู้ให้คำปรึกษา</label>
               <select class="form-control" name="ADVISOR_ID">
               <option value="">กรุณาเลือก</option>
+                         
+
                 <?php foreach($personnels as $key=>$value): ?>
                   <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
                 <?php endforeach; ?>

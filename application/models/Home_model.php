@@ -49,10 +49,8 @@ class Home_model extends CI_Model {
   public function select_admin_login(){
     $this->db->select('*');
     $this->db->from('admin_login');
-    $this->db->join('personnels','personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
-
-    
-
+    $this->db->join('personnels','personnels.PERSONNEL_ID = admin_login.ADMIN_ID');
+    $this->db->order_by("level", "asc");    
     $admin_login = $this->db->get();
     $admin_login = $admin_login->result_array();
     $personnels = $this->select_personnels();
@@ -83,10 +81,16 @@ class Home_model extends CI_Model {
     $query = $query->result_array();
     return $query;
   }
-  public function select_academics(){
+  public function select_academics($data_search = ""){
     
     $query = $this->db->get('academics');
     
+    $this->db->select('*');
+    $this->db->from('academics');
+    if($data_search != ""){
+      $this->db->like('`academics`.`ACADEMIC_NAME`', $data_search);
+    };
+    $query = $this->db->get();
     $query = $query->result_array();
     // echo '<pre>';
     // print_r ($query);
@@ -243,10 +247,18 @@ class Home_model extends CI_Model {
   }
   //
 
-  public function select_managements(){
-    $query = $this->db->get('managements');
+  public function select_managements($data_search = ""){
+
+    $this->db->select('*');
+    $this->db->from('managements');
+    if($data_search != ""){
+      $this->db->like('`managements`.`MANAGEMENT_NAME`', $data_search);
+    };
+    $query = $this->db->get();
     $query = $query->result_array();
     return $query;
+
+
   }
   public function add_managements($data){
     $st = array('st'=>0);
@@ -279,12 +291,26 @@ class Home_model extends CI_Model {
   }
   //
 
-  public function select_management_positions(){
+  public function select_management_positions($data_search = ""){
     $this->db->select('*');
     $this->db->from('management_positions');
     $this->db->join('personnels', 'personnels.PERSONNEL_ID = management_positions.PERSONNEL_ID');
     $this->db->join('managements', 'managements.MANAGEMENT_ID  = management_positions.MANAGEMENT_ID');
     $this->db->join('departments', 'departments.DEPARTMENT_ID  = management_positions.DEPARTMENT_ID');
+    if($data_search != ""){
+      $this->db->like('management_positions.DEPARTMENT_ID', $data_search);
+      $this->db->or_like('management_positions.PERSONNEL_ID', $data_search);
+      $this->db->or_like('management_positions.START_DATE', $data_search);
+      $this->db->or_like('management_positions.END_DATE', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+      $this->db->or_like('managements.MANAGEMENT_NAME', $data_search);
+      $this->db->or_like('departments.DEPARTMENT_ID', $data_search);
+      $this->db->or_like('departments.DEPARTMENT_NAME_TH', $data_search);
+      $this->db->or_like('departments.DEPARTMENT_NAME_EN', $data_search);
+
+
+    };
     $management_positions = $this->db->get();
     $management_positions = $management_positions->result_array();
     $personnels = $this->select_personnels();
@@ -662,6 +688,10 @@ class Home_model extends CI_Model {
   }
   public function add_personnels($data){
     $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
+    // echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit();
 
     $this->db->select('PERSONNEL_ID,PERSONNEL_USERNAME');
     $this->db->from('personnels');
@@ -669,21 +699,31 @@ class Home_model extends CI_Model {
     $this->db->or_where('PERSONNEL_ID', $data['PERSONNEL_ID']);
     $personnels_check = $this->db->get();
     $personnels_check = $personnels_check->row_array();
-    $PERSONNEL_ID_check = isset($personnels_check['PERSONNEL_ID'])?$personnels_check['PERSONNEL_ID']:"";
     $PERSONNEL_USERNAME_check = isset($personnels_check['PERSONNEL_USERNAME'])?$personnels_check['PERSONNEL_USERNAME']:"";
+    $PERSONNEL_ID_check = isset($personnels_check['PERSONNEL_ID'])?$personnels_check['PERSONNEL_ID']:"";
     
     
-    
+   
+
 
     if($PERSONNEL_ID_check == $data['PERSONNEL_ID']){
       $st = array('st'=>0,'ms'=>$PERSONNEL_ID_check.' ซ้ำ','name'=>'PERSONNEL_ID');
-    }
-
-    if($PERSONNEL_USERNAME_check == $data['PERSONNEL_USERNAME']){
+    // echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+    }elseif($PERSONNEL_USERNAME_check == $data['PERSONNEL_USERNAME']){
       $st = array('st'=>0,'ms'=>$PERSONNEL_USERNAME_check.' ซ้ำ','name'=>'PERSONNEL_USERNAME');
     }
    
-    if(is_array($data) && $data['PERSONNEL_CATEGORY_ID']!="" && $data['PERSONNEL_ID']!="" && $PERSONNEL_ID_check == ""){
+
+    // echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+
+  
+		// exit();
+
+    if(is_array($data) && $data['PERSONNEL_ID']!=""  && $data['PERSONNEL_USERNAME']!="" && $PERSONNEL_ID_check == ""  && $PERSONNEL_USERNAME_check == ""  ){
       $data = array(
         'PERSONNEL_ID' => $data['PERSONNEL_ID'],
         'PERSONNEL_NAME' => $data['PERSONNEL_NAME'],
@@ -703,11 +743,19 @@ class Home_model extends CI_Model {
         'PERSONNEL_TYPE_ID' => $data['PERSONNEL_TYPE_ID'],
         'PERSONNEL_USERNAME' => $data['PERSONNEL_USERNAME'],
         'PERSONNEL_PASSWORD' => $data['PERSONNEL_PASSWORD'],
+        'level' => $data['level'],
+        'PERSONNEL_CREATE_BY' => $_SESSION['PERSONNEL_ID'],
+        
+
+
       );
       $data = $this->db->insert('personnels', $data);
       $st = array('st'=>1,'ms'=>'สำเร็จ');
     }
-  
+    //    echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit();
     return $st;
   }
   public function edit_personnels($data){
@@ -752,11 +800,17 @@ class Home_model extends CI_Model {
   }
 
   //
-  public function select_academic_positions(){
+  public function select_academic_positions($data_search = ""){
     $this->db->select('*');
     $this->db->from('academic_positions');
     $this->db->join('academics', 'academics.ACADEMIC_ID = academic_positions.ACADEMIC_ID');
     $this->db->join('personnels', 'personnels.PERSONNEL_ID = academic_positions.PERSONNEL_ID');
+    if($data_search != ""){
+      $this->db->like('academic_positions.PERSONNEL_ID', $data_search);
+      $this->db->or_like('academics.ACADEMIC_NAME', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+      $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+    };
     $academic_positions = $this->db->get();
     $academic_positions = $academic_positions->result_array();
     $academics = $this->select_academics();
@@ -818,32 +872,93 @@ class Home_model extends CI_Model {
     return $query;
   }
   //
-  public function select_individual_counseling_services(){
-    $this->db->select('*');
-    $this->db->from('individual_counseling_services');
-    $this->db->join('counseling_types', 'counseling_types.COUNSELING_TYPE_ID = individual_counseling_services.COUNSELING_TYPE_ID');
-    $this->db->join('personnels', 'personnels.PERSONNEL_ID  = individual_counseling_services.ADVISOR_ID');
-    $this->db->join('students', 'students.STUDENT_ID  = individual_counseling_services.STUDENT_ID');
+  public function select_individual_counseling_services($data_search = ""){
+    if($_SESSION['level'] != "1"){
+      $this->db->select('*');
+      $this->db->from('individual_counseling_services');
+      $this->db->join('counseling_types', 'counseling_types.COUNSELING_TYPE_ID = individual_counseling_services.COUNSELING_TYPE_ID');
+      $this->db->join('personnels', 'personnels.PERSONNEL_ID  = individual_counseling_services.ADVISOR_ID');
+      $this->db->join('students', 'students.STUDENT_ID  = individual_counseling_services.STUDENT_ID');
+      $this->db->where('ADVISOR_ID', $_SESSION['PERSONNEL_ID'] );
+      $this->db->where('personnels.PERSONNEL_ID', $_SESSION['PERSONNEL_ID'] );
+      if($data_search != ""){
+        $this->db->like('personnels.PERSONNEL_ID', $data_search);
+        $this->db->or_like('counseling_types.COUNSELING_NAME', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+      };
+      $individual_counseling_services = $this->db->get();
+      $individual_counseling_services = $individual_counseling_services->result_array();
+      $counseling_types = $this->select_counseling_types();
+      $personnels = $this->select_personnels();
+      $students = $this->select_students();
+    
+      $DATA = array(
+        'individual_counseling_services'=>$individual_counseling_services,
+        'counseling_types' => $counseling_types,
+        'students' => $students,
+        'personnels' => $personnels['personnels']
+      );
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['level']);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['ADMIN_ID']);
+    // echo "</pre>";
+    // exit();
+      return $DATA;
 
- 
-    $individual_counseling_services = $this->db->get();
-    $individual_counseling_services = $individual_counseling_services->result_array();
-    $counseling_types = $this->select_counseling_types();
-    $personnels = $this->select_personnels();
-    $students = $this->select_students();
+    }else {
+      $this->db->select('*');
+      $this->db->from('individual_counseling_services');
+      $this->db->join('counseling_types', 'counseling_types.COUNSELING_TYPE_ID = individual_counseling_services.COUNSELING_TYPE_ID');
+      $this->db->join('personnels', 'personnels.PERSONNEL_ID  = individual_counseling_services.ADVISOR_ID');
+      $this->db->join('students', 'students.STUDENT_ID  = individual_counseling_services.STUDENT_ID');
+      if($data_search != ""){
+        $this->db->like('personnels.PERSONNEL_ID', $data_search);
+        $this->db->or_like('counseling_types.COUNSELING_NAME', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+      };
   
-    $DATA = array(
-      'individual_counseling_services'=>$individual_counseling_services,
-      'counseling_types' => $counseling_types,
-      'students' => $students,
-      'personnels' => $personnels['personnels']
-    );
+
+  
+   
+      $individual_counseling_services = $this->db->get();
+      $individual_counseling_services = $individual_counseling_services->result_array();
+      $counseling_types = $this->select_counseling_types();
+      $personnels = $this->select_personnels();
+      $students = $this->select_students();
+    
+      $DATA = array(
+        'individual_counseling_services'=>$individual_counseling_services,
+        'counseling_types' => $counseling_types,
+        'students' => $students,
+        'personnels' => $personnels['personnels']
+      );
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['level']);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['ADMIN_ID']);
+    // echo "</pre>";
+    // exit();
+      return $DATA;
+
+    }
+  
     // echo "<pre>";
     // print_r($departments['departments']);
     // echo "</pre>";
     // exit(); 
     // // หน้า network
-    return $DATA;
+
   }
   public function add_individual_counseling_services($data){
     if(is_array($data) && $data['ADVISOR_ID']!="" && $data['STUDENT_ID']!=""){
@@ -1367,30 +1482,73 @@ class Home_model extends CI_Model {
     return $st;
   }
   //
-  public function select_leaves(){
-    $this->db->select('*');
-    $this->db->from('leaves');
-    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
-    $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
+  public function select_leaves($data_search = ""){
 
+    if($_SESSION['level'] != "1"){
+      $this->db->select('*');
+      $this->db->from('leaves');
+      $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
+      $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
+      $this->db->where('personnels.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
+      if($data_search != ""){
+        $this->db->like('personnels.PERSONNEL_ID', $data_search);
+        $this->db->or_like('leave_types.LEAVE_TYPE', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+      };
 
-    $leaves = $this->db->get();
-    $leaves = $leaves->result_array();
-    $personnels = $this->select_personnels();
-    $leave_types = $this->select_leave_types();
+      $leaves = $this->db->get();
+      $leaves = $leaves->result_array();
+      $personnels = $this->select_personnels();
+      $leave_types = $this->select_leave_types();
+  
+  
+      $DATA = array(
+        'leaves'=>$leaves,
+        'personnels' => $personnels['personnels'],
+        'leave_types' => $leave_types
+      );
+    
 
-
-    $DATA = array(
-      'leaves'=>$leaves,
-      'personnels' => $personnels['personnels'],
-      'leave_types' => $leave_types
-    );
-    // echo "<pre>";
-    // print_r($departments['departments']);
-    // echo "</pre>";
-    // exit(); 
-    // // หน้า network
     return $DATA;
+
+    }else{
+      $this->db->select('*');
+      $this->db->from('leaves');
+      $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
+      $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
+      if($data_search != ""){
+        $this->db->like('personnels.PERSONNEL_ID', $data_search);
+        $this->db->or_like('leave_types.LEAVE_TYPE', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
+        $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
+      };
+  
+      $leaves = $this->db->get();
+      $leaves = $leaves->result_array();
+      $personnels = $this->select_personnels();
+      $leave_types = $this->select_leave_types();
+      $DATA = array(
+        'leaves'=>$leaves,
+        'personnels' => $personnels['personnels'],
+        'leave_types' => $leave_types
+      );
+      // echo "<pre>";
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['level']);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['ADMIN_ID']);
+    // echo "</pre>";
+    // exit();
+      return $DATA;
+
+    }
+  
+
   }
   public function add_leaves($data){
     $st = array('st'=>0);
@@ -1446,129 +1604,151 @@ class Home_model extends CI_Model {
     return $st;
   }
   //
+  // public function check_login($data){
 
+
+  //   $this->db->select('*');
+  //   $this->db->from('admin_login');
+  //   $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.ADMIN_ID ');
+  //   $this->db->join('personnel_categories', 'personnel_categories.PERSONNEL_CATEGORY_ID = personnels.PERSONNEL_CATEGORY_ID');
+  //   $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
+  //   $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
+  //   $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
+  //   $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
+  //   $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
+  //   $check_login = $this->db->get();
+  //   $check_login = $check_login->row_array();
+
+
+
+  //   $ADMIN_ID = isset($check_login['ADMIN_ID'])?$check_login['ADMIN_ID']:"";
+  //   $ADMIN_USER_check = isset($check_login['ADMIN_USER'])?$check_login['ADMIN_USER']:"";
+  //   $ADMIN_PASS_check = isset($check_login['ADMIN_PASS'])?$check_login['ADMIN_PASS']:"";
+  //   $PERSONNEL_ID = isset($check_login['PERSONNEL_ID'])?$check_login['PERSONNEL_ID']:"";
+  //   $level = isset($check_login['level'])?$check_login['level']:"";
+  //   $PERSONNEL_NAME = isset($check_login['PERSONNEL_NAME'])?$check_login['PERSONNEL_NAME']:"";
+  //   $PERSONNEL_SURNAME = isset($check_login['PERSONNEL_SURNAME'])?$check_login['PERSONNEL_SURNAME']:"";
+  //   $image = isset($check_login['image'])?$check_login['image']:"";
+  //   $PERSONNEL_NAME_EN = isset($check_login['PERSONNEL_NAME_EN'])?$check_login['PERSONNEL_NAME_EN']:"";
+  //   $PERSONNEL_SURNAME_EN = isset($check_login['PERSONNEL_SURNAME_EN'])?$check_login['PERSONNEL_SURNAME_EN']:"";
+  //   $PERSONNEL_EMAIL = isset($check_login['PERSONNEL_EMAIL'])?$check_login['PERSONNEL_EMAIL']:"";
+  //   $PERSONNEL_MOBILE = isset($check_login['PERSONNEL_MOBILE'])?$check_login['PERSONNEL_MOBILE']:"";
+  //   $PERSONNEL_PHONE_EXTENSION = isset($check_login['PERSONNEL_PHONE_EXTENSION'])?$check_login['PERSONNEL_PHONE_EXTENSION']:"";
+  //   $PERSONNEL_PHONE = isset($check_login['PERSONNEL_PHONE'])?$check_login['PERSONNEL_PHONE']:"";
+  //   $PERSONNEL_SEX = isset($check_login['PERSONNEL_SEX'])?$check_login['PERSONNEL_SEX']:"";
+  //   $PERSONNEL_TYPE_DETAIL = isset($check_login['PERSONNEL_TYPE_DETAIL'])?$check_login['PERSONNEL_TYPE_DETAIL']:"";
+  //   $PERSONNEL_CATEGORY_DETAIL = isset($check_login['PERSONNEL_CATEGORY_DETAIL'])?$check_login['PERSONNEL_CATEGORY_DETAIL']:"";
+
+
+  //   $_SESSION['ADMIN_ID'] = $ADMIN_ID;
+  //   $_SESSION['PERSONNEL_ID'] = $PERSONNEL_ID;
+  //   $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
+  //   $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
+  //   $_SESSION['level'] = $level;
+  //   $_SESSION['PERSONNEL_NAME'] = $PERSONNEL_NAME;
+  //   $_SESSION['PERSONNEL_SURNAME'] = $PERSONNEL_SURNAME;
+  //   $_SESSION['image'] = $image;
+  //   $_SESSION['PERSONNEL_NAME_EN'] = $PERSONNEL_NAME_EN;
+  //   $_SESSION['PERSONNEL_SURNAME_EN'] = $PERSONNEL_SURNAME_EN;
+  //   $_SESSION['PERSONNEL_EMAIL'] = $PERSONNEL_EMAIL;
+  //   $_SESSION['PERSONNEL_PHONE_EXTENSION'] = $PERSONNEL_PHONE_EXTENSION;
+  //   $_SESSION['PERSONNEL_MOBILE'] = $PERSONNEL_MOBILE;
+  //   $_SESSION['PERSONNEL_PHONE'] = $PERSONNEL_PHONE;
+  //   $_SESSION['PERSONNEL_SEX'] = $PERSONNEL_SEX;
+  //   $_SESSION['PERSONNEL_TYPE_DETAIL'] = $PERSONNEL_TYPE_DETAIL;
+  //   $_SESSION['PERSONNEL_CATEGORY_DETAIL'] = $PERSONNEL_CATEGORY_DETAIL;
+
+  
+  //   $st = array(
+  //     'st'=>0,
+  //     'msg'=>'ไม่มี user ในระบบ หรือ กรอกรหัสผ่านผิด กรุณาตรวจสอบ'
+  //   ); 
+
+  //   if($ADMIN_USER_check != "" && $ADMIN_PASS_check != ""){
+  //     $st = array(
+  //       'st'=>1,
+  //       'msg'=>'login สำเร็จ'
+  //     );
+  //   }
+  //   return $st;
+  // }
   public function check_login($data){
-      // $this->db->select('*');
-      // $this->db->from('admin_login');
-      // $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.PERSONNEL_ID');
-      // $we = $this->db->get();
-      // $we = $we->result_array();
-      // echo '<pre>';
-      // print_r ($we);
-      // // print_r ($data['ADMIN_PASS']);
-      // // print_r ($level['level']);
-      // echo '</pre>';
-      // exit;
+
+
       $this->db->select('*');
-      $this->db->from('admin_login');
-      $this->db->join('personnels', 'personnels.PERSONNEL_ID = admin_login.ADMIN_ID ');
-      $this->db->join('personnel_categories', 'personnel_categories.PERSONNEL_CATEGORY_ID = personnels.PERSONNEL_CATEGORY_ID');
-      $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
-      $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
-      $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
-      $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
-      $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
+      $this->db->from('personnels');
+      $this->db->where('PERSONNEL_USERNAME', $data['ADMIN_USER']);
+      $this->db->where('PERSONNEL_PASSWORD', $data['ADMIN_PASS']);
+
+
       $check_login = $this->db->get();
       $check_login = $check_login->row_array();
 
-    // $we = $check_login;
-    // $check_login =   $this->db->select('ADMIN_USER,ADMIN_PASS,level,PERSONNEL_ID');
-    // $this->db->from('admin_login');
-    // $this->db->where('ADMIN_USER', $data['ADMIN_USER']);
-    // $this->db->where('ADMIN_PASS', $data['ADMIN_PASS']);
-    // $check_login = $this->db->get();
-    // $check_login = $check_login->row_array();
-    
- 
-
-    // echo '<pre>';
-    // print_r ($check_login);
-    // echo '</pre>';
-    // exit;
-
-    
-  
-    // $check_login = $check_login->row_array();
+      // echo "<pre>";
+      // print_r($check_login);
+      // echo "</pre>";
   
 
- 
-   
-    $ADMIN_ID = isset($check_login['ADMIN_ID'])?$check_login['ADMIN_ID']:"";
+      
+      $level = isset($check_login['level'])?$check_login['level']:"";
+      $ADMIN_USER_check = isset($check_login['PERSONNEL_USERNAME'])?$check_login['PERSONNEL_USERNAME']:"";
+      $ADMIN_PASS_check = isset($check_login['PERSONNEL_PASSWORD'])?$check_login['PERSONNEL_PASSWORD']:"";
+     
+      $PERSONNEL_ID = isset($check_login['PERSONNEL_ID'])?$check_login['PERSONNEL_ID']:"";
+      $PERSONNEL_NAME = isset($check_login['PERSONNEL_NAME'])?$check_login['PERSONNEL_NAME']:"";
+      $PERSONNEL_SURNAME = isset($check_login['PERSONNEL_SURNAME'])?$check_login['PERSONNEL_SURNAME']:"";
+      $PIC = isset($check_login['PIC'])?$check_login['PIC']:"";
+      $PERSONNEL_NAME_EN = isset($check_login['PERSONNEL_NAME_EN'])?$check_login['PERSONNEL_NAME_EN']:"";
+      $PERSONNEL_SURNAME_EN = isset($check_login['PERSONNEL_SURNAME_EN'])?$check_login['PERSONNEL_SURNAME_EN']:"";
+      $PERSONNEL_EMAIL = isset($check_login['PERSONNEL_EMAIL'])?$check_login['PERSONNEL_EMAIL']:"";
+      $PERSONNEL_MOBILE = isset($check_login['PERSONNEL_MOBILE'])?$check_login['PERSONNEL_MOBILE']:"";
+      $PERSONNEL_PHONE_EXTENSION = isset($check_login['PERSONNEL_PHONE_EXTENSION'])?$check_login['PERSONNEL_PHONE_EXTENSION']:"";
+      $PERSONNEL_PHONE = isset($check_login['PERSONNEL_PHONE'])?$check_login['PERSONNEL_PHONE']:"";
+      $PERSONNEL_SEX = isset($check_login['PERSONNEL_SEX'])?$check_login['PERSONNEL_SEX']:"";
+      $PERSONNEL_TYPE_DETAIL = isset($check_login['PERSONNEL_TYPE_DETAIL'])?$check_login['PERSONNEL_TYPE_DETAIL']:"";
+      $PERSONNEL_CATEGORY_DETAIL = isset($check_login['PERSONNEL_CATEGORY_DETAIL'])?$check_login['PERSONNEL_CATEGORY_DETAIL']:"";
+  
 
-    $ADMIN_USER_check = isset($check_login['ADMIN_USER'])?$check_login['ADMIN_USER']:"";
-    $ADMIN_PASS_check = isset($check_login['ADMIN_PASS'])?$check_login['ADMIN_PASS']:"";
-    $PERSONNEL_ID = isset($check_login['PERSONNEL_ID'])?$check_login['PERSONNEL_ID']:"";
-    $level = isset($check_login['level'])?$check_login['level']:"";
-    $PERSONNEL_NAME = isset($check_login['PERSONNEL_NAME'])?$check_login['PERSONNEL_NAME']:"";
-    $PERSONNEL_SURNAME = isset($check_login['PERSONNEL_SURNAME'])?$check_login['PERSONNEL_SURNAME']:"";
-    $image = isset($check_login['image'])?$check_login['image']:"";
-    $PERSONNEL_NAME_EN = isset($check_login['PERSONNEL_NAME_EN'])?$check_login['PERSONNEL_NAME_EN']:"";
-    $PERSONNEL_SURNAME_EN = isset($check_login['PERSONNEL_SURNAME_EN'])?$check_login['PERSONNEL_SURNAME_EN']:"";
-    $PERSONNEL_EMAIL = isset($check_login['PERSONNEL_EMAIL'])?$check_login['PERSONNEL_EMAIL']:"";
-    $PERSONNEL_MOBILE = isset($check_login['PERSONNEL_MOBILE'])?$check_login['PERSONNEL_MOBILE']:"";
-    $PERSONNEL_PHONE_EXTENSION = isset($check_login['PERSONNEL_PHONE_EXTENSION'])?$check_login['PERSONNEL_PHONE_EXTENSION']:"";
-    $PERSONNEL_PHONE = isset($check_login['PERSONNEL_PHONE'])?$check_login['PERSONNEL_PHONE']:"";
-    $PERSONNEL_SEX = isset($check_login['PERSONNEL_SEX'])?$check_login['PERSONNEL_SEX']:"";
-    $PERSONNEL_TYPE_DETAIL = isset($check_login['PERSONNEL_TYPE_DETAIL'])?$check_login['PERSONNEL_TYPE_DETAIL']:"";
-    $PERSONNEL_CATEGORY_DETAIL = isset($check_login['PERSONNEL_CATEGORY_DETAIL'])?$check_login['PERSONNEL_CATEGORY_DETAIL']:"";
+      // echo "<pre>";
+      // print_r($check_login['level']);
+      // echo "</pre>";
+      // exit();
 
 
+      $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
+      $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
+      $_SESSION['level'] = $level;
+      $_SESSION['PIC'] = $PIC;
+      $_SESSION['PERSONNEL_ID'] = $PERSONNEL_ID;
+      $_SESSION['PERSONNEL_NAME'] = $PERSONNEL_NAME;
+      $_SESSION['PERSONNEL_SURNAME'] = $PERSONNEL_SURNAME;
+      $_SESSION['PERSONNEL_NAME_EN'] = $PERSONNEL_NAME_EN;
+      $_SESSION['PERSONNEL_SURNAME_EN'] = $PERSONNEL_SURNAME_EN;
 
-    $_SESSION['ADMIN_ID'] = $ADMIN_ID;
-    $_SESSION['PERSONNEL_ID'] = $PERSONNEL_ID;
-    $_SESSION['ADMIN_USER_check'] = $ADMIN_USER_check;
-    $_SESSION['ADMIN_PASS_check'] = $ADMIN_PASS_check;
-    $_SESSION['level'] = $level;
-    $_SESSION['PERSONNEL_NAME'] = $PERSONNEL_NAME;
-    $_SESSION['PERSONNEL_SURNAME'] = $PERSONNEL_SURNAME;
-    $_SESSION['image'] = $image;
-    $_SESSION['PERSONNEL_NAME_EN'] = $PERSONNEL_NAME_EN;
-    $_SESSION['PERSONNEL_SURNAME_EN'] = $PERSONNEL_SURNAME_EN;
-    $_SESSION['PERSONNEL_EMAIL'] = $PERSONNEL_EMAIL;
-    $_SESSION['PERSONNEL_PHONE_EXTENSION'] = $PERSONNEL_PHONE_EXTENSION;
-    $_SESSION['PERSONNEL_MOBILE'] = $PERSONNEL_MOBILE;
-    $_SESSION['PERSONNEL_PHONE'] = $PERSONNEL_PHONE;
-    $_SESSION['PERSONNEL_SEX'] = $PERSONNEL_SEX;
-    $_SESSION['PERSONNEL_TYPE_DETAIL'] = $PERSONNEL_TYPE_DETAIL;
-    $_SESSION['PERSONNEL_CATEGORY_DETAIL'] = $PERSONNEL_CATEGORY_DETAIL;
+      $_SESSION['PERSONNEL_EMAIL'] = $PERSONNEL_EMAIL;
+      $_SESSION['PERSONNEL_MOBILE'] = $PERSONNEL_MOBILE;
+      $_SESSION['PERSONNEL_PHONE_EXTENSION'] = $PERSONNEL_PHONE_EXTENSION;
+      $_SESSION['PERSONNEL_PHONE'] = $PERSONNEL_PHONE;
+      $_SESSION['PERSONNEL_SEX'] = $PERSONNEL_SEX;
+      $_SESSION['PERSONNEL_TYPE_DETAIL'] = $PERSONNEL_TYPE_DETAIL;
+      $_SESSION['PERSONNEL_CATEGORY_DETAIL'] = $PERSONNEL_CATEGORY_DETAIL;
 
-    
+    // echo "<pre>";
+    // print_r($level);
+    // echo "</pre>";
+    // exit(); 
 
-   
-    // echo '<pre>';
-    // print_r ( $_SESSION['PERSONNEL_TYPE_DETAIL']);
-    // print_r ( $_SESSION['PERSONNEL_CATEGORY_DETAIL']);
-    // echo '</pre>';
-    // exit;
-    // print_r ($_SESSION);
-   
-    // echo "\n";
-    // echo '..........';
-    // echo "\n";
-    // // print_r ($level);
-    // exit;
-
-    // if ($level == "") {
-    //   echo "ไม่ได้กรอกข้อมูล";
-    // } elseif ($level == "1") {
-    //   echo "we";
-    // } else {
-    //   echo "e";
-    // }
-    
-    $st = array(
-      'st'=>0,
-      'msg'=>'ไม่มี user ในระบบ หรือ กรอกรหัสผ่านผิด กรุณาตรวจสอบ'
-    ); 
-
-    if($ADMIN_USER_check != "" && $ADMIN_PASS_check != ""){
       $st = array(
-        'st'=>1,
-        'msg'=>'login สำเร็จ'
-      );
-    }
-  //  print_r ($st);
-  //   exit;
+        'st'=>0,
+        'msg'=>'ไม่มี user ในระบบ หรือ กรอกรหัสผ่านผิด กรุณาตรวจสอบ'
+      ); 
+
+      if($ADMIN_USER_check != "" && $ADMIN_PASS_check != ""){
+        $st = array(
+          'st'=>1,
+          'msg'=>'login สำเร็จ'
+        );
+      }
     return $st;
   }
   public function select_login(){
@@ -1612,11 +1792,11 @@ class Home_model extends CI_Model {
   }
   
   public function save_upload($data){
-    // echo '<per>';
-    // print_r($data['img_name']);
-    // echo '</per>';
-    // exit;
-    $this->db-
+    echo '<pre>';
+    print_r($data);
+    echo '</pre>';
+    exit;
+
     $this->db->insert_batch('service_participants_pic', $data['img_name']); 
 
     $this->db->select('*');
@@ -1651,17 +1831,20 @@ class Home_model extends CI_Model {
     // echo '<per>';
     // print_r($data['ADMIN_ID']);
     // echo '</per>';
-    echo '<per>';
-    print_r($data);
-    echo '</per>';
-    exit;
-    $this->db->insert_batch('admin_login', $data['img_name']); 
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+    // exit;
+    $this->db->insert_batch('personnels', $data['img_name']); 
 
     $this->db->select('*');
-    $this->db->from('admin_login');
-    $this->db->where('ADMIN_ID', $data['ADMIN_ID']);
+    $this->db->from('personnels');
+    $this->db->where('PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
 
     $data = $this->db->get();
+      echo "<pre>";
+		print_r($data_html);
+		echo "</pre>";
     $data = $data->result_array();
     $output = "";
     $data_html = array(
@@ -1681,7 +1864,10 @@ class Home_model extends CI_Model {
         'st'=>1
       );
     }
-    
+     echo "<pre>";
+		print_r($data_html);
+		echo "</pre>";
+    exit;
     return $data_html;
   }
   public function Mget_img_SERVICE($data){
@@ -1731,11 +1917,8 @@ class Home_model extends CI_Model {
     $this->db->order_by('ADMIN_ID ', 'DESC');
     return $this->db->get();
   }
-  public function preArray($data = array()){
-    echo "<pre>";
-		print_r($data);
-		echo "</pre>";
-  }
+ 
+
 
 }
 
