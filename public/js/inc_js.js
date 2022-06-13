@@ -1463,24 +1463,29 @@ var main = {
     })
   }, 
   get_edit_management_positions(MANAGEMENT_POSITION_ID,MANAGEMENT_ID,PERSONNEL_ID,DEPARTMENT_ID){
-    // console.log(MANAGEMENT_POSITION_ID);
-    // console.log(MANAGEMENT_ID);
-    // console.log(PERSONNEL_ID);
-    // console.log(DEPARTMENT_ID);
-    // return false;
+    
+    // console.log($('.abc').attr('data-tes'));
     $('#edit_management_positions [name=MANAGEMENT_POSITION_ID]').val(MANAGEMENT_POSITION_ID);  
+ 
 
     $('#edit_management_positions [name=MANAGEMENT_ID] option').each(function(key,value){
-      if(MANAGEMENT_ID === $(value).val()){
+      $(value).removeAttr('selected');
+      if( Number(MANAGEMENT_ID) === Number($(value).val())){
+        // $(value).attr('test','2'); 
+        // console.log($(value).attr('test'));
         $(value).attr("selected","selected")
       }
     });
+    
     $('#edit_management_positions [name=PERSONNEL_ID] option').each(function(key,value){
+      $(value).removeAttr('selected'); 
       if(PERSONNEL_ID === $(value).val()){
         $(value).attr("selected","selected")
       }
     });
+
     $('#edit_management_positions [name=DEPARTMENT_ID] option').each(function(key,value){
+      $(value).removeAttr('selected'); 
       if(DEPARTMENT_ID === $(value).val()){
         $(value).attr("selected","selected")
       }
@@ -1910,7 +1915,7 @@ var main = {
 
     var INDIVIDUAL_COUNSELING_ID = $('#edit_individual_counseling_services [name=INDIVIDUAL_COUNSELING_ID]').val()
 
-    var ADVISOR_ID = $('#edit_individual_counseling_services [name=ADVISOR_ID] option:selected').val();
+    var ADVISOR_ID = $('#edit_individual_counseling_services [name=ADVISOR_ID]').val();
     var STUDENT_ID = $('#edit_individual_counseling_services [name=STUDENT_ID] option:selected').val();
     var COUNSELING_TYPE_ID = $('#edit_individual_counseling_services [name=COUNSELING_TYPE_ID] option:selected').val();
     
@@ -2351,7 +2356,7 @@ var main = {
       }
     })
   },
-  delete_service_participants(ID ){
+  delete_service_participants(ID){
     var url = window.location.origin+"/index.php/Home/delete_service_participants";
     var data = {
       'ID':ID  
@@ -3295,7 +3300,8 @@ $('#edit_training_participants').modal('show');
       }
     }
     form_data.append('SERVICE_ID', $('[name=SERVICE_ID]').val());
-   
+    // console.log(SERVICE_ID);
+    // return false
     if(error == ''){
       $.ajax({
         url:window.location.origin+"/index.php/Home/upload",
@@ -3385,17 +3391,14 @@ $('#edit_training_participants').modal('show');
       alert(error);
     }
   },
-  search_all(url){
-    console.log(url);
-    
-  }, 
+
 
   add_admin_login(){
     var ADMIN_ID = $('#add_admin_login [name=ADMIN_ID] option:selected').val();
     var level = $('#add_admin_login [name=level] option:selected').val();
-    console.log(ADMIN_ID);
-    console.log(PERSONNEL_ID);
-    return false;
+    // console.log(ADMIN_ID);
+    // console.log(PERSONNEL_ID);
+    // return false;
 
     var url = window.location.origin+"/index.php/Home/add_admin_login";
  
@@ -3423,7 +3426,251 @@ $('#edit_training_participants').modal('show');
     })
   }, 
 
+
+  add_researchs(){
+
+        var level = $('#add_researchs [name=level]').val();
+        var RESEARCH_TITLE_TH = $('#add_researchs [name=RESEARCH_TITLE_TH]').val();
+        var RESEARCH_TITLE_EN = $('#add_researchs [name=RESEARCH_TITLE_EN]').val();
+        var RESEARCH_ABSTRACT_TH = $('#add_researchs [name=RESEARCH_ABSTRACT_TH]').val();
+        var RESEARCH_ABSTRACT_EN = $('#add_researchs [name=RESEARCH_ABSTRACT_EN]').val();
+        var RESEARCH_TYPE  = $('#add_researchs [name=RESEARCH_TYPE]').val();
+        var RESEARCH_BUDGETT = $('#add_researchs [name=RESEARCH_BUDGETT]').val();
+        var RESEARCH_START_DATE = $('#add_researchs [name=RESEARCH_START_DATE]').val();
+        var RESEARCH_END_DATE = $('#add_researchs [name=RESEARCH_END_DATE]').val();
+
+        var RESEARCHER_ID = $('#add_researchs [name=RESEARCHER_ID]').val();
+        
+        var RESEARCHER_TYPE = $('#add_researchs [name=RESEARCHER_TYPE] option:selected').val();  
+        var url = window.location.origin+"/index.php/Home/add_researchs";
+      
+
+        var data = {
+          'level':level,
+          'RESEARCH_TITLE_TH':RESEARCH_TITLE_TH,
+          'RESEARCH_TITLE_EN':RESEARCH_TITLE_EN,
+          'RESEARCH_ABSTRACT_TH':RESEARCH_ABSTRACT_TH,
+          'RESEARCH_ABSTRACT_EN':RESEARCH_ABSTRACT_EN,
+          'RESEARCH_TYPE':RESEARCH_TYPE,
+          'RESEARCH_BUDGETT':RESEARCH_BUDGETT,
+          'RESEARCH_START_DATE':RESEARCH_START_DATE,
+          'RESEARCH_END_DATE':RESEARCH_END_DATE,
+          'RESEARCHER_ID':RESEARCHER_ID,
+          'RESEARCHER_TYPE':RESEARCHER_TYPE
+        }
+
+     
+     
+      
+        // console.log(level);
+        // console.log(RESEARCH_TITLE_TH);
+      
+        // console.log(data);
+
+        // return false;
+
+
+      
+      $.ajax({
+        url : url,
+        method : 'POST',
+        dataType : 'JSON',
+        data:data,
+        cache : false,
+        beforeSend: function(jqXHR, settings) {
+          delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        },
+      }).done(function(resp) {
+        if(resp.st == 1){
+          alert('บันทึกสำเร็จ')
+          location.reload();
+        }else{
+          alert('บันทึกไม่สำเร็จ')
+        }
+      })
+  },
+
+
+  upload_file_researchs(obj){
+    var files = $(obj)[0].files;
+    var error = '';
+    var form_data = new FormData();
+    for(var count = 0; count<files.length; count++){
+      var name = files[count].name;
+      var extension = name.split('.').pop().toLowerCase();
+      if(jQuery.inArray(extension, ['gif','png','jpg','jpeg','pdf','csv']) == -1){
+        error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ PDF"
+      }else{
+        form_data.append("files[]", files[count]);
+
+      }
+    }
+
+    // form_data.append('RESEARCH_ID', $('[name=RESEARCH_ID]').val());
+    form_data.append('RESEARCH_ID', $(obj).attr('data-id-RESEARCH_ID'));
+
+    
+    if(error == ''){
+      $.ajax({
+        url:window.location.origin+"/index.php/Home/upload_file_researchs",
+        method:"POST",
+        data:form_data,
+        contentType:false,
+        dataType : 'JSON',
+        cache:false,
+        processData:false,
+        beforeSend:function(){
+          $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+        },
+      }).done(function(data) {
+        // console.log(data);
+        // return false;
+        if(data.st == 1){
+          location.reload();
+        }else{
+          alert('sud')
+        }
+        
+      })
+    }else{
+      alert(error);
+    }
+  },
+  
+  get_edit_researchs(RESEARCH_ID,RESEARCH_TITLE_TH,RESEARCH_TITLE_EN,RESEARCH_ABSTRACT_TH,RESEARCH_ABSTRACT_EN,
+    RESEARCH_TYPE,RESEARCH_BUDGETT,RESEARCH_START_DATE,RESEARCH_END_DATE,RESEARCHER_ID,
+    RESEARCHER_TYPE){
+    // console.log(PERSONNEL_CRETTE_DATE);
+    // return false;
+
+
+
+
+
+    $('#edit_researchs [name=RESEARCH_ID]').val(RESEARCH_ID); 
+    $('#edit_researchs [name=RESEARCH_TITLE_TH]').val(RESEARCH_TITLE_TH); 
+    $('#edit_researchs [name=RESEARCH_TITLE_EN]').val(RESEARCH_TITLE_EN);
+    $('#edit_researchs [name=RESEARCH_ABSTRACT_TH]').val(RESEARCH_ABSTRACT_TH);
+    $('#edit_researchs [name=RESEARCH_ABSTRACT_EN]').val(RESEARCH_ABSTRACT_EN);
+    $('#edit_researchs [name=RESEARCH_BUDGETT]').val(RESEARCH_BUDGETT);
+    $('#edit_researchs [name=RESEARCH_START_DATE]').val(RESEARCH_START_DATE);
+    $('#edit_researchs [name=RESEARCH_END_DATE]').val(RESEARCH_END_DATE); 
+    // $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    
+    // $('input').removeClass('red')
+    // if(PERSONNEL_ID==""){
+    //   $('#edit_personnels [name=PERSONNEL_ID]').addClass("red")
+    //   return false;
+    // }
+    
+    
+    $('#edit_researchs [name=RESEARCHER_TYPE] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(RESEARCHER_TYPE === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+    $('#edit_researchs [name=RESEARCHER_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(RESEARCHER_ID === $(value).val()){
+        $(value).attr("selected","selected")
+       }
+    });
+    $('#edit_researchs [name=RESEARCH_TYPE] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(RESEARCH_TYPE === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
+
+
  
+    $('#edit_researchs').modal('show'); 
+   ;
+  }, 
+  edit_researchs(){
+    var RESEARCH_ID = $('#edit_researchs [name=RESEARCH_ID]').val()
+    var RESEARCH_TITLE_TH = $('#edit_researchs [name=RESEARCH_TITLE_TH]').val();
+    var RESEARCH_TITLE_EN = $('#edit_researchs [name=RESEARCH_TITLE_EN]').val();
+    var RESEARCH_ABSTRACT_TH = $('#edit_researchs [name=RESEARCH_ABSTRACT_TH]').val();
+    var RESEARCH_ABSTRACT_EN = $('#edit_researchs [name=RESEARCH_ABSTRACT_EN]').val()
+    var RESEARCH_BUDGETT = $('#edit_researchs [name=RESEARCH_BUDGETT]').val()
+    var RESEARCH_START_DATE = $('#edit_researchs [name=RESEARCH_START_DATE]').val()
+    var RESEARCH_END_DATE = $('#edit_researchs [name=RESEARCH_END_DATE]').val()
+    var RESEARCHER_TYPE = $('#edit_researchs [name=RESEARCHER_TYPE] option:selected').val()
+    var RESEARCHER_ID = $('#edit_researchs [name=RESEARCHER_ID]').val()
+    var RESEARCH_TYPE = $('#edit_researchs [name=RESEARCH_TYPE] option:selected').val()
+  
+  
+
+    var url = window.location.origin+"/index.php/Home/edit_researchs";
+
+    
+    // console.log(RESEARCH_ID);
+    // console.log(RESEARCHER_ID);
+    // return false;
+
+
+    var data = {
+      'RESEARCH_ID':RESEARCH_ID,
+      'RESEARCH_TITLE_TH':RESEARCH_TITLE_TH,
+      'RESEARCH_TITLE_EN':RESEARCH_TITLE_EN,
+      'RESEARCH_ABSTRACT_TH':RESEARCH_ABSTRACT_TH,
+      'RESEARCH_ABSTRACT_EN':RESEARCH_ABSTRACT_EN,
+      'RESEARCH_BUDGETT':RESEARCH_BUDGETT,
+      'RESEARCH_START_DATE':RESEARCH_START_DATE,
+      'RESEARCH_END_DATE':RESEARCH_END_DATE,
+      'RESEARCHER_TYPE':RESEARCHER_TYPE,
+      'RESEARCHER_ID':RESEARCHER_ID,
+      'RESEARCH_TYPE':RESEARCH_TYPE
+    }
+  
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  delete_researchs(RESEARCH_ID){
+    var url = window.location.origin+"/index.php/Home/delete_researchs";
+    var data = {
+      'RESEARCH_ID':RESEARCH_ID  
+    }
+    var datas = confirm("ท่านต้องการลบข้อมูลนี้หรือไม่");
+    if(confirm("ยืนยันการลบ") === false){
+      return false;
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('ลบสำเร็จ')
+        location.reload();
+      }else{
+        alert('ลบไม่สำเร็จ')
+      }
+    })
+  },
 }
+
 
 

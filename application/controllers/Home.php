@@ -722,7 +722,13 @@ class Home extends CI_Controller {
 	
 	}
 	public function upload(){
-
+			// echo "<pre>";
+			// print_r($_POST);
+			// echo "</pre>";
+			// // echo "<pre>";
+			// // print_r($data);
+			// // echo "</pre>";
+			// exit(); 
     if($_FILES["files"]["name"] != '')
       $output = '';
       $config["upload_path"] = './images/upload/';
@@ -736,7 +742,6 @@ class Home extends CI_Controller {
 				$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
 				$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
 				$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
-				
 				if($this->upload->do_upload('file')){
 					$data = $this->upload->data();
 					// $output .= '
@@ -751,28 +756,32 @@ class Home extends CI_Controller {
 					);
 				}
 			}
+
+
+			// echo "<pre>";
+			// print_r($img_name);
+			// echo "</pre>";
+			// exit(); 
 			$data = array(
 				'SERVICE_ID' => $_POST['SERVICE_ID'],
 				'img_name' => $img_name
 			);
-			// 		echo "<pre>";
-			// print_r($data);
-			// echo "</pre>";
-			// exit(); 
+
 			$data = $this->mhome->save_upload($data);
-			// echo "<pre>";
-			// print_r($data);
-			// echo "</pre>";
-			// exit(); 
 			echo json_encode($data);
   }
 	public function upload_profile(){
 
     if($_FILES["files"]["name"] != '')
       $output = '';
+			$config['image_library'] = 'gd2';
       $config["upload_path"] = './images/profile/';
       $config["allowed_types"] = './jpg|jpeg|png|gif';
+			// $config['encrypt_name'] = FALSE;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
       $this->load->library('upload', $config);
+			$this->load->library('image_lib', $config);
       $this->upload->initialize($config);
 
 			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
@@ -780,13 +789,17 @@ class Home extends CI_Controller {
 			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
 			$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
 			$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
-				
+
+			$new_name = $_FILES["file"]["name"];
+			$config['file_name'] = $new_name;
+			
 			if($this->upload->do_upload('file')){
 				$data = $this->upload->data();
 			}
 
+				
 			$data = array(
-				'img_name' => $_FILES['files']['name'][0]
+				'img_name' => $new_name
 			);
 			$data = $this->mhome->save_upload_profile($data);
 			echo json_encode($data);
@@ -801,51 +814,18 @@ class Home extends CI_Controller {
 		// print_r($_SESSION);
 		// echo "</pre>";
 		// exit;
-			$this->load->view('tem/profile');
+		$this->check_login_session();		
+		$data_search = $this->search_all(); 
+		$data = $this->mhome->select_profile($data_search);
+
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit;
+		$this->load->view('tem/profile',$data);
 	}
 	
-	public function fetch(){
-		$output = '';
-		$query = '';
-		$this->load->model('Home_model');
-		if($this->input->post('query')){
-			$query = $this->input->post('query');
-		}
-		$data = $this->Home_model->fetch_data($query);
-		$output = '
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<tr>
-					<th>Customer Name</th>
-					<th>Address</th>
-					<th>City</th>
-					<th>Postal Code</th>
-					<th>Country</th>
-					</tr>
-		';
-		if($data->num_rows() > 0){
-			foreach($data->result() as $row){
-				$output .= '
-						<tr>
-						<td>'.$row->ADMIN_USER.'</td>
-						<td>'.$row->ADMIN_PASS.'</td>
-						<td>'.$row->PERSONNEL_ID.'</td>
-						<td>'.$row->level.'</td>
-						
-						<td>'.$row->level.'</td>
-						</tr>
-				';
-				
-			}
-		}else{
-			$output .= '<tr>
-					<td colspan="5">ไม่มีข้อมูล</td>
-					</tr>';
-		}
-			$output .= '</table>';
-			echo $output;
- 	}
- 
+
  	public function admin_login(){
 		$this->check_login_session();
 		$data = $this->mhome->select_where_not_in();
@@ -868,13 +848,85 @@ class Home extends CI_Controller {
 	public function researchs(){
 		$this->check_login_session();		
 		$data_search = $this->search_all(); 
-		// $data = $this->mhome->select_researchs($data_search);
+		$data = $this->mhome->select_researchs($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
 		// exit(); 
 		$this->load->view('tem/researchs',$data); 
 	} 
+	public function add_researchs(){
+			$this->check_login_session();
+			$data = $this->mhome->add_researchs($_POST);
+			// echo "<pre>";
+			// print_r($data);
+			// echo "</pre>";
+			// exit(); 
+			echo json_encode($data);
+	}
+	public function upload_file_researchs(){
+    // echo "<pre>";
+		// print_r($_FILES);
+		// echo "</pre>";
+		// exit(); 
+
+		if($_FILES["files"]["name"] != '')
+      $output = '';
+			$config['image_library'] = 'gd2';
+      $config["upload_path"] = './images/researchs/';
+      $config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
+			// $config['encrypt_name'] = FALSE;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+      $this->load->library('upload', $config);
+			$this->load->library('image_lib', $config);
+      $this->upload->initialize($config);
+
+			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
+			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
+			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
+			$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
+			$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
+
+
+			$new_name = $_FILES["file"]["name"];
+			$config['file_name'] = $new_name;
+			
+			if($this->upload->do_upload('file')){
+				$data = $this->upload->data();
+			}
+
+				
+			$data = array(
+				'RESEARCH_ID' => $_POST['RESEARCH_ID'],
+				'img_name' => $new_name
+			);
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// exit;
+
+			$data = $this->mhome->save_upload_file_researchs($data);
+			echo json_encode($data);
+  }
+	public function edit_researchs(){
+		$this->check_login_session();
+
+		$data = $this->mhome->edit_researchs($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function delete_researchs(){
+		$this->check_login_session();
+		$data = $this->mhome->delete_researchs($_POST);
+		echo json_encode($data);
+  }
 	
 } 
 

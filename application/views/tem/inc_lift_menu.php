@@ -5,13 +5,14 @@
       <img src="<?php echo base_url()."public/"?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">หน้าหลัก</span>
     </a>
-
+    
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?php echo base_url()."public/"?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+
+          <img src="<?php echo base_url("/images/profile/".$_SESSION['PIC']);?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a  class="d-block"><?php echo $_SESSION['PERSONNEL_NAME'].'&nbsp;&nbsp;&nbsp;&nbsp;'.$_SESSION['PERSONNEL_SURNAME']?></a>
@@ -374,7 +375,7 @@
               </ul>  
             </li>
             <li class="nav-item"><!-- งานวิจัย -->
-              <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
+              <a href="<?php echo base_url()?>index.php/Home/researchs" class="nav-link">
                 <i class="fas fa-circle nav-icon"></i>
                 <p>งานวิจัย</p>
               </a>

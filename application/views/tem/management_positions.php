@@ -143,7 +143,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body abc"  data-tes="1">
         <div class="form-group">
           <label for="formGroupExampleInput">ตำแหน่งผู้บริหาร</label>
           <select class="form-control" name="MANAGEMENT_ID" >

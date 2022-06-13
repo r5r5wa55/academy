@@ -86,11 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['PERSONNEL_ID'];?>',
               '<?php echo $value['LEAVE_STATUS'];?>',
               '<?php echo $value['LEAVE_FILE'];?>');">
-
-
-
-
-              แก้ไขข้อมูล
+               แก้ไขข้อมูล
             </button>
           </div>
 
