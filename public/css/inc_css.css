@@ -40,7 +40,7 @@ a.btn-edit {
   border: 1px solid #00bc8c;
   padding: 3px 10px;
   border-radius: 8px;
-  color: rgb(78, 31, 31);
+  color: #00bc8c;
   letter-spacing:  0.1em;
 
 }
@@ -57,6 +57,9 @@ a.btn-edit:hover{
 }
 .box-btn-center {
   text-align: center;
+
+  border: none solid none;   
+  justify-content: center;
 }
 a.btn-delete {
   border: 1px solid #ff0b40;

@@ -44,6 +44,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    <div class="col-lg-11 box-btn-add-center"> 
+      <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_faculties').modal('show');">
+      เพิ่มข้อมูล
+      </a>
+ 
+    </div>
 
     <div class="content">
       <div class="row">
@@ -61,20 +67,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-lg-2 body-show"><?php echo $value['FACULTY_ID'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['FACUALTY_NAME_TH'];?></div>
           <div class="col-lg-2 body-show"><?php echo $value['FACUALTY_NAME_EN'];?></div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_faculties('<?php echo $value['ID_F'];?>','<?php echo $value['FACULTY_ID'];?>','<?php echo $value['FACUALTY_NAME_TH'];?>','<?php echo $value['FACUALTY_NAME_EN'];?>');">แก้ไขข้อมูล</button>
+          <div class="col-lg-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_faculties(
+              '<?php echo $value['ID_F'];?>',
+              '<?php echo $value['FACULTY_ID'];?>',
+              '<?php echo $value['FACUALTY_NAME_TH'];?>',
+              '<?Php echo $value['FACUALTY_NAME_EN'];?>');">
+              แก้ไขข้อมูล
+            </a>
           </div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_faculties('<?php echo $value['ID_F'];?>')">ลบข้อมูล</button>
+          <div class="col-lg-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_faculties(
+              '<?php echo $value['ID_F'];?>');" >
+              ลบข้อมูล
+            </a>
              <div class="col-lg-1 "></div>
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_faculties').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
+  
     </div>
   </div>
 </div>

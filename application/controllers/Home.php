@@ -203,7 +203,16 @@ class Home extends CI_Controller {
 	} 
 	public function add_management_positions(){
 		$this->check_login_session();
+		// echo '<pre>';
+		// print_r($_POST);
+		// echo '</pre>';
+		// exit;
+
 		$data = $this->mhome->add_management_positions($_POST);
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';
+		// exit;
 		echo json_encode($data);	 
 	}	
 	public function edit_management_positions(){
@@ -312,6 +321,10 @@ class Home extends CI_Controller {
   public function add_faculties(){
 		$this->check_login_session();
 		$data = $this->mhome->add_faculties($_POST);
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';
+		// exit;
 		echo json_encode($data);
 	}
   public function edit_faculties(){

@@ -356,6 +356,10 @@ class Home_model extends CI_Model {
     return $DATA;
   }
   public function add_management_positions($data){
+    // echo '<pre>';
+    // print_r($data);
+    // echo '</pre>';
+    // exit;
     $st = array('st'=>0);
     if(is_array($data) && $data['MANAGEMENT_ID']!="" && $data['DEPARTMENT_ID']!=""){
       $data = array(
@@ -539,7 +543,7 @@ class Home_model extends CI_Model {
     $st = array('st'=>0);
     if(is_array($data) && $data['FACULTY_ID']!=""){
       $data = array(
-        'ID_F' => $data['ID_F'],
+      
         'FACULTY_ID' => $data['FACULTY_ID'],
         'FACUALTY_NAME_TH' => $data['FACUALTY_NAME_TH'],
         'FACUALTY_NAME_EN' => $data['FACUALTY_NAME_EN'],
