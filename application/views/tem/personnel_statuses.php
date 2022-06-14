@@ -20,9 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="<?php echo base_url()."public/"?>dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
-
   <?php $this->load->view('tem/inc_head_menu.php')?>
-
   <?php $this->load->view('tem/inc_lift_menu')?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -44,33 +42,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <div class="col-lg-11 box-btn-add-center"> 
-      <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_personnel_statuses').modal('show');">
-        เพิ่มข้อมูล
-      </a>
-    </div>
+    
+ 
     <div class="content">
+      <div class="row"> 
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_personnel_statuses').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div>
+        <div class="col-lg-2 "></div>
+        </div>
       <div class="row">
-         <div class="col-lg-2 "></div>
-        <div class="col-lg-2 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 "></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
         <div class="col-lg-2 "></div>
       </div>
       <?php foreach($personnel_statuses as $key=>$value): ?>
         <div class="row">
             <div class="col-lg-2 "></div>
-            <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_STATUS_ID'];?></div>
-            <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></div>
-            <div class="col-lg-2 body-show box-btn-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_STATUS_ID'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
               <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_personnel_statuses(
                 '<?php echo $value['PERSONNEL_STATUS_ID'];?>',
                 '<?php echo $value['PERSONNEL_STATUS_DETAIL'];?>')">
                   แก้ไขข้อมูล
               </a>
             </div>
-            <div class="col-lg-2 body-show box-btn-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
               <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_personnel_statuses(
                 '<?php echo $value['PERSONNEL_STATUS_ID'];?>')">
                 ลบข้อมูล
@@ -79,7 +86,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-2 "></div>
         </div>
       <?php endforeach; ?>
- 
     </div>
   </div>
 </div>

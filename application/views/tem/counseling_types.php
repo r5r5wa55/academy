@@ -42,35 +42,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <div class="content">
+    <div class="row">
+        <div class="col-lg-2 "></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_counseling_types').modal('show');">
+            เพิ่มข้อมูล
+          </a>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+      </div>
       <div class="row">
-         <div class="col-lg-2 "></div>
-        <div class="col-lg-2 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ประเภท</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 "></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ประเภท</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
         <div class="col-lg-2 "></div>
       </div>
       <?php foreach($counseling_types as $key=>$value): ?>
         <div class="row">
         <div class="col-lg-2 "></div>
-          <div class="col-lg-2 body-show"><?php echo $value['COUNSELING_TYPE_ID'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['COUNSELING_NAME'];?></div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_counseling_types('<?php echo $value['COUNSELING_TYPE_ID'];?>','<?php echo $value['COUNSELING_NAME'];?>');">แก้ไขข้อมูล</button>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['COUNSELING_TYPE_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['COUNSELING_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_counseling_types(
+              '<?php echo $value['COUNSELING_TYPE_ID'];?>',
+              '<?php echo $value['COUNSELING_NAME'];?>');">
+              แก้ไขข้อมูล
+            </a>
           </div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_counseling_types('<?php echo $value['COUNSELING_TYPE_ID'];?>')">ลบข้อมูล</button>
-             <div class="col-lg-2 "></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_counseling_types(
+              '<?php echo $value['COUNSELING_TYPE_ID'];?>');">
+              ลบข้อมูล
+            </a>
           </div>
+            <div class="col-lg-2 "></div>
+       
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_counseling_types').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
+    
     </div>
   </div>
 </div>

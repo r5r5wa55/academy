@@ -57,7 +57,9 @@ a.btn-edit:hover{
 }
 .box-btn-center {
   text-align: center;
-
+  margin: -0.5px; 
+  padding-top: 10px;
+  padding-bottom: 10px;
   border: none solid none;   
   justify-content: center;
 }
@@ -112,6 +114,7 @@ a.box-btn-add:hover{
  display: flex;
  justify-content: right;
  margin-bottom: 15px;
+
 }
 /* margin-bottom: 18px;
 margin-left: 903px; */

@@ -160,16 +160,17 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล leave_types</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูลประเภทการลา</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">leave_types</label>
-          <input type="text" class="form-control m-2 p-2" name="LEAVE_TYPE" placeholder="ชื่อคณะ">
-          <input type="text" class="form-control m-2 p-2" name="LEAVE_TYPE_MAX" placeholder="ชื่อคณะภาษาอังกฤษ">
+          <label for="formGroupExampleInput">ประเภทการลา</label>
+          <input type="text" class="form-control m-2 p-2" name="LEAVE_TYPE" placeholder="ประเภทการลา">
+          <label for="">จำนวนการลา</label>
+          <input type="text" class="form-control m-2 p-2" name="LEAVE_TYPE_MAX" placeholder="จำนวนการลา">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -183,15 +184,16 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล leave_types</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูลประเภทการลา</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">leave_types</label>
-          <input type="text" class="form-control"  name="LEAVE_TYPE" placeholder="ชื่อคณะ">
+          <label for="formGroupExampleInput">ประเภทการลา</label>
+          <input type="text" class="form-control"  name="LEAVE_TYPE" placeholder="ประเภทการลา">
+          <label for="">จำนวนการลา</label>
           <input type="text" class="form-control"  name="LEAVE_TYPE_MAX" placeholder="จำนวนการลา">
           
           <input type="hidden"   name="LEAVE_TYPE_ID">

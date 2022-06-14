@@ -52,48 +52,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="content">
       <div class="row">
-        <div class="col-lg-2 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">นามสกุล</div>
-        <div class="col-lg-2 hade-show">หัวข้อ</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a a href="javascritp:void(0)" class="box-btn-add" onclick="$('#add_individual_counseling_services').modal('show');">
+            เพิ่มข้อมูล
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">นามสกุล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($individual_counseling_services as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['COUNSELING_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['COUNSELING_NAME'];?></div>
          
 
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_individual_counseling_services(
-              '<?php echo $value['INDIVIDUAL_COUNSELING_ID'];?>',
-              '<?php echo $value['ADVISOR_ID'];?>',
-              '<?php echo $value['STUDENT_ID'];?>',
-              '<?php echo $value['COUNSELING_TYPE_ID'];?>',
-              '<?php echo $value['COUNSELING_PROBLEM'];?>',
-              '<?php echo $value['COUNSELING_DETAIL'];?>',
-              '<?php echo $value['COUNSELING_SOLVE'];?>',
-              '<?php echo $value['COUNSELING_RESULT'];?>',
-              '<?php echo $value['COUNSELING_CREATE_DATE'];?>',
-              '<?php echo $value['COUNSELING_DATE'];?>',
-              '<?php echo $value['STUDEN_DATE'];?>');">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_individual_counseling_services(
+            '<?php echo $value['INDIVIDUAL_COUNSELING_ID'];?>',
+            '<?php echo $value['ADVISOR_ID'];?>',
+            '<?php echo $value['STUDENT_ID'];?>',
+            '<?php echo $value['COUNSELING_TYPE_ID'];?>',
+            '<?php echo $value['COUNSELING_PROBLEM'];?>',
+            '<?php echo $value['COUNSELING_DETAIL'];?>',
+            '<?php echo $value['COUNSELING_SOLVE'];?>',
+            '<?php echo $value['COUNSELING_RESULT'];?>',
+            '<?php echo $value['COUNSELING_CREATE_DATE'];?>',
+            '<?php echo $value['COUNSELING_DATE'];?>',
+            '<?php echo $value['STUDEN_DATE'];?>');">
               แก้ไขข้อมูล
-            </button>
+            </a>
           </div>
-
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_individual_counseling_services('<?php echo $value['INDIVIDUAL_COUNSELING_ID'];?>')">ลบข้อมูล</button>
-        </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_individual_counseling_services(
+              '<?php echo $value['INDIVIDUAL_COUNSELING_ID'];?>');">
+              ลบข้อมูล
+            </a>
+          </div>
       </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_individual_counseling_services').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
+    
     </div>
     </div>
     </div>
@@ -163,13 +173,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                
                 <label for="formGroupExampleInput">ผลลัพธ์</label>
                 <textarea class="form-control" rows="3" placeholder="ผลลัพธ์ที่เกิดขี้น" name="COUNSELING_RESULT"></textarea>
-
                 <label for="formGroupExampleInput">ถึงวันที่</label>
                 <input type="date" class="form-control"  name="STUDEN_DATE" placeholder="">
-
-         
-
-
             </div>    
           </div>  
         </div>
@@ -182,8 +187,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
   </div>
 </div>
-
-
 
 <div class="modal fade" id="edit_individual_counseling_services" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -199,14 +202,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row">    
               <div class="col-md-6">
               <input type="hidden" name='INDIVIDUAL_COUNSELING_ID'> 
-
-
-
               <label for="formGroupExampleInput" >ผู้ให้คำปรึกษา</label>
-
-         
-             
-            
                 <?php if ($_SESSION['level'] === '1'): ?>     
                   <label for="formGroupExampleInput" >ผู้ทำงานวิจัย</label>
                     <select class="form-control" name="ADVISOR_ID">
@@ -225,12 +221,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <label for="formGroupExampleInput">หัวข้อ</label>
                 <select class="form-control" name="COUNSELING_TYPE_ID">
-                <option value="">กรุณาเลือก</option>
-
-                <?php foreach($counseling_types as $key=>$value): ?>
-                  <option value="<?php echo $value['COUNSELING_TYPE_ID'];?>"><?php echo $value['COUNSELING_NAME'];?></option>
-                <?php endforeach; ?>
-              </select>
+                  <option value="">กรุณาเลือก</option>
+                  <?php foreach($counseling_types as $key=>$value): ?>
+                    <option value="<?php echo $value['COUNSELING_TYPE_ID'];?>"><?php echo $value['COUNSELING_NAME'];?></option>
+                  <?php endforeach; ?>
+                </select>
 
                 <label for="formGroupExampleInput">ปัญหาที่เจอ</label>
                 <textarea class="form-control" rows="3" placeholder="การแก้ปัญหา" name="COUNSELING_PROBLEM"></textarea>
@@ -267,11 +262,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <textarea class="form-control" rows="3" placeholder="ผลลัพธ์ที่เกิดขี้น" name="COUNSELING_RESULT"></textarea>
 
                 <label for="formGroupExampleInput">ถึงวันที่</label>
-                <input type="date" class="form-control"  name="STUDEN_DATE" placeholder="">
-
-         
-
-
+                <input type="date" class="form-control"  name="STUDEN_DATE" placeholder=""> 
             </div>    
           </div>  
         </div>
@@ -284,9 +275,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
   </div>
 </div>
-
-
-
 
 <div class="modal fade" id="show_personnels" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">

@@ -45,29 +45,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <div class="col-lg-11 box-btn-add-center"> 
-      <a href="javascript: void(0)" class="box-btn-add" onclick="$('#add_management_positions').modal('show');">
-        เพิ่มข้อมูล
-      </a>
-    </div>
+   
 
     <div class="content">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript: void(0)" class="box-btn-add" onclick="$('#add_management_positions').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-lg-2 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">นามสกุล</div>
-        <div class="col-lg-2 hade-show">ตำแหน่ง</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">นามสกุล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ตำแหน่ง</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($management_positions as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['MANAGEMENT_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['MANAGEMENT_NAME'];?></div>
 
-          <div class="col-lg-2 body-show">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_management_positions(
               '<?php echo $value['MANAGEMENT_POSITION_ID'];?>',
               '<?php echo $value['MANAGEMENT_ID'];?>',
@@ -77,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
           </div>
 
-          <div class="col-lg-2 body-show">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show  box-btn-center">
             <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_management_positions(
               '<?php echo $value['MANAGEMENT_POSITION_ID'];?>');">
               ลบข้อมูล

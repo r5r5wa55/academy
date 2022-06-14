@@ -42,19 +42,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <?php if ($_SESSION['level'] === '1'): ?>  <!-- add_personnels ช่อน -->
-        <div class="row">
-   
-            <div class="col-lg-11 box-btn-add-center">
-              <a href="javascript:void(0)" onclick="$('#add_personnels').modal('show');" class="box-btn-add">
-              เพิ่มข้อมูล
-              </a>
-         
-
-          </div>
-        </div>
+      
       <?php endif; ?>
       <!-- /.content-header -->
     <div class="content">
+      <div class="row">
+        <?php if ($_SESSION['level'] === '1'): ?>  <!-- add_personnels ช่อน -->
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+              <a href="javascript:void(0)" onclick="$('#add_personnels').modal('show');" class="box-btn-add">
+              เพิ่มข้อมูล
+              </a>
+          </div>
+        <?php endif; ?>
+      </div>
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
@@ -71,29 +76,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
             <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></div>
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><!-- get_edit_personnels -->
-            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_personnels(
-               '<?php echo $value['PERSONNEL_ID'];?>',
-               '<?php echo $value['PERSONNEL_NAME'];?>',
-               '<?php echo $value['PERSONNEL_SURNAME'];?>',
-               '<?php echo $value['PERSONNEL_NAME_EN'];?>',
-               '<?php echo $value['PERSONNEL_SURNAME_EN'];?>',
-               '<?php echo $value['PERSONNEL_EMAIL'];?>',
-               '<?php echo $value['PERSONNEL_MOBILE'];?>',
-               '<?php echo $value['PERSONNEL_PHONE'];?>',
-               '<?php echo $value['PERSONNEL_PHONE_EXTENSION'];?>',
-               '<?php echo $value['PERSONNEL_SEX'];?>',
-               '<?php echo $value['PERSONNEL_CREATE_BY'];?>',
-               '<?php echo $value['PERSONNEL_CRETTE_DATE'];?>',
-               '<?php echo $value['DEPARTMENT_ID'];?>',
-               '<?php echo $value['PERSONNEL_TYPE_ID'];?>',
-               '<?php echo $value['PERSONNEL_STATUS_ID'];?>',
-               '<?php echo $value['PERSONNEL_CATEGORY_ID'];?>', 
-               '<?php echo $value['PERSONNEL_USERNAME'];?>',
-               '<?php echo $value['PERSONNEL_PASSWORD'];?>',
+              <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_personnels(
+              '<?php echo $value['PERSONNEL_ID'];?>',
+              '<?php echo $value['PERSONNEL_NAME'];?>',
+              '<?php echo $value['PERSONNEL_SURNAME'];?>',
+              '<?php echo $value['PERSONNEL_NAME_EN'];?>',
+              '<?php echo $value['PERSONNEL_SURNAME_EN'];?>',
+              '<?php echo $value['PERSONNEL_EMAIL'];?>',
+              '<?php echo $value['PERSONNEL_MOBILE'];?>',
+              '<?php echo $value['PERSONNEL_PHONE'];?>',
+              '<?php echo $value['PERSONNEL_PHONE_EXTENSION'];?>',
+              '<?php echo $value['PERSONNEL_SEX'];?>',
+              '<?php echo $value['PERSONNEL_CREATE_BY'];?>',
+              '<?php echo $value['PERSONNEL_CRETTE_DATE'];?>',
+              '<?php echo $value['DEPARTMENT_ID'];?>',
+              '<?php echo $value['PERSONNEL_TYPE_ID'];?>',
+              '<?php echo $value['PERSONNEL_STATUS_ID'];?>',
+              '<?php echo $value['PERSONNEL_CATEGORY_ID'];?>', 
+              '<?php echo $value['PERSONNEL_USERNAME'];?>',
+              '<?php echo $value['PERSONNEL_PASSWORD'];?>',
                 '<?php echo $value['level'];?>');">
                 แก้ไขข้อมูล
               </a>
-            
+        
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><!-- delete_personnels -->
               <a href="javascript:void(0)" class="btn-delete"  onclick="main.delete_personnels('<?php echo $value['PERSONNEL_ID'];?>')">

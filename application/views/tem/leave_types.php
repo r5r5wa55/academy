@@ -32,12 +32,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0" >leave_types</h1>
+            <h1 class="m-0" >ประเภทการลา</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">leave_types</li>
+              <li class="breadcrumb-item active">ประเภทการลา</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -47,34 +47,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="content">
       <div class="row">
-         <div class="col-lg-1"></div>
-        <div class="col-lg-1 hade-show">รหัส</div>
-        <div class="col-lg-4 hade-show">ขื่อ</div>
-        <div class="col-lg-1 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript:void(0);" class="box-btn-add" onclick="$('#add_leave_types').modal('show');">
+            เพิ่มข้อมูล
+          </a>
+        </div>
+        <div class="col-lg-1 "></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-1 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-4 col-md-2 col-sm-2 hade-show">ขื่อ</div>
+        <div class="col-lg-1 col-md-2 col-sm-2  hade-show">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
         <div class="col-lg-1 "></div>
       </div>
       <?php foreach($leave_types as $key=>$value): ?>
         <div class="row">
         <div class="col-lg-1"></div>
-          <div class="col-lg-1 body-show"><?php echo $value['LEAVE_TYPE_ID'];?></div>
-          <div class="col-lg-4 body-show"><?php echo $value['LEAVE_TYPE'];?></div>
-          <div class="col-lg-1 body-show"><?php echo $value['LEAVE_TYPE_MAX'];?></div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_leave_types('<?php echo $value['LEAVE_TYPE_ID'];?>','<?php echo $value['LEAVE_TYPE'];?>','<?php echo $value['LEAVE_TYPE_MAX'];?>');">แก้ไขข้อมูล</button>
+          <div class="col-lg-1 col-md-2 col-sm-2 body-show"><?php echo $value['LEAVE_TYPE_ID'];?></div>
+          <div class="col-lg-4 col-md-2 col-sm-2 body-show"><?php echo $value['LEAVE_TYPE'];?></div>
+          <div class="col-lg-1 col-md-2 col-sm-2 body-show"><?php echo $value['LEAVE_TYPE_MAX'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0);" class="btn-edit" onclick="main.get_edit_leave_types(
+              '<?php echo $value['LEAVE_TYPE_ID'];?>',
+              '<?php echo $value['LEAVE_TYPE'];?>',
+              '<?php echo $value['LEAVE_TYPE_MAX'];?>')">
+              แก้ไขข้อมูล
+            </a>
           </div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_leave_types('<?php echo $value['LEAVE_TYPE_ID'];?>')">ลบข้อมูล</button>
-             <div class="col-lg-1 "></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <a href="javascript:void(0);" class="btn-delete" onclick="main.delete_leave_types('<?php echo $value['LEAVE_TYPE_ID'];?>');">
+            ลบข้อมูล
+          </a>  
+          <div class="col-lg-1 "></div>
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_leave_types').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
     </div>
   </div>
 </div>

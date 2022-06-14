@@ -52,23 +52,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="content">
       <div class="row">
-        <div class="col-lg-2 hade-show">หัวข้อการบริการ</div>
-        <div class="col-lg-2 hade-show">สถานที่ให้บริการ</div>
-        <div class="col-lg-2 hade-show">เจ้าของผู้ให้บริการ</div>
-        <div class="col-lg-2 hade-show">ไฟล์ข้อมูล</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_services').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div> 
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อการบริการ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานที่ให้บริการ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">เจ้าของผู้ให้บริการ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ไฟล์ข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($services as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-2 body-show"><?php echo $value['SERVICE_TITLE'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['SERVICE_PLACE'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['SERVICE_OWNER'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['FILE_DOCUMENT'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['SERVICE_TITLE'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['SERVICE_PLACE'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['SERVICE_OWNER'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['FILE_DOCUMENT'];?></div>
          
 
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_services(
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_services(
+
               '<?php echo $value['SERVICE_ID'];?>',
               '<?php echo $value['SERVICE_TITLE'];?>',
               '<?php echo $value['SERVICE_PLACE'];?>',
@@ -81,19 +94,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['SERVICE_END_DATE'];?>',
               '<?php echo $value['FILE_DOCUMENT'];?>');">
               แก้ไขข้อมูล
-            </button>
+            </a>
+
           </div>
 
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_services('<?php echo $value['SERVICE_ID'];?>')">ลบข้อมูล</button>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_services(
+              '<?php echo $value['SERVICE_ID'];?>');">
+              ลบข้อมูล
+            </a>
         </div>
       </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_services').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
+>
     </div>
     </div>
     </div>

@@ -44,44 +44,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <div class="col-lg-11 box-btn-add-center"> 
-      <a href="javascrip:void(0)" class="box-btn-add" onclick="$('#add_personnel_types').modal('show');">
-        เพิ่มข้อมูล
-      </a>
-    </div>
     <div class="content">
+      <div class="row"> 
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascrip:void(0)" class="box-btn-add" onclick="$('#add_personnel_types').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div>
+        <div class="col-lg-2 "></div>
+      </div>
       <div class="row">
          <div class="col-lg-2 "></div>
-        <div class="col-lg-2 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
         <div class="col-lg-2 "></div>
       </div>
       <?php foreach($personnel_types as $key=>$value): ?>
         <div class="row">
-        <div class="col-lg-2 "></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_TYPE_ID'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></div>
-          <div class="col-lg-2 body-show box-btn-center">
+          <div class="col-lg-2 "></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_TYPE_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_personnel_types(
               '<?php echo $value['PERSONNEL_TYPE_ID'];?>',
               '<?php echo $value['PERSONNEL_TYPE_DETAIL'];?>');">
               แก้ไขข้อมูล
             </a>
           </div>
-          <div class="col-lg-2 body-show box-btn-center">
-            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_personnel_types(
-              '<?php echo $value['PERSONNEL_TYPE_ID'];?>');">
-              ลบข้อมูล
-            </a>
-         
-          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+              <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_personnel_types(
+                '<?php echo $value['PERSONNEL_TYPE_ID'];?>');">
+                ลบข้อมูล
+              </a>   
+            </div>
         </div>
-      <?php endforeach; ?>
-      <div class="row">
-      
-      </div>
+      <?php endforeach; ?> 
     </div>
   </div>
 </div>

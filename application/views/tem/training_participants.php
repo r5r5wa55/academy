@@ -41,7 +41,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
     <div class="content">
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_training_participants').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div> 
+      </div>
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ชื่อการอบรม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ชื่อผู้เข้าร่วม</div>
@@ -56,8 +69,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show"><?php echo $value['TRAINING_BUDGET'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_training_participants(
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_training_participants(
               '<?php echo $value['ID_TRAINING_PARTICIPANTS'];?>',
               '<?php echo $value['TRAINING_ID'];?>',
               '<?php echo $value['TRAINING_BUDGET'];?>',
@@ -66,19 +79,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['TRAINING_ASSESSOR_ID'];?>',
               '<?php echo $value['PERSONNEL_ID'];?>');">
               แก้ไขข้อมูล
-            </button>
+            </a>
           </div>
-
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_training_participants('<?php echo $value['ID_TRAINING_PARTICIPANTS'];?>')">ลบข้อมูล</button>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_training_participants(
+              '<?php echo $value['ID_TRAINING_PARTICIPANTS'];?>');">
+              ลบข้อมูล
+            </a>
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_training_participants').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
-      </div>
     </div>
   </div>
 </div>

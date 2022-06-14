@@ -52,19 +52,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="content">
       <div class="row">
-        <div class="col-lg-2 hade-show">ขื่องานวิจัย</div>
-        <div class="col-lg-2 hade-show">ขื่องานวิจัยภาษาอังกฤษ</div>
-        <div class="col-lg-2 hade-show">หัวข้อ/นามสกุล</div>
-        <div class="col-lg-2 hade-show">ไฟล์งานวิจัย</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_researchs').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div> 
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่องานวิจัย</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่องานวิจัยภาษาอังกฤษ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อ/นามสกุล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ไฟล์งานวิจัย</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($researchs as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-2 body-show"><?php echo $value['RESEARCH_TITLE_TH'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['RESEARCH_TITLE_EN'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 body-show">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['RESEARCH_TITLE_TH'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['RESEARCH_TITLE_EN'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show">
     
               <!-- ใช้ไม่ได้เพราะ จะลูปเอา name อันแรกมาเสมอ -->
               <!-- <input type="hidden" name="RESEARCH_ID" id="RESEARCH_ID" value="////<?php echo $value['RESEARCH_ID']?>"> -->
@@ -72,8 +84,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <input type="file" name="files" id="files" data-id-RESEARCH_ID="<?php echo $value['RESEARCH_ID']?>" onchange="main.upload_file_researchs(this)">    
           
           </div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_researchs(
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_researchs(
               '<?php echo $value['RESEARCH_ID'];?>',
               '<?php echo $value['RESEARCH_TITLE_TH'];?>',
               '<?php echo $value['RESEARCH_TITLE_EN'];?>',
@@ -87,19 +99,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['RESEARCHER_TYPE'];?>',
               '<?php echo $value['FILE_RESEARCHS'];?>');">
               แก้ไขข้อมูล
-            </button>
+            </a>
           </div>
 
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_researchs('<?php echo $value['RESEARCH_ID'];?>')">ลบข้อมูล</button>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_researchs(
+              '<?php echo $value['RESEARCH_ID'];?>');">
+              ลบข้อมูล
+            </a>
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"><button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_researchs').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
     </div>
     </div>
     </div>

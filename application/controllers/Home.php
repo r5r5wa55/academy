@@ -415,6 +415,10 @@ class Home extends CI_Controller {
 	}
 	public function edit_personnels(){
 		$this->check_login_session();
+		// 		echo "<pre>";
+		// print_r($_POST);
+		// echo "</pre>";
+		// exit(); 
 		$data = $this->mhome->edit_personnels($_POST);
 		// 	echo "<pre>";
 		// print_r($data);
@@ -458,11 +462,12 @@ class Home extends CI_Controller {
 	}
 	public function edit_individual_counseling_services(){
 		$this->check_login_session();
-		$data = $this->mhome->edit_individual_counseling_services($_POST);
-		// 	echo "<pre>";
-		// print_r($data);
+		// echo "<pre>";
+		// print_r($_POST);
 		// echo "</pre>";
 		// exit(); 
+		$data = $this->mhome->edit_individual_counseling_services($_POST);
+	
 		echo json_encode($data);
 	}
 	public function delete_individual_counseling_services(){
@@ -670,6 +675,16 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
+	
+	public function delete_training_participants(){
+		$this->check_login_session();
+		// echo '<pre>';
+		// print_r($_POST);
+		// echo '</pre>';
+		// exit;
+		$data = $this->mhome->delete_training_participants($_POST);
+		echo json_encode($data);
+	}
 	///
 	public function counseling_types(){
 		$this->check_login_session();
@@ -717,6 +732,12 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
+	public function delete_leaves(){
+		$this->check_login_session();
+		$data = $this->mhome->delete_leaves($_POST);
+		echo json_encode($data);
+  }
+	
 	//
 	public function check_login(){
 	
