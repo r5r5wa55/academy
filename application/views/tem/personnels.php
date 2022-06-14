@@ -289,7 +289,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="col-md-6">
                 <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
-                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">
+                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" readonly onkeyup="main.checkcountinput(this)">
                   
                 <label for="formGroupExampleInput">รหัสผ่าน</label>
                 <div class="input-group input-group-md">

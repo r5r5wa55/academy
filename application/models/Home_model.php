@@ -715,7 +715,7 @@ class Home_model extends CI_Model {
     $this->db->select('PERSONNEL_ID,PERSONNEL_USERNAME');
     $this->db->from('personnels');
     $this->db->where('PERSONNEL_ID', $data['PERSONNEL_ID']);
-    $this->db->or_where('PERSONNEL_ID', $data['PERSONNEL_ID']);
+    $this->db->or_where('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME']);
     $personnels_check = $this->db->get();
     $personnels_check = $personnels_check->row_array();
     $PERSONNEL_USERNAME_check = isset($personnels_check['PERSONNEL_USERNAME'])?$personnels_check['PERSONNEL_USERNAME']:"";
@@ -729,12 +729,7 @@ class Home_model extends CI_Model {
 		// echo "</pre>";
 		// exit();
 
-    $this->db->select('PERSONNEL_ID,PERSONNEL_USERNAME');
-    $this->db->from('personnels');
-    $this->db->where('PERSONNEL_ID', $data['PERSONNEL_ID']);
-    $this->db->or_where('PERSONNEL_ID', $data['PERSONNEL_ID']);
-    $personnels_check = $this->db->get();
-    $personnels_check = $personnels_check->row_array();
+   
 
     if($PERSONNEL_ID_check == $data['PERSONNEL_ID']){
       $st = array('st'=>0,'ms'=>$PERSONNEL_ID_check.' ซ้ำ','name'=>'PERSONNEL_ID');
@@ -792,17 +787,13 @@ class Home_model extends CI_Model {
     // echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
-		// exit();
-
-    // $this->db->select('PERSONNEL_ID,PERSONNEL_USERNAME');
-    // $this->db->from('personnels');
-    // $this->db->where('PERSONNEL_ID', $data['PERSONNEL_ID']);
-    // $this->db->or_where('PERSONNEL_ID', $data['PERSONNEL_ID']);
-    // $personnels_check = $this->db->get();
-    // $personnels_check = $personnels_check->row_array();
-    // $PERSONNEL_USERNAME_check = isset($personnels_check['PERSONNEL_USERNAME'])?$personnels_check['PERSONNEL_USERNAME']:"";
-    // $PERSONNEL_ID_check = isset($personnels_check['PERSONNEL_ID'])?$personnels_check['PERSONNEL_ID']:"";
-    
+		// // exit();
+    // $this->db->seletct('*');
+    // $this->db->from('personnels')
+    // $this->db->where('PERSONNEL_ID',$data['PERSONNEL_ID']);
+    // $this->db->or_where('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME'];);
+    // $PERSONNEL_ID_check = $this->db->get();
+    // $PERSONNEL_ID_check = $this->db->row_array()
 
 
     $st1 = array('st'=>0);
