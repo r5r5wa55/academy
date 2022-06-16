@@ -129,7 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="form-group">
           <div class="row">    
             <div class="col-md-6">
-              <label for="formGroupExampleInput">รหัสผู้สร้างบุคลากร</label>
+              <label for="formGroupExampleInput">รหัสผู้เพิ่มข้อมูลบุคลากร</label>
               <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly > 
               <label for="formGroupExampleInput">ชื่อผู้ใช้</label>
               <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ชื่อผู้ใช้">    
@@ -141,17 +141,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row radioinput">    
                 <div class="col-md-6">  
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="1">
+                    <input class="form-check-input" type="radio" name="PERSONNEL_SEX" value="1" checked>
                     <label class="form-check-label" >ชาย</label>
                   </div>
                 </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="2">
+                    <input class="form-check-input" type="radio" name="PERSONNEL_SEX"  value="2">
                     <label class="form-check-label">หญิง</label>
                   </div>
               </div>  
               <label for="formGroupExampleInput">อีเมล</label>
-              <input type="text" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
+              <input type="email" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
               <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
               <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
               <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
@@ -192,7 +192,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label for="formGroupExampleInput">วันที่สร้าง</label>
                 <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก" onkeyup="main.checkcountinputphone(this)">
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
                 <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >
                 <label for="formGroupExampleInput">สถานะการทำงาน</label>
@@ -237,7 +237,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group">
             <div class="row">    
               <div class="col-md-6">
-                <label for="formGroupExampleInput">รหัสผู้แก้ไขบุคลากร</label>
+                <label for="formGroupExampleInput">รหัสผู้เพิ่มข้อมูลบุคลากร</label>
                 <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="รหัสผู้แก้ไขบุคลากร" readonly >
                 <label for="formGroupExampleInput">ชื่อผู้ใช้</label>
                 <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ชื่อผู้ใช้">    
@@ -261,7 +261,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>  
 
                 <label for="formGroupExampleInput">อีเมล</label>
-                <input type="text" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
+                <input type="Email" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล" onkeyup="main.checkemail(this)">
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
                 <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
@@ -289,7 +289,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="col-md-6">
                 <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
-                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" readonly onkeyup="main.checkcountinput(this)">
+                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" readonly>
                   
                 <label for="formGroupExampleInput">รหัสผ่าน</label>
                 <div class="input-group input-group-md">
@@ -308,7 +308,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก" onkeyup="main.checkcountinputphone(this)">
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
                 <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >

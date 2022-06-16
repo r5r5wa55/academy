@@ -67,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ประเภทกิจกรรม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หมวดหมู่กิจกรรม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ชื่อกิจกรรม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">วันที่จัดกิจกรรม</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ไฟล์ข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
@@ -94,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
           </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_activities(
               '<?php echo $value['ACTIVITY_ID'];?>');">
               ลบข้อมูล
@@ -153,8 +153,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </select>
               <label for="formGroupExampleInput">รายละเอียดกิจกรรม</label>
               <input type="text" class="form-control"  name="ACTIVITY_DETAIL" placeholder="รายละเอียดกิจกรรม">
-              <label for="formGroupExampleInput">ไฟล์ข้อมูล</label>
-              <input type="file" class="form-control"  name="FILE_DOCUMENT" placeholder="FILE_DOCUMENT">
+             
             </div>    
           </div>  
         </div>
@@ -184,58 +183,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="hidden" name="ACTIVITY_ID">
                 <label for="formGroupExampleInput">ชื่อกิจกรรม</label>
                 <input class="form-control" rows="3" placeholder="ชื่อกิจกรรม" name="ACTIVITY_NAME"></input>
-
                 <label for="formGroupExampleInput">ประเภทกิจกรรม</label>
-                    <select class="form-control" name="ACTIVITY_TYPE_ID">
-                    <?php foreach($activity_types as $key=>$value): ?>
-                        <option value="<?php echo $value['ACTIVITY_TYPE_ID'];?>"><?php echo $value['ACTIVITY_TYPE_NAME'];?></option>
-                    <?php endforeach; ?>
-                    </select>
-
-            
-   
-                
+                <select class="form-control" name="ACTIVITY_TYPE_ID">
+                  <?php foreach($activity_types as $key=>$value): ?>
+                      <option value="<?php echo $value['ACTIVITY_TYPE_ID'];?>"><?php echo $value['ACTIVITY_TYPE_NAME'];?></option>
+                  <?php endforeach; ?>
+                </select>      
                 <label for="formGroupExampleInput">สถานที่จัดกิจกรรม</label>
                 <input class="form-control" rows="3" placeholder="สถานที่จัดกิจกรรม" name="ACTIVITY_PLACE"></input>
-
-
                 <label for="formGroupExampleInput">ผู้จัดกิจกรรม</label>
-                    <select class="form-control" name="ACTIVITY_OWNER_ID">
-                        <option value="">กรุณาเลือก</option>
-                    <?php foreach($personnels as $key=>$value): ?>
-                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_NAME'];?></option>
-                    <?php endforeach; ?>
-                    </select>
-              
-          
-
-                
-
+                <select class="form-control" name="ACTIVITY_OWNER_ID">
+                    <option value="">กรุณาเลือก</option>
+                  <?php foreach($personnels as $key=>$value): ?>
+                      <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_NAME'];?></option>
+                  <?php endforeach; ?>
+                </select>
               </div>
-              <div class="col-md-6">
-
-                  
+              <div class="col-md-6">     
                 <label for="formGroupExampleInput">วันที่จัดกิจกรรม</label>
                 <input type="date" class="form-control"  name="ACTIVITY_DATE" placeholder="วันที่จัดกิจกรรม">
                 <label for="formGroupExampleInput">หมวดหมู่กิจกรรม</label>
-                    <select class="form-control" name="ACTIVITY_CATEGORY_ID">
-                    <?php foreach($activity_categories as $key=>$value): ?>
-                        <option value="<?php echo $value['ACTIVITY_CATEGORY_ID'];?>"><?php echo $value['ACTIVITY_CATEGORY_NAME'];?></option>
-                    <?php endforeach; ?>
-                    </select>
-
-              
-
+                <select class="form-control" name="ACTIVITY_CATEGORY_ID">
+                  <?php foreach($activity_categories as $key=>$value): ?>
+                      <option value="<?php echo $value['ACTIVITY_CATEGORY_ID'];?>"><?php echo $value['ACTIVITY_CATEGORY_NAME'];?></option>
+                  <?php endforeach; ?>
+                </select>
                 <label for="formGroupExampleInput">รายละเอียดกิจกรรม</label>
                 <input type="text" class="form-control"  name="ACTIVITY_DETAIL" placeholder="รายละเอียดกิจกรรม">
-    
-      
-
-                <label for="formGroupExampleInput">ไฟล์ข้อมูล</label>
-                <input type="file" class="form-control"  name="FILE_DOCUMENT" placeholder="FILE_DOCUMENT">
-
-             
-
             </div>    
           </div>  
         </div>

@@ -675,7 +675,7 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
-	
+	///
 	public function delete_training_participants(){
 		$this->check_login_session();
 		// echo '<pre>';
@@ -732,6 +732,16 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
+	public function edit_leaves(){
+		$this->check_login_session();
+		$data = $this->mhome->edit_leaves($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	
 	public function delete_leaves(){
 		$this->check_login_session();
 		$data = $this->mhome->delete_leaves($_POST);
@@ -857,6 +867,19 @@ class Home extends CI_Controller {
 		// echo "</pre>";
 		// exit;
 		$this->load->view('tem/profile',$data);
+	}
+	public function edit_profile(){
+		$this->check_login_session();
+		// 		echo "<pre>";
+		// print_r($_POST);
+		// echo "</pre>";
+		// exit(); 
+		$data = $this->mhome->edit_profile($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
 	}
 	
 

@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2"></div>
         <div class="col-lg-2 col-md-2 box-btn-center">
           <a href="javascript:void(0);" class="box-btn-add" onclick="$('#add_leaves').modal('show');">
-          ลบข้อมูล
+          เพิ่มข้อมูล
           </a>
         </div>
       </div>
@@ -94,7 +94,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['SUPERVISOR_ID'];?>',
               '<?php echo $value['SUPERVISOR_OPINION'];?>',
               '<?php echo $value['PERSONNEL_ID'];?>',
-
               '<?php echo $value['LEAVE_STATUS'];?>');">
                แก้ไขข้อมูล
             </a>
@@ -140,9 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label for="formGroupExampleInput">ตั้งแต่วันที่</label>
                 <input type="date" class="form-control"  name="LEAVE_START_DATE" placeholder="ตั้งแต่วันที่">
 
-                
-                <label for="formGroupExampleInput">การลาทั้งหมด</label>
-                <input type="text" class="form-control"  name="LEAVE_TOAL" placeholder="จำนวนการลาทั้งหมด">
+     
 
                 <label for="formGroupExampleInput">หัวข้อการลาครั้งลาสุด</label>
                 <select class="form-control" name="LAST_LEAVE_TYPE_ID" >
@@ -156,6 +153,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 
                 <label for="formGroupExampleInput">ลาครั้งล่าสุดตั้งแต่วันที่</label>
                 <input type="date" class="form-control"  name="LAST_LEAVE_START_DATE" placeholder="ตั้งแต่วันที่">
+
+                           
+                <label for="formGroupExampleInput">การลาทั้งหมด</label>
+                <input type="text" class="form-control"  name="LEAVE_TOAL" placeholder="จำนวนการลาทั้งหมด">
 
                 <label for="formGroupExampleInput">เจ้าหน้าที่</label>
                 <select class="form-control" name="OFFICER">
@@ -194,6 +195,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
             
+       
+                <label for="formGroupExampleInput">สถานะการลา</label>
+                <input type="text" class="form-control"  name="LEAVE_STATUS" placeholder="สถานะการลา"> 
                 <label for="formGroupExampleInput">หัวหน้างาน</label>
                 <select class="form-control" name="SUPERVISOR_ID">
                         <option value="">กรุณาเลือก</option>
@@ -201,9 +205,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
                     <?php endforeach; ?>
                 </select>
-                <label for="formGroupExampleInput">สถานะการลา</label>
-                <input type="text" class="form-control"  name="LEAVE_STATUS" placeholder="สถานะการลา"> 
-
 
             </div>    
           </div>  
@@ -235,14 +236,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row">    
               <div class="col-md-6">
 
-              <label for="formGroupExampleInput">ผู้ขอลา</label>
-                <select class="form-control" name="PERSONNEL_ID">
-                        <option value="">กรุณาเลือก</option>
-                    <?php foreach($personnels as $key=>$value): ?>
-                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
-                    <?php endforeach; ?>
-                 </select>
-
+                <input type="hidden" name="LEAVE_ID">
+                <label for="formGroupExampleInput">ผู้ขอลา</label>
+                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="สถานที่" readonly>
                 <label for="formGroupExampleInput">สถานที่</label>
                 <input type="text" class="form-control"  name="WRITE_PLACE" placeholder="สถานที่"  >
 
@@ -250,9 +246,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label for="formGroupExampleInput">ตั้งแต่วันที่</label>
                 <input type="date" class="form-control"  name="LEAVE_START_DATE" placeholder="ตั้งแต่วันที่">
 
-                
-                <label for="formGroupExampleInput">การลาทั้งหมด</label>
-                <input type="text" class="form-control"  name="LEAVE_TOAL" placeholder="จำนวนการลาทั้งหมด">
+             
 
                 <label for="formGroupExampleInput">หัวข้อการลาครั้งลาสุด</label>
                 <select class="form-control" name="LAST_LEAVE_TYPE_ID" >
@@ -266,6 +260,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 
                 <label for="formGroupExampleInput">ลาครั้งล่าสุดตั้งแต่วันที่</label>
                 <input type="date" class="form-control"  name="LAST_LEAVE_START_DATE" placeholder="ตั้งแต่วันที่">
+                   
+                <label for="formGroupExampleInput">การลาทั้งหมด</label>
+                <input type="text" class="form-control"  name="LEAVE_TOAL" placeholder="จำนวนการลาทั้งหมด">
 
                 <label for="formGroupExampleInput">เจ้าหน้าที่</label>
                 <select class="form-control" name="OFFICER">
@@ -304,6 +301,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
             
+           
+                <label for="formGroupExampleInput">สถานะการลา</label>
+                <input type="text" class="form-control"  name="LEAVE_STATUS" placeholder="สถานะการลา"> 
+
                 <label for="formGroupExampleInput">หัวหน้างาน</label>
                 <select class="form-control" name="SUPERVISOR_ID">
                         <option value="">กรุณาเลือก</option>
@@ -311,16 +312,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
                     <?php endforeach; ?>
                 </select>
-                <label for="formGroupExampleInput">สถานะการลา</label>
-                <input type="text" class="form-control"  name="LEAVE_STATUS" placeholder="สถานะการลา"> 
-
-
             </div>    
           </div>  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="main.add_leaves();">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="main.edit_leaves();">Save changes</button>
           
         </div>
       </div>

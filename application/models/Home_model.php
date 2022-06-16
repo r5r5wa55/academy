@@ -719,18 +719,8 @@ class Home_model extends CI_Model {
     $personnels_check = $this->db->get();
     $personnels_check = $personnels_check->row_array();
     $PERSONNEL_USERNAME_check = isset($personnels_check['PERSONNEL_USERNAME'])?$personnels_check['PERSONNEL_USERNAME']:"";
-    $PERSONNEL_ID_check = isset($personnels_check['PERSONNEL_ID'])?$personnels_check['PERSONNEL_ID']:"";
-    
-    
-   
+    $PERSONNEL_ID_check = isset($personnels_check['PERSONNEL_ID'])?$personnels_check['PERSONNEL_ID']:""; 
     $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
-    // echo "<pre>";
-		// print_r($st);
-		// echo "</pre>";
-		// exit();
-
-   
-
     if($PERSONNEL_ID_check == $data['PERSONNEL_ID']){
       $st = array('st'=>0,'ms'=>$PERSONNEL_ID_check.' ซ้ำ','name'=>'PERSONNEL_ID');
    
@@ -784,19 +774,15 @@ class Home_model extends CI_Model {
   public function edit_personnels($data){
     
     $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
-    // echo "<pre>";
+  
+    //  echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
-		// // exit();
-    // $this->db->seletct('*');
-    // $this->db->from('personnels')
-    // $this->db->where('PERSONNEL_ID',$data['PERSONNEL_ID']);
-    // $this->db->or_where('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME'];);
-    // $PERSONNEL_ID_check = $this->db->get();
-    // $PERSONNEL_ID_check = $this->db->row_array()
+		// exit();
 
 
-    $st1 = array('st'=>0);
+
+    $st = array('st'=>0);
     if(is_array($data) && $data['PERSONNEL_ID']!=""){
       $this->db->where('PERSONNEL_ID', $data['PERSONNEL_ID']);
       $this->db->set('PERSONNEL_NAME', $data['PERSONNEL_NAME']);
@@ -817,7 +803,7 @@ class Home_model extends CI_Model {
       $this->db->set('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME']);
       $this->db->set('PERSONNEL_PASSWORD', $data['PERSONNEL_PASSWORD']);
       $this->db->update('personnels');
-      $st1 = array('st'=>1);
+      $st = array('st'=>1);
     }
     
     
@@ -826,7 +812,7 @@ class Home_model extends CI_Model {
 		// echo "</pre>";
 		// exit(); 
 
-    return $st1;
+    return $st;
   }
   public function delete_personnels($data){
     $st = array('st'=>0);
@@ -1135,7 +1121,6 @@ class Home_model extends CI_Model {
       $this->db->set('TOTAL_HOUR', $data['TOTAL_HOUR']);
       $this->db->set('SERVICE_START_DATE', $data['SERVICE_START_DATE']);
       $this->db->set('SERVICE_END_DATE', $data['SERVICE_END_DATE']);
-      $this->db->set('FILE_DOCUMENT', $data['FILE_DOCUMENT']);
 
 
       $this->db->update('services');
@@ -1869,6 +1854,54 @@ class Home_model extends CI_Model {
   
     return $st;
   }
+  public function edit_leaves($data){
+    $st = array('st'=>0);
+
+      // onsole.log(LEAVE_ID);
+      // console.log(LEAVE_TYPE_ID);
+      // console.log(WRITE_PLACE);
+      // console.log(WRITE_DATE);
+      // console.log(LEAVE_START_DATE);
+      // console.log(LEAVE_END_DATE);
+      // console.log(LEAVE_TOAL);
+      // console.log(LAST_LEAVE_TYPE_ID);
+      // console.log(PERSONNEL_ID);
+      // console.log(LAST_LEAVE_END_DATE);
+      // console.log(LAST_LEAVE_TOAL);
+      // console.log(OFFICER);
+      // console.log(SUPERVISOR_ID);
+      // console.log(SUPERVISOR_OPINION);
+      // console.log(LEAVE_STATUS);
+      
+    $this->db->where('LEAVE_ID', $data['LEAVE_ID']);
+    $this->db->set('LEAVE_TYPE_ID', $data['LEAVE_TYPE_ID']);
+    $this->db->set('WRITE_PLACE',  $data['WRITE_PLACE']);
+    $this->db->set('WRITE_DATE', $data['WRITE_DATE']);
+    $this->db->set('LEAVE_START_DATE', $data['LEAVE_START_DATE']);
+    $this->db->set('LEAVE_END_DATE', $data['LEAVE_END_DATE']);
+    $this->db->set('LEAVE_TOAL',  $data['LEAVE_TOAL']);
+    $this->db->set('LAST_LEAVE_START_DATE',  $data['LAST_LEAVE_START_DATE']);
+    $this->db->set('LAST_LEAVE_TYPE_ID', $data['LAST_LEAVE_TYPE_ID']);
+    $this->db->set('PERSONNEL_ID', $data['PERSONNEL_ID']);
+    $this->db->set('LAST_LEAVE_END_DATE', $data['LAST_LEAVE_END_DATE']);
+    $this->db->set('LAST_LEAVE_TOAL', $data['LAST_LEAVE_TOAL']);
+    $this->db->set('OFFICER', $data['OFFICER']);
+    $this->db->set('SUPERVISOR_ID', $data['SUPERVISOR_ID']);
+    $this->db->set('SUPERVISOR_OPINION', $data['SUPERVISOR_OPINION']);
+    $this->db->set('LEAVE_STATUS', $data['LEAVE_STATUS']);
+
+    $this->db->update('leaves');
+    $st = array('st'=>1);
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+ 
+
+
+    return $st;
+  }
+  
   public function delete_leaves($data){
     $st = array('st'=>0);
   
@@ -1982,28 +2015,16 @@ class Home_model extends CI_Model {
   }
   //
   public function select_profile($data_search = ""){
-    $this->db->select('*');
     $this->db->from('personnels');
     $this->db->join('personnel_categories', 'personnel_categories.PERSONNEL_CATEGORY_ID = personnels.PERSONNEL_CATEGORY_ID');
     $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
     $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
     $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
-    $this->db->join('leaves', 'leaves.PERSONNEL_ID  = personnels.PERSONNEL_ID');
-    $this->db->join('individual_counseling_services', 'individual_counseling_services.ADVISOR_ID  = personnels.PERSONNEL_ID');
-    $this->db->join('researchs', 'researchs.RESEARCHER_ID  = personnels.PERSONNEL_ID');
-    $this->db->join('activities', 'activities.ACTIVITY_OWNER_ID  = personnels.PERSONNEL_ID');
-    $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID  = leaves.LEAVE_TYPE_ID');
-  
+    $this->db->where('personnels.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
+
 
     
 
-    
-    if($data_search != ""){
-      $this->db->like('personnels.PERSONNEL_ID', $data_search);
-      $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
-      $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
-      $this->db->or_like('personnel_statuses.PERSONNEL_STATUS_DETAIL', $data_search);
-    };
   
   
   
@@ -2013,24 +2034,13 @@ class Home_model extends CI_Model {
     $personnel_categories = $this->select_personnel_categories();
     $personnel_statuses = $this->select_personnel_statuses();
     $personnel_types = $this->select_personnel_types();
-    $leaves = $this->select_leaves();
-    $researchs = $this->select_researchs();
-   
-    $leave_types = $this->select_leave_types();
-    $activities = $this->select_activities();
-    $individual_counseling_services = $this->select_individual_counseling_services();
     $departments = $this->select_departments();
     $DATA = array(
       'personnels'=>$personnels,
       'personnel_categories' => $personnel_categories,
       'personnel_statuses' => $personnel_statuses,
       'personnel_types' => $personnel_types,
-      'leaves'=>$leaves['leaves'],
-      'leave_types' => $leave_types,
-      'activities' => $activities['activities'],
-      'individual_counseling_services' => $individual_counseling_services['individual_counseling_services'],
       'departments' => $departments['departments']
-     
     );
 
     // echo '<pre>';
@@ -2042,8 +2052,61 @@ class Home_model extends CI_Model {
 
 
   }
+  public function edit_profile($data){
+    
+    $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
   
+    //  echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit();
 
+    $this->db->select('PERSONNEL_ID,PERSONNEL_USERNAME');
+    $this->db->from('personnels');
+    $this->db->where('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME']);
+    $this->db->where_not_in('PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
+    $personnels_check = $this->db->get();
+    $personnels_check = $personnels_check->row_array();
+
+    //  echo "<pre>";
+		// print_r($personnels_check);
+		// echo "</pre>";
+		// exit();
+    $PERSONNEL_USERNAME_check = isset($personnels_check['PERSONNEL_USERNAME'])?$personnels_check['PERSONNEL_USERNAME']:"";
+    $st = array('st'=>0 ,'ms'=>'มีบางอย่งผิดพลาด');
+  
+    if($PERSONNEL_USERNAME_check == $data['PERSONNEL_USERNAME']){
+      $st = array('st'=>0,'ms'=>$PERSONNEL_USERNAME_check.' ซ้ำ','name'=>'PERSONNEL_USERNAME');
+    }
+
+    $st = array('st'=>0);
+    if(is_array($data) && $data['PERSONNEL_NAME']!=""){
+      $this->db->where('PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
+      $this->db->set('PERSONNEL_NAME', $data['PERSONNEL_NAME']);
+      $this->db->set('PERSONNEL_SURNAME',  $data['PERSONNEL_SURNAME']);
+      $this->db->set('PERSONNEL_NAME_EN', $data['PERSONNEL_NAME_EN']);
+      $this->db->set('PERSONNEL_SURNAME_EN', $data['PERSONNEL_SURNAME_EN']);
+      $this->db->set('PERSONNEL_EMAIL', $data['PERSONNEL_EMAIL']);
+      $this->db->set('PERSONNEL_MOBILE',  $data['PERSONNEL_MOBILE']);
+      $this->db->set('PERSONNEL_PHONE', $data['PERSONNEL_PHONE']);
+      $this->db->set('PERSONNEL_PHONE_EXTENSION', $data['PERSONNEL_PHONE_EXTENSION']);
+      $this->db->set('PERSONNEL_SEX', $data['PERSONNEL_SEX']);
+      $this->db->set('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME']);
+      $this->db->set('PERSONNEL_PASSWORD', $data['PERSONNEL_PASSWORD']);
+      $this->db->update('personnels');
+      $st = array('st'=>1);
+    }
+    
+    
+    //   echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit(); 
+
+    return $st;
+  }
+  
+  ///
   public function select_service_participants_pic(){
     $this->db->select('*');
     $this->db->from('services');

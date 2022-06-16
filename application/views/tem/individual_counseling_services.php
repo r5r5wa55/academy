@@ -192,7 +192,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล การให้คำปรีกษา</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล การให้คำปรีกษา</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -202,21 +202,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row">    
               <div class="col-md-6">
               <input type="hidden" name='INDIVIDUAL_COUNSELING_ID'> 
-              <label for="formGroupExampleInput" >ผู้ให้คำปรึกษา</label>
-                <?php if ($_SESSION['level'] === '1'): ?>     
-                  <label for="formGroupExampleInput" >ผู้ทำงานวิจัย</label>
-                    <select class="form-control" name="ADVISOR_ID">
-                      <option value="">กรุณาเลือก</option>
-                      <?php foreach($personnels as $key=>$value): ?>
-                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
-                      <?php endforeach; ?>
-                    </select>
-                <?php endif; ?>
-                <!-- level 1 แสดงไอดีผู้เพื่ม-->
-                <?php if ($_SESSION['level'] === '2'): ?> 
-                  <label for="formGroupExampleInpt" >รหัสผู้ทำงานวิจัย</label>
-                  <input type="text" class="form-control"  name="ADVISOR_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
-                <?php endif; ?> 
+           
+                
+                 
+  
+            
+                  <label for="formGroupExampleInpt" >ผู้ทำงานวิจัย</label>
+                  <input type="text" class="form-control"  name="ADVISOR_ID" readonly ">
+          
 
 
                 <label for="formGroupExampleInput">หัวข้อ</label>

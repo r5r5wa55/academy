@@ -125,46 +125,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group">
             <div class="row">    
               <div class="col-md-6">
-            
-                <label for="formGroupExampleInput" >หัวข้อการบริการ</label>
-                <input class="form-control" rows="3" placeholder="SERVICE_TITLE" name="SERVICE_TITLE"></input>
 
-            
-   
                 <label for="formGroupExampleInput">เจ้าของผู้ให้บริการ</label>
-                <input class="form-control" rows="3" placeholder="SERVICE_OWNER" name="SERVICE_OWNER"></input>
+                <input class="form-control" rows="3" placeholder="เจ้าของผู้ให้บริการ" name="SERVICE_OWNER"></input>
 
-                
+                <label for="formGroupExampleInput" >สถานที่ให้บริการ</label>
+                <input type="text" class="form-control"  name="SERVICE_PLACE" placeholder="สถานที่ให้บริการ  ">
+
                 <label for="formGroupExampleInput">ผู้เข้าร่วมการบริการ</label>
-                <input class="form-control" rows="3" placeholder="PARTICIPANT" name="PARTICIPANT"></input>
+                <input class="form-control" rows="3" placeholder="ผู้เข้าร่วมการบริการ" name="PARTICIPANT"></input>
 
                 <label for="formGroupExampleInput">เวลาเริ่มการบริการ</label>
-                <input class="form-control" rows="3" placeholder="SERVICE_START_DATE" name="SERVICE_START_DATE"></input>
+                <input type="date" class="form-control" rows="3" placeholder="เวลาเริ่มการบริการ" name="SERVICE_START_DATE"></input>
 
                 <label for="formGroupExampleInput">เวลาในการอบรม</label>
-                <input class="form-control" rows="3" placeholder="TOTAL_HOUR" name="TOTAL_HOUR"></input>
+                <input class="form-control" rows="3" placeholder="เวลาในการอบรม" name="TOTAL_HOUR"></input>
               
-          
-
-                
-
               </div>
               <div class="col-md-6">
-                <label for="formGroupExampleInput" >สถานที่ให้บริการ</label>
-                <input type="text" class="form-control"  name="SERVICE_PLACE" placeholder="SERVICE_PLACE  ">
-
-                  
+                   
+                <label for="formGroupExampleInput" >หัวข้อการบริการ</label>
+                <input class="form-control" rows="3" placeholder="หัวข้อการบริการ" name="SERVICE_TITLE"></input>       
                 <label for="formGroupExampleInput">ลักษณะผู้เข้าร่วมการบริการ</label>
-                <input type="text" class="form-control"  name="PARTICIPANT_TYPE" placeholder="PARTICIPANT_TYPE">
+                <input type="text" class="form-control"  name="PARTICIPANT_TYPE" placeholder="ลักษณะผู้เข้าร่วมการบริการ">
 
                 <label for="formGroupExampleInput">ผู้เข้าร่วมการบริการทั้งหมด</label>
-                <input type="text" class="form-control"  name="TOTAL_PARTICIPANT" placeholder="TOTAL_PARTICIPANT">
+                <input type="text" class="form-control"  name="TOTAL_PARTICIPANT" placeholder="ผู้เข้าร่วมการบริการทั้งหมด">
     
-                <label for="formGroupExampleInput">เวลาเสร็จสิ้นการบริการ]</label>
-                <input type="text" class="form-control"  name="SERVICE_END_DATE" placeholder="SERVICE_END_DATE">
+                <label for="formGroupExampleInput">เวลาเสร็จสิ้นการบริการ</label>
+                <input type="date" class="form-control"  name="SERVICE_END_DATE" placeholder="เวลาเสร็จสิ้นการบริการ">
 
-                <label for="formGroupExampleInput">ไฟล์ข้อมูล</label>
-                <input type="file" class="form-control"  name="FILE_DOCUMENT" placeholder="FILE_DOCUMENT">
 
              
 
@@ -194,51 +184,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group">
             <div class="row">    
               <div class="col-md-6">
-
-                <label  type="hiden" name="SERVICE_ID" id="SERVICE_ID"></label>
-                <label for="formGroupExampleInput" >หัวข้อการบริการ</label>
-                <input class="form-control" rows="3" placeholder="SERVICE_TITLE" name="SERVICE_TITLE"></label>
-
-            
-   
+                <label  type="hiden" name="SERVICE_ID" id="SERVICE_ID"></label>             
                 <label for="formGroupExampleInput">เจ้าของผู้ให้บริการ</label>
-                <input class="form-control" rows="3" placeholder="SERVICE_OWNER" name="SERVICE_OWNER"></input>
-
-                
+                <input class="form-control" rows="3" placeholder="เจ้าของผู้ให้บริการ" name="SERVICE_OWNER"></input>
+                <label for="formGroupExampleInput" >สถานที่ให้บริการ</label>
+                <input type="text" class="form-control"  name="SERVICE_PLACE" placeholder="สถานที่ให้บริการ ">
+     
                 <label for="formGroupExampleInput">ผู้เข้าร่วมการบริการ</label>
-                <input class="form-control" rows="3" placeholder="PARTICIPANT" name="PARTICIPANT"></input>
+                <input class="form-control" rows="3" placeholder="ผู้เข้าร่วมการบริการ" name="PARTICIPANT"></input>
 
                 <label for="formGroupExampleInput">เวลาเริ่มการบริการ</label>
-                <input class="form-control" rows="3" placeholder="SERVICE_START_DATE" name="SERVICE_START_DATE"></input>
+                <input type="date" class="form-control" rows="3" placeholder="เวลาเริ่มการบริการ" name="SERVICE_START_DATE"></input>
 
                 <label for="formGroupExampleInput">เวลาในการอบรม</label>
-                <input class="form-control" rows="3" placeholder="TOTAL_HOUR" name="TOTAL_HOUR"></input>
-              
-          
-
-                
-
+                <input class="form-control" rows="3" placeholder="เวลาในการอบรม" name="TOTAL_HOUR"></input>
               </div>
               <div class="col-md-6">
-                <label for="formGroupExampleInput" >สถานที่ให้บริการ</label>
-                <input type="text" class="form-control"  name="SERVICE_PLACE" placeholder="SERVICE_PLACE  ">
-
-                  
+                <label for="formGroupExampleInput" >หัวข้อการบริการ</label>
+                <input class="form-control" rows="3" placeholder="หัวข้อการบริการ" name="SERVICE_TITLE"></label>     
                 <label for="formGroupExampleInput">ลักษณะผู้เข้าร่วมการบริการ</label>
-                <input type="text" class="form-control"  name="PARTICIPANT_TYPE" placeholder="PARTICIPANT_TYPE">
-
+                <input type="text" class="form-control"  name="PARTICIPANT_TYPE" placeholder="ลักษณะผู้เข้าร่วมการบริการ">
                 <label for="formGroupExampleInput">ผู้เข้าร่วมการบริการทั้งหมด</label>
-                <input type="text" class="form-control"  name="TOTAL_PARTICIPANT" placeholder="TOTAL_PARTICIPANT">
-    
+                <input type="text" class="form-control"  name="TOTAL_PARTICIPANT" placeholder="ผู้เข้าร่วมการบริการทั้งหมด">
                 <label for="formGroupExampleInput">เวลาเสร็จสิ้นการบริการ]</label>
-                <input type="text" class="form-control"  name="SERVICE_END_DATE" placeholder="SERVICE_END_DATE">
-
-                <label for="formGroupExampleInput">ไฟล์ข้อมูล</label>
-                <input type="file" class="form-control"  name="FILE_DOCUMENT" placeholder="FILE_DOCUMENT">
-
-             
-
-            </div>    
+                <input type="date" class="form-control"  name="SERVICE_END_DATE" placeholder="เวลาเสร็จสิ้นการบริการ">
+              </div>    
           </div>  
         </div>
         <div class="modal-footer">
