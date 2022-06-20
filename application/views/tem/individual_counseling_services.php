@@ -64,21 +64,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">นามสกุล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ปัญหาการขอคำปรึกษา</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หมวดหมู่การร้องขอ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ/นามสกุลอาจารย์</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ/นามสกุลนักศึกษา</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($individual_counseling_services as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['COUNSELING_PROBLEM'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['COUNSELING_NAME'];?></div>
-         
-
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['STUDENT_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['STUDENT_SURNAME'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_individual_counseling_services(
             '<?php echo $value['INDIVIDUAL_COUNSELING_ID'];?>',
@@ -101,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               ลบข้อมูล
             </a>
           </div>
-      </div>
+        </div>
       <?php endforeach; ?>
     
     </div>
@@ -122,14 +120,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group">
             <div class="row">    
               <div class="col-md-6">
+              <?php if ($_SESSION['level'] === '1'): ?>     
+                  <label for="formGroupExampleInput" >ผู้ให้คำปรึกษา</label>
+                    <select class="form-control" name="ADVISOR_ID">
+                      <option value="">กรุณาเลือก</option>
+                      <?php foreach($personnels as $key=>$value): ?>
+                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
+                      <?php endforeach; ?>
+                    </select>
+                <?php endif; ?>
+                <!-- level 1 แสดงไอดีผู้เพื่ม-->
+                <?php if ($_SESSION['level'] === '2'): ?> 
+                  <label for="formGroupExampleInpt" >ผู้ให้คำปรึกษา</label>
+                  <input type="text" class="form-control"  name="ADVISOR_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
+                <?php endif; ?>            
 
-              <label for="formGroupExampleInput" >ผู้ให้คำปรึกษา</label>
-              <select class="form-control" name="ADVISOR_ID">
-              <option value="">กรุณาเลือก</option>
-                <?php foreach($personnels as $key=>$value): ?>
-                  <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
-                <?php endforeach; ?>
-              </select>
+        
    
                 <label for="formGroupExampleInput">หัวข้อ</label>
                 <select class="form-control" name="COUNSELING_TYPE_ID">
@@ -201,17 +207,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group">
             <div class="row">    
               <div class="col-md-6">
-              <input type="hidden" name='INDIVIDUAL_COUNSELING_ID'> 
-           
-                
-                 
-  
-            
-                  <label for="formGroupExampleInpt" >ผู้ทำงานวิจัย</label>
-                  <input type="text" class="form-control"  name="ADVISOR_ID" readonly ">
-          
-
-
+                <input type="hidden" name='INDIVIDUAL_COUNSELING_ID'> 
+                <label for="formGroupExampleInpt" >ผู้ทำงานวิจัย</label>
+                <input type="text" class="form-control"  name="ADVISOR_ID" readonly ">
                 <label for="formGroupExampleInput">หัวข้อ</label>
                 <select class="form-control" name="COUNSELING_TYPE_ID">
                   <option value="">กรุณาเลือก</option>
@@ -219,22 +217,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <option value="<?php echo $value['COUNSELING_TYPE_ID'];?>"><?php echo $value['COUNSELING_NAME'];?></option>
                   <?php endforeach; ?>
                 </select>
-
                 <label for="formGroupExampleInput">ปัญหาที่เจอ</label>
                 <textarea class="form-control" rows="3" placeholder="การแก้ปัญหา" name="COUNSELING_PROBLEM"></textarea>
-              
                 <label for="formGroupExampleInput">การแก้ปัญหา</label>
                 <textarea class="form-control" rows="3" placeholder="ปัญหาที่เจอ" name="COUNSELING_SOLVE"></textarea>
-
-              
-
-              
-
                 <label for="formGroupExampleInput">ตั้งแต่วันที่</label>
                 <input type="date" class="form-control"  name="COUNSELING_DATE" placeholder="">
-
-                
-
               </div>
               <div class="col-md-6">
                 <label for="formGroupExampleInput" >ผู้ขอคำปรีกษา</label>
@@ -269,119 +257,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
-<div class="modal fade" id="show_personnels" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">แสดงข้อมูล บุคลากร</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div class="form-group">
-            <div class="row">    
-              <div class="col-md-6">
-                <label for="formGroupExampleInput">รหัสผู้สร้างบุคลากร</label>
-                <!-- <input type="text" class="form-control"  name="PERSONNEL_CREATE_BY" placeholder="รหัสผู้สร้างบุคลากร" readonly > -->
-              <br>
-                <label class="PERSONNEL_CREATE_BY"></label>
-                <label for="formGroupExampleInput">ชื่อผู้ใช้</label>
-                
-                <input type="text" class="form-control"  name="PERSONNEL_USERNAME" placeholder="ชื่อผู้ใช้">
 
-                <label for="formGroupExampleInput">ชื่อ</label>
-                <input type="text" class="form-control"  name="PERSONNEL_NAME" placeholder="ชื่อ">
-
-                <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
-                <input type="text" class="form-control"  name="PERSONNEL_NAME_EN" placeholder="ชื่อภาษาอังกฤษ">
-
-                <label for="formGroupExampleInput">เพศ</label>
-                <div class="row radioinput">    
-                  <div class="col-md-6">  
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX" checked="" value="1">
-                      <label class="form-check-label" >ชาย</label>
-                    </div>
-                  </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="PERSONNEL_SEX"  value="2">
-                      <label class="form-check-label">หญิง</label>
-                    </div>
-                </div>  
-
-                <label for="formGroupExampleInput">อีเมล</label>
-                <input type="text" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
-
-                <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
-                <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
-
-                <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
-              <select class="form-control" name="PERSONNEL_TYPE_ID">
-                <?php foreach($personnel_types as $key=>$value): ?>
-                  <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
-                <?php endforeach; ?>
-              </select>
-
-              <label for="formGroupExampleInput">สายงาน</label>
-              <select class="form-control" name="PERSONNEL_CATEGORY_ID" >
-                <?php foreach($personnel_categories as $key=>$value): ?>
-                  <option value="<?php echo $value['PERSONNEL_CATEGORY_ID'];?>"><?php echo $value['PERSONNEL_CATEGORY_DETAIL'];?></option>
-                <?php endforeach; ?>
-              </select>
-
-              </div>
-              <div class="col-md-6">
-                <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
-                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">
-                  
-                <label for="formGroupExampleInput">รหัสผ่าน</label>
-                <div class="input-group input-group-md">
-                  <input type="password" class="form-control"  id="myInputedit"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
-                  <span class="input-group-append">
-                    <button type="checkbox" class="btn btn-info btn-flat"name="PERSONNEL_PASSWORD"  onclick="myFunctionedit()" id="myInputedit">แสดง</button>
-                  </span>
-                </div>
-                <label for="formGroupExampleInput">นามสกุล</label>
-                <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
-
-                <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
-                <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
-
-                <label for="formGroupExampleInput">วันที่สร้าง</label>
-                <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
-
-                <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก">
-
-                <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >
-
-              <label for="formGroupExampleInput">สถานะการทำงาน</label>
-              <select class="form-control" name="PERSONNEL_STATUS_ID">
-                <?php foreach($personnel_statuses as $key=>$value): ?>
-                  <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
-                <?php endforeach; ?>
-              </select>
-    
-              <label for="formGroupExampleInput">แผนก</label>
-              <select class="form-control" name="DEPARTMENT_ID" >
-                <?php foreach($departments as $key=>$value): ?>
-                  <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
-                <?php endforeach; ?>
-              </select>
-
-            </div>    
-          </div>  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ./wrapper -->
 <?php $this->load->view('tem/inc_modal_center')?>

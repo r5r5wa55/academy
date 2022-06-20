@@ -1778,10 +1778,13 @@ var main = {
   },
     ///
   add_individual_counseling_services(){
-    var ADVISOR_ID =$('#add_individual_counseling_services [name=ADVISOR_ID] option:selected').val();
+
+
+
+
+    var ADVISOR_ID =$('#add_individual_counseling_services [name=ADVISOR_ID]').val();
     var STUDENT_ID =$('#add_individual_counseling_services [name=STUDENT_ID] option:selected').val();
     var COUNSELING_TYPE_ID =$('#add_individual_counseling_services [name=COUNSELING_TYPE_ID] option:selected').val();
-
     var COUNSELING_PROBLEM = $('#add_individual_counseling_services [name=COUNSELING_PROBLEM]').val()
     var COUNSELING_DETAIL = $('#add_individual_counseling_services [name=COUNSELING_DETAIL]').val()
     var COUNSELING_SOLVE = $('#add_individual_counseling_services [name=COUNSELING_SOLVE  ]').val()
@@ -1801,7 +1804,7 @@ var main = {
     // console.log(COUNSELING_CREATE_DATE);
     // console.log(COUNSELING_DATE);
     // console.log(STUDEN_DATE);
-    // return false
+    // return false;
     
     $('input').removeClass('red')
     if(ADVISOR_ID==""){

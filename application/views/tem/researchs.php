@@ -74,14 +74,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php foreach($researchs as $key=>$value): ?>
         <div class="row">
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['RESEARCH_TITLE_TH'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['RESEARCH_TITLE_EN'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_NAME'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show">
+              <a href="<?php echo base_url("/images/researchs/".$value['FILE_RESEARCHS']);?>" target="_blank">
+                <span class="text-file-FILE_RESEARCHS"> 
+                  <?php echo $value['FILE_RESEARCHS'];?>
+                </span>
+              </a></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
     
               <!-- ใช้ไม่ได้เพราะ จะลูปเอา name อันแรกมาเสมอ -->
               <!-- <input type="hidden" name="RESEARCH_ID" id="RESEARCH_ID" value="////<?php echo $value['RESEARCH_ID']?>"> -->
-              <a href="<?php echo base_url("/images/researchs/".$value['FILE_RESEARCHS']);?>" target="_blank"> <?php echo $value['FILE_RESEARCHS'];?></a>
-              <input type="file" name="files" id="files" data-id-RESEARCH_ID="<?php echo $value['RESEARCH_ID']?>" onchange="main.upload_file_researchs(this)">    
+        
+
+              <div class="upload-btn-wrapper box-btn-center">
+                <button class="btn">Upload a file</button>
+                <input type="file" name="files"  id="files" data-id-RESEARCH_ID="<?php echo $value['RESEARCH_ID']?>" onchange="main.upload_file_researchs(this)">
+              </div>
           
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">

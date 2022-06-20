@@ -124,13 +124,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row">    
               <div class="col-md-6">
 
-              <label for="formGroupExampleInput">ผู้ขอลา</label>
-                <select class="form-control" name="PERSONNEL_ID">
-                        <option value="">กรุณาเลือก</option>
-                    <?php foreach($personnels as $key=>$value): ?>
-                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
-                    <?php endforeach; ?>
-                 </select>
+
+              <?php if ($_SESSION['level'] === '1'): ?>     
+                  <label for="formGroupExampleInput" >ผู้ขอลา</label>
+                    <select class="form-control" name="PERSONNEL_ID">
+                      <option value="">กรุณาเลือก</option>
+                      <?php foreach($personnels as $key=>$value): ?>
+                        <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
+                      <?php endforeach; ?>
+                    </select>
+                <?php endif; ?>
+                <!-- level 1 แสดงไอดีผู้เพื่ม-->
+                <?php if ($_SESSION['level'] === '2'): ?> 
+                  <label for="formGroupExampleInpt" >ผู้ขอลา</label>
+                  <input type="text" class="form-control"  name="PERSONNEL_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
+                <?php endif; ?>               
+
+        
 
                 <label for="formGroupExampleInput">สถานที่</label>
                 <input type="text" class="form-control"  name="WRITE_PLACE" placeholder="สถานที่"  >
