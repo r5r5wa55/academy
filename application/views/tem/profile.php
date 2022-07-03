@@ -79,8 +79,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <b>เบอร์ติดต่อ</b> <a class="float-right"><?php echo $personnels['PERSONNEL_MOBILE']?></a>
                   </li>
                 </ul>
-
-               
+                <a href="javascript:void(0)" class="btn btn-edit-profile" onclick="main.get_edit_profile(
+                                '<?php echo $personnels['PERSONNEL_ID'];?>',
+                                '<?php echo $personnels['PERSONNEL_NAME'];?>',
+                                '<?php echo $personnels['PERSONNEL_SURNAME'];?>',
+                                '<?php echo $personnels['PERSONNEL_NAME_EN'];?>',
+                                '<?php echo $personnels['PERSONNEL_SURNAME_EN'];?>',
+                                '<?php echo $personnels['PERSONNEL_EMAIL'];?>',
+                                '<?php echo $personnels['PERSONNEL_MOBILE'];?>',
+                                '<?php echo $personnels['PERSONNEL_PHONE'];?>',
+                                '<?php echo $personnels['PERSONNEL_PHONE_EXTENSION'];?>',
+                                '<?php echo $personnels['PERSONNEL_SEX'];?>',
+                                '<?php echo $personnels['PERSONNEL_CREATE_BY'];?>',
+                                '<?php echo $personnels['PERSONNEL_CRETTE_DATE'];?>',
+                                '<?php echo $personnels['DEPARTMENT_ID'];?>',
+                                '<?php echo $personnels['PERSONNEL_TYPE_ID'];?>',
+                                '<?php echo $personnels['PERSONNEL_STATUS_ID'];?>',
+                                '<?php echo $personnels['PERSONNEL_CATEGORY_ID'];?>', 
+                                '<?php echo $personnels['PERSONNEL_USERNAME'];?>',
+                                '<?php echo $personnels['PERSONNEL_PASSWORD'];?>',
+                                '<?php echo $personnels['level'];?>');">
+                              แก้ไขข้อมูล
+                            </a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -101,7 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              
                   <!-- /.tab-pane -->
 
-                  <div class="tab-content" id="settings">
+                  <!-- <div class="tab-content" id="settings">
                     <form class="form-horizontal">
                         <div class="form-group row">
                           <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุล</label>
@@ -165,32 +185,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>         
                         <div class="form-group row">
-                            <a href="javascript:void(0)" class="btn btn-danger" onclick="main.get_edit_profile(
-                                '<?php echo $personnels['PERSONNEL_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_NAME'];?>',
-                                '<?php echo $personnels['PERSONNEL_SURNAME'];?>',
-                                '<?php echo $personnels['PERSONNEL_NAME_EN'];?>',
-                                '<?php echo $personnels['PERSONNEL_SURNAME_EN'];?>',
-                                '<?php echo $personnels['PERSONNEL_EMAIL'];?>',
-                                '<?php echo $personnels['PERSONNEL_MOBILE'];?>',
-                                '<?php echo $personnels['PERSONNEL_PHONE'];?>',
-                                '<?php echo $personnels['PERSONNEL_PHONE_EXTENSION'];?>',
-                                '<?php echo $personnels['PERSONNEL_SEX'];?>',
-                                '<?php echo $personnels['PERSONNEL_CREATE_BY'];?>',
-                                '<?php echo $personnels['PERSONNEL_CRETTE_DATE'];?>',
-                                '<?php echo $personnels['DEPARTMENT_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_TYPE_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_STATUS_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_CATEGORY_ID'];?>', 
-                                '<?php echo $personnels['PERSONNEL_USERNAME'];?>',
-                                '<?php echo $personnels['PERSONNEL_PASSWORD'];?>',
-                                '<?php echo $personnels['level'];?>');">
-                              แก้ไขข้อมูล
-                            </a>
+                         
                         </div>
 
                     </form>
-                  </div>
+                  </div> -->
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
@@ -228,7 +227,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <input type="text" class="form-control"  name="PERSONNEL_NAME" placeholder="ชื่อ">
                   <label for="formGroupExampleInput">ชื่อภาษาอังกฤษ</label>
                   <input type="text" class="form-control"  name="PERSONNEL_NAME_EN" placeholder="ชื่อภาษาอังกฤษ">
-
                   <label for="formGroupExampleInput">เพศ</label>
                   <div class="row radioinput">    
                     <div class="col-md-6">  
@@ -242,18 +240,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <label class="form-check-label">หญิง</label>
                       </div>
                   </div>  
-
                   <label for="formGroupExampleInput">อีเมล</label>
                   <input type="Email" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล" onkeyup="main.checkemail(this)">
 
                   <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
                   <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
-
-         
-
-        
-             
-              
                 </div>
                 <div class="col-md-6">
                   <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
@@ -268,22 +259,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
                   <label for="formGroupExampleInput">นามสกุล</label>
                   <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
-
                   <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
                   <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
-
                   <label for="formGroupExampleInput">วันที่สร้าง</label>
                   <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง" readonly>
-
                   <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
                   <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก" onkeyup="main.checkcountinputphone(this)">
-
                   <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
                   <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >
-
-      
-          
-
               </div>    
             </div>  
           </div>

@@ -984,6 +984,81 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_researchs($_POST);
 		echo json_encode($data);
   }
+	////
+	public function getleaves(){
+		$this->check_login_session();		
+		$data = $this->mhome->getleaves($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	public function get_last_leave_type_name(){
+		$this->check_login_session();		
+		$data = $this->mhome->get_last_leave_type_name($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	public function leaves_approve(){
+		$this->check_login_session();		
+		$data_search = $this->search_all(); 
+		$data = $this->mhome->select_leaves_approve($data_search);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/leaves_approve',$data); 
+	} 
+	public function get_mangement_positions_onchange(){
+		$this->check_login_session();		
+		$data = $this->mhome->get_mangement_positions_onchange($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	public function get_leaves_approve(){
+		$this->check_login_session();		
+		$data = $this->mhome->get_leaves_approve($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	public function add_edit_leaves_approve(){
+		$this->check_login_session();		
+		$data = $this->mhome->add_edit_leaves_approve($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	public function leaves_approve_supervisor(){
+		$this->check_login_session();	
+			$data_search = $this->search_all(); 	
+		$data = $this->mhome->select_leaves_approve_supervisor($data_search);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/leaves_approve_supervisor',$data); 
+	} 
+		public function add_edit_leaves_approve_supervisor(){
+		$this->check_login_session();		
+		$data = $this->mhome->add_edit_leaves_approve_supervisor($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
 	
 } 
 

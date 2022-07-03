@@ -61,19 +61,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <div class="row">
         <div class="col-lg-1"></div>
-        <div class="col-lg-1 col-md-2 col-sm-2 hade-show">รหัส</div>
-        <div class="col-lg-4 col-md-2 col-sm-2 hade-show">ขื่อ</div>
-        <div class="col-lg-1 col-md-2 col-sm-2  hade-show">ขื่อ</div>
+        <div class="col-lg-5 col-md-5 col-sm-5 hade-show">หัวข้อประเภทการลา</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 hade-show">จำนวน</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
         <div class="col-lg-1 "></div>
       </div>
       <?php foreach($leave_types as $key=>$value): ?>
         <div class="row">
-        <div class="col-lg-1"></div>
-          <div class="col-lg-1 col-md-2 col-sm-2 body-show"><?php echo $value['LEAVE_TYPE_ID'];?></div>
-          <div class="col-lg-4 col-md-2 col-sm-2 body-show"><?php echo $value['LEAVE_TYPE'];?></div>
-          <div class="col-lg-1 col-md-2 col-sm-2 body-show"><?php echo $value['LEAVE_TYPE_MAX'];?></div>
+          <div class="col-lg-1"></div>
+          <div class="col-lg-5 col-md-5 col-sm-5 body-show box-btn-left"><?php echo $value['LEAVE_TYPE'];?></div>
+          <div class="col-lg-1 col-md-1 col-sm-1 body-show box-btn-center"><?php echo $value['LEAVE_TYPE_MAX'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0);" class="btn-edit" onclick="main.get_edit_leave_types(
               '<?php echo $value['LEAVE_TYPE_ID'];?>',
@@ -83,11 +81,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
-          <a href="javascript:void(0);" class="btn-delete" onclick="main.delete_leave_types('<?php echo $value['LEAVE_TYPE_ID'];?>');">
-            ลบข้อมูล
-          </a>  
-          <div class="col-lg-1 "></div>
+            <a href="javascript:void(0);" class="btn-delete" onclick="main.delete_leave_types('<?php echo $value['LEAVE_TYPE_ID'];?>');">
+              ลบข้อมูล
+            </a>  
           </div>
+          <div class="col-lg-1 "></div>
         </div>
       <?php endforeach; ?>
     </div>

@@ -1,4 +1,5 @@
 var main = {
+
   add_academics(){
     var ACADEMIC_NAME = $('[name=ACADEMIC_NAME]').val()
     // console.log($('[name=ACADEMIC_NAME]').val());
@@ -1019,7 +1020,7 @@ var main = {
     var PERSONNEL_MOBILE = $('#add_personnels [name=PERSONNEL_MOBILE]').val()
     var PERSONNEL_PHONE = $('#add_personnels [name=PERSONNEL_PHONE]').val()
     var PERSONNEL_PHONE_EXTENSION = $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').val()
-    var PERSONNEL_SEX = $('#add_personnels [name=PERSONNEL_SEX]:checked').val()
+    var personnel_sex = $('#add_personnels [name=personnel_sex]:checked').val()
     var PERSONNEL_CREATE_BY = $('#add_personnels [name=PERSONNEL_CREATE_BY]').val()
     var PERSONNEL_CRETTE_DATE = $('#add_personnels [name=PERSONNEL_CRETTE_DATE]').val()
     var DEPARTMENT_ID =$('#add_personnels [name=DEPARTMENT_ID] option:selected').val();
@@ -1030,6 +1031,9 @@ var main = {
     var PERSONNEL_PASSWORD = $('#add_personnels [name=PERSONNEL_PASSWORD]').val()
     var level = $('#add_personnels [name=level]').val()
     var PERSONNEL_CREATE_BY = $('#add_personnels [name=PERSONNEL_CREATE_BY]').val()
+    var PERSONNEL_LINE = $('#add_personnels [name=PERSONNEL_LINE]').val()
+    var PERSONNEL_FACEBOOK = $('#add_personnels [name=PERSONNEL_FACEBOOK]').val()
+
 
 
     var url = window.location.origin+"/index.php/Home/add_personnels";
@@ -1037,6 +1041,8 @@ var main = {
     // console.log(PERSONNEL_PASSWORD);
     // return false
     $('input').removeClass('red')
+    
+
     if(PERSONNEL_ID==""){
       $('#add_personnels [name=PERSONNEL_ID]').addClass("red")
       return false;
@@ -1083,8 +1089,17 @@ var main = {
       $('#add_personnels [name=PERSONNEL_MOBILE]').addClass("red")
       return false;
     }
+
     if(PERSONNEL_PHONE_EXTENSION==""){
       $('#add_personnels [name=PERSONNEL_PHONE_EXTENSION]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_LINE	==""){
+      $('#add_personnels [name=PERSONNEL_LINE	]').addClass("red")
+      return false;
+    }
+    if(PERSONNEL_FACEBOOK==""){
+      $('#add_personnels [name=PERSONNEL_FACEBOOK]').addClass("red")
       return false;
     }
     if(PERSONNEL_TYPE_ID==""){
@@ -1117,7 +1132,7 @@ var main = {
       'PERSONNEL_MOBILE':PERSONNEL_MOBILE,
       'PERSONNEL_PHONE':PERSONNEL_PHONE,
       'PERSONNEL_PHONE_EXTENSION':PERSONNEL_PHONE_EXTENSION,
-      'PERSONNEL_SEX':PERSONNEL_SEX,
+      'personnel_sex':personnel_sex,
       'PERSONNEL_CREATE_BY':PERSONNEL_CREATE_BY,
       'PERSONNEL_CRETTE_DATE':PERSONNEL_CRETTE_DATE,
       'DEPARTMENT_ID':DEPARTMENT_ID,
@@ -1127,7 +1142,10 @@ var main = {
       'PERSONNEL_USERNAME':PERSONNEL_USERNAME,
       'PERSONNEL_PASSWORD':PERSONNEL_PASSWORD,
       'PERSONNEL_CREATE_BY':PERSONNEL_CREATE_BY,
-      'level':level
+      'level':level,
+      'PERSONNEL_LINE':PERSONNEL_LINE,
+      'PERSONNEL_FACEBOOK':PERSONNEL_FACEBOOK
+  
     }
     $.ajax({
       url : url,
@@ -1157,7 +1175,7 @@ var main = {
   get_edit_personnels(PERSONNEL_ID,PERSONNEL_NAME,PERSONNEL_SURNAME,PERSONNEL_NAME_EN,PERSONNEL_SURNAME_EN,
     PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,PERSONNEL_CREATE_BY,
     PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
-    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD,level){
+    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD,level,PERSONNEL_LINE,PERSONNEL_FACEBOOK){
 
 
       
@@ -1231,7 +1249,8 @@ var main = {
     $('#edit_personnels [name=PERSONNEL_USERNAME]').val(PERSONNEL_USERNAME);
     $('#edit_personnels [name=PERSONNEL_PASSWORD]').val(PERSONNEL_PASSWORD);
     $('#edit_personnels [name=level]').val(level);
-
+    $('#edit_personnels [name=PERSONNEL_LINE]').val(PERSONNEL_LINE);
+    $('#edit_personnels [name=PERSONNEL_FACEBOOK]').val(PERSONNEL_FACEBOOK);
 
  
     $('#edit_personnels').modal('show'); 
@@ -1316,6 +1335,8 @@ var main = {
     var PERSONNEL_TYPE_ID = $('#edit_personnels [name=PERSONNEL_TYPE_ID] option:selected').val();
     var PERSONNEL_CATEGORY_ID = $('#edit_personnels [name=PERSONNEL_CATEGORY_ID] option:selected').val();
     var DEPARTMENT_ID = $('#edit_personnels [name=DEPARTMENT_ID] option:selected').val();
+    var PERSONNEL_LINE = $('#edit_personnels [name=PERSONNEL_LINE]').val();
+    var PERSONNEL_FACEBOOK = $('#edit_personnels [name=PERSONNEL_FACEBOOK]').val();
     var url = window.location.origin+"/index.php/Home/edit_personnels";
     // console.log(window.location.origin);
     // return false;
@@ -1389,7 +1410,9 @@ var main = {
       'PERSONNEL_STATUS_ID':PERSONNEL_STATUS_ID,
       'PERSONNEL_TYPE_ID':PERSONNEL_TYPE_ID,
       'PERSONNEL_CATEGORY_ID':PERSONNEL_CATEGORY_ID,
-      'DEPARTMENT_ID':DEPARTMENT_ID
+      'DEPARTMENT_ID':DEPARTMENT_ID,
+      'PERSONNEL_LINE':PERSONNEL_LINE,
+      'PERSONNEL_FACEBOOK':PERSONNEL_FACEBOOK
     }
 
     $.ajax({
@@ -1446,7 +1469,18 @@ var main = {
   
     var MANAGEMENT_ID = $('#add_management_positions [name=MANAGEMENT_ID] option:selected').val();
     var PERSONNEL_ID = $('#add_management_positions [name=PERSONNEL_ID] option:selected').val();
-    var DEPARTMENT_ID = $('#add_management_positions [name=DEPARTMENT_ID] option:selected').val();
+    var DEPARTMENT_ID = $('[name=DEPARTMENT_ID]').attr('data-id-department_id');
+
+    // let DEPARTMENT_ID = myAnchor.getAttribute("target");
+    
+    // console.log(MANAGEMENT_ID);
+    // console.log(PERSONNEL_ID);
+    // console.log(DEPARTMENT_ID);
+    // return false;
+    
+
+
+  
     var url = window.location.origin+"/index.php/Home/add_management_positions";
     // console.log(window.location.origin);
     // return false;
@@ -1455,6 +1489,9 @@ var main = {
       'PERSONNEL_ID':PERSONNEL_ID,
       'DEPARTMENT_ID':DEPARTMENT_ID
     }
+    // console.log(data);
+    // console.log(DEPARTMENT_ID);
+    // return false;
   
     $.ajax({
       url : url,
@@ -3157,114 +3194,127 @@ var main = {
   //
   add_leaves(){
 
-    var LEAVE_TYPE_ID = $('#add_leaves [name=LEAVE_TYPE_ID]').val();
+    var LEAVE_TYPE_ID = $('#add_leaves [name=LEAVE_TYPE_ID] option:selected').val();
     var WRITE_PLACE = $('#add_leaves [name=WRITE_PLACE]').val();
     var WRITE_DATE = $('#add_leaves [name=WRITE_DATE]').val();
     var LEAVE_START_DATE = $('#add_leaves [name=LEAVE_START_DATE]').val();
     var LEAVE_END_DATE = $('#add_leaves [name=LEAVE_END_DATE]').val();
     var LEAVE_TOAL = $('#add_leaves [name=LEAVE_TOAL]').val();
-    var LAST_LEAVE_TYPE_ID = $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').val();
+    // var LAST_LEAVE_TYPE_ID =  $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').attr('data-id-leave_type_id');
+    var LAST_LEAVE_TYPE_ID = $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').attr('data-id-leave_type_id');
     var LAST_LEAVE_START_DATE = $('#add_leaves [name=LAST_LEAVE_START_DATE]').val();
     var LAST_LEAVE_END_DATE = $('#add_leaves [name=LAST_LEAVE_END_DATE]').val();
-    
     var LAST_LEAVE_TOAL = $('#add_leaves [name=LAST_LEAVE_TOAL]').val();
-    var OFFICER = $('#add_leaves [name=OFFICER]').val();
-    var SUPERVISOR_ID = $('#add_leaves [name=SUPERVISOR_ID]').val();
-    var SUPERVISOR_OPINION = $('#add_leaves [name=SUPERVISOR_OPINION]').val();
-    var LEAVE_STATUS = $('#add_leaves [name=LEAVE_STATUS]').val();
+  
+    var OFFICER = $('#add_leaves [name=OFFICER] option:selected').val();
+    var SUPERVISOR_ID = $('#add_leaves [name=SUPERVISOR_ID] option:selected').val();
     var PERSONNEL_ID = $('#add_leaves [name=PERSONNEL_ID]').val();
+    var LEAVES_NUMBER_USE = $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val();
+
+    var LEAVE_TOAL_PLUS = 
+
+    $('#add_leaves').val(Number($('[name=LEAVES_NUMBER_PLUS]').val()) + Number($('[name=LEAVE_TOAL]').val())).val();
+
+    // $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+
+    // var WRITE_DATE = $('#add_leaves [name=WRITE_DATE]').val();
+    // var PERSONNEL_ID = $('#add_leaves [name=PERSONNEL_ID]').val();
+
+
+
+  
+    // console.log(LEAVE_TYPE_ID)
+    // console.log(WRITE_PLACE)
+    // console.log(WRITE_DATE)
+    // console.log(LEAVE_START_DATE)
+    // console.log(LEAVE_END_DATE)
+    // console.log(LEAVE_TOAL)
+    // console.log(LAST_LEAVE_TYPE_ID)
+    // console.log(LAST_LEAVE_START_DATE)
+    // console.log(LAST_LEAVE_END_DATE)
+    // console.log(LAST_LEAVE_TOAL)
+    // console.log(OFFICER)
+    // console.log(SUPERVISOR_ID)
+    // console.log(PERSONNEL_ID)
+    // console.log(LEAVES_NUMBER_PLUS)
+
+    // console.log(LEAVES_NUMBER_USE)
+    // return false;
 
     var url = window.location.origin+"/index.php/Home/add_leaves";
 
-    $('input').removeClass('red')
-    if(PERSONNEL_ID==""){
-      $('#add_leaves [name=PERSONNEL_ID]').addClass("red")
-      return false;
-    }
-    if(LEAVE_TYPE_ID==""){
-      $('#add_leaves [name=LEAVE_TYPE_ID]').addClass("red")
-      return false;
-    }
-    if(WRITE_PLACE==""){
-      $('#add_leaves [name=WRITE_PLACE]').addClass("red")
-      return false;
-    }
-    if(WRITE_DATE==""){
-      $('#add_leaves [name=WRITE_DATE]').addClass("red")
-      return false;
-    }
-    if(LEAVE_START_DATE==""){
-      $('#add_leaves [name=LEAVE_START_DATE]').addClass("red")
-      return false;
-    }
-    if(LEAVE_END_DATE==""){
-      $('#add_leaves [name=LEAVE_END_DATE]').addClass("red")
-      return false;
-    }
-    if(LAST_LEAVE_TYPE_ID==""){
-      $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').addClass("red")
-      return false;
-    }
-    if(LAST_LEAVE_TOAL==""){
-      $('#add_leaves [name=LAST_LEAVE_TOAL]').addClass("red")
-      return false;
-    }
-    if(LAST_LEAVE_START_DATE==""){
-      $('#add_leaves [name=LAST_LEAVE_START_DATE]').addClass("red")
-      return false;
-    }
-    if(LAST_LEAVE_END_DATE==""){
-      $('#add_leaves [name=LAST_LEAVE_END_DATE]').addClass("red")
-      return false;
-    }
-    if(LEAVE_TOAL==""){
-      $('#add_leaves [name=LEAVE_TOAL]').addClass("red")
-      return false;
-    }
-    if(LEAVE_STATUS==""){
-      $('#add_leaves [name=LEAVE_STATUS]').addClass("red")
-      return false;
-    }
-    if(OFFICER==""){
-      $('#add_leaves [name=OFFICER]').addClass("red")
-      return false;
-    }
-    if(SUPERVISOR_ID==""){
-      $('#add_leaves [name=SUPERVISOR_ID]').addClass("red")
-      return false;
-    }
-    if(SUPERVISOR_OPINION==""){
-      $('#add_leaves [name=SUPERVISOR_OPINION]').addClass("red")
-      return false;
-    }
 
 
-     
 
 
+
+
+
+    // $('input').removeClass('red')
+    // if(PERSONNEL_ID==""){
+    //   $('#add_leaves [name=PERSONNEL_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(LEAVE_TYPE_ID==""){
+    //   $('#add_leaves [name=LEAVE_TYPE_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(WRITE_PLACE==""){
+    //   $('#add_leaves [name=WRITE_PLACE]').addClass("red")
+    //   return false;
+    // }
+    // if(WRITE_DATE==""){
+    //   $('#add_leaves [name=WRITE_DATE]').addClass("red")
+    //   return false;
+    // }
+    // if(LEAVE_START_DATE==""){
+    //   $('#add_leaves [name=LEAVE_START_DATE]').addClass("red")
+    //   return false;
+    // }
+    // if(LEAVE_END_DATE==""){
+    //   $('#add_leaves [name=LEAVE_END_DATE]').addClass("red")
+    //   return false;
+    // }
+    // if(LAST_LEAVE_TYPE_ID==""){
+    //   $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(LAST_LEAVE_TOAL==""){
+    //   $('#add_leaves [name=LAST_LEAVE_TOAL]').addClass("red")
+    //   return false;
+    // }
     // if(LAST_LEAVE_START_DATE==""){
     //   $('#add_leaves [name=LAST_LEAVE_START_DATE]').addClass("red")
     //   return false;
     // }
-    // console.log(LEAVE_TYPE_ID);
-    // console.log(WRITE_PLACE);
-    // console.log(WRITE_DATE);
-    // console.log(LEAVE_START_DATE);
-    // console.log(LEAVE_END_DATE);
-    // console.log(LEAVE_TOAL);
-    // console.log(LAST_LEAVE_TYPE_ID);
-    // console.log(LAST_LEAVE_START_DATE);
+    // if(LAST_LEAVE_END_DATE==""){
+    //   $('#add_leaves [name=LAST_LEAVE_END_DATE]').addClass("red")
+    //   return false;
+    // }
+    // if(LEAVE_TOAL==""){
+    //   $('#add_leaves [name=LEAVE_TOAL]').addClass("red")
+    //   return false;
+    // }
+    // if(LEAVE_STATUS==""){
+    //   $('#add_leaves [name=LEAVE_STATUS]').addClass("red")
+    //   return false;
+    // }
+    // if(OFFICER==""){
+    //   $('#add_leaves [name=OFFICER]').addClass("red")
+    //   return false;
+    // }
+    // if(SUPERVISOR_ID==""){
+    //   $('#add_leaves [name=SUPERVISOR_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(SUPERVISOR_OPINION==""){
+    //   $('#add_leaves [name=SUPERVISOR_OPINION]').addClass("red")
+    //   return false;
+    // }
 
-    // console.log(LAST_LEAVE_END_DATE);
-    // console.log(LAST_LEAVE_TOAL);
-    // console.log(OFFICER);
-    // console.log(SUPERVISOR_ID);
-    // console.log(SUPERVISOR_OPINION);
-    // console.log(PERSONNEL_ID);
-    // console.log(LEAVE_STATUS);
 
-    // return false;
     var data = {
+
   
       'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
       'WRITE_PLACE':WRITE_PLACE,
@@ -3279,10 +3329,13 @@ var main = {
       'PERSONNEL_ID':PERSONNEL_ID,
       'OFFICER':OFFICER,
       'SUPERVISOR_ID':SUPERVISOR_ID,
-      'SUPERVISOR_OPINION':SUPERVISOR_OPINION,
-      'LEAVE_STATUS':LEAVE_STATUS
+      'LEAVES_NUMBER_USE':LEAVES_NUMBER_USE,
+      'LEAVE_TOAL_PLUS':LEAVE_TOAL_PLUS
   
     }
+
+    
+  
    
     $.ajax({
       url : url,
@@ -4118,8 +4171,330 @@ var main = {
     })
   },
 
+  get_last_leave_type_onchange(obj){
+      var LEAVE_TYPE_ID = $(obj).val(); 
+      var url = window.location.origin+"/index.php/Home/getleaves";
+    // console.log(FACUALTY_NAME_TH);
+    // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+      var data = {
+        'LEAVE_TYPE_ID':LEAVE_TYPE_ID
+      }
+      $.ajax({
+        url : url,
+        method : 'POST',
+        dataType : 'JSON',
+        data:data,
+        cache : false,
+        beforeSend: function(jqXHR, settings) {
+          delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        },
+      }).done(function(resp) {
+        // console.log(resp);
+        // return false;
+        if(resp.leaves == null){
+          $('#add_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leave_types.LEAVE_TYPE_MAX).val();
+          $('#add_leaves [name=LEAVE_TOAL]').val('0').val();
+          $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
+        }else{
+          $('#add_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leave_types.LEAVE_TYPE_MAX).val();
+          $('#add_leaves [name=LEAVE_TOAL]').val(resp.leaves.LEAVE_TOAL).val();
+          // $('#add_leaves [name=LEAVES_NUMBER_USE]').val('resp.leaves.LEAVES_NUMBER_USE').val();
+          // $('#add_leaves [name=LEAVES_NUMBER_PLUS]').Number($('[name=LEAVE_TOAL]').val()) + Number($('[name=LEAVES_NUMBER_USE]').val());
+          $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+
+        }
+    
+      
+          // Number($('[name=LEAVE_TOAL]').val()) + Number($('[name=LEAVES_NUMBER_USE]').val())
+       
+      })
+  },
+  get_last_leave_type_name(PERSONNEL_ID){
+    
+   
+    // console.log(PERSONNEL_ID);
+    // return false;
+    // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    var url = window.location.origin+"/index.php/Home/get_last_leave_type_name";
+  //
+    var data = {
+      'PERSONNEL_ID':PERSONNEL_ID
+    }
+    // console.log(PERSONNEL_ID);
+    // return false;
+    // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+        // console.log(resp.leaves);
+        // return false
+      if(resp.leaves == null){
+        $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').val('ยังไม่มีการทำรายการ').val();
+        $('#add_leaves [name=LEAVE_TYPE_MAX_SHOW]').val('0').val();
+        $('#add_leaves [name=LAST_LEAVE_TOAL]').val('0').val();
+        $('#add_leaves [name=LEAVES_NUMBER_SHOW]').val('0').val();
+        $('#add_leaves [name=LAST_LEAVE_START_DATE]').val('ยังไม่มีการทำรายการ').val();
+        $('#add_leaves [name=LAST_LEAVE_END_DATE]').val('ยังไม่มีการทำรายการ').val()
+
+      }else{
+ 
+        // $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').attr(resp.leaves.LEAVE_TYPE_ID).val();
+        $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').attr('data-id-leave_type_id',resp.leaves.LEAVE_TYPE_ID).val();
+        $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').val(resp.leaves.LEAVE_TYPE).val();
+        $('#add_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.leaves.LEAVE_TYPE_MAX).val();
+        $('#add_leaves [name=LAST_LEAVE_TOAL]').val(resp.leaves.LEAVE_TOAL).val();
+        $('#add_leaves [name=LAST_LEAVES_NUMBER_SHOW]').val(Number($('[name=LAST_LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LAST_LEAVE_TOAL]').val())).val();
+        $('#add_leaves [name=LAST_LEAVE_START_DATE]').val(resp.leaves.LEAVE_START_DATE).val();
+        $('#add_leaves [name=LAST_LEAVE_END_DATE]').val(resp.leaves.LEAVE_END_DATE).val();
+        
+
+ 
+        // Number($('[name=LEAVE_TOAL]').val()) + Number($('[name=LEAVES_NUMBER_USE]').val())
+
+      }
+  
+      // console.log(resp.leaves);
+      // return false
+      
+        // $('#add_leaves [name=LEAVES_NUMBER_USE]').val(resp.leaves.LEAVES_NUMBER_USE).val();
+   
+  
+      $('#add_leaves').modal('show');
+      
+     
+    })
+  },
+
+  get_mangement_positions_onchange(obj){
+
+  var DEPARTMENT_ID = $('option:selected', obj).attr('data-id-department_id');
+    // console.log(obj);
+    // console.log(DEPARTMENT_ID);
+    // return false;
 
 
+    var url = window.location.origin+"/index.php/Home/get_mangement_positions_onchange";
+  // console.log(FACUALTY_NAME_TH);
+  // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    var data = {
+      'DEPARTMENT_ID':DEPARTMENT_ID
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      
+      // console.log(resp.departments.DEPARTMENT_ID);
+      if(resp.departments == null){
+        $('#add_management_positions [name=DEPARTMENT_ID]').val('ไม่มีข้อมูลที่ตรงกัน').val();
+     
+      }else{
+        $('#add_management_positions [name=DEPARTMENT_ID]').attr('data-id-department_id',resp.departments.DEPARTMENT_ID).val();
+        $('#add_management_positions [name=DEPARTMENT_ID]').val(resp.departments.DEPARTMENT_NAME_TH).val();
+      }
+  
+    
+      
+     
+    })
+  },
+
+  get_leaves_approve(LEAVE_ID,PERSONNEL_ID){
+      
+ 
+  // console.log(obj);
+  // console.log(DEPARTMENT_ID);
+  // return false;
+
+
+  var url = window.location.origin+"/index.php/Home/get_leaves_approve";
+// console.log(FACUALTY_NAME_TH);
+// console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+  var data = {
+    'LEAVE_ID':LEAVE_ID,
+    'PERSONNEL_ID':PERSONNEL_ID
+  }
+  $.ajax({
+    url : url,
+    method : 'POST',
+    dataType : 'JSON',
+    data:data,
+    cache : false,
+    beforeSend: function(jqXHR, settings) {
+      delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+    },
+  }).done(function(resp) {
+    console.log(resp);
+    if(resp.leaves_LAST_LEAVE_TYPE_ID != null){
+      $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_ID).val();
+      $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.PERSONNEL_ID).val();
+      $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.WRITE_DATE).val();
+      
+      $('#edit_leaves [name=LAST_LEAVE_TYPE_ID] option').each(function(key,value){
+        $(value).removeAttr('selected');
+        if(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_ID === $(value).val()){
+          $(value).attr("selected","selected")
+        }
+      });
+      $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+      $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TOAL).val();
+      $('#edit_leaves [name=LAST_LEAVES_NUMBER_SHOW]').val(Number($('[name=LAST_LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LAST_LEAVE_TOAL]').val())).val();
+      $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_START_DATE).val();
+      $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_END_DATE).val();
+      
+      
+      $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
+        $(value).removeAttr('selected');
+        if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
+          $(value).attr("selected","selected")
+        }
+      });
+      $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+      $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+      $('#edit_leaves [name=LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
+      $('#edit_leaves [name=LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
+      $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
+      
+      $('#edit_leaves').modal('show');
+      
+    }else{
+      $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_ID).val();
+      $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LEAVE_TYPE_ID.PERSONNEL_ID).val();
+      $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_DATE).val();
+      $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val('ยังไม่มีการทำรายการ').val();
+      $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val('ยังไม่มีการทำรายการ').val();
+      
+      
+      $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
+        $(value).removeAttr('selected');
+        if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
+          $(value).attr("selected","selected")
+        }
+      });
+      $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+      $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+      $('#edit_leaves [name=LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
+      $('#edit_leaves [name=LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
+      $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
+      $('#edit_profile [name=PERSONNEL_SEX]').each(function(key,value){
+      
+        if($(value).val()==PERSONNEL_SEX){
+          // console.log($(value).val());
+          // console.log(PERSONNEL_SEX);
+          $(value).prop( "checked", true );
+          
+        }
+        
+  
+      })
+      $('#edit_leaves').modal('show');
+    }
+
+  })
+  
+  },
+ 
+  add_edit_leaves_approve(){
+      
+    var LEAVE_ID = $('#edit_leaves [name=LEAVE_ID]').val()
+    var SUPERVISOR_OPINION = $('#edit_leaves [name=SUPERVISOR_OPINION]').val()
+    var SUPERVISOR_STATUS = $('#edit_leaves [name=SUPERVISOR_STATUS]:checked').val()
+
+    
+    // console.log(LEAVE_ID);
+    // console.log(SUPERVISOR_OPINION);
+    // console.log(SUPERVISOR_STATUS);
+    // return false;
+  
+  
+    var url = window.location.origin+"/index.php/Home/add_edit_leaves_approve";
+  // console.log(FACUALTY_NAME_TH);
+  // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    var data = {
+      'LEAVE_ID':LEAVE_ID,
+      'SUPERVISOR_OPINION':SUPERVISOR_OPINION,
+      'SUPERVISOR_STATUS':SUPERVISOR_STATUS
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        // console.log(data);
+        // return false;
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+    
+  },
+  
+  add_edit_leaves_approve_supervisor(){
+      
+    var LEAVE_ID = $('#edit_leaves [name=LEAVE_ID]').val()
+    var SUPERVISOR_OPINION = $('#edit_leaves [name=SUPERVISOR_OPINION]').val()
+    var SUPERVISOR_STATUS = $('#edit_leaves [name=SUPERVISOR_STATUS]:checked').val()
+
+    
+    // console.log(LEAVE_ID);
+    // console.log(SUPERVISOR_OPINION);
+    // console.log(SUPERVISOR_STATUS);
+    // return false;
+  
+  
+    var url = window.location.origin+"/index.php/Home/add_edit_leaves_approve_supervisor";
+  // console.log(FACUALTY_NAME_TH);
+  // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    var data = {
+      'LEAVE_ID':LEAVE_ID,
+      'SUPERVISOR_OPINION':SUPERVISOR_OPINION,
+      'SUPERVISOR_STATUS':SUPERVISOR_STATUS
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        // console.log(data);
+        // return false;
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+    
+  },
+    
 }
 
 

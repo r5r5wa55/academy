@@ -1,20 +1,42 @@
 .hade-show {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #12d98f;
   font-size: 18px;
   text-align: center;
-  border: 1px solid #6666668c;
-  background: #fafafa3d;
-  color: #000000;
+  border: 1px solid #f6f6f68c;
+  color: #ffffff;
   font-weight: 800;
+  text-align: center;
+}
+
+.body-leave-number {
+  display: table-cell;
+
+  
 }
 .body-show {
-  padding: 6px 7px;
-    border: 1px solid #6666668c;
-    background: #fafafa3d;
-    /* white-space: nowrap; */
-    /* width: 50px; */
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+  display: table-cell;
+  vertical-align: inherit;
+  
 }
+.row.body-show-long:hover {
+  background-color: #ddd;
+}
+.row.body-show-long:nth-child(even){
+  background-color: #e7e2e2;
+}
+.row.body-show-long:hover:nth-child(even) {
+  background-color: #ddd;
+}
+.name-show{
+  word-spacing: 90px;
+}
+
 .red {
   border: 1px solid red;
 }
@@ -66,6 +88,16 @@ a.btn-edit:hover{
   padding-bottom: 10px;
   border: none solid none;   
   justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.box-btn-left {
+  text-align: center;
+  margin: -0.5px; 
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: none solid none;   
+  justify-content: left;
   display: flex;
   align-items: center;
 }
@@ -145,5 +177,50 @@ span.text-file-FILE_RESEARCHS {
   top: 0;
   opacity: 0;
 }
+a.btn.btn-edit-profile {
+  width: 100%;
+}
+a.btn.btn-edit-profile:hover{
+  color: rgb(252, 252, 252);
+  background-color: #00bc8c;
+}
+
+.show-personel:hover + #add_personnels {
+  display: block;
+}
+
+div.show-text {
+  background-color: yellow;
+  padding: 20px;
+  display: none;
+}
+  
+span:hover + div.show-text  {
+  display: block;
+}
+.zoom-in {
+  cursor: zoom-in;
+}
+
+.ui-datepicker{
+  width:150px;
+  font-family:tahoma;
+  font-size:12px;
+  text-align:center;
+  h
+}
+.line-1 {
+  height: 1px;
+  background: black;
+}
+.success {
+  text-decoration: none;
+  color: #05ca30;
+}
+.danger {
+  text-decoration: none;
+  color: #ca0505;
+}
+
 /* margin-bottom: 18px;
 margin-left: 903px; */

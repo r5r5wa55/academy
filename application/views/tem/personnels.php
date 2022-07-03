@@ -61,21 +61,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php endif; ?>
       </div>
       <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">นามสกุล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานะการทำงาน</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show id-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show id-show">สถานะการทำงาน</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show id-show">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show id-show">นามสกุล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show id-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show id-show">ลบข้อมูล</div>
       </div>
       
       <?php foreach($personnels as $key=>$value):?><!-- show_personnels -->
-        <div class="row">
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><!-- get_edit_personnels -->
+        <div class="row row body-show-long">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center zoom-in"
+            onclick="main.get_edit_personnels(
+                '<?php echo $value['PERSONNEL_ID'];?>',
+                '<?php echo $value['PERSONNEL_NAME'];?>',
+                '<?php echo $value['PERSONNEL_SURNAME'];?>',
+                '<?php echo $value['PERSONNEL_NAME_EN'];?>',
+                '<?php echo $value['PERSONNEL_SURNAME_EN'];?>',
+                '<?php echo $value['PERSONNEL_EMAIL'];?>',
+                '<?php echo $value['PERSONNEL_MOBILE'];?>',
+                '<?php echo $value['PERSONNEL_PHONE'];?>',
+                '<?php echo $value['PERSONNEL_PHONE_EXTENSION'];?>',
+                '<?php echo $value['PERSONNEL_SEX'];?>',
+                '<?php echo $value['PERSONNEL_CREATE_BY'];?>',
+                '<?php echo $value['PERSONNEL_CRETTE_DATE'];?>',
+                '<?php echo $value['DEPARTMENT_ID'];?>',
+                '<?php echo $value['PERSONNEL_TYPE_ID'];?>',
+                '<?php echo $value['PERSONNEL_STATUS_ID'];?>',
+                '<?php echo $value['PERSONNEL_CATEGORY_ID'];?>', 
+                '<?php echo $value['PERSONNEL_USERNAME'];?>',
+                '<?php echo $value['PERSONNEL_PASSWORD'];?>',
+                '<?php echo $value['level'];?>',
+                '<?php echo $value['PERSONNEL_LINE'];?>',
+                '<?php echo $value['PERSONNEL_FACEBOOK'];?>');">
+                <?php echo $value['PERSONNEL_ID'];?>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['PERSONNEL_NAME'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['PERSONNEL_SURNAME'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><!-- get_edit_personnels -->
               <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_personnels(
               '<?php echo $value['PERSONNEL_ID'];?>',
               '<?php echo $value['PERSONNEL_NAME'];?>',
@@ -95,7 +119,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['PERSONNEL_CATEGORY_ID'];?>', 
               '<?php echo $value['PERSONNEL_USERNAME'];?>',
               '<?php echo $value['PERSONNEL_PASSWORD'];?>',
-                '<?php echo $value['level'];?>');">
+              '<?php echo $value['level'];?>',
+              '<?php echo $value['PERSONNEL_LINE'];?>',
+                '<?php echo $value['PERSONNEL_FACEBOOK'];?>');">
                 แก้ไขข้อมูล
               </a>
         
@@ -108,7 +134,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       <?php endforeach; ?>
       <?php echo $create_links; ?>
-   
+      
+
     </div>
   </div>
 </div>
@@ -141,12 +168,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row radioinput">    
                 <div class="col-md-6">  
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="PERSONNEL_SEX" value="1" checked>
-                    <label class="form-check-label" >ชาย</label>
+                  <input type="radio" name="personnel_sex" value="1" checked>
+                    <label class="form-check-label">ชาย</label>
                   </div>
                 </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="PERSONNEL_SEX"  value="2">
+                    <input class="form-check-input" type="radio" name="personnel_sex"  value="2">
                     <label class="form-check-label">หญิง</label>
                   </div>
               </div>  
@@ -154,6 +181,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <input type="email" class="form-control"  name="PERSONNEL_EMAIL" placeholder="อีเมล">
               <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
               <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
+              <label for="formGroupExampleInput">Line</label>
+              <input type="text" class="form-control"  name="PERSONNEL_LINE" placeholder="ชื่อ Line">
               <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
               <select class="form-control" name="PERSONNEL_TYPE_ID">
                 <option value="">กรุณาเลือก</option>
@@ -194,7 +223,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
                 <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก" onkeyup="main.checkcountinputphone(this)">
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >
+                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
+                <label for="formGroupExampleInput">Facebook</label>
+                <input type="text" class="form-control"  name="PERSONNEL_FACEBOOK" placeholder="ชื่อ Facebook" >
                 <label for="formGroupExampleInput">สถานะการทำงาน</label>
                 <select class="form-control" name="PERSONNEL_STATUS_ID">
                   <option value="">กรุณาเลือก</option>
@@ -214,8 +245,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>  
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="main.add_personnels();">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+          <button type="button" class="btn btn-primary" onclick="main.add_personnels();">ยืนยันข้อมูล</button>
           
         </div>
       </div>
@@ -265,7 +296,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์บ้าน</label>
                 <input type="text" class="form-control"  name="PERSONNEL_MOBILE" placeholder="เบอร์โทรศัพท์บ้าน 10 หลัก">
-
+                <label for="formGroupExampleInput">Line</label>
+                <input type="text" class="form-control"  name="PERSONNEL_LINE" placeholder="ชื่อ Line">
                 <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
               <select class="form-control" name="PERSONNEL_TYPE_ID">
                 <?php foreach($personnel_types as $key=>$value): ?>
@@ -312,13 +344,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
                 <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน" >
-
-              <label for="formGroupExampleInput">สถานะการทำงาน</label>
-              <select class="form-control" name="PERSONNEL_STATUS_ID">
-                <?php foreach($personnel_statuses as $key=>$value): ?>
-                  <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
-                <?php endforeach; ?>
-              </select>
+                <label for="formGroupExampleInput">Facebook</label>
+                <input type="text" class="form-control"  name="PERSONNEL_FACEBOOK" placeholder="ชื่อ Facebook" >
+                <label for="formGroupExampleInput">สถานะการทำงาน</label>
+                <select class="form-control" name="PERSONNEL_STATUS_ID">
+                  <?php foreach($personnel_statuses as $key=>$value): ?>
+                    <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
+                  <?php endforeach; ?>
+                </select>
     
               <label for="formGroupExampleInput">แผนก</label>
               <select class="form-control" name="DEPARTMENT_ID" >
@@ -332,8 +365,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>  
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="main.edit_personnels();">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+          <button type="button" class="btn btn-primary" onclick="main.edit_personnels();">ยืนยันข้อมูล</button>
           
         </div>
       </div>
@@ -364,6 +397,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 
   }
+  
+  $(document).ready(function() {
+  // $('.id-show').text("").text('we')
+
+  $('.id-show').each(function(index,val){
+    // if($(val).text() == "รหัส"){
+    //    $(val).text("").text('we')
+    // }
+    // if($(val).text() == "สถานะการทำงาน"){
+    //    $(val).text("").text('we2')
+    // }
+    // if($(val).text()== "ขื่อ"){
+    //   $(val).text("").text("we3")
+    // }
+    // if($(val).text()== "นามสกุล"){
+    //   $(val).text("").text("we4")
+    // }
+  
+  })
+  $('.page-link').each(function(index ,val){
+    if($(val).text() == "First"){
+      $(val).text("").text("ย้อนกลับ")
+    }
+    if($(val).text() == "Last"){
+      $(val).text("").text("ถัดไป")
+    }
+  
+  })
+
+
+  
+  
+  });
 </script>
 
 

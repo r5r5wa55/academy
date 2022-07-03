@@ -119,20 +119,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php endforeach; ?>
           </select>
           <label for="formGroupExampleInput">ชื่อ นามสกุล</label>
-          <select class="form-control" name="PERSONNEL_ID" >
+          <select class="form-control" name="PERSONNEL_ID" onchange="main.get_mangement_positions_onchange(this)" >
             <option value="">กรุณาเลือก</option>
-
             <?php foreach($personnels as $key=>$value): ?>
-              <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
+              <option value="<?php echo $value['PERSONNEL_ID'];?>" data-id-DEPARTMENT_ID="<?php echo $value['DEPARTMENT_ID']?>" ><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></option>
             <?php endforeach; ?>
           </select>
+    
           <label for="formGroupExampleInput">สาขา</label>
-          <select class="form-control" name="DEPARTMENT_ID" >
-            <option value="">กรุณาเลือก</option>
-            <?php foreach($departments as $key=>$value): ?>
-              <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
-            <?php endforeach; ?>
-          </select>
+          <input type="text" class="form-control"  name="DEPARTMENT_ID" placeholder="สาขา">
+   
    
 
         </div>

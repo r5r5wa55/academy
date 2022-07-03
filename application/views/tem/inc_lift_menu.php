@@ -42,22 +42,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?php echo base_url()?>index.php/Home/personnels" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>
                       จัดการข้อมูลตาราง
-                        <i class="right fas fa-angle-left"></i>
                       </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="<?php echo base_url()?>index.php/Home/personnels" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <!-- personnels -->
-                          <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                        </a>
-                      </li>
-                    </ul>
+                
                   </li>         
                 </ul>
                 <ul class="nav nav-treeview">
@@ -120,22 +111,12 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo base_url()?>index.php/Home/management_positions" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     จัดการข้อมูลตาราง
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/management_positions" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <!-- personnels -->
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
                 </li>         
               </ul>
               <ul class="nav nav-treeview">
@@ -181,21 +162,12 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo base_url()?>index.php/Home/academic_positions"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     จัดการข้อมูลตาราง
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/academic_positions" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
                 </li>         
               </ul>
               <ul class="nav nav-treeview">
@@ -231,22 +203,12 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo base_url()?>index.php/Home/individual_counseling_services" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     จัดการข้อมูลตาราง
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/individual_counseling_services" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <!-- personnels -->
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
                 </li>         
               </ul>
               <?php if ($_SESSION['level'] === '1'): ?>
@@ -283,25 +245,42 @@
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
+              
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo base_url()?>index.php/Home/leaves" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     จัดการข้อมูลการลา
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
+                </li>   
+                <?php if ($_SESSION['OFFICER_STATUS'] != '0'): ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/leaves" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <!-- personnels -->
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
-                </li>         
+                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <span class="badge badge-info right">
+                        <?php echo $_SESSION['OFFICER_STATUS']?>
+                      </span>
+                      <p>
+                        อนุมัติการลา(เจ้าหน้าที่)
+                      </p>
+                    </a>
+                  </li>
+                <?php endif; ?>
+                <?php if ($_SESSION['OFFICER_STATUS'] != '0'): ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve_supervisor" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <span class="badge badge-info right">
+                        <?php echo $_SESSION['SUPERVISOR_ID']?>
+                      </span>
+                      <p>
+                        อนุมัติการลา(หัวหน้า)
+                      </p>
+                    </a>
+                  </li>  
+                <?php endif; ?>      
               </ul>
               <?php if ($_SESSION['level'] === '1'): ?>
               <ul class="nav nav-treeview">
@@ -336,42 +315,22 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
+                <a href="<?php echo base_url()?>index.php/Home/services" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     ข้อมูลการบริการ
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/services" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <!-- personnels -->
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
                 </li>         
               </ul> 
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
+                <a href="<?php echo base_url()?>index.php/Home/service_participants" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     การเข้าร่วมการบริการ
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/service_participants" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <!-- personnels -->
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
                 </li>         
               </ul>  
             </li>
@@ -392,40 +351,22 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
+                <a href="<?php echo base_url()?>index.php/Home/activities" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     ข้อมูลกิจกรรม
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/activities"  class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
                 </li>         
               </ul>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
+                <a href="<?php echo base_url()?>index.php/Home/activity_participants"   class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     ผู้เข้าร่วมกิจกรรม
-                      <i class="right fas fa-angle-left"></i>
                     </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/activity_participants"  class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
+                  </a> 
                 </li>         
               </ul>  
               <ul class="nav nav-treeview">
@@ -471,40 +412,23 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
+                <a href="<?php echo base_url()?>index.php/Home/trainings" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     ข้อมูลการอบรม
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/trainings"  class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
                 </li>         
               </ul>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="<?php echo base_url()?>index.php/Home/" class="nav-link">
+                <a href="<?php echo base_url()?>index.php/Home/training_participants" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                     ผู้เข้าร่วมการอบรม
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?php echo base_url()?>index.php/Home/training_participants"  class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>แสดง/เพิ่ม/แก้ไข/ลบ</p> 
-                      </a>
-                    </li>
-                  </ul>
+
                 </li>         
               </ul>  
             </li>

@@ -21,6 +21,7 @@
   
   <link rel="stylesheet" href="<?php echo base_url()."public/"?>css/inc_css.css">
 
+  <link rel="stylesheet" href="<?php echo base_url()."public/"?>css/jquery.datetimepicker.css">
 
   <!-- Font Awesome -->
   <!-- icheck bootstrap -->
