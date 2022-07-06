@@ -442,6 +442,9 @@ class Home extends CI_Controller {
 		$this->load->view('tem/students',$data); 
 	}
 	///
+
+
+
 	public function individual_counseling_services(){
 		$this->check_login_session();
 
@@ -741,6 +744,16 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
+	public function get_edit_leaves(){
+		$this->check_login_session();		
+		$data = $this->mhome->get_edit_leaves($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	
 	
 	public function delete_leaves(){
 		$this->check_login_session();
@@ -1050,7 +1063,7 @@ class Home extends CI_Controller {
 		// exit(); 
 		$this->load->view('tem/leaves_approve_supervisor',$data); 
 	} 
-		public function add_edit_leaves_approve_supervisor(){
+	public function add_edit_leaves_approve_supervisor(){
 		$this->check_login_session();		
 		$data = $this->mhome->add_edit_leaves_approve_supervisor($_POST);
 		// 	echo "<pre>";
@@ -1059,6 +1072,87 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	} 
+	
+	public function students_login(){
+
+		
+	
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/students_login'); 
+	} 
+	public function check_login_student(){
+
+		$data = $this->mhome->check_login_student($_POST);
+		// echo "<pre>";
+		// print_r($_SESSION);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	public function profile_student(){
+
+			
+		$data = $this->mhome->profile_student();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/profile_student',$data); 
+	
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+
+	}
+	
+	public function add_individual_counseling_services_student(){
+	
+		$data = $this->mhome->add_individual_counseling_services_student($_POST);
+		echo json_encode($data);
+	}
+	public function edit_status_individual_counseling_services(){
+		$this->check_login_session();
+		$data = $this->mhome->edit_status_individual_counseling_services($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function update_conf_individual_counseling_service_studen(){
+		$this->check_login_session();
+		$data = $this->mhome->update_conf_individual_counseling_service_studen($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function update_conf_teacher_individual_counseling_service_studen(){
+		$this->check_login_session();
+		$data = $this->mhome->update_conf_teacher_individual_counseling_service_studen($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	
+	public function update_individual_counseling_filnel(){
+		$this->check_login_session();
+		$data = $this->mhome->update_individual_counseling_filnel($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	
+	
 	
 } 
 

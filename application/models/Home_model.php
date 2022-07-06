@@ -947,6 +947,8 @@ class Home_model extends CI_Model {
       $this->db->join('students', 'students.STUDENT_ID  = individual_counseling_services.STUDENT_ID');
       $this->db->where('ADVISOR_ID', $_SESSION['PERSONNEL_ID'] );
       $this->db->where('personnels.PERSONNEL_ID', $_SESSION['PERSONNEL_ID'] );
+      $this->db->order_by("individual_counseling_services.INDIVIDUAL_COUNSELING_ID", "desc");  
+
       if($data_search != ""){
         $this->db->like('personnels.PERSONNEL_ID', $data_search);
         $this->db->or_like('counseling_types.COUNSELING_NAME', $data_search);
@@ -1927,7 +1929,7 @@ class Home_model extends CI_Model {
         'PERSONNEL_ID' => $data['PERSONNEL_ID'],
         'OFFICER' => $data['OFFICER'],
         'SUPERVISOR_ID' => $data['SUPERVISOR_ID'], 
-
+        'CONFINED' => $data['CONFINED'],
 
         'LEAVES_NUMBER_USE' => $data['LEAVES_NUMBER_USE'],
 
@@ -1950,41 +1952,58 @@ class Home_model extends CI_Model {
   
     return $st;
   }
+  
+  public function get_edit_leaves($data){
+   
+    $this->db->select('*');
+    $this->db->from('leaves');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
+    $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
+    $this->db->where('leaves.OFFICER', $_SESSION['PERSONNEL_ID']);
+    $this->db->where('leaves.LEAVE_ID', $data['LEAVE_ID']);
+    $leaves_LEAVE_TYPE_ID = $this->db->get();
+    $leaves_LEAVE_TYPE_ID = $leaves_LEAVE_TYPE_ID->row_array();
+
+    // echo'<pre>';
+    // print_r($leaves_LEAVE_TYPE_ID);
+    // echo'</pre>';
+    // exit;
+
+    $this->db->select('*');
+    $this->db->from('leaves');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
+    $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LAST_LEAVE_TYPE_ID');
+    $this->db->where('leaves.OFFICER', $_SESSION['PERSONNEL_ID']);
+    $this->db->where('leaves.LEAVE_ID', $data['LEAVE_ID']);
+    $leaves_LAST_LEAVE_TYPE_ID = $this->db->get();
+    $leaves_LAST_LEAVE_TYPE_ID = $leaves_LAST_LEAVE_TYPE_ID->row_array();
+
+    $DATA = array(
+      'leaves_LEAVE_TYPE_ID'=>$leaves_LEAVE_TYPE_ID,
+      'leaves_LAST_LEAVE_TYPE_ID' => $leaves_LAST_LEAVE_TYPE_ID
+    );
+    // echo'<pre>';
+    // print_r($DATA);
+    // echo'</pre>';
+    // exit;
+    return $DATA;
+  }
   public function edit_leaves($data){
     $st = array('st'=>0);
+ 
+ 
 
-      // onsole.log(LEAVE_ID);
-      // console.log(LEAVE_TYPE_ID);
-      // console.log(WRITE_PLACE);
-      // console.log(WRITE_DATE);
-      // console.log(LEAVE_START_DATE);
-      // console.log(LEAVE_END_DATE);
-      // console.log(LEAVE_TOAL);
-      // console.log(LAST_LEAVE_TYPE_ID);
-      // console.log(PERSONNEL_ID);
-      // console.log(LAST_LEAVE_END_DATE);
-      // console.log(LAST_LEAVE_TOAL);
-      // console.log(OFFICER);
-      // console.log(SUPERVISOR_ID);
-      // console.log(SUPERVISOR_OPINION);
-      // console.log(LEAVE_STATUS);
-      
+
     $this->db->where('LEAVE_ID', $data['LEAVE_ID']);
     $this->db->set('LEAVE_TYPE_ID', $data['LEAVE_TYPE_ID']);
-    $this->db->set('WRITE_PLACE',  $data['WRITE_PLACE']);
-    $this->db->set('WRITE_DATE', $data['WRITE_DATE']);
-    $this->db->set('LEAVE_START_DATE', $data['LEAVE_START_DATE']);
-    $this->db->set('LEAVE_END_DATE', $data['LEAVE_END_DATE']);
-    $this->db->set('LEAVE_TOAL',  $data['LEAVE_TOAL']);
-    $this->db->set('LAST_LEAVE_START_DATE',  $data['LAST_LEAVE_START_DATE']);
-    $this->db->set('LAST_LEAVE_TYPE_ID', $data['LAST_LEAVE_TYPE_ID']);
-    $this->db->set('PERSONNEL_ID', $data['PERSONNEL_ID']);
-    $this->db->set('LAST_LEAVE_END_DATE', $data['LAST_LEAVE_END_DATE']);
-    $this->db->set('LAST_LEAVE_TOAL', $data['LAST_LEAVE_TOAL']);
+    $this->db->set('LEAVE_START_DATE',  $data['edit_LEAVE_START_DATE']);
+    $this->db->set('LEAVE_END_DATE', $data['edit_LEAVE_END_DATE']);
+    $this->db->set('LEAVES_NUMBER_USE', $data['LEAVES_NUMBER_PLUS']);
     $this->db->set('OFFICER', $data['OFFICER']);
-    $this->db->set('SUPERVISOR_ID', $data['SUPERVISOR_ID']);
-    $this->db->set('SUPERVISOR_OPINION', $data['SUPERVISOR_OPINION']);
-    $this->db->set('LEAVE_STATUS', $data['LEAVE_STATUS']);
+    $this->db->set('SUPERVISOR_ID',  $data['SUPERVISOR_ID']);
+    $this->db->set('CONFINED',  $data['CONFINED']);
+    $this->db->set('WRITE_PLACE', $data['WRITE_PLACE']);
+
 
     $this->db->update('leaves');
     $st = array('st'=>1);
@@ -2717,8 +2736,10 @@ class Home_model extends CI_Model {
   
 
   public function get_leaves_approve($data){
-
-   
+      // echo'<pre>';
+      // print_r($data);
+      // echo'</pre>';
+      // exit;
       $this->db->select('*');
       $this->db->from('leaves');
       $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
@@ -2728,6 +2749,10 @@ class Home_model extends CI_Model {
       $leaves_LEAVE_TYPE_ID = $this->db->get();
       $leaves_LEAVE_TYPE_ID = $leaves_LEAVE_TYPE_ID->row_array();
 
+      // echo'<pre>';
+      // print_r($leaves_LEAVE_TYPE_ID);
+      // echo'</pre>';
+      // exit;
 
       $this->db->select('*');
       $this->db->from('leaves');
@@ -2742,7 +2767,10 @@ class Home_model extends CI_Model {
         'leaves_LEAVE_TYPE_ID'=>$leaves_LEAVE_TYPE_ID,
         'leaves_LAST_LEAVE_TYPE_ID' => $leaves_LAST_LEAVE_TYPE_ID
       );
-  
+      // echo'<pre>';
+      // print_r($DATA);
+      // echo'</pre>';
+      // exit;
     return $DATA;
   }
 
@@ -2888,7 +2916,290 @@ class Home_model extends CI_Model {
     return $st;
   }
 
+
+  public function check_login_student($data){
+
+
+    
+    // echo "<pre>";
+    // print_r($data);
+    // echo "</pre>";
+   
+
+    $this->db->select('*');
+    $this->db->from('students');
+    $this->db->where('STUDENT_USERNAME', $data['ADMIN_USER']);
+    $this->db->where('STUDENT_PASSWORD', $data['ADMIN_PASS']);
+
+
+    $check_login = $this->db->get();
+    $check_login = $check_login->row_array();
+
+    // echo "<pre>";
+    // print_r($check_login);
+    // echo "</pre>";
+    // exit();
+
+
+
+
+    
+    $STUDENT_ID = isset($check_login['STUDENT_ID'])?$check_login['STUDENT_ID']:"";
+    $STUDENT_NAME = isset($check_login['STUDENT_NAME'])?$check_login['STUDENT_NAME']:"";
+    $STUDENT_SURNAME = isset($check_login['STUDENT_SURNAME'])?$check_login['STUDENT_SURNAME']:"";
+    $STUDENT_NAME_EN = isset($check_login['STUDENT_NAME_EN'])?$check_login['STUDENT_NAME_EN']:"";
+    $STUDENT_SURNAME_EN = isset($check_login['STUDENT_SURNAME_EN'])?$check_login['STUDENT_SURNAME_EN']:"";
+    $STUDENT_EMAIL = isset($check_login['STUDENT_EMAIL'])?$check_login['STUDENT_EMAIL']:"";
+    $STUDENT_TELL = isset($check_login['STUDENT_TELL'])?$check_login['STUDENT_TELL']:"";
+    $STUDENT_USERNAME_check = isset($check_login['STUDENT_USERNAME'])?$check_login['STUDENT_USERNAME']:"";
+    $STUDENT_PASSWORD_check = isset($check_login['STUDENT_PASSWORD'])?$check_login['STUDENT_PASSWORD']:"";
+   
+
+
+
+    // echo "<pre>";
+    // print_r($check_login['level']);
+    // echo "</pre>";
+    // exit();
+
+
+    $_SESSION['STUDENT_TELL'] = $STUDENT_TELL;
+    $_SESSION['STUDENT_USERNAME'] = $STUDENT_USERNAME_check;
+    $_SESSION['STUDENT_PASSWORD'] = $STUDENT_PASSWORD_check;
+
+    $_SESSION['STUDENT_ID'] = $STUDENT_ID;
+    $_SESSION['STUDENT_NAME'] = $STUDENT_NAME;
+    $_SESSION['STUDENT_SURNAME'] = $STUDENT_SURNAME;
+    $_SESSION['STUDENT_NAME_EN'] = $STUDENT_NAME_EN;
+    $_SESSION['STUDENT_SURNAME_EN'] = $STUDENT_SURNAME_EN;
+    $_SESSION['STUDENT_EMAIL'] = $STUDENT_EMAIL;
+
+   
+   
+    // echo "<pre>";
+    // print_r($_SESSION['OFFICER_STATUS']);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['SUPERVISOR_ID']);
+    // echo "</pre>";
+    // exit();
+
+    $st = array(
+      'st'=>0,
+      'msg'=>'ไม่มี user ในระบบ หรือ กรอกรหัสผ่านผิด กรุณาตรวจสอบ'
+    ); 
+
+    if($STUDENT_USERNAME_check != "" && $STUDENT_PASSWORD_check != ""){
+      $st = array(
+        'st'=>1,
+        'msg'=>'login สำเร็จ'
+      );
+    }
+    return $st;
+  }
+
+  public function profile_student(){
+ 
+
+
+
+      $this->db->select('*');
+      $this->db->from('individual_counseling_services');
+      $this->db->join('counseling_types', 'counseling_types.COUNSELING_TYPE_ID = individual_counseling_services.COUNSELING_TYPE_ID');
+      $this->db->join('personnels', 'personnels.PERSONNEL_ID  = individual_counseling_services.ADVISOR_ID');
+      $this->db->join('students', 'students.STUDENT_ID  = individual_counseling_services.STUDENT_ID');
+      $this->db->where('individual_counseling_services.STUDENT_ID', $_SESSION['STUDENT_ID'] );
+
+      $this->db->order_by("INDIVIDUAL_COUNSELING_ID", "DESC");
+      $individual_counseling_services = $this->db->get();
+      $individual_counseling_services = $individual_counseling_services->result_array();
+      $counseling_types = $this->select_counseling_types();
+      $personnels = $this->select_personnels();
+     
+    
+    // echo "<pre>";
+    // print_r($individual_counseling_services);
+    // echo "</pre>";
+    // exit();
+
+
+      $DATA = array(
+        'individual_counseling_services'=>$individual_counseling_services,
+        'counseling_types' => $counseling_types,
+        'personnels' => $personnels['personnels']
+      );
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['level']);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['ADMIN_ID']);
+    // echo "</pre>";
+    // exit();
+      return $DATA;
+
   
+  
+    // echo "<pre>";
+    // print_r($departments['departments']);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+
+  }
+
+
+  public function add_individual_counseling_services_student($data){
+    if(is_array($data) && $data['STUDENT_ID']!="" && $data['COUNSELING_CREATE_DATE']!=""){
+      $data = array(
+        'ADVISOR_ID' => $data['ADVISOR_ID'],
+        'STUDENT_ID' => $data['STUDENT_ID'],
+        'COUNSELING_TYPE_ID' => $data['COUNSELING_TYPE_ID'],
+        'COUNSELING_PROBLEM' => $data['COUNSELING_PROBLEM'],
+        'COUNSELING_CREATE_DATE' => $data['COUNSELING_CREATE_DATE'],
+        'CONTACT' => $data['CONTACT'],
+        'STUDEN_DATE_START' => $data['STUDEN_DATE_START'],
+        'STUDEN_DATE_END' => $data['STUDEN_DATE_END'],
+        'COUNSELING_DATE_START' => $data['STUDEN_DATE_START'],
+        'COUNSELING_DATE_END' => $data['STUDEN_DATE_END'],
+        'INDIVIDUAL_COUNSELING_STATUS' => '1',
+        
+    
+      );
+      $data = $this->db->insert('individual_counseling_services', $data);
+      $st = array('st'=>1,'ms'=>'สำเร็จ');
+    }
+  
+    return $st;
+  }
+
+  public function edit_status_individual_counseling_services($data){
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+
+
+    $st = array('st'=>0);
+    $this->db->where('INDIVIDUAL_COUNSELING_ID', $data['INDIVIDUAL_COUNSELING_ID']);
+    $this->db->set('ADVISOR_ID', $data['ADVISOR_ID']);
+    $this->db->set('STUDENT_ID',  $data['STUDENT_ID']);
+    $this->db->set('COUNSELING_TYPE_ID', $data['COUNSELING_TYPE_ID']);
+
+    $this->db->set('COUNSELING_PROBLEM', $data['COUNSELING_PROBLEM']);
+    $this->db->set('COUNSELING_DETAIL', $data['COUNSELING_DETAIL']);
+    $this->db->set('COUNSELING_CREATE_DATE',  $data['COUNSELING_CREATE_DATE']);
+
+    $this->db->set('COUNSELING_DATE_START', $data['COUNSELING_DATE_START']);
+    $this->db->set('COUNSELING_DATE_END', $data['COUNSELING_DATE_END']);
+    $this->db->set('STUDEN_DATE_START', $data['STUDEN_DATE_START']);
+    $this->db->set('STUDEN_DATE_END', $data['STUDEN_DATE_END']);
+    $this->db->set('CONTACT', $data['CONTACT']);
+
+    $this->db->set('STUDEN_DATE_CONF_START', $data['COUNSELING_DATE_START']);
+    $this->db->set('STUDEN_DATE_CONF_END', $data['COUNSELING_DATE_END']);
+    $this->db->set('INDIVIDUAL_COUNSELING_STATUS', '2');
+   
+
+    $this->db->update('individual_counseling_services');
+    $st = array('st'=>1);
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+ 
+
+
+    return $st;
+  }
+  
+  public function update_conf_individual_counseling_service_studen($data){
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+
+
+    $st = array('st'=>0);
+    $this->db->where('INDIVIDUAL_COUNSELING_ID', $data['INDIVIDUAL_COUNSELING_ID']);
+  
+
+
+    $this->db->set('STUDEN_DATE_CONF_START', $data['COUNSELING_DATE_START']);
+
+    $this->db->set('INDIVIDUAL_COUNSELING_STATUS', $data['INDIVIDUAL_COUNSELING_STATUS']);
+    $this->db->set('DETAIL_NOT', $data['DETAIL_NOT']);
+
+    $this->db->update('individual_counseling_services');
+    $st = array('st'=>1);
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+ 
+
+
+    return $st;
+  }
+  public function update_conf_teacher_individual_counseling_service_studen($data){
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+
+
+    $st = array('st'=>0);
+    $this->db->where('INDIVIDUAL_COUNSELING_ID', $data['INDIVIDUAL_COUNSELING_ID']);
+  
+
+    $this->db->set('INDIVIDUAL_COUNSELING_STATUS', $data['INDIVIDUAL_COUNSELING_STATUS']);
+
+    $this->db->update('individual_counseling_services');
+    $st = array('st'=>1);
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+ 
+
+
+    return $st;
+  }
+  
+  public function update_individual_counseling_filnel($data){
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+
+
+    $st = array('st'=>0);
+    $this->db->where('INDIVIDUAL_COUNSELING_ID', $data['INDIVIDUAL_COUNSELING_ID']);
+  
+
+    $this->db->set('INDIVIDUAL_COUNSELING_STATUS','5');
+    $this->db->set('COUNSELING_SOLVE', $data['COUNSELING_SOLVE']);
+    $this->db->set('COUNSELING_RESULT', $data['COUNSELING_RESULT']);
+
+    $this->db->update('individual_counseling_services');
+    $st = array('st'=>1);
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+ 
+
+
+    return $st;
+  }
+  
+
 }
+
+
+
+
 
 

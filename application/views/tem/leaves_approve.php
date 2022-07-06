@@ -106,9 +106,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+
+          <?php if ($value['CONFINED'] == '1'): ?>
               <a href="javascript:void(0);" class="btn-edit" onclick="main.edit_leaves('<?php echo $value['LEAVE_ID'];?>');">
                 แก้ไขข้อมูล
               </a>
+          <?php endif; ?>
+          <?php if ($value['CONFINED'] == '2'): ?>
+            <a class="danger">ไม่มีสิทธิแก้ไข</a>
+          <?php endif; ?>
+
+
+
+            
           </div>
         </div>
       <?php endforeach; ?>

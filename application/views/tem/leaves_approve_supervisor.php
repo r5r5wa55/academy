@@ -81,7 +81,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
 
 
-          
+            <?php if ($value['SUPERVISOR_STATUS'] == '0'): ?>
+              <a >รอรับอนุมัติ(เจ้าหน้าที่)</a>
+            <?php endif; ?>
             <?php if ($value['SUPERVISOR_STATUS'] == '1'): ?>
               <a href="javascript:void(0);" class="box-btn-add" onclick="main.get_leaves_approve(
                 '<?php echo $value['LEAVE_ID'];?>',

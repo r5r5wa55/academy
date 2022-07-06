@@ -1813,7 +1813,81 @@ var main = {
       }
     })
   },
-    ///
+  ///
+  add_individual_counseling_services_student(){
+
+
+
+
+    var ADVISOR_ID =$('#add_individual_counseling_services [name=ADVISOR_ID] option:selected').val();
+    var STUDENT_ID =$('#add_individual_counseling_services [name=STUDENT_ID]').val();
+    var COUNSELING_TYPE_ID =$('#add_individual_counseling_services [name=COUNSELING_TYPE_ID] option:selected').val();
+    var COUNSELING_CREATE_DATE = $('#add_individual_counseling_services [name=COUNSELING_CREATE_DATE]').val()
+    var COUNSELING_PROBLEM = $('#add_individual_counseling_services [name=COUNSELING_PROBLEM]').val()
+    var CONTACT = $('#add_individual_counseling_services [name=CONTACT]').val()
+
+    
+    var STUDEN_DATE_START = $('#add_individual_counseling_services [name=STUDEN_DATE_START]').val()
+    var STUDEN_DATE_END = $('#add_individual_counseling_services [name=STUDEN_DATE_END  ]').val()
+
+    
+    var url = window.location.origin+"/index.php/Home/add_individual_counseling_services_student";
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(CONTACT);
+    // console.log(STUDEN_DATE_START);
+    // console.log(STUDEN_DATE_END);
+    // return false;
+    
+    // $('input').removeClass('red')
+    // if(ADVISOR_ID==""){
+    //   $('#add_individual_counseling_services [name=ADVISOR_ID]').addClass("red")
+    //   return false;
+    // }
+    // if(STUDENT_ID==""){
+    //   $('#add_individual_counseling_services [name=STUDENT_ID]').addClass("red")
+    //   return false;
+    // }
+
+
+    
+  
+
+    var data = {
+      'ADVISOR_ID':ADVISOR_ID,
+      'STUDENT_ID':STUDENT_ID,
+      'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID,
+      'COUNSELING_PROBLEM':COUNSELING_PROBLEM,
+      'COUNSELING_CREATE_DATE':COUNSELING_CREATE_DATE,
+      'CONTACT':CONTACT,
+      'STUDEN_DATE_START':STUDEN_DATE_START,
+      'STUDEN_DATE_END':STUDEN_DATE_END
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+
+      if(resp.st == 1){
+        alert(resp.ms)
+        location.reload();
+      }else{
+        alert(resp.ms)
+        $('#add_individual_counseling_services [name='+resp.name+']').addClass("red")
+        return false;
+      }
+    })
+  },
+  /// 
   add_individual_counseling_services(){
 
 
@@ -3211,9 +3285,13 @@ var main = {
     var PERSONNEL_ID = $('#add_leaves [name=PERSONNEL_ID]').val();
     var LEAVES_NUMBER_USE = $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val();
 
+    var CONFINED = $('#add_leaves [name=CONFINED]:checked').val()
+
     var LEAVE_TOAL_PLUS = 
 
     $('#add_leaves').val(Number($('[name=LEAVES_NUMBER_PLUS]').val()) + Number($('[name=LEAVE_TOAL]').val())).val();
+
+    
 
     // $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
 
@@ -3223,7 +3301,7 @@ var main = {
 
 
   
-    // console.log(LEAVE_TYPE_ID)
+    // console.log(CONFINED)
     // console.log(WRITE_PLACE)
     // console.log(WRITE_DATE)
     // console.log(LEAVE_START_DATE)
@@ -3330,7 +3408,8 @@ var main = {
       'OFFICER':OFFICER,
       'SUPERVISOR_ID':SUPERVISOR_ID,
       'LEAVES_NUMBER_USE':LEAVES_NUMBER_USE,
-      'LEAVE_TOAL_PLUS':LEAVE_TOAL_PLUS
+      'LEAVE_TOAL_PLUS':LEAVE_TOAL_PLUS,
+      'CONFINED':CONFINED
   
     }
 
@@ -3355,157 +3434,160 @@ var main = {
       }
     })
   },
-  get_edit_leaves(LEAVE_ID,LEAVE_TYPE_ID,WRITE_PLACE,WRITE_DATE,LEAVE_START_DATE,
-    LEAVE_END_DATE,LEAVE_TOAL,LAST_LEAVE_TYPE_ID,LAST_LEAVE_START_DATE,LAST_LEAVE_END_DATE,
-    LAST_LEAVE_TOAL,OFFICER,SUPERVISOR_ID,SUPERVISOR_OPINION,PERSONNEL_ID,LEAVE_STATUS){
+  get_edit_leaves(LEAVE_ID,PERSONNEL_ID){
       
+
+
+    var url = window.location.origin+"/index.php/Home/get_edit_leaves";
   
-      // console.log(LEAVE_ID);
-      // console.log(LEAVE_TYPE_ID);
-      // console.log(WRITE_PLACE);
-      // console.log(WRITE_DATE);
-      // console.log(LEAVE_START_DATE);
-      // console.log(LEAVE_END_DATE);
-      // console.log(LEAVE_TOAL);
-      // console.log(LAST_LEAVE_TYPE_ID);
-      // console.log(PERSONNEL_ID);
-      // console.log(LAST_LEAVE_END_DATE);
-      // console.log(LAST_LEAVE_TOAL);
-      // console.log(OFFICER);
-      // console.log(SUPERVISOR_ID);
-      // console.log(SUPERVISOR_OPINION);
-      // console.log(LEAVE_STATUS);
+    // console.log(LEAVE_ID);
+    // console.log(PERSONNEL_ID);
+    // return false;
+
     
-  
+      var data = {
+        'LEAVE_ID':LEAVE_ID,
+        'PERSONNEL_ID':PERSONNEL_ID
+      }
+      // console.log(data);
       // return false;
-
-    $('#edit_leaves [name=LEAVE_ID]').val(LEAVE_ID);
-    $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
-      $(value).removeAttr('selected');
-      if(LEAVE_TYPE_ID === $(value).val()){
-        $(value).attr("selected","selected")
+      $.ajax({
+        url : url,
+        method : 'POST',
+        dataType : 'JSON',
+        data:data,
+        cache : false,
+        beforeSend: function(jqXHR, settings) {
+          delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        },
+      }).done(function(resp) {
+        console.log(resp);
+        if(resp.leaves_LAST_LEAVE_TYPE_ID != null){
+          $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_ID).val();
+          $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.PERSONNEL_ID).val();
+          $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.WRITE_DATE).val();
+          
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_ID] option').each(function(key,value){
+            $(value).removeAttr('selected');
+            if(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_ID === $(value).val()){
+              $(value).attr("selected","selected")
+            }
+          });
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+          $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TOAL).val();
+          $('#edit_leaves [name=LAST_LEAVES_NUMBER_SHOW]').val(Number($('[name=LAST_LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LAST_LEAVE_TOAL]').val())).val();
+          $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_START_DATE).val();
+          $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_END_DATE).val();
+          
+          
+          $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
+            $(value).removeAttr('selected');
+            if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
+              $(value).attr("selected","selected")
+            }
+          });
+          $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+          $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+          $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
+          $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
+          $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
+          
+          $('#edit_leaves').modal('show');
+          
+        }else{
+          $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_ID).val();
+          $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LEAVE_TYPE_ID.PERSONNEL_ID).val();
+          $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_DATE).val();
+          $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val('ยังไม่มีการทำรายการ').val();
+          $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val('ยังไม่มีการทำรายการ').val();
+          $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
+            $(value).removeAttr('selected');
+            if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
+              $(value).attr("selected","selected")
+            }
+          });
+          $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+          $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
+          
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+          
+          $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
+          $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
+          $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
+          $('#edit_leaves [name=OFFICER] option').each(function(key,value){
+            $(value).removeAttr('selected');
+            if(resp.leaves_LEAVE_TYPE_ID.OFFICER === $(value).val()){
+              $(value).attr("selected","selected")
+            }
+          });
+          $('#edit_leaves [name=SUPERVISOR_ID] option').each(function(key,value){
+            $(value).removeAttr('selected');
+            if(resp.leaves_LEAVE_TYPE_ID.SUPERVISOR_ID === $(value).val()){
+              $(value).attr("selected","selected")
+            }
+          });
+          
+          $('#edit_leaves [name=CONFINED]').each(function(key,value){
+                 // console.log($(value).val());
+              // console.log(PERSONNEL_SEX);
+              
+            if($(value).val()==resp.leaves_LEAVE_TYPE_ID.CONFINED){
+              // console.log($(value).val());
+              // console.log(PERSONNEL_SEX);
+              $(value).prop( "checked", true );
+              
+            }
+            
+      
+          })
+          $('#edit_leaves').modal('show');
         }
-    });
-    $('#edit_leaves [name=WRITE_PLACE]').val(WRITE_PLACE);
-    $('#edit_leaves [name=WRITE_DATE]').val(WRITE_DATE);
-    $('#edit_leaves [name=LEAVE_START_DATE]').val(LEAVE_START_DATE);
-    $('#edit_leaves [name=LEAVE_END_DATE]').val(LEAVE_END_DATE);
-    $('#edit_leaves [name=LEAVE_TOAL]').val(LEAVE_TOAL);
-
-    $('#edit_leaves [name=LAST_LEAVE_TYPE_ID] option').each(function(key,value){
-      $(value).removeAttr('selected')
-      if(LAST_LEAVE_TYPE_ID === $(value).val()){
-        $(value).attr("selected","selected")
-      }
-    });
-    $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val(LAST_LEAVE_START_DATE);
-    $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(LAST_LEAVE_END_DATE);
-
-    $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(LAST_LEAVE_TOAL);
-    $('#edit_leaves [name=OFFICER] option').each(function(key,value){
-      $(value).removeAttr('selected');
-
-      if(OFFICER === $(value).val()){
-        $(value).attr("selected","selected")
-      }
-    });
-    $('#edit_leaves [name=SUPERVISOR_ID] option').each(function(key,value){
-      $(value).removeAttr('selected');
-      if(SUPERVISOR_ID === $(value).val()){
-        $(value).attr("selected","selected")
-      }
-    });
-    $('#edit_leaves [name=SUPERVISOR_OPINION]').val(SUPERVISOR_OPINION);
-    $('#edit_leaves [name=PERSONNEL_ID]').val(PERSONNEL_ID);
-    $('#edit_leaves [name=LEAVE_STATUS]').val(LEAVE_STATUS);
     
-
-    
-    $('#edit_leaves').modal('show'); 
-;
+      })
   },
   edit_leaves(){
 
-      // console.log(LEAVE_ID);
-      // console.log(LEAVE_TYPE_ID);
-      // console.log(WRITE_PLACE);
-      // console.log(WRITE_DATE);
-      // console.log(LEAVE_START_DATE);
-      // console.log(LEAVE_END_DATE);
-      // console.log(LEAVE_TOAL);
-      // console.log(LAST_LEAVE_TYPE_ID);
-      // console.log(PERSONNEL_ID);
-      // console.log(LAST_LEAVE_END_DATE);
-      // console.log(LAST_LEAVE_TOAL);
-      // console.log(OFFICER);
-      // console.log(SUPERVISOR_ID);
-      // console.log(SUPERVISOR_OPINION);
-      // console.log(LEAVE_STATUS);
-      
-
     var LEAVE_ID = $('#edit_leaves [name=LEAVE_ID]').val()
     var LEAVE_TYPE_ID = $('#edit_leaves [name=LEAVE_TYPE_ID] option:selected').val()
-    var WRITE_PLACE = $('#edit_leaves [name=WRITE_PLACE]').val()
-    var WRITE_DATE = $('#edit_leaves [name=WRITE_DATE]').val()
-    var LEAVE_START_DATE = $('#edit_leaves [name=LEAVE_START_DATE]').val()
-    var LEAVE_END_DATE = $('#edit_leaves [name=LEAVE_END_DATE]').val()
-    var LEAVE_TOAL = $('#edit_leaves [name=LEAVE_TOAL]').val()
-    
-    var LAST_LEAVE_TYPE_ID = $('#edit_leaves [name=LAST_LEAVE_TYPE_ID] option:selected').val()
-    var LAST_LEAVE_START_DATE = $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val()
-    var PERSONNEL_ID = $('#edit_leaves [name=PERSONNEL_ID]').val()
-    var LAST_LEAVE_END_DATE = $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val()
-    var LAST_LEAVE_TOAL = $('#edit_leaves [name=LAST_LEAVE_TOAL]').val()
+    var LEAVES_NUMBER_PLUS = $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val()
+    var edit_LEAVE_START_DATE = $('#edit_leaves [name=edit_LEAVE_START_DATE]').val()
+    var edit_LEAVE_END_DATE = $('#edit_leaves [name=edit_LEAVE_END_DATE]').val()
     var OFFICER = $('#edit_leaves [name=OFFICER] option:selected').val()
     var SUPERVISOR_ID = $('#edit_leaves [name=SUPERVISOR_ID] option:selected').val()
-    var SUPERVISOR_OPINION = $('#edit_leaves [name=SUPERVISOR_OPINION]').val()
-    var LEAVE_STATUS = $('#edit_leaves [name=LEAVE_STATUS]').val()
+    var CONFINED = $('#edit_leaves [name=CONFINED]:checked').val()
+    var WRITE_PLACE = $('#edit_leaves [name=WRITE_PLACE]').val()
+
+    
+
+
+      // console.log(LEAVE_ID);
+      // console.log(LEAVES_NUMBER_PLUS);
+      // console.log(edit_LEAVE_START_DATE);
+      // console.log(edit_LEAVE_END_DATE);
+      // console.log(OFFICER);
+      // console.log(SUPERVISOR_ID);
+      // console.log(CONFINED);
+      // console.log(WRITE_PLACE);
+      // return false;
+
+
 
     var url = window.location.origin+"/index.php/Home/edit_leaves";
 
        
-    // console.log(LEAVE_ID);
-    //   console.log(LEAVE_TYPE_ID);
-    //   console.log(WRITE_PLACE);
-    //   console.log(WRITE_DATE);
-
-    //   console.log(LEAVE_START_DATE);
-    //   console.log(LEAVE_END_DATE);
-
-    //   console.log(LEAVE_TOAL);
-    //   console.log(LAST_LEAVE_TYPE_ID);
-    //   console.log(PERSONNEL_ID);
-    //   console.log(LAST_LEAVE_END_DATE);
-    //   console.log(LAST_LEAVE_TOAL);
-    //   console.log(OFFICER);
-
-    //   console.log(SUPERVISOR_ID);
-    //   console.log(SUPERVISOR_OPINION);
-    //   console.log(LEAVE_STATUS);
-  
-
-          // return false;
 
    
     var data = {
-      
       'LEAVE_ID':LEAVE_ID,
       'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
-      'WRITE_PLACE':WRITE_PLACE,
-      'WRITE_DATE':WRITE_DATE,
-      'LEAVE_START_DATE':LEAVE_START_DATE,
-      'LEAVE_END_DATE':LEAVE_END_DATE,
-      
-      'LEAVE_TOAL':LEAVE_TOAL,
-      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
-      'LAST_LEAVE_START_DATE':LAST_LEAVE_START_DATE,
-      'PERSONNEL_ID':PERSONNEL_ID,
-      'LAST_LEAVE_END_DATE':LAST_LEAVE_END_DATE,
-      'LAST_LEAVE_TOAL':LAST_LEAVE_TOAL,
+      'LEAVES_NUMBER_PLUS':LEAVES_NUMBER_PLUS,
+      'edit_LEAVE_START_DATE':edit_LEAVE_START_DATE,
+      'edit_LEAVE_END_DATE':edit_LEAVE_END_DATE,
       'OFFICER':OFFICER,
       'SUPERVISOR_ID':SUPERVISOR_ID,
-      'SUPERVISOR_OPINION':SUPERVISOR_OPINION,
-      'LEAVE_STATUS':LEAVE_STATUS
+      'CONFINED':CONFINED,
+      'WRITE_PLACE':WRITE_PLACE
     }
 
     $.ajax({
@@ -4391,17 +4473,7 @@ var main = {
       $('#edit_leaves [name=LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
       $('#edit_leaves [name=LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
       $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
-      $('#edit_profile [name=PERSONNEL_SEX]').each(function(key,value){
-      
-        if($(value).val()==PERSONNEL_SEX){
-          // console.log($(value).val());
-          // console.log(PERSONNEL_SEX);
-          $(value).prop( "checked", true );
-          
-        }
-        
-  
-      })
+   
       $('#edit_leaves').modal('show');
     }
 
@@ -4495,6 +4567,733 @@ var main = {
     
   },
     
+
+  check_login_student(){
+    var ADMIN_USER = $('[name=ADMIN_USER]').val(); 
+    var ADMIN_PASS = $('[name=ADMIN_PASS]').val();
+    var level = $('[name=level]').val();
+  
+    var url = window.location.origin+"/index.php/Home/check_login_student";
+    // console.log(ADMIN_USER);
+    // console.log(ADMIN_PASS);
+    // console.log(level);
+    // return false;
+    var data = {
+      'ADMIN_USER':ADMIN_USER,
+      'ADMIN_PASS':ADMIN_PASS,
+      'level':level
+    }
+      // console.log(data);
+      //    return false;
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+     
+     
+      beforeSend: function(jqXHR, settings) {
+      
+
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+      
+    }).done(function(resp) {
+      // console.log(resp);
+      // return false;
+      if(resp.st == 1){
+        window.location.href = location.origin+"/index.php/Home/profile_student"
+      }else{
+       
+        alert(resp.msg);
+      }
+    })
+  },
+
+
+  ///profile_student
+  show_individual_counseling_service(INDIVIDUAL_COUNSELING_ID,ADVISOR_ID,STUDENT_ID,COUNSELING_TYPE_ID,COUNSELING_PROBLEM,
+    COUNSELING_DETAIL,COUNSELING_SOLVE,COUNSELING_RESULT,COUNSELING_CREATE_DATE,COUNSELING_DATE_START,COUNSELING_DATE_END,
+    STUDEN_DATE_START,STUDEN_DATE_END,CONTACT,INDIVIDUAL_COUNSELING_STATUS){
+
+
+
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_DETAIL);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    // console.log(STUDEN_DATE_END);
+    // console.log(INDIVIDUAL_COUNSELING_STATUS);
+
+    // return false;
+     
+
+    $('#show_individual_counseling_service [name=INDIVIDUAL_COUNSELING_ID]').val(INDIVIDUAL_COUNSELING_ID); 
+    $('#show_individual_counseling_service [name=COUNSELING_CREATE_DATE]').val(COUNSELING_CREATE_DATE)
+    $('#show_individual_counseling_service [name=STUDEN_DATE_START]').val(STUDEN_DATE_START)
+    $('#show_individual_counseling_service [name=STUDEN_DATE_END]').val(STUDEN_DATE_END)
+    $('#show_individual_counseling_service [name=COUNSELING_PROBLEM]').val(COUNSELING_PROBLEM)
+    $('#show_individual_counseling_service [name=CONTACT]').val(CONTACT)
+    
+    $('#show_individual_counseling_service [name=COUNSELING_DETAIL]').val(COUNSELING_DETAIL)
+    $('#show_individual_counseling_service [name=COUNSELING_SOLVE]').val(COUNSELING_SOLVE)
+    $('#show_individual_counseling_service [name=COUNSELING_RESULT]').val(COUNSELING_RESULT)
+
+    // $('#edit_profile [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#show_individual_counseling_service [name=COUNSELING_TYPE_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(COUNSELING_TYPE_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+    $('#show_individual_counseling_service [name=ADVISOR_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(ADVISOR_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+
+   
+    
+
+ 
+    $('#show_individual_counseling_service').modal('show'); 
+   ;
+  }, 
+
+
+  ///individual_counseling_services_status
+  show_individual_counseling_service_status(INDIVIDUAL_COUNSELING_ID,ADVISOR_ID,STUDENT_ID,COUNSELING_TYPE_ID,COUNSELING_PROBLEM,
+    COUNSELING_DETAIL,COUNSELING_SOLVE,COUNSELING_RESULT,COUNSELING_CREATE_DATE,COUNSELING_DATE_START,COUNSELING_DATE_END,
+    STUDEN_DATE_START,STUDEN_DATE_END,CONTACT,INDIVIDUAL_COUNSELING_STATUS){
+
+
+
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_DETAIL);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    // console.log(STUDEN_DATE_END);
+    // console.log(INDIVIDUAL_COUNSELING_STATUS);
+
+    // return false;
+
+
+    $('#show_individual_counseling_service [name=INDIVIDUAL_COUNSELING_ID]').val(INDIVIDUAL_COUNSELING_ID); 
+    $('#show_individual_counseling_service [name=COUNSELING_CREATE_DATE]').val(COUNSELING_CREATE_DATE)
+    $('#show_individual_counseling_service [name=STUDEN_DATE_START]').val(STUDEN_DATE_START)
+    $('#show_individual_counseling_service [name=STUDEN_DATE_END]').val(STUDEN_DATE_END)
+    $('#show_individual_counseling_service [name=COUNSELING_PROBLEM]').val(COUNSELING_PROBLEM)
+    $('#show_individual_counseling_service [name=CONTACT]').val(CONTACT)
+    $('#show_individual_counseling_service [name=COUNSELING_DATE_START]').val(COUNSELING_DATE_START)
+    $('#show_individual_counseling_service [name=COUNSELING_DATE_END]').val(COUNSELING_DATE_END)
+    // $('#edit_profile [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#show_individual_counseling_service [name=COUNSELING_TYPE_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(COUNSELING_TYPE_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+    $('#show_individual_counseling_service [name=ADVISOR_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(ADVISOR_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+
+   
+    
+
+ 
+    $('#show_individual_counseling_service').modal('show'); 
+   ;
+  },
+
+  edit_status_individual_counseling_services(){
+
+
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_DETAIL);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+
+    // console.log(STUDEN_DATE_END);
+    // console.log(INDIVIDUAL_COUNSELING_STATUS);
+
+     
+
+    var INDIVIDUAL_COUNSELING_ID = $('#show_individual_counseling_service [name=INDIVIDUAL_COUNSELING_ID]').val()
+    var ADVISOR_ID = $('#show_individual_counseling_service [name=ADVISOR_ID] option:selected').val();
+    var STUDENT_ID = $('#show_individual_counseling_service [name=STUDENT_ID]').val()
+    var COUNSELING_TYPE_ID = $('#show_individual_counseling_service [name=COUNSELING_TYPE_ID] option:selected').val();
+
+  
+    var COUNSELING_PROBLEM = $('#show_individual_counseling_service [name=COUNSELING_PROBLEM]').val()
+    var COUNSELING_DETAIL = $('#show_individual_counseling_service [name=COUNSELING_DETAIL]').val()
+
+    var COUNSELING_CREATE_DATE = $('#show_individual_counseling_service [name=COUNSELING_CREATE_DATE]').val()
+    var COUNSELING_DATE_START = $('#show_individual_counseling_service [name=COUNSELING_DATE_START]').val();
+    var COUNSELING_DATE_END = $('#show_individual_counseling_service [name=COUNSELING_DATE_END]').val()
+
+    var STUDEN_DATE_START = $('#show_individual_counseling_service [name=STUDEN_DATE_START]').val();
+    var STUDEN_DATE_END = $('#show_individual_counseling_service [name=STUDEN_DATE_END]').val()
+    var CONTACT = $('#show_individual_counseling_service [name=CONTACT]').val()
+
+    var url = window.location.origin+"/index.php/Home/edit_status_individual_counseling_services";
+
+
+
+    $('input').removeClass('red')
+    if(COUNSELING_DATE_START==""){
+      $('#show_individual_counseling_service [name=COUNSELING_DATE_START').addClass('red')
+      return false;
+    } 
+    if(COUNSELING_DATE_END==""){
+      $('#show_individual_counseling_service [name=COUNSELING_DATE_END').addClass('red')
+      return false;
+    } 
+    if(COUNSELING_DETAIL==""){
+      $('#show_individual_counseling_service [name=COUNSELING_DETAIL').addClass('red')
+      return false;
+    } 
+    
+      
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_CREATE_DATE);
+
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    // console.log(COUNSELING_CREATE_DATE);
+    // return false
+
+   
+    var data = {
+      
+      'INDIVIDUAL_COUNSELING_ID':INDIVIDUAL_COUNSELING_ID,
+      'ADVISOR_ID':ADVISOR_ID,
+      'STUDENT_ID':STUDENT_ID,
+      'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID,
+      'COUNSELING_PROBLEM':COUNSELING_PROBLEM,
+      'COUNSELING_DETAIL':COUNSELING_DETAIL,
+      'COUNSELING_CREATE_DATE':COUNSELING_CREATE_DATE,
+
+      'COUNSELING_DATE_START':COUNSELING_DATE_START,
+      'COUNSELING_DATE_END':COUNSELING_DATE_END,
+      'STUDEN_DATE_START':STUDEN_DATE_START,
+      'STUDEN_DATE_END':STUDEN_DATE_END,
+      'CONTACT':CONTACT
+      
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+
+
+
+  conf_individual_counseling_service_studen(INDIVIDUAL_COUNSELING_ID,ADVISOR_ID,STUDENT_ID,COUNSELING_TYPE_ID,COUNSELING_PROBLEM,
+    COUNSELING_DETAIL,COUNSELING_SOLVE,COUNSELING_RESULT,COUNSELING_CREATE_DATE,COUNSELING_DATE_START,COUNSELING_DATE_END,
+    STUDEN_DATE_START,STUDEN_DATE_END,CONTACT,INDIVIDUAL_COUNSELING_STATUS,STUDEN_DATE_CONF_START,STUDEN_DATE_CONF_END,){
+
+      
+      
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_DETAIL);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    // console.log(STUDEN_DATE_CONF_END);
+    // console.log(COUNSELING_TYPE_ID);
+
+    // return false;
+     
+
+    $('#conf_individual_counseling_service_studen [name=INDIVIDUAL_COUNSELING_ID]').val(INDIVIDUAL_COUNSELING_ID); 
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_CREATE_DATE]').val(COUNSELING_CREATE_DATE)
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_START]').val(STUDEN_DATE_START)
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_END]').val(STUDEN_DATE_END)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_PROBLEM]').val(COUNSELING_PROBLEM)
+    $('#conf_individual_counseling_service_studen [name=CONTACT]').val(CONTACT)
+    
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_DETAIL]').val(COUNSELING_DETAIL)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_SOLVE]').val(COUNSELING_SOLVE)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_RESULT]').val(COUNSELING_RESULT)
+     
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_START]').val(COUNSELING_DATE_START)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_END]').val(COUNSELING_DATE_END)
+
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_CONF_START]').val(STUDEN_DATE_CONF_START)
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_CONF_END]').val(STUDEN_DATE_CONF_END)
+    
+    
+    // $('#edit_profile [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_TYPE_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(COUNSELING_TYPE_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+    $('#conf_individual_counseling_service_studen [name=ADVISOR_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(ADVISOR_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+
+   
+    
+
+ 
+    $('#conf_individual_counseling_service_studen').modal('show'); 
+   ;
+  }, 
+  update_conf_individual_counseling_service_studen(){
+
+
+
+     
+
+    
+    var INDIVIDUAL_COUNSELING_ID = $('#conf_individual_counseling_service_studen [name=INDIVIDUAL_COUNSELING_ID]').val()
+    var ADVISOR_ID = $('#conf_individual_counseling_service_studen [name=ADVISOR_ID] option:selected').val();
+    var STUDENT_ID = $('#conf_individual_counseling_service_studen [name=STUDENT_ID]').val()
+    var COUNSELING_TYPE_ID = $('#conf_individual_counseling_service_studen [name=COUNSELING_TYPE_ID] option:selected').val();
+
+
+    var INDIVIDUAL_COUNSELING_STATUS = $('#conf_individual_counseling_service_studen [name=INDIVIDUAL_COUNSELING_STATUS]:checked').val()
+    
+
+    var DETAIL_NOT = $('#conf_individual_counseling_service_studen [name=DETAIL_NOT]').val()
+
+
+
+
+    var COUNSELING_CREATE_DATE = $('#conf_individual_counseling_service_studen [name=COUNSELING_CREATE_DATE]').val()
+    var COUNSELING_DATE_START = $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_START]').val();
+    var COUNSELING_DATE_END = $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_END]').val()
+
+    var STUDEN_DATE_START = $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_START]').val();
+    var STUDEN_DATE_END = $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_END]').val()
+
+    var STUDEN_DATE_CONF_START = $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_CONF_START]').val();
+    var STUDEN_DATE_CONF_END = $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_END]').val()
+    
+    var url = window.location.origin+"/index.php/Home/update_conf_individual_counseling_service_studen";
+
+    
+    
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(INDIVIDUAL_COUNSELING_STATUS);
+    // console.log(DETAIL_NOT);
+
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    
+    // console.log(STUDEN_DATE_END);
+    // console.log(STUDEN_DATE_CONF_START);
+    // console.log(STUDEN_DATE_CONF_END);
+ 
+
+  
+    // return false;
+    // $('input').removeClass('red')
+    // if(COUNSELING_DATE_START==""){
+    //   $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_START').addClass('red')
+      // return false;
+    // } 
+
+    
+      
+ 
+
+   
+    var data = {
+      
+      'INDIVIDUAL_COUNSELING_ID':INDIVIDUAL_COUNSELING_ID,
+      'ADVISOR_ID':ADVISOR_ID,
+      'STUDENT_ID':STUDENT_ID,
+
+      'COUNSELING_TYPE_ID':COUNSELING_TYPE_ID,
+      'INDIVIDUAL_COUNSELING_STATUS':INDIVIDUAL_COUNSELING_STATUS,
+      'DETAIL_NOT':DETAIL_NOT,
+
+      'INDIVIDUAL_COUNSELING_ID':INDIVIDUAL_COUNSELING_ID,
+      'ADVISOR_ID':ADVISOR_ID,
+      'STUDENT_ID':STUDENT_ID,
+
+      'COUNSELING_CREATE_DATE':COUNSELING_CREATE_DATE,
+      'COUNSELING_DATE_START':COUNSELING_DATE_START,
+      'COUNSELING_DATE_END':COUNSELING_DATE_END,
+  
+      'STUDEN_DATE_START':STUDEN_DATE_START,
+      'STUDEN_DATE_END':STUDEN_DATE_END,
+      'STUDEN_DATE_CONF_START':STUDEN_DATE_CONF_START,
+      'STUDEN_DATE_CONF_END':STUDEN_DATE_CONF_END
+      
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  
+  
+
+
+  conf_teacher_individual_counseling_service_studen(INDIVIDUAL_COUNSELING_ID,ADVISOR_ID,STUDENT_ID,COUNSELING_TYPE_ID,COUNSELING_PROBLEM,
+    COUNSELING_DETAIL,COUNSELING_SOLVE,COUNSELING_RESULT,COUNSELING_CREATE_DATE,COUNSELING_DATE_START,COUNSELING_DATE_END,
+    STUDEN_DATE_START,STUDEN_DATE_END,CONTACT,INDIVIDUAL_COUNSELING_STATUS,STUDEN_DATE_CONF_START,STUDEN_DATE_CONF_END){
+
+      
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_DETAIL);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    // console.log(STUDEN_DATE_CONF_END);
+    // console.log(COUNSELING_TYPE_ID);
+
+    // return false;
+     
+
+    $('#conf_individual_counseling_service_studen [name=INDIVIDUAL_COUNSELING_ID]').val(INDIVIDUAL_COUNSELING_ID); 
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_CREATE_DATE]').val(COUNSELING_CREATE_DATE)
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_START]').val(STUDEN_DATE_START)
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_END]').val(STUDEN_DATE_END)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_PROBLEM]').val(COUNSELING_PROBLEM)
+    $('#conf_individual_counseling_service_studen [name=CONTACT]').val(CONTACT)
+    
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_DETAIL]').val(COUNSELING_DETAIL)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_SOLVE]').val(COUNSELING_SOLVE)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_RESULT]').val(COUNSELING_RESULT)
+     
+
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_CONF_START]').val(STUDEN_DATE_CONF_START)
+    $('#conf_individual_counseling_service_studen [name=STUDEN_DATE_CONF_END]').val(STUDEN_DATE_CONF_END)
+    
+
+    
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_START]').val(COUNSELING_DATE_START)
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_END]').val(COUNSELING_DATE_END)
+    
+    // $('#edit_profile [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#conf_individual_counseling_service_studen [name=COUNSELING_TYPE_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(COUNSELING_TYPE_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+    $('#conf_individual_counseling_service_studen [name=ADVISOR_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(ADVISOR_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+
+   
+    
+
+ 
+    $('#conf_individual_counseling_service_studen').modal('show'); 
+   ;
+  }, 
+  
+
+  update_conf_teacher_individual_counseling_service_studen(){
+
+    var INDIVIDUAL_COUNSELING_ID = $('#conf_individual_counseling_service_studen [name=INDIVIDUAL_COUNSELING_ID]').val()
+
+    var INDIVIDUAL_COUNSELING_STATUS = $('#conf_individual_counseling_service_studen [name=INDIVIDUAL_COUNSELING_STATUS]:checked').val()
+  
+    var url = window.location.origin+"/index.php/Home/update_conf_teacher_individual_counseling_service_studen";
+
+    
+    
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(INDIVIDUAL_COUNSELING_STATUS);
+    // console.log(DETAIL_NOT);
+
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    
+    // console.log(STUDEN_DATE_END);
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(INDIVIDUAL_COUNSELING_STATUS);
+ 
+
+  
+    // return false;
+    // $('input').removeClass('red')
+    // if(COUNSELING_DATE_START==""){
+    //   $('#conf_individual_counseling_service_studen [name=COUNSELING_DATE_START').addClass('red')
+      // return false;
+    // } 
+
+    
+      
+ 
+
+   
+    var data = {
+      
+     
+      'INDIVIDUAL_COUNSELING_ID':INDIVIDUAL_COUNSELING_ID,
+      'INDIVIDUAL_COUNSELING_STATUS':INDIVIDUAL_COUNSELING_STATUS
+      
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+
+
+  get_conseling_result_st(INDIVIDUAL_COUNSELING_ID,ADVISOR_ID,STUDENT_ID,COUNSELING_TYPE_ID,COUNSELING_PROBLEM,
+    COUNSELING_DETAIL,COUNSELING_SOLVE,COUNSELING_RESULT,COUNSELING_CREATE_DATE,COUNSELING_DATE_START,COUNSELING_DATE_END,
+    STUDEN_DATE_START,STUDEN_DATE_END,CONTACT,INDIVIDUAL_COUNSELING_STATUS,STUDEN_DATE_CONF_START,STUDEN_DATE_CONF_END){
+
+      
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(COUNSELING_PROBLEM);
+    // console.log(COUNSELING_DETAIL);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+   
+    // console.log(COUNSELING_TYPE_ID);
+
+    // return false;
+     
+
+    $('#individual_counseling_filnel [name=INDIVIDUAL_COUNSELING_ID]').val(INDIVIDUAL_COUNSELING_ID); 
+    $('#individual_counseling_filnel [name=COUNSELING_CREATE_DATE]').val(COUNSELING_CREATE_DATE)
+    $('#individual_counseling_filnel [name=STUDEN_DATE_START]').val(STUDEN_DATE_START)
+    $('#individual_counseling_filnel [name=STUDEN_DATE_END]').val(STUDEN_DATE_END)
+    $('#individual_counseling_filnel [name=COUNSELING_PROBLEM]').val(COUNSELING_PROBLEM)
+    $('#individual_counseling_filnel [name=CONTACT]').val(CONTACT)
+    
+    $('#individual_counseling_filnel [name=COUNSELING_DETAIL]').val(COUNSELING_DETAIL)
+    $('#individual_counseling_filnel [name=COUNSELING_SOLVE]').val(COUNSELING_SOLVE)
+    $('#individual_counseling_filnel [name=COUNSELING_RESULT]').val(COUNSELING_RESULT)
+     
+
+    $('#individual_counseling_filnel [name=STUDEN_DATE_CONF_START]').val(STUDEN_DATE_CONF_START)
+    $('#individual_counseling_filnel [name=STUDEN_DATE_CONF_END]').val(STUDEN_DATE_CONF_END)
+    
+    
+    
+    $('#individual_counseling_filnel [name=COUNSELING_DATE_START]').val(COUNSELING_DATE_START)
+    $('#individual_counseling_filnel [name=COUNSELING_DATE_END]').val(COUNSELING_DATE_END)
+    $('#individual_counseling_filnel [name=STUDEN_DATE_CONF_START]').val(STUDEN_DATE_CONF_START)
+
+    
+    // $('#edit_profile [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+    $('#individual_counseling_filnel [name=COUNSELING_TYPE_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(COUNSELING_TYPE_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+    $('#individual_counseling_filnel [name=ADVISOR_ID] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(ADVISOR_ID === $(value).val()){
+      $(value).attr("selected","selected")
+    }
+    });
+
+   
+    
+
+ 
+    $('#individual_counseling_filnel').modal('show'); 
+   ;
+  }, 
+
+  update_individual_counseling_filnel(){
+
+    var INDIVIDUAL_COUNSELING_ID = $('#individual_counseling_filnel [name=INDIVIDUAL_COUNSELING_ID]').val()
+    var COUNSELING_SOLVE = $('#individual_counseling_filnel [name=COUNSELING_SOLVE]').val()
+
+    var COUNSELING_RESULT = $('#individual_counseling_filnel [name=COUNSELING_RESULT]').val()
+
+    
+    var url = window.location.origin+"/index.php/Home/update_individual_counseling_filnel";
+
+    
+    
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(ADVISOR_ID);
+    // console.log(STUDENT_ID);
+    // console.log(COUNSELING_TYPE_ID);
+    // console.log(INDIVIDUAL_COUNSELING_STATUS);
+    // console.log(DETAIL_NOT);
+
+    // console.log(COUNSELING_CREATE_DATE);
+    // console.log(COUNSELING_DATE_START);
+    // console.log(COUNSELING_DATE_END);
+    // console.log(STUDEN_DATE_START);
+    
+    // console.log(INDIVIDUAL_COUNSELING_ID);
+    // console.log(COUNSELING_SOLVE);
+    // console.log(COUNSELING_RESULT);
+ 
+
+  
+    // return false;
+
+
+    $('input').removeClass('red')
+    if(COUNSELING_SOLVE==""){
+      $('#individual_counseling_filnel [name=COUNSELING_SOLVE').addClass('red')
+      return false;
+    } 
+    if(COUNSELING_RESULT==""){
+      $('#individual_counseling_filnel [name=COUNSELING_RESULT').addClass('red')
+      return false;
+    } 
+
+    
+      
+ 
+
+   
+    var data = {
+      
+     
+      'INDIVIDUAL_COUNSELING_ID':INDIVIDUAL_COUNSELING_ID,
+      'COUNSELING_SOLVE':COUNSELING_SOLVE,
+      'COUNSELING_RESULT':COUNSELING_RESULT
+      
+    }
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+  },
+  
+  
+
 }
 
 

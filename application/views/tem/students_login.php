@@ -22,10 +22,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="" class="h1"><b>เข้าสู่ระบบ</b></a>
+      <a href="" class="h3"><b>เข้าสู่ระบบนักศึกษา</b></a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">ระบบจัดการฐานข้อมูล</p>
+   
   
 
 
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <span class="text-danger"></span>  
         </div>
         <div class="row">
-          <div class="col-12"><button type="button" class="btn btn-block btn-outline-primary btn-lg" onclick="main.check_login();">เข้าสู่ระบบ</button></div>
+          <div class="col-12"><button type="button" class="btn btn-block btn-outline-primary btn-lg" onclick="main.check_login_student();">เข้าสู่ระบบ</button></div>
           <!-- /.col -->
         </div>
         
@@ -54,9 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
     <!-- /.card-body -->
   </div>
-  <div class="card-header text-center">
-      <a href="<?php echo base_url()?>index.php/Home/students_login"  class="h2"><b>เข้าสู่ระบบนักศึกษา</b></a>
-    </div>
+
   <!-- /.card -->
 </div>
 
