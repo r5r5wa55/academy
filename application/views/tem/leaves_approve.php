@@ -146,7 +146,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <label for="formGroupExampleInpt" >ผู้ขอลา</label>
               <input type="text" class="form-control"  name="PERSONNEL_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
               <label for="formGroupExampleInput">หัวข้อการลาครั้งลาสุด</label>
-              <select class="form-control" name="LAST_LEAVE_TYPE_ID" onchange="main.get_last_leave_type_onchange(this)" disabled>
+              <select class="form-control" name="LAST_LEAVE_TYPE_ID" onchange="main.get_edit_last_leave_type_onchange(this)" disabled>
                 <option value="">ยังไม่มีการทำรายการ</option>
                 <?php foreach($leave_types as $key=>$value):?>
                   <option value="<?php echo $value['LEAVE_TYPE_ID'];?>"><?php echo $value['LEAVE_TYPE'];?></option>

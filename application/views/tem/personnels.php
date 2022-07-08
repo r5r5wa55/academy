@@ -205,42 +205,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </select>
             </div>
             <div class="col-md-6">
-                <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
-                <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">    
-                <label for="formGroupExampleInput">รหัสผ่าน</label>
-                <div class="input-group input-group-md">
-                  <input type="password" class="form-control"  id="myInput"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
-                  <span class="input-group-append">
-                    <button type="checkbox" class="btn btn-info btn-flat"name="PERSONNEL_PASSWORD"  onclick="myFunction()" id="myInput">แสดง</button>
-                  </span>
-                </div>
-                <label for="formGroupExampleInput">นามสกุล</label>
-                <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
-                <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
-                <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
-                <label for="formGroupExampleInput">วันที่สร้าง</label>
-                <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
-                <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก" onkeyup="main.checkcountinputphone(this)">
-                <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
-                <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
-                <label for="formGroupExampleInput">Facebook</label>
-                <input type="text" class="form-control"  name="PERSONNEL_FACEBOOK" placeholder="ชื่อ Facebook" >
-                <label for="formGroupExampleInput">สถานะการทำงาน</label>
-                <select class="form-control" name="PERSONNEL_STATUS_ID">
-                  <option value="">กรุณาเลือก</option>
-                  <?php foreach($personnel_statuses as $key=>$value): ?>
-                    <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
-                  <?php endforeach; ?>
-                </select>
-                <label for="formGroupExampleInput">แผนก</label>
-                <select class="form-control" name="DEPARTMENT_ID" >
-                  <option value="">กรุณาเลือก</option>
-                  <?php foreach($departments as $key=>$value): ?>
-                    <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
-                  <?php endforeach; ?>
-                </select>
-              
+              <label for="formGroupExampleInput" >รหัสบุคลากร 6 หลัก</label>
+              <input type="text" class="form-control"  name="PERSONNEL_ID" placeholder="รหัสบุคลากร" onkeyup="main.checkcountinput(this)">    
+              <label for="formGroupExampleInput">รหัสผ่าน</label>
+              <div class="input-group input-group-md">
+                <input type="password" class="form-control"  id="myInput"  name="PERSONNEL_PASSWORD" placeholder="รหัสผ่าน">
+                <span class="input-group-append">
+                  <button type="checkbox" class="btn btn-info btn-flat"name="PERSONNEL_PASSWORD"  onclick="myFunction()" id="myInput">แสดง</button>
+                </span>
+              </div>
+              <label for="formGroupExampleInput">นามสกุล</label>
+              <input type="text" class="form-control"  name="PERSONNEL_SURNAME" placeholder="นามสกุล">
+              <label for="formGroupExampleInput">นามสกุลภาษาอังกฤษ</label>
+              <input type="text" class="form-control"  name="PERSONNEL_SURNAME_EN" placeholder="นามสกุลภาษาอังกฤษ">
+              <label for="formGroupExampleInput">วันที่สร้าง</label>
+              <input type="date" class="form-control"  name="PERSONNEL_CRETTE_DATE" placeholder="วันที่สร้าง">
+              <label for="formGroupExampleInput">เบอร์โทรศัพท์ส่วนตัว</label>
+              <input type="text" class="form-control"  name="PERSONNEL_PHONE" placeholder="เบอร์โทรศัพท์ส่วนตัว 10 หลัก" onkeyup="main.checkcountinputphone(this)">
+              <label for="formGroupExampleInput">เบอร์โทรศัพท์สำนักงาน</label>
+              <input type="text" class="form-control"  name="PERSONNEL_PHONE_EXTENSION" placeholder="เบอร์โทรศัพท์สำนักงาน">
+              <label for="formGroupExampleInput">Facebook</label>
+              <input type="text" class="form-control"  name="PERSONNEL_FACEBOOK" placeholder="ชื่อ Facebook" >
+              <label for="formGroupExampleInput">สถานะการทำงาน</label>
+              <select class="form-control" name="PERSONNEL_STATUS_ID">
+                <option value="">กรุณาเลือก</option>
+                <?php foreach($personnel_statuses as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+              <label for="formGroupExampleInput">แผนก</label>
+              <select class="form-control" name="DEPARTMENT_ID" >
+                <option value="">กรุณาเลือก</option>
+                <?php foreach($departments as $key=>$value): ?>
+                  <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
+                <?php endforeach; ?>
+              </select>
+            
             </div>    
           </div>  
         </div>

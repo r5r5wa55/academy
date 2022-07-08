@@ -102,7 +102,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_leaves(
               '<?php echo $value['LEAVE_ID'];?>',
-              '<?php echo $value['PERSONNEL_ID'];?>');">
+              '<?php echo $value['LEAVE_TYPE_ID'];?>',
+              '<?php echo $value['WRITE_PLACE'];?>',
+              '<?php echo $value['WRITE_DATE'];?>',
+              '<?php echo $value['LEAVE_START_DATE'];?>',
+              '<?php echo $value['LEAVE_END_DATE'];?>',
+              '<?php echo $value['LEAVE_TOAL'];?>',
+              '<?php echo $value['LAST_LEAVE_TYPE_ID'];?>',
+              '<?php echo $value['LAST_LEAVE_START_DATE'];?>',
+              '<?php echo $value['LAST_LEAVE_END_DATE'];?>',
+              '<?php echo $value['LAST_LEAVE_TOAL'];?>',
+              '<?php echo $value['OFFICER'];?>',
+              '<?php echo $value['SUPERVISOR_ID'];?>',
+              '<?php echo $value['SUPERVISOR_OPINION'];?>',
+              '<?php echo $value['PERSONNEL_ID'];?>',
+              '<?php echo $value['CONFINED'];?>',
+              '<?php echo $value['LEAVES_NUMBER_USE'];?>');">
                แก้ไขข้อมูล
             </a>
           </div>
@@ -282,7 +297,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <label for="formGroupExampleInpt" >ผู้ขอลา</label>
               <input type="text" class="form-control"  name="PERSONNEL_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
               <label for="formGroupExampleInput">หัวข้อการล่าครั้งลาสุด</label>
-              <input type="text" class="form-control"  name="LAST_LEAVE_TYPE_ID" data-id-LEAVE_TYPE_ID="" readonly placeholder="ยังไม่เคยทำรายการ">
+
+              <select class="form-control" name="LAST_LEAVE_TYPE_ID" >
+                <option value="">ยังไม่มีการทำรายการ</option>
+                <?php foreach($leave_types as $key=>$value):?>
+                  <option value="<?php echo $value['LEAVE_TYPE_ID'];?>"><?php echo $value['LEAVE_TYPE'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+                
+
+
               <label for="formGroupExampleInput">ลาครั้งล่าสุดตั้งแต่วันที่</label>
               <input type="text" class="form-control" id="LAST_LEAVE_START_DATE" readonly  name="LAST_LEAVE_START_DATE" placeholder="ตั้งแต่วันที่">
             </div>
@@ -368,6 +393,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
               <label for="formGroupExampleInput">สิทธิการแก้ไข(ผู้ตรวจสอบ)</label>
+
+              
               <div class="row radioinput">    
                 <div class="col-md-6">  
                   <div class="form-check">
