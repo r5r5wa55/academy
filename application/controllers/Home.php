@@ -1073,6 +1073,19 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	} 
 	
+	public function last_leave_end_date_onchange(){
+		$this->check_login_session();		
+		$data = $this->mhome->last_leave_end_date_onchange($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	
+
+	///
+
 	public function students_login(){
 
 		

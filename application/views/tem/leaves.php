@@ -117,7 +117,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['SUPERVISOR_OPINION'];?>',
               '<?php echo $value['PERSONNEL_ID'];?>',
               '<?php echo $value['CONFINED'];?>',
-              '<?php echo $value['LEAVES_NUMBER_USE'];?>');">
+              '<?php echo $value['LEAVES_NUMBER_USE'];?>',
+              '<?php echo $value['LAST_LEAVE_TYPE_MAX'];?>');">
                แก้ไขข้อมูล
             </a>
           </div>
@@ -148,6 +149,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="row">   
              
             <div class="col-md-6">
+
+         
               <label for="formGroupExampleInpt" >ผู้ขอลา</label>
               <input type="text" class="form-control"  name="PERSONNEL_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
               <label for="formGroupExampleInput">หัวข้อการล่าครั้งลาสุด</label>
@@ -186,6 +189,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-6">
 
               <!-- level 1 แสดงไอดีผู้เพื่ม-->
+     
+             
+      
+
+         
               <label for="formGroupExampleInput">หัวข้อการลา</label>
               <select class="form-control" name="LEAVE_TYPE_ID" onchange="main.get_last_leave_type_onchange(this)">
                 <option value="">กรุณาเลือก</option>
@@ -193,6 +201,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <option value="<?php echo $value['LEAVE_TYPE_ID'];?>"><?php echo $value['LEAVE_TYPE'];?></option>
                 <?php endforeach; ?>
               </select>
+
               <label for="formGroupExampleInput">ขอลาตั้งแต่วันที่</label>
               <input type="text" class="form-control" readonly id="LEAVE_START_DATE" name="LEAVE_START_DATE" placeholder="ตั้งแต่วันที่">
 
@@ -206,27 +215,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <label for="formGroupExampleInput">สถานที่</label>
               <textarea class="form-control" name="WRITE_PLACE" rows="3" placeholder="สถานที่"></textarea>
 
+              <label for="formGroupExampleInput">ลายละเอียด</label>
+              <textarea class="form-control" name="detailed_pattern" rows="3" placeholder="ลายละเอียด"></textarea>
+
             
 
             </div>
           
             <div class="col-md-6">
               <div class="row">
+                              
+
+           
+              
                 <div class="col-lg-4 col-md-4 col-sm-4 body-leave-number">
                   <label for="formGroupExampleInput">วันลาทั้งหมด</label>
-                  <input type="text" class="form-control"  name="LEAVE_TYPE_MAX_SHOW" placeholder="0" readonly>
+                  <input type="text" class="form-control"  name="LEAVE_TYPE_MAX_SHOW" value="0" readonly>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 body-leave-number">
                   <label for="formGroupExampleInput">ใช้ไปแล้ว</label>
-                  <input type="text" class="form-control"  name="LEAVE_TOAL" placeholder="0" readonly> 
+                  <input type="text" class="form-control"  name="LEAVE_TOAL" value="0" readonly> 
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 body-leave-number">
-                  <label for="formGroupExampleInput">ระบุจำนวนวัน</label>
-                  <input type="text" class="form-control"  name="LEAVES_NUMBER_PLUS" value="0">
+                  <label for="formGroupExampleInput">คงเหลือ</label>
+                  <input type="text" class="form-control"  name="LEAVES_NUMBER_PLUS" value="0" readonly>
                 </div>
               </div>  
+
+              
               <label for="formGroupExampleInput">ขอลาถึงวันที่</label>
-              <input type="text" class="form-control" readonly id="LEAVE_END_DATE" name="LEAVE_END_DATE" placeholder="ถึงวันที่"> 
+              <input type="text" class="form-control" readonly id="LEAVE_END_DATE" name="LEAVE_END_DATE" placeholder="ถึงวันที่"  onchange="main.last_leave_end_date_onchange(this)"> 
+              
               <label for="formGroupExampleInput">หัวหน้างาน</label>
               <select class="form-control" name="SUPERVISOR_ID">
                       <option value="">กรุณาเลือก</option>
@@ -249,13 +268,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <label class="form-check-label">ไม่สามารถแก้ไขได้</label>
                   </div>
               </div> 
+
+              
+
+              
+              <div class="form-check col-md-12">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 body-leave-number">
+                  <input type="checkbox"  class="form-check-input" id="myCheck" onclick="myFunction()">
+                  <label for="formGroupExampleInput">กรณีที่ลาครึ่งวัน</label>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 body-leave-number" style="display:none" id="HALF_DATE" >
+
+                <input type="text" class="form-control" readonly  id="LEAVE_HALF_DATE" name="LEAVE_HALF_DATE" placeholder="ลาวันที่"> 
+                <label class="form-check-label"></label>
+
+                <div class="row radioinput">    
+                  <div class="col-md-6">  
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="HALF_ONE" checked="" value="1">
+                      <label class="form-check-label" >ครึ่งวันเช้า</label>
+                    </div>
+                  </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="HALF_ONE"  value="2">
+                      <label class="form-check-label">ครึ่งวันบ่าย</label>
+                    </div>
+
+                </div>
+
+                
+              </div>
+    
+             
+              
         
             </div>    
           </div>  
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="main.add_leaves();">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+          <button type="button" class="btn btn-primary" onclick="main.add_leaves();">ยืนยันข้อมูล</button>
         </div>
       </div>
 
@@ -298,7 +351,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <input type="text" class="form-control"  name="PERSONNEL_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
               <label for="formGroupExampleInput">หัวข้อการล่าครั้งลาสุด</label>
 
-              <select class="form-control" name="LAST_LEAVE_TYPE_ID" >
+              <select class="form-control" name="LAST_LEAVE_TYPE_ID" disabled>
                 <option value="">ยังไม่มีการทำรายการ</option>
                 <?php foreach($leave_types as $key=>$value):?>
                   <option value="<?php echo $value['LEAVE_TYPE_ID'];?>"><?php echo $value['LEAVE_TYPE'];?></option>
@@ -317,7 +370,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row" >
                 <div class="col-lg-4 col-md-4 col-sm-4 body-leave-number">
                   <label for="formGroupExampleInput">วันลาทั้งหมด</label>
-                  <input type="text" class="form-control"  name="LAST_LEAVE_TYPE_MAX_SHOW" readonly value="0">
+                  <input type="text" class="form-control"  name="LAST_LEAVE_TYPE_MAX" readonly value="0">
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 body-leave-number">
                   <label for="formGroupExampleInput">ใช้ไปแล้ว</label>
@@ -437,20 +490,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
 <script>
+  // var = date
   $(function(){
     jQuery(function(){
       $.datetimepicker.setLocale('th');
+      
       jQuery('#LEAVE_START_DATE').datetimepicker({
+        onGenerate:function( ct ){
+        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+          .addClass('xdsoft_disabled');
+      },
+
+        weekends:['01.01.2014','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'],
         format:'Y/m/d',
-    
+        startDate:new Date(),
+        // minDate:'-1970/01/02' ,
+        minDate:new Date(),
         onShow:function( ct ){
+          // console.log(ct);
+          // return false;
           this.setOptions({
             maxDate:jQuery('#LEAVE_END_DATE').val()?jQuery('#LEAVE_END_DATE').val():false
+            
           })
         },
+  
         timepicker:false
       });
       jQuery('#LEAVE_END_DATE').datetimepicker({
+        onGenerate:function( ct ){
+        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+          .addClass('xdsoft_disabled');
+      },
+        weekends:['01.01.2014','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'],
         format:'Y/m/d',
         onShow:function( ct ){
           this.setOptions({
@@ -494,6 +566,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   });
   
+  function myFunction() {
+    var checkBox = document.getElementById("myCheck");
+    var HALF_DATE = document.getElementById("HALF_DATE");
+    if (checkBox.checked == true){
+      HALF_DATE.style.display = "block";
+    } else {
+      HALF_DATE.style.display = "none";
+    }
+    // console.log(checkBox);  
+  }
+
+
+
+  
+  jQuery('#LEAVE_HALF_DATE').datetimepicker({
+    onGenerate:function( ct ){
+        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+          .addClass('xdsoft_disabled');
+      },
+    weekends:['01.01.2014','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'],
+    format:'Y/m/d',
+  
+    timepicker:false,
+
+  
+    minDate:new Date(),
+    onShow:function( ct ){
+      this.setOptions({
+        minDate:jQuery('#LEAVE_START_DATE').val()?jQuery('#LEAVE_START_DATE').val():false,
+        maxDate:jQuery('#LEAVE_END_DATE').val()?jQuery('#LEAVE_END_DATE').val():false
+      })
+    },
+
+  
+  });
+
+
 
 
   
