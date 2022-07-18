@@ -1875,161 +1875,118 @@ class Home_model extends CI_Model {
    
     return $DATA;
 
-    // }else{
-    //   $this->db->select('*');
-    //   $this->db->from('leaves');
-    //   $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
-    //   // $this->db->join('management_positions', 'management_positions.PERSONNEL_ID = leaves.PERSONNEL_ID');
-    //   $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
-    //   if($data_search != ""){
-    //     $this->db->like('personnels.PERSONNEL_ID', $data_search);
-    //     $this->db->or_like('leave_types.LEAVE_TYPE', $data_search);
-    //     $this->db->or_like('personnels.PERSONNEL_SURNAME', $data_search);
-    //     $this->db->or_like('personnels.PERSONNEL_NAME', $data_search);
-    //   };
-    //   $this->db->order_by("LEAVE_ID", "asc");
-    //   $leaves = $this->db->get();
-    //   $leaves = $leaves->result_array();
-    //   $personnels = $this->select_personnels();
-    //   $leave_types = $this->select_leave_types();
-    //   $management_positions = $this->select_management_positions();
-   
-    
 
 
-
-    //   // echo "<pre>";
-    //   // print_r($management_positions);
-    //   // echo "</pre>";
-    //   // exit();
-
-
-    //   $DATA = array(
-    //     'leaves'=>$leaves,
-    //     'management_positions'=>$management_positions['management_positions'],
-    //     'personnels' => $personnels['personnels'],
-    //     'leave_types' => $leave_types
-    //   );
-    //   // echo "<pre>";
-    // // echo "<pre>";
-    // // print_r($DATA);
-    // // echo "</pre>";
-    // // echo "<pre>";
-    // // print_r($_SESSION['level']);
-    // // echo "</pre>";
-    // // echo "<pre>";
-    // // print_r($_SESSION['ADMIN_ID']);
-    // // echo "</pre>";
-    // // exit();
-    //   return $DATA;
-
-    // }
   
 
   }
   public function add_leaves($data){
 
 
-    // echo  '<pre>';
-    // print_r($data);
-    // echo  '</pre>';
-    // exit;
 
 
 
-
+    
   
     $st = array('st'=>0);
 
-
-      
-    if(is_array($data) && $data['LEAVE_TYPE_ID']!="" && $data['OFFICER']!=""){
+    // echo'<pre>';
+    // print_r($data);
+    // echo'</pre>';
+    // exit;
+    if(is_array($data) && $data['LEAVE_TYPE_ID'] != ""){
       $data = array(
-        'LEAVE_TYPE_ID' => $data['LEAVE_TYPE_ID'],
-        'WRITE_PLACE' => $data['WRITE_PLACE'],
-         
+
+        'PERSONNEL_ID' => $data['PERSONNEL_ID'],
         'WRITE_DATE' => $data['WRITE_DATE'],
+        'LAST_LEAVE_TYPE_ID' => $data['LAST_LEAVE_TYPE_ID'],
+        'LAST_LEAVE_TYPE_MAX' => $data['LAST_LEAVE_TYPE_MAX'], 
+        'LAST_LEAVE_TOAL' => $data['LAST_LEAVE_TOAL'], 
+        'LAST_LEAVE_START_DATE' => $data['LAST_LEAVE_START_DATE'],
+        'LAST_LEAVE_END_DATE' => $data['LAST_LEAVE_END_DATE'],
+        'LEAVE_TYPE_ID' => $data['LEAVE_TYPE_ID'],
+        'LEAVE_TOAL' => $data['LEAVE_TOAL'],
         'LEAVE_START_DATE' => $data['LEAVE_START_DATE'], 
         'LEAVE_END_DATE' => $data['LEAVE_END_DATE'],
-        'LEAVE_TOAL' => $data['LEAVE_TOAL_PLUS'], 
-        'LAST_LEAVE_TYPE_ID' => $data['LAST_LEAVE_TYPE_ID'],
-        'LAST_LEAVE_START_DATE' => $data['LAST_LEAVE_START_DATE'], 
-        'LAST_LEAVE_END_DATE' => $data['LAST_LEAVE_END_DATE'],
-        'LAST_LEAVE_TOAL' => $data['LAST_LEAVE_TOAL'], 
-        'PERSONNEL_ID' => $data['PERSONNEL_ID'],
-        'OFFICER' => $data['OFFICER'],
-        'SUPERVISOR_ID' => $data['SUPERVISOR_ID'], 
+        'OFFICER' => $data['OFFICER'], 
+        'SUPERVISOR_ID' => $data['SUPERVISOR_ID'],
+        'WRITE_PLACE' => $data['WRITE_PLACE'],
         'CONFINED' => $data['CONFINED'],
+        'LEAVE_HALF_DATE' => $data['LEAVE_HALF_DATE'],
+        'HALF_ONE' => isset($data['HALF_ONE'])?$data['HALF_ONE']:"",
 
-        'LEAVES_NUMBER_USE' => $data['LEAVES_NUMBER_USE'],
-        'LAST_LEAVE_TYPE_MAX' => $data['LAST_LEAVE_TYPE_MAX_SHOW'],
+
         'SUPERVISOR_STATUS' => '0',
-
-
-        
+        'MY_CHECK' => $data['myCheck'],
       );
-     
-
-    
-    // echo  '<pre>';    
-    // print_r($data);
-    // echo  '</pre>';
-    // exit;
-
-
-
 
       $data = $this->db->insert('leaves', $data);
       $st = array('st'=>1);
+
     }
-  
+
+
+
+
+
+      $this->db->select('*');
+      $this->db->from('leaves');
+      $this->db->where('leaves.OFFICER',   $_SESSION['PERSONNEL_ID']);
+      $this->db->where('leaves.SUPERVISOR_STATUS', '0');
+
+      $leaves_status = $this->db->get();
+      $leaves_status = $leaves_status->result_array();
+      $leaves_status = count($leaves_status); 
+      $_SESSION['OFFICER_STATUS'] = $leaves_status;
+      
     return $st;
   }
   
   public function get_edit_leaves($data){
    
-    // echo'<pre>';
-    // print_r($data);
-    // echo'</pre>';
-    // exit;
+ 
+   
 
 
 
 
     $this->db->select('*');
     $this->db->from('leaves');
-    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
     $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
-    $this->db->where('leaves.PERSONNEL_ID', $data['PERSONNEL_ID']);
-    $this->db->where('leaves.OFFICER', $data['PERSONNEL_ID']);
-    $leaves_LEAVE_TYPE_ID = $this->db->get();
-    $leaves_LEAVE_TYPE_ID = $leaves_LEAVE_TYPE_ID->row_array();
+    $this->db->where('leaves.LEAVE_TYPE_ID', $data['LEAVE_TYPE_ID']);
+    $this->db->where('leaves.LEAVE_ID', $data['LEAVE_ID']);
+    
+    $LEAVE_TYPE_ID = $this->db->get();
+    $LEAVE_TYPE_ID = $LEAVE_TYPE_ID->row_array();
 
 
-
+ 
 
 
     
-
     $this->db->select('*');
     $this->db->from('leaves');
-    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
     $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LAST_LEAVE_TYPE_ID');
-    $this->db->where('leaves.SUPERVISOR_ID', $data['PERSONNEL_ID']);
+    $this->db->where('leaves.LAST_LEAVE_TYPE_ID', $data['LAST_LEAVE_TYPE_ID']);
     $this->db->where('leaves.LEAVE_ID', $data['LEAVE_ID']);
-    $leaves_LAST_LEAVE_TYPE_ID = $this->db->get();
-    $leaves_LAST_LEAVE_TYPE_ID = $leaves_LAST_LEAVE_TYPE_ID->row_array();
-    // echo'<pre>';
-    // print_r($leaves_LAST_LEAVE_TYPE_ID);
-    // echo'</pre>';
+    
+    $LAST_LEAVE_TYPE_ID = $this->db->get();
+    $LAST_LEAVE_TYPE_ID = $LAST_LEAVE_TYPE_ID->row_array();
+
+
+    echo '<pre>';
+    print_r($LEAVE_TYPE_ID);
+    echo '</pre>';
+
+    echo '<pre>';
+    print_r($LAST_LEAVE_TYPE_ID);
+    echo '</pre>';
+    exit;
     $DATA = array(
       'leaves_LEAVE_TYPE_ID'=>$leaves_LEAVE_TYPE_ID,
       'leaves_LAST_LEAVE_TYPE_ID' => $leaves_LAST_LEAVE_TYPE_ID
     );
-    // echo'<pre>';
-    // print_r($DATA);
-    // echo'</pre>';
-    // exit;
+ 
     return $DATA;
   }
   public function edit_leaves($data){
@@ -2164,12 +2121,47 @@ class Home_model extends CI_Model {
       $leaves_SUPERVISOR_ID = $leaves_SUPERVISOR_ID->result_array();
       $leaves_SUPERVISOR_ID = count($leaves_SUPERVISOR_ID);
       $_SESSION['SUPERVISOR_ID'] = $leaves_SUPERVISOR_ID;
+
+
+
+
+
+    
+      $this->db->select('*');
+      $this->db->from('management_positions');
+      $this->db->where('management_positions.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
+      $this->db->where('management_positions.MANAGEMENT_ID', '1');
+
+      $check_OFFICER = $this->db->get();
+      $check_OFFICER = $check_OFFICER->result_array();
+      $_SESSION['check_OFFICER'] = $check_OFFICER;
+
+      
+
+      $this->db->select('*');
+      $this->db->from('management_positions');
+      $this->db->where('management_positions.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
+      // $this->db->where('management_positions.MANAGEMENT_ID', '2');
+
+      // $this->db->where_in('management_positions.MANAGEMENT_ID', '4');
+    
+      
+      $check_SUPERVISOR_ID = $this->db->get();
+      $check_SUPERVISOR_ID = $check_SUPERVISOR_ID->result_array();  
+      $_SESSION['check_SUPERVISOR_ID'] = $check_SUPERVISOR_ID;
+
       
       // echo "<pre>";
       // print_r($_SESSION['OFFICER_STATUS']);
       // echo "</pre>";
       // echo "<pre>";
-      // print_r($_SESSION['SUPERVISOR_ID']);
+      // print_r($_SESSION['PERSONNEL_ID']);
+      // echo "</pre>";
+      // echo "<pre>";
+      // print_r($check_OFFICER);
+      // echo "</pre>";
+      // echo "<pre>";
+      // print_r($check_SUPERVISOR_ID);
       // echo "</pre>";
       // exit();
 
@@ -2689,14 +2681,17 @@ class Home_model extends CI_Model {
     $this->db->from('leaves');
     $this->db->where('leaves.PERSONNEL_ID',$_SESSION['PERSONNEL_ID']);
     $this->db->where('leaves.LEAVE_TYPE_ID',$data['LEAVE_TYPE_ID']);
-
+    $this->db->where('leaves.SUPERVISOR_STATUS','2');
 
     $NUM_LEAVE_TOAL = $this->db->get(); 
     $NUM_LEAVE_TOAL = $NUM_LEAVE_TOAL->result_array();
 
-  
 
+    $NUM_LEAVE_TOAL = isset($NUM_LEAVE_TOAL[0])?$NUM_LEAVE_TOAL[0]:"0";
 
+    $NUM_LEAVE_TOAL = isset($NUM_LEAVE_TOAL['LEAVE_TOAL'])?$NUM_LEAVE_TOAL['LEAVE_TOAL']:"0";
+
+    
     // echo "<pre>";
     // print_r($leave_types);
     // echo "</pre>";
@@ -2704,7 +2699,7 @@ class Home_model extends CI_Model {
     // print_r($leaves);
     // echo "</pre>";
     // echo "<pre>";
-    // print_r($NUM_LEAVE_TOAL[0]);
+    // print_r($NUM_LEAVE_TOAL);
     // echo "</pre>";
     // exit;
 
@@ -2718,7 +2713,7 @@ class Home_model extends CI_Model {
     $DATA = array(
       'leaves'=>$leaves,
       'leave_types' => $leave_types,
-      'NUM_LEAVE_TOAL' => $NUM_LEAVE_TOAL[0]
+      'NUM_LEAVE_TOAL' => $NUM_LEAVE_TOAL
     );
  
     // echo'<pre>';
@@ -2747,7 +2742,9 @@ class Home_model extends CI_Model {
     $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
     $this->db->where('leaves.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
 
-
+    $this->db->where('leaves.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
+    
+    $this->db->where('leaves.SUPERVISOR_STATUS', '2');
  
     $this->db->order_by("LEAVE_ID", "DESC");
     $leaves = $this->db->get();
@@ -3016,60 +3013,6 @@ class Home_model extends CI_Model {
 
     return $st;
   }
-
-  public function last_leave_end_date_onchange($data){
-   
-
-   
-
-    echo "<pre>";
-    print_r($data['days']);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-
-
-    $this->db->select('*');
-    $this->db->from('leaves');
-    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
-    $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
-    $this->db->where('leaves.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
-
-
- 
-    $this->db->order_by("LEAVE_ID", "DESC");
-    $leaves = $this->db->get();
-    $leaves = $leaves->row_array();
-   
-
-
-
-
-
-
-
-
-
-
- 
-
-    $DATA = array(
-      'leaves'=>$leaves
-    );
-    //  echo "<pre>";
-    // print_r($DATA);
-    // echo "</pre>";
-    exit;
-
-    return $DATA ;
-  
-
-  }
-
-
-  
-
 
 
   public function check_login_student($data){

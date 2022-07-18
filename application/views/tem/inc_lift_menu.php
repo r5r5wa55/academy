@@ -255,7 +255,7 @@
                     </p>
                   </a>
                 </li>   
-                <?php if ($_SESSION['OFFICER_STATUS'] != '0'): ?>
+                <?php if ($_SESSION['check_OFFICER'] != null): ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url()?>index.php/Home/leaves_approve" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -263,20 +263,22 @@
                         <?php echo $_SESSION['OFFICER_STATUS']?>
                       </span>
                       <p>
-                        อนุมัติการลา(เจ้าหน้าที่)
+                       (เจ้าหน้าที่)ยังไม่อนุมัติ
                       </p>
                     </a>
                   </li>
                 <?php endif; ?>
-                <?php if ($_SESSION['OFFICER_STATUS'] != '0'): ?>
+                <?php if ($_SESSION['check_SUPERVISOR_ID'] != null): ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url()?>index.php/Home/leaves_approve_supervisor" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <span class="badge badge-info right">
+                     
                         <?php echo $_SESSION['SUPERVISOR_ID']?>
+                     
                       </span>
                       <p>
-                        อนุมัติการลา(หัวหน้า)
+                        (หัวหน้า)ยังไม่อนุมัติ
                       </p>
                     </a>
                   </li>  

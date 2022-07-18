@@ -717,7 +717,7 @@ class Home extends CI_Controller {
   }
 	//
 	public function leaves(){
-		$this->check_login_session();		
+		// $this->check_login_session();		
 		$data_search = $this->search_all(); 
 		$data = $this->mhome->select_leaves($data_search);
 		// 	echo "<pre>";
@@ -728,6 +728,10 @@ class Home extends CI_Controller {
 	} 
 	public function add_leaves(){
 		$this->check_login_session();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
 		$data = $this->mhome->add_leaves($_POST);
 		// echo "<pre>";
 		// print_r($data);
@@ -1066,16 +1070,6 @@ class Home extends CI_Controller {
 	public function add_edit_leaves_approve_supervisor(){
 		$this->check_login_session();		
 		$data = $this->mhome->add_edit_leaves_approve_supervisor($_POST);
-		// 	echo "<pre>";
-		// print_r($data);
-		// echo "</pre>";
-		// exit(); 
-		echo json_encode($data);
-	} 
-	
-	public function last_leave_end_date_onchange(){
-		$this->check_login_session();		
-		$data = $this->mhome->last_leave_end_date_onchange($_POST);
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
