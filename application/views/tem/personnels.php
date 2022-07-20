@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php foreach($personnels as $key=>$value):?><!-- show_personnels -->
         <div class="row row body-show-long">
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center zoom-in"
-            onclick="main.get_edit_personnels(
+                onclick="main.get_edit_personnels(
                 '<?php echo $value['PERSONNEL_ID'];?>',
                 '<?php echo $value['PERSONNEL_NAME'];?>',
                 '<?php echo $value['PERSONNEL_SURNAME'];?>',

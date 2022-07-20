@@ -83,22 +83,20 @@ a.btn-edit:hover{
 }
 .box-btn-center {
   text-align: center;
-  margin: -0.5px; 
+ 
   padding-top: 10px;
   padding-bottom: 10px;
-  border: none solid none;   
+   
   justify-content: center;
-  display: flex;
   align-items: center;
 }
 .box-btn-left {
-  text-align: center;
-  margin: -0.5px; 
+  text-align: left;
   padding-top: 10px;
   padding-bottom: 10px;
   border: none solid none;   
   justify-content: left;
-  display: flex;
+ 
   align-items: center;
 }
 a.btn-delete {
@@ -221,9 +219,14 @@ span:hover + div.show-text  {
   text-decoration: none;
   color: #ca0505;
 }
-/* .content-wrapper {
-  background-color: #1e273a;
-} */
+.text-long {
+  white-space: nowrap; 
+  width: 200px; 
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+}
 
 
 

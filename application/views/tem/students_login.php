@@ -40,13 +40,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <span class="text-danger"></span>  
         </div>
         <div class="row">
-          <div class="col-12"><button type="button" class="btn btn-block btn-outline-primary btn-lg" onclick="main.check_login_student();">เข้าสู่ระบบ</button></div>
+          <div class="col-12"><button type="button" class="btn btn-block btn-outline-primary btn-lg"  onclick="main.check_login_student()">เข้าสู่ระบบ</button></div>
           <!-- /.col -->
         </div>
         
       </form>
 
-    
+     
  
   
  
@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- /.login-box -->
 
 <!-- jQuery -->
-
+<?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
 <script>
   function myFunctionedit() {

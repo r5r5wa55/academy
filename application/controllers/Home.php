@@ -757,8 +757,29 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	} 
+	public function get_edit_leaves_approve(){
+		$this->check_login_session();		
+		$data = $this->mhome->get_edit_leaves_approve($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	
+
+	public function update_leaves_approve(){
+		$this->check_login_session();		
+		$data = $this->mhome->update_leaves_approve($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
 	
 	
+
 	public function delete_leaves(){
 		$this->check_login_session();
 		$data = $this->mhome->delete_leaves($_POST);
@@ -1011,6 +1032,16 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	} 
+	public function edit_leave_type_id(){
+		$this->check_login_session();		
+		$data = $this->mhome->edit_leave_type_id($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	} 
+	
 	public function get_last_leave_type_name(){
 		$this->check_login_session();		
 		$data = $this->mhome->get_last_leave_type_name($_POST);

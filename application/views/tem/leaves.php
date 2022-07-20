@@ -83,7 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php foreach($leaves as $key=>$value):?>
         <div class="row body-show-long">
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center zoom-in"
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left zoom-in text-long"
             onclick="main.get_show_leaves(
             '<?php echo $value['LEAVE_ID'];?>',
             '<?php echo $value['LEAVE_TYPE_ID'];?>',
@@ -106,45 +106,74 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php echo $value['LEAVE_TYPE'];?>
           </div>
          
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left text-long"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></div>
           
 
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
             <?php echo $value['LEAVE_TOAL'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วัน
           </div>
 
 
 
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
-            <?php
-              if($value['SUPERVISOR_STATUS'] == "0"){
-                echo "รอการอนุมัติ(เจ้าหน้าที่)";   
-              }elseif($value['SUPERVISOR_STATUS'] == "1"){
-                echo "รอการอนุมัติ(หัวหน้า)";  
-              }elseif($value['SUPERVISOR_STATUS'] == "2"){
-                echo "ได้รับการอนุมัติ";  
-              }else{
-                echo "ไม่ผ่ารการอนุมัติ";  
-              }
-            ?>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
+
+
+          <?php if ($value['SUPERVISOR_STATUS'] == '0'): ?>
+            <a class="primary">รอการอนุมัติ(เจ้าหน้าที่)</a>
+             
+            <?php endif; ?>
+            <?php if ($value['SUPERVISOR_STATUS'] == '1'): ?>
+              <a class="primary">รอการอนุมัติ(หัวหน้า)</a>
+            <?php endif; ?>
+            <?php if ($value['SUPERVISOR_STATUS'] == '2'): ?>
+              <a class="success">ได้รับการอนุมัติ</a>
+            <?php endif; ?>
+            <?php if ($value['SUPERVISOR_STATUS'] == '3'): ?>
+              <a class="danger">ไม่ผ่ารการอนุมัติ</a>
+            <?php endif; ?>
+
+
+        
      
           </div> 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
-            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_leaves(
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
+  
+          <?php if ($value['SUPERVISOR_STATUS'] == '0'): ?>
+            <a href="javascript:void(0)" class="btn-edit text-long" onclick="main.get_edit_leaves(
               '<?php echo $value['LEAVE_ID'];?>',
               '<?php echo $value['LEAVE_TYPE_ID'];?>',     
               '<?php echo $value['WRITE_DATE'];?>',
+              '<?php echo $value['LEAVE_START_DATE'];?>',
+              '<?php echo $value['LEAVE_END_DATE'];?>',
+              '<?php echo $value['MY_CHECK'];?>',
               '<?php echo $value['LAST_LEAVE_TYPE_ID'];?>',
               '<?php echo $value['OFFICER'];?>',
               '<?php echo $value['SUPERVISOR_ID'];?>',
               '<?php echo $value['PERSONNEL_ID'];?>');">
                แก้ไขข้อมูล
             </a>
+            <?php endif; ?>
+            <?php if ($value['SUPERVISOR_STATUS'] == '1'): ?>
+              <a class="danger">ไม่สามารถแก้ไขได้</a>
+            <?php endif; ?>
+            <?php if ($value['SUPERVISOR_STATUS'] == '2'): ?>
+              <a class="danger">ไม่สามารถแก้ไขได้</a>
+            <?php endif; ?>
+            <?php if ($value['SUPERVISOR_STATUS'] == '3'): ?>
+              <a class="danger">ไม่สามารถแก้ไขได้</a>
+            <?php endif; ?>
+
+
+
+       
+
+
+      
           </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
               <a href="javascript:void(0);" class="btn-delete" onclick="main.delete_leaves('<?php echo $value['LEAVE_ID'];?>');">
                 ลบข้อมูล
               </a>
@@ -330,13 +359,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              
             <div class="col-md-6">
 
-         
+              <input type="hidden" class="form-control"  name="LEAVE_ID" id="LEAVE_ID" >
               <label for="formGroupExampleInpt" >ผู้ขอลา</label>
-              <input type="text" class="form-control"  name="PERSONNEL_ID" value="<?php echo $_SESSION['PERSONNEL_ID'];?>" readonly placeholder="<?php echo $_SESSION['PERSONNEL_ID'];?>">
+              <input type="text" class="form-control"  name="PERSONNEL_ID"  readonly placeholder="รหัสผู้ขอลา">
               
               
               <label for="formGroupExampleInput">หัวข้อการล่าครั้งลาสุด</label>
-              <select class="form-control" name="LAST_LEAVE_TYPE_ID"  data-id-LEAVE_TYPE_ID="0"  onchange="main.get_edit_last_leave_type_onchange(this)" disabled >
+              <select class="form-control" name="LAST_LEAVE_TYPE_ID" disabled = false>
                 <option value="">ยังไม่มีการทำรายการ</option>
                 <?php foreach($leave_types as $key=>$value):?>
                   <option value="<?php echo $value['LEAVE_TYPE_ID'];?>"><?php echo $value['LEAVE_TYPE'];?></option>
@@ -348,7 +377,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="col-md-6">
               <label for="formGroupExampleInput">วันที่ทำแบบฟอร์ม</label>
-              <input type="text" class="form-control"  id="WRITE_DATE"  name="WRITE_DATE" placeholder="วันที่ลา" readonly value="<?php echo date("Y/m/d") ?>">
+              <input type="text" class="form-control"  id="WRITE_DATE"  name="WRITE_DATE" placeholder="วันที่ลา" readonly >
               <div class="row" >
                 <div class="col-lg-6 col-md-6 col-sm-6 body-leave-number">
                   <label for="formGroupExampleInput">วันลาทั้งหมด</label>
@@ -376,7 +405,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
               <label for="formGroupExampleInput">หัวข้อการลา</label>
-              <select class="form-control" name="LEAVE_TYPE_ID" onchange="main.get_last_leave_type_onchange(this)">
+              <select class="form-control" name="LEAVE_TYPE_ID" onchange="main.get_edit_last_leave_type_onchange(this)">
                 <option value="">กรุณาเลือก</option>
                 <?php foreach($leave_types as $key=>$value):?>
                   <option value="<?php echo $value['LEAVE_TYPE_ID'];?>"><?php echo $value['LEAVE_TYPE'];?></option>
@@ -385,7 +414,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               
               <label for="formGroupExampleInput">ขอลาตั้งแต่วันที่</label>
-              <input type="text" class="form-control" readonly id="edit_LEAVE_START_DATE" name="edit_LEAVE_START_DATE" placeholder="ตั้งแต่วันที่"  onchange="main.last_leave_end_date_onchange(this)">
+              <input type="text" class="form-control" readonly id="edit_LEAVE_START_DATE" name="edit_LEAVE_START_DATE" placeholder="ตั้งแต่วันที่"  onchange="main.last_edit_leave_end_date_onchange(this)">
 
               <label for="formGroupExampleInput">เจ้าหน้าที่</label>
               <select class="form-control" name="OFFICER">
@@ -416,7 +445,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>  
   
               <label for="formGroupExampleInput">ขอลาถึงวันที่</label>
-              <input type="text" class="form-control" readonly id="edit_LEAVE_END_DATE" name="edit_LEAVE_END_DATE" placeholder="ถึงวันที่"  onchange="main.last_leave_end_date_onchange(this)"> 
+              <input type="text" class="form-control" readonly id="edit_LEAVE_END_DATE" name="edit_LEAVE_END_DATE" placeholder="ถึงวันที่"  onchange="main.last_edit_leave_end_date_onchange(this)"> 
               
               <label for="formGroupExampleInput">หัวหน้างาน</label>
               <select class="form-control" name="SUPERVISOR_ID">
@@ -443,13 +472,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="form-check col-md-12">
 
                 <div class="col-lg-12 col-md-12 col-sm-12 body-leave-number">
-                  <input type="checkbox"  class="form-check-input" id="myCheck" onclick="myFunction()">
+                  <input type="checkbox"  class="form-check-input" id="myCheck_edit" name="myCheck_edit" onclick="myFunction_edit()">
                   <label for="formGroupExampleInput">กรณีที่ลาครึ่งวัน</label>
                 </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 body-leave-number" style="display:none" id="HALF_DATE" >
+                <div class="col-lg-12 col-md-12 col-sm-12 body-leave-number" style="display:none" id="HALF_DATE_edit" >
 
-                  <input type="text" class="form-control" readonly  id="LEAVE_HALF_DATE" name="LEAVE_HALF_DATE" placeholder="วันที่ลาครึ่งวัน"> 
+                  <input type="text" class="form-control" readonly  id="edit_LEAVE_HALF_DATE" name="edit_LEAVE_HALF_DATE" placeholder="วันที่ลาครึ่งวัน" onchange="main.last_edit_leave_end_date_onchange(this)"> 
                   <label class="form-check-label"></label>
 
                   <div class="row radioinput">    
@@ -471,7 +500,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-          <button type="button" class="btn btn-primary" onclick="main.add_leaves();">ยืนยันข้อมูล</button>
+          <button type="button" class="btn btn-primary" onclick="main.edit_leaves();">ยืนยันข้อมูล</button>
         </div>
       </div>
     </div>
@@ -725,11 +754,55 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     if (checkBox.checked == true){
       HALF_DATE.style.display = "block";
     } else {
+    
       HALF_DATE.style.display = "none" ;
-      $('#add_leaves [name=LEAVE_HALF_DATE]').val("").val();
-      $('#add_leaves [name=LEAVE_START_DATE]').val("").val();
-      $('#add_leaves [name=LEAVE_END_DATE]').val("").val();
-      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val("0").val();
+      let confirmAction = confirm("ถ้ากดตกลง จะทำการรีเช็ตข้อมูลวันที่");
+      if (confirmAction) {
+          alert("เสร็จสิ้น");
+          
+          $('#add_leaves [name=myCheck]').val("").val();
+          $('#add_leaves [name=LEAVE_HALF_DATE]').val("").val();
+          $('#add_leaves [name=LEAVE_START_DATE]').val("").val();
+          $('#add_leaves [name=LEAVE_END_DATE]').val("").val();
+          $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val("0").val();
+        } else {
+          $('#add_leaves [name=myCheck]').prop('checked',true);
+          HALF_DATE.style.display = "block";
+         
+        }
+    }
+       
+  }
+
+
+
+
+  function myFunction_edit() {
+    var checkBox = document.getElementById("myCheck_edit");
+    var HALF_DATE = document.getElementById("HALF_DATE_edit");
+    var LEAVE_HALF_DATE = $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val();
+
+    if (checkBox.checked == true){
+      HALF_DATE.style.display = "block";
+    } else {
+      HALF_DATE.style.display = "none" ;
+      let confirmAction = confirm("ถ้ากดตกลง จะทำการรีเช็ตข้อมูลวันที่");
+      if (confirmAction) {
+          alert("เสร็จสิ้น");
+          
+        $('#edit_leaves [name=myCheck]').val("").val();
+        $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val("").val();
+        $('#edit_leaves [name=edit_LEAVE_START_DATE]').val("").val();
+        $('#edit_leaves [name=edit_LEAVE_END_DATE]').val("").val();
+        $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val("0").val();
+  
+        }else {
+          $('#edit_leaves [name=myCheck_edit]').prop('checked',true);
+          HALF_DATE.style.display = "block";
+         
+        }
+
+
     
     }
      
@@ -737,10 +810,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
      
   }
-
-
+  
 
   
+
+
   jQuery('#LEAVE_HALF_DATE').datetimepicker({
     onGenerate:function( ct ){
         jQuery(this).find('.xdsoft_date.xdsoft_weekend')
@@ -763,7 +837,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
   });
 
+  jQuery('#edit_LEAVE_HALF_DATE').datetimepicker({
+    onGenerate:function( ct ){
+        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+          .addClass('xdsoft_disabled');
+      },
+    weekends:['01.01.2014','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'],
+    format:'Y/m/d',
+  
+    timepicker:false,
 
+  
+    minDate:new Date(),
+    onShow:function( ct ){
+      this.setOptions({
+        minDate:jQuery('#edit_LEAVE_START_DATE').val()?jQuery('#edit_LEAVE_START_DATE').val():false,
+        maxDate:jQuery('#edit_LEAVE_END_DATE').val()?jQuery('#edit_LEAVE_END_DATE').val():false
+      })
+    },
+
+  
+  });
 
 
   

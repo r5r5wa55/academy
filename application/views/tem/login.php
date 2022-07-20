@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <!-- /.col -->
           <div class="col-4">
             
-          <button type="button" class="btn btn-primary" onclick="main.check_login();">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="main.check_login()">Save changes</button>
 
 
 
@@ -77,8 +77,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- jQuery -->
 
 <!-- Code injected by live-server -->
+<?php $this->load->view('inc_js')?>
 <script type="text/javascript">
-  <?php $this->load->view('inc_js')?>
+ 
 	// <![CDATA[  <-- For SVG support
 	if ('WebSocket' in window) {
 		(function () {

@@ -3278,9 +3278,7 @@ var main = {
     var LAST_LEAVE_START_DATE = $('#add_leaves [name=LAST_LEAVE_START_DATE]').val();
     var LAST_LEAVE_END_DATE = $('#add_leaves [name=LAST_LEAVE_END_DATE]').val();
     var LEAVE_TOAL = $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val();
-
-    
-    
+ 
     var LEAVE_TYPE_ID = $('#add_leaves [name=LEAVE_TYPE_ID] option:selected').val();
     var LEAVE_START_DATE = $('#add_leaves [name=LEAVE_START_DATE]').val();
     var LEAVE_END_DATE = $('#add_leaves [name=LEAVE_END_DATE]').val();
@@ -3294,7 +3292,7 @@ var main = {
     var HALF_ONE = $('#add_leaves [name=HALF_ONE]:checked').val();
 
     var myCheck =  $('#add_leaves [name=myCheck]:checked').val();
-    // var myCheck =  $('#add_leaves [name=myCheck]').val('checked', false);
+
     
     if(myCheck === undefined){
       var myCheck = (null == undefined);
@@ -3318,16 +3316,10 @@ var main = {
     // console.log(CONFINED)
     // console.log(LEAVE_HALF_DATE)
     // console.log(HALF_ONE)
-    
- 
 
-   
     // console.log(LAST_LEAVE_END_DATE)
    
-   
   
- 
-
     // console.log(LEAVE_HALF_DATE)
     // console.log(myCheck)
     // return false;
@@ -3409,28 +3401,34 @@ var main = {
 
 
 
-  get_edit_leaves(LEAVE_ID,LEAVE_TYPE_ID,WRITE_DATE,
-    LAST_LEAVE_TYPE_ID,OFFICER,
-    SUPERVISOR_ID,PERSONNEL_ID){
+  get_edit_leaves(LEAVE_ID,LEAVE_TYPE_ID,WRITE_DATE,LEAVE_START_DATE,LEAVE_END_DATE,MY_CHECK,
+    LAST_LEAVE_TYPE_ID,OFFICER,SUPERVISOR_ID,PERSONNEL_ID){
+
       
-    // console.log(LEAVE_ID)
-    // console.log(LEAVE_TYPE_ID)
-    // console.log(WRITE_PLACE)
-    // console.log(WRITE_DATE)
-    // console.log(LEAVE_START_DATE)
-    // console.log(LEAVE_END_DATE)
-    // console.log(LEAVE_TOAL)
-    // console.log(LAST_LEAVE_TYPE_ID)
-    // console.log(LAST_LEAVE_START_DATE)
-    // console.log(LAST_LEAVE_END_DATE)
-    // console.log(LAST_LEAVE_TOAL)
-    // console.log(OFFICER)
-    // console.log(SUPERVISOR_ID)
-    // console.log(PERSONNEL_ID)
-    // console.log(CONFINED)
-    // console.log(LEAVE_HALF_DATE)
-    // console.log(HALF_ONE)
-    // console.log(LAST_LEAVE_TYPE_MAX_SHOW)
+      
+      var startDate = new Date(LEAVE_START_DATE);
+      var currentDate = new Date(LEAVE_END_DATE);
+      var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
+      var aDay = 24 * 60 * 60 * 1000,
+  
+      daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+   
+      if(MY_CHECK != 'on' && startDate != '' && currentDate != '' ){
+        daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+      }else{
+        daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1-0.5;
+      }
+      
+      
+
+      // console.log(startDate);
+      // console.log($('#LEAVE_START_DATE').val());
+      // console.log(daysDiff);
+      // console.log(MY_CHECK);
+      // return false;
+
+
+
     var url = window.location.origin+"/index.php/Home/get_edit_leaves";
 
     var data = {
@@ -3441,7 +3439,9 @@ var main = {
       'SUPERVISOR_ID':SUPERVISOR_ID,
       'OFFICER':OFFICER,
       'WRITE_DATE':WRITE_DATE,
-      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID
+      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
+      'daysDiff':daysDiff
+      
     }
 
 
@@ -3457,9 +3457,115 @@ var main = {
       },
       
     }).done(function(resp) {
-        console.log(resp)
-        return false;
+        // console.log(resp)
+    
+        // return false;
+        var HALF_DATE = document.getElementById("HALF_DATE_edit");
+
+        if(resp.LAST_LEAVE_TYPE_ID != ""){
+          $("#edit_leaves [name=myCheck_edit]").removeAttr('checked');
+
+          $('#edit_leaves [name=LEAVE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_ID);
+
+          $('#edit_leaves [name=PERSONNEL_ID]').val(resp.LEAVE_TYPE_ID.PERSONNEL_ID);
+          $('#edit_leaves [name=WRITE_DATE]').val(resp.LEAVE_TYPE_ID.WRITE_DATE);
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_ID]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_ID);
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_MAX);
+          $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TOAL);
+          $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_START_DATE);
+          $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_END_DATE);
+          
+  
+          $('#edit_leaves [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
+          $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
+          $('#edit_leaves [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
+          $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
+          $('#edit_leaves [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
+          $('#edit_leaves [name=SUPERVISOR_ID]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_ID);
+          $('#edit_leaves [name=WRITE_PLACE]').val(resp.LEAVE_TYPE_ID.WRITE_PLACE);
+          $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_HALF_DATE);
+
+
+
+          if(resp.LEAVE_TYPE_ID.MY_CHECK === "on"){
+           
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',true);
+            HALF_DATE.style.display = "block";
+          }else{
+
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',false);
+            HALF_DATE.style.display = "none" ;
+          }
+        
    
+  
+          $('#edit_leaves [name=CONFINED]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.CONFINED){
+              // console.log($(value).val());
+              // console.log(resp.LEAVE_TYPE_ID.CONFINED);
+              $(value).prop( "checked", true);
+            }
+          });
+          $('#edit_leaves [name=HALF_ONE]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.HALF_ONE){
+              $(value).prop( "checked", true); 
+            }
+          });
+          
+        }else{
+          $("#edit_leaves [name=myCheck_edit]").removeAttr('checked');
+          $('#edit_leaves [name=LEAVE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_ID);
+          $('#edit_leaves [name=PERSONNEL_ID]').val(resp.LEAVE_TYPE_ID.PERSONNEL_ID);
+          $('#edit_leaves [name=WRITE_DATE]').val(resp.LEAVE_TYPE_ID.WRITE_DATE);
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_ID]').val('');
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val('0');
+          $('#edit_leaves [name=LAST_LEAVE_TOAL]').val('0');
+          $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val('ยังไม่ได้ทำรายการ');
+          $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val('ยังไม่ได้ทำรายการ');
+          
+          
+
+          
+          $('#edit_leaves [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
+          $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
+          $('#edit_leaves [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
+          $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
+          $('#edit_leaves [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
+          $('#edit_leaves [name=SUPERVISOR_ID]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_ID);
+          $('#edit_leaves [name=WRITE_PLACE]').val(resp.LEAVE_TYPE_ID.WRITE_PLACE);
+          $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_HALF_DATE);
+
+          
+       
+          if(resp.LEAVE_TYPE_ID.MY_CHECK === "on"){
+           
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',true);
+            HALF_DATE.style.display = "block";
+          }else{
+            
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',false);
+            HALF_DATE.style.display = "none" ;
+          }
+        
+
+  
+          $('#edit_leaves [name=CONFINED]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.CONFINED){
+              $(value).prop( "checked", true);
+            }
+          });
+          $('#edit_leaves [name=HALF_ONE]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.HALF_ONE){
+              $(value).prop( "checked", true); 
+            }
+          });
+        }
+
+        $('#edit_leaves').modal('show'); 
     })
     
 
@@ -3467,6 +3573,222 @@ var main = {
     // $('#edit_leaves').modal('show'); 
    ;
   }, 
+  
+
+
+  add_get_edit_leaves_approve(LEAVE_ID,LEAVE_TYPE_ID,WRITE_DATE,LEAVE_START_DATE,LEAVE_END_DATE,MY_CHECK,
+    LAST_LEAVE_TYPE_ID,OFFICER,SUPERVISOR_ID,PERSONNEL_ID){
+
+      
+      
+      var startDate = new Date(LEAVE_START_DATE);
+      var currentDate = new Date(LEAVE_END_DATE);
+      var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
+      var aDay = 24 * 60 * 60 * 1000,
+  
+      daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+   
+      if(MY_CHECK != 'on' && startDate != '' && currentDate != '' ){
+        daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+      }else{
+        daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1-0.5;
+      }
+      
+      
+
+      // console.log(startDate);
+      // console.log($('#LEAVE_START_DATE').val());
+      // console.log(daysDiff);
+      // console.log(MY_CHECK);
+      // return false;
+
+
+
+    var url = window.location.origin+"/index.php/Home/get_edit_leaves";
+
+    var data = {
+      
+      'LEAVE_ID':LEAVE_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+      'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
+      'SUPERVISOR_ID':SUPERVISOR_ID,
+      'OFFICER':OFFICER,
+      'WRITE_DATE':WRITE_DATE,
+      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
+      'daysDiff':daysDiff
+      
+    }
+
+      // console.log(data);
+      // return false;
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+      
+    }).done(function(resp) {
+        console.log(resp)
+    
+        // return false;
+        var HALF_DATE = document.getElementById("HALF_DATE");
+
+        if(resp.LAST_LEAVE_TYPE_ID != ""){
+          $("#add_edit_leaves_approve [name=myCheck_edit]").removeAttr('checked');
+
+          $('#add_edit_leaves_approve [name=LEAVE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_ID);
+
+          $('#add_edit_leaves_approve [name=PERSONNEL_ID]').val(resp.LEAVE_TYPE_ID.PERSONNEL_ID);
+          $('#add_edit_leaves_approve [name=WRITE_DATE]').val(resp.LEAVE_TYPE_ID.WRITE_DATE);
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_TYPE_ID]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_ID);
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_MAX);
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_TOAL]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TOAL);
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_START_DATE]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_START_DATE);
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_END_DATE]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_END_DATE);
+          
+  
+          $('#add_edit_leaves_approve [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
+          $('#add_edit_leaves_approve [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
+          $('#add_edit_leaves_approve [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
+          $('#add_edit_leaves_approve [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#add_edit_leaves_approve [name=LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
+          $('#add_edit_leaves_approve [name=LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
+          $('#add_edit_leaves_approve [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
+          $('#add_edit_leaves_approve [name=SUPERVISOR_ID]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_ID);
+          $('#add_edit_leaves_approve [name=WRITE_PLACE]').val(resp.LEAVE_TYPE_ID.WRITE_PLACE);
+          $('#add_edit_leaves_approve [name=LEAVE_HALF_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_HALF_DATE);
+
+
+          $('#add_edit_leaves_approve [name=SUPERVISOR_OPINION]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_OPINION);
+          
+
+          if(resp.LEAVE_TYPE_ID.MY_CHECK === "on"){
+           
+            $('#add_edit_leaves_approve [name=myCheck]').prop('checked',true);
+            HALF_DATE.style.display = "block";
+          }else{
+
+            $('#add_edit_leaves_approve [name=myCheck]').prop('checked',false);
+            HALF_DATE.style.display = "none" ;
+          }
+        
+   
+  
+   
+          $('#add_edit_leaves_approve [name=HALF_ONE]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.HALF_ONE){
+              $(value).prop( "checked", true); 
+            }
+          });
+          
+        }else{
+          $("#add_edit_leaves_approve [name=myCheck_edit]").removeAttr('checked');
+          $('#add_edit_leaves_approve [name=LEAVE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_ID);
+          $('#add_edit_leaves_approve [name=PERSONNEL_ID]').val(resp.LEAVE_TYPE_ID.PERSONNEL_ID);
+          $('#add_edit_leaves_approve [name=WRITE_DATE]').val(resp.LEAVE_TYPE_ID.WRITE_DATE);
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_TYPE_ID]').val('');
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_TYPE_MAX_SHOW]').val('0');
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_TOAL]').val('0');
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_START_DATE]').val('ยังไม่ได้ทำรายการ');
+          $('#add_edit_leaves_approve [name=LAST_LEAVE_END_DATE]').val('ยังไม่ได้ทำรายการ');
+          
+          
+
+          
+          $('#add_edit_leaves_approve [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
+          $('#add_edit_leaves_approve [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
+          $('#add_edit_leaves_approve [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
+          $('#add_edit_leaves_approve [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#add_edit_leaves_approve [name=LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
+          $('#add_edit_leaves_approve [name=LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
+          $('#add_edit_leaves_approve [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
+          $('#add_edit_leaves_approve [name=SUPERVISOR_ID]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_ID);
+          $('#add_edit_leaves_approve [name=WRITE_PLACE]').val(resp.LEAVE_TYPE_ID.WRITE_PLACE);
+          $('#add_edit_leaves_approve [name=LEAVE_HALF_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_HALF_DATE);
+
+          $('#add_edit_leaves_approve [name=SUPERVISOR_OPINION]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_OPINION);
+          
+       
+          if(resp.LEAVE_TYPE_ID.MY_CHECK === "on"){
+           
+            $('#add_edit_leaves_approve [name=myCheck]').prop('checked',true);
+            HALF_DATE.style.display = "block";
+          
+          }else{
+            
+            $('#add_edit_leaves_approve [name=myCheck]').prop('checked',false);
+            HALF_DATE.style.display = "none" ;
+            
+          }
+        
+          $('#add_edit_leaves_approve [name=HALF_ONE]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.HALF_ONE){
+              $(value).prop( "checked", true); 
+            }
+          });
+        }
+
+        $('#add_edit_leaves_approve').modal('show'); 
+    })
+    
+
+ 
+    // $('#edit_leaves').modal('show'); 
+   ;
+  }, 
+
+
+
+
+  update_leaves_approve(){
+      
+    var LEAVE_ID = $('#add_edit_leaves_approve [name=LEAVE_ID]').val()
+    var SUPERVISOR_OPINION = $('#add_edit_leaves_approve [name=SUPERVISOR_OPINION]').val()
+    var SUPERVISOR_STATUS = $('#add_edit_leaves_approve [name=SUPERVISOR_STATUS]:checked').val()
+
+    
+    // console.log(LEAVE_ID);
+    // console.log(SUPERVISOR_OPINION);
+    // console.log(SUPERVISOR_STATUS);
+    // return false;
+  
+  
+    var url = window.location.origin+"/index.php/Home/update_leaves_approve";
+  // console.log(FACUALTY_NAME_TH);
+  // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    var data = {
+      'LEAVE_ID':LEAVE_ID,
+      'SUPERVISOR_OPINION':SUPERVISOR_OPINION,
+      'SUPERVISOR_STATUS':SUPERVISOR_STATUS
+    }
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        // console.log(data);
+        // return false;
+      },
+    }).done(function(resp) {
+      if(resp.st == 1){
+        alert('บันทึกสำเร็จ')
+        location.reload();
+      }else{
+        alert('บันทึกไม่สำเร็จ')
+      }
+    })
+    
+  },
+  
+
 
   get_show_leaves(LEAVE_ID,LEAVE_TYPE_ID,WRITE_PLACE,WRITE_DATE,LEAVE_START_DATE,LEAVE_END_DATE,
     LEAVE_TOAL,LAST_LEAVE_TYPE_ID,LAST_LEAVE_START_DATE,LAST_LEAVE_END_DATE,LAST_LEAVE_TOAL,OFFICER,
@@ -3572,26 +3894,54 @@ var main = {
 
     var LEAVE_ID = $('#edit_leaves [name=LEAVE_ID]').val()
     var PERSONNEL_ID = $('#edit_leaves [name=PERSONNEL_ID]').val()
-    var WRITE_PLACE = $('#edit_leaves [name=WRITE_PLACE]').val()
+    var WRITE_DATE = $('#edit_leaves [name=WRITE_DATE]').val()
+    var LAST_LEAVE_TYPE_ID = $('#edit_leaves [name=LAST_LEAVE_TYPE_ID]').val()
+    var LAST_LEAVE_TYPE_MAX = $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val()
+    var LAST_LEAVE_TOAL = $('#edit_leaves [name=LAST_LEAVE_TOAL]').val()
+    var LAST_LEAVE_START_DATE = $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val()
+    var LAST_LEAVE_END_DATE = $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val()
     var LEAVE_TYPE_ID = $('#edit_leaves [name=LEAVE_TYPE_ID] option:selected').val()
-    var LEAVES_NUMBER_PLUS = $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val()
+    var LEAVE_TOAL = $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val()
     var edit_LEAVE_START_DATE = $('#edit_leaves [name=edit_LEAVE_START_DATE]').val()
     var edit_LEAVE_END_DATE = $('#edit_leaves [name=edit_LEAVE_END_DATE]').val()
     var OFFICER = $('#edit_leaves [name=OFFICER] option:selected').val()
     var SUPERVISOR_ID = $('#edit_leaves [name=SUPERVISOR_ID] option:selected').val()
+    var WRITE_PLACE = $('#edit_leaves [name=WRITE_PLACE]').val()
     var CONFINED = $('#edit_leaves [name=CONFINED]:checked').val()
 
+
+    
+    var myCheck_edit = $('#edit_leaves [name=myCheck_edit]:checked').val()
+    var edit_LEAVE_HALF_DATE = $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val()
+    var HALF_ONE = $('#edit_leaves [name=HALF_ONE]:checked').val()
+
+    if(myCheck_edit === undefined){
+      var myCheck_edit = (null == undefined);
+    }
     
 
 
       // console.log(LEAVE_ID);
-      // console.log(LEAVES_NUMBER_PLUS);
+      // console.log(PERSONNEL_ID);
+      // console.log(WRITE_DATE);
+
+      // console.log(LAST_LEAVE_TYPE_ID);
+      // console.log(LAST_LEAVE_TYPE_MAX);
+      // console.log(LAST_LEAVE_TOAL);
+      // console.log(LAST_LEAVE_START_DATE);
+      // console.log(LAST_LEAVE_END_DATE);
+      // console.log(LEAVE_TYPE_ID);
+      // console.log(LEAVE_TOAL);
+
       // console.log(edit_LEAVE_START_DATE);
       // console.log(edit_LEAVE_END_DATE);
       // console.log(OFFICER);
       // console.log(SUPERVISOR_ID);
-      // console.log(LEAVE_ID);
-      // console.log(PERSONNEL_ID);
+      // console.log(WRITE_PLACE);
+      // console.log(CONFINED);
+      // console.log(myCheck_edit);
+      // console.log(edit_LEAVE_HALF_DATE);
+      // console.log(HALF_ONE);
       // return false;
 
 
@@ -3603,9 +3953,31 @@ var main = {
    
     var data = {
     
+      'LEAVE_ID':LEAVE_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+      'WRITE_DATE':WRITE_DATE,
+      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
+      'LAST_LEAVE_TYPE_MAX':LAST_LEAVE_TYPE_MAX,
+      'LAST_LEAVE_TOAL':LAST_LEAVE_TOAL,
+      'LAST_LEAVE_START_DATE':LAST_LEAVE_START_DATE,
+      'LAST_LEAVE_END_DATE':LAST_LEAVE_END_DATE,
+      'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
+      'LEAVE_TOAL':LEAVE_TOAL,
+      'edit_LEAVE_START_DATE':edit_LEAVE_START_DATE,
+      'edit_LEAVE_END_DATE':edit_LEAVE_END_DATE,
+      
+
+      'OFFICER':OFFICER,
+      'SUPERVISOR_ID':SUPERVISOR_ID,
+      'WRITE_PLACE':WRITE_PLACE,
       'CONFINED':CONFINED,
-      'WRITE_PLACE':WRITE_PLACE
+      'myCheck_edit':myCheck_edit,
+      'edit_LEAVE_HALF_DATE':edit_LEAVE_HALF_DATE,
+      'HALF_ONE':HALF_ONE
     }
+    
+
+
 
     $.ajax({
       url : url,
@@ -3721,7 +4093,7 @@ var main = {
       }
       
 
-    })
+    });
     
     $('#edit_profile [name=PERSONNEL_CRETTE_DATE]').val(PERSONNEL_CRETTE_DATE);
 
@@ -4319,6 +4691,9 @@ var main = {
        
       })
   },
+  
+  
+  
   get_edit_last_leave_type_onchange(obj){
     var LEAVE_TYPE_ID = $(obj).val(); 
     var url = window.location.origin+"/index.php/Home/getleaves";
@@ -4345,10 +4720,10 @@ var main = {
       if(resp.leaves == null){
         $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leave_types.LEAVE_TYPE_MAX).val();
         $('#edit_leaves [name=LEAVE_TOAL]').val('0').val();
-        $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
+      
       }else{
         $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leave_types.LEAVE_TYPE_MAX).val();
-        $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves.LEAVE_TOAL).val();
+        $('#edit_leaves [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL).val();
   
       }
   
@@ -4443,13 +4818,14 @@ var main = {
   },
 
   last_leave_end_date_onchange(obj){
-    var LEAVE_HALF_DATE = new Date($('#LEAVE_HALF_DATE').val());
     var startDate = new Date($('#LEAVE_START_DATE').val());
     var currentDate = new Date($('#LEAVE_END_DATE').val());
     var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
-    var aDay = 24 * 60 * 60 * 1000,
+    var aDay = 24 * 60 * 60 * 1000, daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
 
-    var daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+    // console.log($('#LEAVE_START_DATE').val());
+    // console.log(aDay);
+    // return false;
  
     if($('#LEAVE_START_DATE').val() == "" && $('#LEAVE_END_DATE').val() == "" && $('#LEAVE_HALF_DATE').val() == ""){
 
@@ -4475,6 +4851,39 @@ var main = {
   },
 
 
+  last_edit_leave_end_date_onchange(obj){
+    
+    var startDate = new Date($('#edit_LEAVE_START_DATE').val());
+    var currentDate = new Date($('#edit_LEAVE_END_DATE').val());
+    var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
+    var aDay = 24 * 60 * 60 * 1000, daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+
+    // console.log($('#LEAVE_START_DATE').val());
+    // console.log(aDay);
+    // return false;
+ 
+    if($('#edit_LEAVE_START_DATE').val() == "" && $('#edit_LEAVE_END_DATE').val() == "" && $('#edit_LEAVE_HALF_DATE').val() == ""){
+
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
+    }else if($('#edit_LEAVE_START_DATE').val() == "" && $('#edit_LEAVE_END_DATE').val() == ""){
+
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0.5').val();
+      $('#edit_leaves [name=edit_LEAVE_START_DATE]').val($('#edit_LEAVE_HALF_DATE').val()).val();
+      $('#edit_leaves [name=edit_LEAVE_END_DATE]').val($('#edit_LEAVE_HALF_DATE').val()).val();
+    }else if($('#edit_LEAVE_END_DATE').val() == ""){
+
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
+    }else if($('#edit_LEAVE_START_DATE').val() == ""){
+
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
+    }else if($('#edit_LEAVE_HALF_DATE').val() != ""){
+
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(daysDiff-0.5).val();
+    }else{
+
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(daysDiff).val();
+    }
+  },
 
   
 
@@ -4518,118 +4927,53 @@ var main = {
     })
   },
 
-  get_leaves_approve(LEAVE_ID,PERSONNEL_ID){
-      
- 
-  // console.log(obj);
-  // console.log(DEPARTMENT_ID);
-  // return false;
 
 
-  var url = window.location.origin+"/index.php/Home/get_leaves_approve";
-// console.log(FACUALTY_NAME_TH);
-// console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
-  var data = {
-    'LEAVE_ID':LEAVE_ID,
-    'PERSONNEL_ID':PERSONNEL_ID
-  }
-  $.ajax({
-    url : url,
-    method : 'POST',
-    dataType : 'JSON',
-    data:data,
-    cache : false,
-    beforeSend: function(jqXHR, settings) {
-      delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
-    },
-  }).done(function(resp) {
-    console.log(resp);
-    $("#edit_leaves").on('hidden.bs.modal', function () {
-      $(this).data('bs.modal', null);
-    });
+  get_leaves_approve(LEAVE_ID,LEAVE_TYPE_ID,WRITE_DATE,LEAVE_START_DATE,LEAVE_END_DATE,MY_CHECK,
+    LAST_LEAVE_TYPE_ID,OFFICER,SUPERVISOR_ID,PERSONNEL_ID){
 
-    if(resp.leaves_LAST_LEAVE_TYPE_ID != null){
-      $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_ID).val();
-      $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.PERSONNEL_ID).val();
-      $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.WRITE_DATE).val();
-      
-      $('#edit_leaves [name=LAST_LEAVE_TYPE_ID] option').each(function(key,value){
-        $(value).removeAttr('selected');
-        if(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_ID === $(value).val()){
-          $(value).attr("selected","selected")
-        }
-      });
-      $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
-      $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TOAL).val();
-      $('#edit_leaves [name=LAST_LEAVES_NUMBER_SHOW]').val(Number($('[name=LAST_LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LAST_LEAVE_TOAL]').val())).val();
-      $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_START_DATE).val();
-      $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_END_DATE).val();
       
       
-      $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
-        $(value).removeAttr('selected');
-        if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
-          $(value).attr("selected","selected")
-        }
-      });
-      $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
-      $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
-      $('#edit_leaves [name=LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
-      $('#edit_leaves [name=LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
-      $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
-      
-      $('#edit_leaves').modal('show');
-      
-    }else{
-      $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_ID).val();
-      $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LEAVE_TYPE_ID.PERSONNEL_ID).val();
-      $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_DATE).val();
-      $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val('ยังไม่มีการทำรายการ').val();
-      $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val('ยังไม่มีการทำรายการ').val();
-      
-      
-      $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
-        $(value).removeAttr('selected');
-        if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
-          $(value).attr("selected","selected")
-        }
-      });
-      $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
-      $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
-      $('#edit_leaves [name=LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
-      $('#edit_leaves [name=LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
-      $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
+      var startDate = new Date(LEAVE_START_DATE);
+      var currentDate = new Date(LEAVE_END_DATE);
+      var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
+      var aDay = 24 * 60 * 60 * 1000,
+  
+      daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
    
-      $('#edit_leaves').modal('show');
-    }
-
-  })
-  
-  },
- 
-  add_edit_leaves_approve(){
+      if(MY_CHECK != 'on' && startDate != '' && currentDate != '' ){
+        daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+      }else{
+        daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1-0.5;
+      }
       
-    var LEAVE_ID = $('#edit_leaves [name=LEAVE_ID]').val()
-    var SUPERVISOR_OPINION = $('#edit_leaves [name=SUPERVISOR_OPINION]').val()
-    var SUPERVISOR_STATUS = $('#edit_leaves [name=SUPERVISOR_STATUS]:checked').val()
+      
 
-    
-    // console.log(LEAVE_ID);
-    // console.log(SUPERVISOR_OPINION);
-    // console.log(SUPERVISOR_STATUS);
-    // return false;
-  
-  
-    var url = window.location.origin+"/index.php/Home/add_edit_leaves_approve";
-  // console.log(FACUALTY_NAME_TH);
-  // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+      // console.log(startDate);
+      // console.log($('#LEAVE_START_DATE').val());
+      // console.log(daysDiff);
+      // console.log(MY_CHECK);
+      // return false;
+
+
+
+    var url = window.location.origin+"/index.php/Home/get_edit_leaves";
+
     var data = {
+      
       'LEAVE_ID':LEAVE_ID,
-      'SUPERVISOR_OPINION':SUPERVISOR_OPINION,
-      'SUPERVISOR_STATUS':SUPERVISOR_STATUS
+      'PERSONNEL_ID':PERSONNEL_ID,
+      'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
+      'SUPERVISOR_ID':SUPERVISOR_ID,
+      'OFFICER':OFFICER,
+      'WRITE_DATE':WRITE_DATE,
+      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
+      'daysDiff':daysDiff
+      
     }
+
+
+
     $.ajax({
       url : url,
       method : 'POST',
@@ -4638,8 +4982,317 @@ var main = {
       cache : false,
       beforeSend: function(jqXHR, settings) {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
-        // console.log(data);
+      },
+      
+    }).done(function(resp) {
+        // console.log(resp)
+        // console.log(resp.LEAVE_TYPE_ID.MY_CHECK)
+        // console.log(resp)
         // return false;
+        var HALF_DATE = document.getElementById("HALF_DATE_edit");
+
+        if(resp.LAST_LEAVE_TYPE_ID != ""){
+          $("#edit_leaves [name=myCheck_edit]").removeAttr('checked');
+
+          $('#edit_leaves [name=LEAVE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_ID);
+
+          $('#edit_leaves [name=PERSONNEL_ID]').val(resp.LEAVE_TYPE_ID.PERSONNEL_ID);
+          $('#edit_leaves [name=WRITE_DATE]').val(resp.LEAVE_TYPE_ID.WRITE_DATE);
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_ID]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_ID);
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_MAX);
+          $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_TOAL);
+          $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_START_DATE);
+          $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(resp.LAST_LEAVE_TYPE_ID.LAST_LEAVE_END_DATE);
+          
+  
+          $('#edit_leaves [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
+          $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
+          $('#edit_leaves [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
+          $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
+          $('#edit_leaves [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
+          $('#edit_leaves [name=SUPERVISOR_ID]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_ID);
+          $('#edit_leaves [name=WRITE_PLACE]').val(resp.LEAVE_TYPE_ID.WRITE_PLACE);
+          $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_HALF_DATE);
+
+
+
+          if(resp.LEAVE_TYPE_ID.MY_CHECK === "on"){
+           
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',true);
+            HALF_DATE.style.display = "block";
+          }else{
+
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',false);
+            HALF_DATE.style.display = "none" ;
+          }
+        
+   
+  
+          $('#edit_leaves [name=CONFINED]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.CONFINED){
+              // console.log($(value).val());
+              // console.log(resp.LEAVE_TYPE_ID.CONFINED);
+              $(value).prop( "checked", true);
+            }
+          });
+          $('#edit_leaves [name=HALF_ONE]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.HALF_ONE){
+              $(value).prop( "checked", true); 
+            }
+          });
+          
+        }else{
+          $("#edit_leaves [name=myCheck_edit]").removeAttr('checked');
+          $('#edit_leaves [name=LEAVE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_ID);
+          $('#edit_leaves [name=PERSONNEL_ID]').val(resp.LEAVE_TYPE_ID.PERSONNEL_ID);
+          $('#edit_leaves [name=WRITE_DATE]').val(resp.LEAVE_TYPE_ID.WRITE_DATE);
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_ID]').val('');
+          $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val('0');
+          $('#edit_leaves [name=LAST_LEAVE_TOAL]').val('0');
+          $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val('ยังไม่ได้ทำรายการ');
+          $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val('ยังไม่ได้ทำรายการ');
+          
+          
+
+          
+          $('#edit_leaves [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
+          $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
+          $('#edit_leaves [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
+          $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
+          $('#edit_leaves [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
+          $('#edit_leaves [name=SUPERVISOR_ID]').val(resp.LEAVE_TYPE_ID.SUPERVISOR_ID);
+          $('#edit_leaves [name=WRITE_PLACE]').val(resp.LEAVE_TYPE_ID.WRITE_PLACE);
+          $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_HALF_DATE);
+
+          
+       
+          if(resp.LEAVE_TYPE_ID.MY_CHECK === "on"){
+           
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',true);
+            HALF_DATE.style.display = "block";
+          }else{
+            
+            $('#edit_leaves [name=myCheck_edit]').prop('checked',false);
+            HALF_DATE.style.display = "none" ;
+          }
+        
+
+  
+          $('#edit_leaves [name=CONFINED]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.CONFINED){
+              $(value).prop( "checked", true);
+            }
+          });
+          $('#edit_leaves [name=HALF_ONE]').each(function(key,value){
+            if($(value).val()==resp.LEAVE_TYPE_ID.HALF_ONE){
+              $(value).prop( "checked", true); 
+            }
+          });
+        }
+
+        $('#edit_leaves').modal('show'); 
+    })
+    
+
+ 
+    // $('#edit_leaves').modal('show'); 
+   ;
+  }, 
+
+//   get_leaves_approve(LEAVE_ID,PERSONNEL_ID){
+      
+ 
+//   // console.log(obj);
+//   // console.log(DEPARTMENT_ID);
+//   // return false;
+
+
+//   var url = window.location.origin+"/index.php/Home/get_leaves_approve";
+// // console.log(FACUALTY_NAME_TH);
+// // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+//   var data = {
+//     'LEAVE_ID':LEAVE_ID,
+//     'PERSONNEL_ID':PERSONNEL_ID
+//   }
+//   $.ajax({
+//     url : url,
+//     method : 'POST',
+//     dataType : 'JSON',
+//     data:data,
+//     cache : false,
+//     beforeSend: function(jqXHR, settings) {
+//       delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+//     },
+//   }).done(function(resp) {
+//     console.log(resp);
+//     $("#edit_leaves").on('hidden.bs.modal', function () {
+//       $(this).data('bs.modal', null);
+//     });
+
+//     if(resp.leaves_LAST_LEAVE_TYPE_ID != null){
+//       $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_ID).val();
+//       $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LAST_LEAVE_TYPE_ID.PERSONNEL_ID).val();
+//       $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.WRITE_DATE).val();
+      
+//       $('#edit_leaves [name=LAST_LEAVE_TYPE_ID] option').each(function(key,value){
+//         $(value).removeAttr('selected');
+//         if(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TYPE_ID === $(value).val()){
+//           $(value).attr("selected","selected")
+//         }
+//       });
+//       $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+//       $('#edit_leaves [name=LAST_LEAVE_TOAL]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_TOAL).val();
+//       $('#edit_leaves [name=LAST_LEAVES_NUMBER_SHOW]').val(Number($('[name=LAST_LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LAST_LEAVE_TOAL]').val())).val();
+//       $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_START_DATE).val();
+//       $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val(resp.leaves_LAST_LEAVE_TYPE_ID.LAST_LEAVE_END_DATE).val();
+      
+      
+//       $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
+//         $(value).removeAttr('selected');
+//         if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
+//           $(value).attr("selected","selected")
+//         }
+//       });
+//       $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+//       $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
+//       $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+//       $('#edit_leaves [name=LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
+//       $('#edit_leaves [name=LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
+//       $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
+      
+//       $('#edit_leaves').modal('show');
+      
+//     }else{
+//       $('#edit_leaves [name=LEAVE_ID]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_ID).val();
+//       $('#edit_leaves [name=PERSONNEL_ID]').val(resp.leaves_LEAVE_TYPE_ID.PERSONNEL_ID).val();
+//       $('#edit_leaves [name=WRITE_DATE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_DATE).val();
+//       $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val('ยังไม่มีการทำรายการ').val();
+//       $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val('ยังไม่มีการทำรายการ').val();
+      
+      
+//       $('#edit_leaves [name=LEAVE_TYPE_ID] option').each(function(key,value){
+//         $(value).removeAttr('selected');
+//         if(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_ID === $(value).val()){
+//           $(value).attr("selected","selected")
+//         }
+//       });
+//       $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_TYPE_MAX).val();
+//       $('#edit_leaves [name=LEAVE_TOAL]').val(resp.leaves_LEAVE_TYPE_ID.LEAVES_NUMBER_USE).val();
+//       $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(Number($('[name=LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LEAVE_TOAL]').val())).val();
+//       $('#edit_leaves [name=LEAVE_START_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_START_DATE).val();
+//       $('#edit_leaves [name=LEAVE_END_DATE]').val(resp.leaves_LEAVE_TYPE_ID.LEAVE_END_DATE).val();
+//       $('#edit_leaves [name=WRITE_PLACE]').val(resp.leaves_LEAVE_TYPE_ID.WRITE_PLACE).val();
+   
+//       $('#edit_leaves').modal('show');
+//     }
+
+//   })
+  
+//   },
+ 
+
+
+  add_edit_leaves_approve(){
+
+
+    var LEAVE_ID = $('#edit_leaves [name=LEAVE_ID]').val()
+    var PERSONNEL_ID = $('#edit_leaves [name=PERSONNEL_ID]').val()
+    var WRITE_DATE = $('#edit_leaves [name=WRITE_DATE]').val()
+    var LAST_LEAVE_TYPE_ID = $('#edit_leaves [name=LAST_LEAVE_TYPE_ID]').val()
+    var LAST_LEAVE_TYPE_MAX = $('#edit_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val()
+    var LAST_LEAVE_TOAL = $('#edit_leaves [name=LAST_LEAVE_TOAL]').val()
+    var LAST_LEAVE_START_DATE = $('#edit_leaves [name=LAST_LEAVE_START_DATE]').val()
+    var LAST_LEAVE_END_DATE = $('#edit_leaves [name=LAST_LEAVE_END_DATE]').val()
+    var LEAVE_TYPE_ID = $('#edit_leaves [name=LEAVE_TYPE_ID] option:selected').val()
+    var LEAVE_TOAL = $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val()
+    var edit_LEAVE_START_DATE = $('#edit_leaves [name=edit_LEAVE_START_DATE]').val()
+    var edit_LEAVE_END_DATE = $('#edit_leaves [name=edit_LEAVE_END_DATE]').val()
+    var OFFICER = $('#edit_leaves [name=OFFICER] option:selected').val()
+    var SUPERVISOR_ID = $('#edit_leaves [name=SUPERVISOR_ID] option:selected').val()
+    var WRITE_PLACE = $('#edit_leaves [name=WRITE_PLACE]').val()
+
+
+    
+    var myCheck_edit = $('#edit_leaves [name=myCheck_edit]:checked').val()
+    var edit_LEAVE_HALF_DATE = $('#edit_leaves [name=edit_LEAVE_HALF_DATE]').val()
+    var HALF_ONE = $('#edit_leaves [name=HALF_ONE]:checked').val()
+  
+    if(myCheck_edit === undefined){
+      var myCheck_edit = (null == undefined);
+    }
+    
+
+
+      // console.log(LEAVE_ID);
+      // console.log(PERSONNEL_ID);
+      // console.log(WRITE_DATE);
+
+      // console.log(LAST_LEAVE_TYPE_ID);
+      // console.log(LAST_LEAVE_TYPE_MAX);
+      // console.log(LAST_LEAVE_TOAL);
+      // console.log(LAST_LEAVE_START_DATE);
+      // console.log(LAST_LEAVE_END_DATE);
+      // console.log(LEAVE_TYPE_ID);
+      // console.log(LEAVE_TOAL);
+
+      // console.log(edit_LEAVE_START_DATE);
+      // console.log(edit_LEAVE_END_DATE);
+      // console.log(OFFICER);
+      // console.log(SUPERVISOR_ID);
+      // console.log(WRITE_PLACE);
+     
+      // console.log(myCheck_edit);
+      // console.log(edit_LEAVE_HALF_DATE);
+      // console.log(HALF_ONE);
+      // return false;
+
+
+
+    var url = window.location.origin+"/index.php/Home/add_edit_leaves_approve";
+
+      
+
+  
+    var data = {
+    
+      'LEAVE_ID':LEAVE_ID,
+      'PERSONNEL_ID':PERSONNEL_ID,
+      'WRITE_DATE':WRITE_DATE,
+      'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
+      'LAST_LEAVE_TYPE_MAX':LAST_LEAVE_TYPE_MAX,
+      'LAST_LEAVE_TOAL':LAST_LEAVE_TOAL,
+      'LAST_LEAVE_START_DATE':LAST_LEAVE_START_DATE,
+      'LAST_LEAVE_END_DATE':LAST_LEAVE_END_DATE,
+      'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
+      'LEAVE_TOAL':LEAVE_TOAL,
+      'edit_LEAVE_START_DATE':edit_LEAVE_START_DATE,
+      'edit_LEAVE_END_DATE':edit_LEAVE_END_DATE,
+      
+
+      'OFFICER':OFFICER,
+      'SUPERVISOR_ID':SUPERVISOR_ID,
+      'WRITE_PLACE':WRITE_PLACE,
+     
+      'myCheck_edit':myCheck_edit,
+      'edit_LEAVE_HALF_DATE':edit_LEAVE_HALF_DATE,
+      'HALF_ONE':HALF_ONE
+    }
+    
+
+
+
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
       },
     }).done(function(resp) {
       if(resp.st == 1){
@@ -4649,8 +5302,8 @@ var main = {
         alert('บันทึกไม่สำเร็จ')
       }
     })
-    
   },
+
   
   add_edit_leaves_approve_supervisor(){
       
