@@ -339,18 +339,33 @@ class Home_model extends CI_Model {
     $management_positions = $management_positions->result_array();
     $personnels = $this->select_personnels_all();
 
-    // echo '<pre>';
-    // print_r($personnels);
-    // echo '</pre>';
-    // exit;
+   
 
 
     $managements = $this->select_managements();
     $departments = $this->select_departments();
 
+  
+    // foreach ($managements as $key => $value) {
+    //   if($value['MANAGEMENT_ID'] == 1){
+    //     $data[] = array(
+    //       'MANAGEMENT'=>$value['MANAGEMENT_ID']
+    //   );
+    //   }
+      
+
+    // }
+    // echo '<pre>';
+    // print_r($data);
+    // echo '</pre>';
+    // exit;
+
     $DATA = array(
       'management_positions'=>$management_positions,
       'managements'=>$managements,
+
+
+
       'personnels' => $personnels['personnels'],
       'departments' => $departments['departments']
     );
@@ -3666,7 +3681,52 @@ class Home_model extends CI_Model {
     return $st;
   }
   
+  public function search_we(){
 
+      $this->db->select('*');
+      $this->db->from('table_images');
+  
+      $table_images = $this->db->get();
+      $table_images = $table_images->result_array();
+
+    // echo "<pre>";
+    // print_r($table_images);
+    // echo "</pre>";
+    // exit();
+  
+    
+      $DATA = array(
+        'table_images'=>$table_images
+      );
+
+ 
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($_SESSION['level']);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // exit();
+   
+
+    
+    // echo '<pre>';
+    // print_r($researchs);
+    // echo '</pre>';
+    // exit;
+    return $DATA;
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // exit(); 
+    // // หน้า network
+
+  }
+
+  
 }
 
 

@@ -9,8 +9,8 @@ class Home extends CI_Controller {
 	parent::__construct();
 		$this->load->library('session');
 		$this->load->model('Home_model','mhome');
-		$this->load->library('upload');
-		$this->load->library('pagination');
+		
+		
 	}  
 	public function check_login_session(){
 	
@@ -27,6 +27,19 @@ class Home extends CI_Controller {
 		}
 	}
 	public function index(){
+
+		
+		// $array[] = array(1,2,3);
+		// $array[] = array(4,5,6);
+
+		// echo '<pre>';
+		// print_r($array);
+		// echo	'</pre>';
+		// exit;
+
+
+
+
 		$ADMIN_USER_check = isset( $_SESSION['ADMIN_USER_check'])? $_SESSION['ADMIN_USER_check']:"";
 		$ADMIN_PASS_check = isset( $_SESSION['ADMIN_PASS_check'])? $_SESSION['ADMIN_PASS_check']:"";
 		if($ADMIN_USER_check == "" && $ADMIN_PASS_check == ""){
@@ -803,55 +816,55 @@ class Home extends CI_Controller {
 		$this->load->view('tem/service_participants_pic',$data); 
 	
 	}
-	public function upload(){
-			// echo "<pre>";
-			// print_r($_POST);
-			// echo "</pre>";
-			// // echo "<pre>";
-			// // print_r($data);
-			// // echo "</pre>";
-			// exit(); 
-    if($_FILES["files"]["name"] != '')
-      $output = '';
-      $config["upload_path"] = './images/upload/';
-      $config["allowed_types"] = './jpg|jpeg|png|gif';
-      $this->load->library('upload', $config);
-      $this->upload->initialize($config);
-			$img_name = array();
-      for($count = 0; $count<count($_FILES["files"]["name"]); $count ++){
-				$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
-				$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
-				$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
-				$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
-				$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
-				if($this->upload->do_upload('file')){
-					$data = $this->upload->data();
-					// $output .= '
-					// <div class="col-md-3">
-					//   <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/>
-					// </div>
-					// ';
-					$img_name[] = array(
-						'PIC_GARRY'=>$data["file_name"],
-						'SERVICE_ID' => $_POST['SERVICE_ID'],
-						'CREATE_BY_SE' => $_SESSION['ADMIN_USER_check'],
-					);
-				}
-			}
+	// public function upload(){
+	// 		// echo "<pre>";
+	// 		// print_r($_POST);
+	// 		// echo "</pre>";
+	// 		// // echo "<pre>";
+	// 		// // print_r($data);
+	// 		// // echo "</pre>";
+	// 		// exit(); 
+  //   if($_FILES["files"]["name"] != '')
+  //     $output = '';
+  //     $config["upload_path"] = './images/upload/';
+  //     $config["allowed_types"] = './jpg|jpeg|png|gif';
+  //     $this->load->library('upload', $config);
+  //     $this->upload->initialize($config);
+	// 		$img_name = array();
+  //     for($count = 0; $count<count($_FILES["files"]["name"]); $count ++){
+	// 			$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
+	// 			$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
+	// 			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
+	// 			$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
+	// 			$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+	// 			if($this->upload->do_upload('file')){
+	// 				$data = $this->upload->data();
+	// 				// $output .= '
+	// 				// <div class="col-md-3">
+	// 				//   <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/>
+	// 				// </div>
+	// 				// ';
+	// 				$img_name[] = array(
+	// 					'PIC_GARRY'=>$data["file_name"],
+	// 					'SERVICE_ID' => $_POST['SERVICE_ID'],
+	// 					'CREATE_BY_SE' => $_SESSION['ADMIN_USER_check'],
+	// 				);
+	// 			}
+	// 		}
 
 
-			// echo "<pre>";
-			// print_r($img_name);
-			// echo "</pre>";
-			// exit(); 
-			$data = array(
-				'SERVICE_ID' => $_POST['SERVICE_ID'],
-				'img_name' => $img_name
-			);
+	// 		// echo "<pre>";
+	// 		// print_r($img_name);
+	// 		// echo "</pre>";
+	// 		// exit(); 
+	// 		$data = array(
+	// 			'SERVICE_ID' => $_POST['SERVICE_ID'],
+	// 			'img_name' => $img_name
+	// 		);
 
-			$data = $this->mhome->save_upload($data);
-			echo json_encode($data);
-  }
+	// 		$data = $this->mhome->save_upload($data);
+	// 		echo json_encode($data);
+  // }
 	public function upload_profile(){
 
     if($_FILES["files"]["name"] != '')
@@ -1190,8 +1203,311 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	
+	public function we(){
+
+		$data = $this->mhome->search_we();
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/we'); 
+	} 
+	public function dbConnection(){
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		$this->load->view('tem/dbConnection'); 
+	} 
+	public function upload1(){
 	
+		if (!empty($_FILES['multipleFile']['name'])) {
+
+	    $multiplefile = $_FILES['multipleFile']['name'];
+
+				// $data = array();
+
+
+        foreach ($multiplefile as $name => $value) {
+            
+            $allowImg = array('png','jpeg','jpg','gif','pdf');	
+            $fileExnt = explode('.', $multiplefile[$name]);
+            $fileTmp = $_FILES['multipleFile']['tmp_name'][$name];        
+            $newFile = 	rand(). '.'. $fileExnt[1];
+            $target_dir = './images/upload/'.$newFile; 
+
+            if (in_array($fileExnt[1], $allowImg)) {
+                if ($_FILES['multipleFile']['size'][$name] > 0 && $_FILES['multipleFile']['error'][$name]== 0) {  
+                    if (move_uploaded_file($fileTmp, $target_dir)) {
+
+											$data[]=array(
+												'images'=>$newFile
+											);
+								
+
+                    }
+                }
+            }
+        }
+				$this->db->insert_batch('table_images', $data); 
+				
+
+		}
+
+		echo json_encode($data);
+
+		// exit(); 
+		$this->load->view('tem/upload1'); 
+	} 
+	public function fetch_data(){
+
+
+			$this->db->select('*');
+			$this->db->from('table_images');
 	
+			$query = $this->db->get();
+			$query = $query->result_array();
+			$output = "";
+
+		
+		if (count($query) > 0) {
+			$output .= "<table class='table table-striped'>";
+			$output .= "<thead>
+								<tr>
+									<th>S.no</th>
+									<th>Image Name</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>
+							</thead>";
+		
+									// echo "<pre>";
+				// print_r($query);
+				// echo "</pre>";
+		
+				// exit;
+				foreach ($query as $key => $row) {
+					
+					$images = '/images/upload/'. $row['images'];
+					$output .=  "<tr>
+									<td>".$row["id"]."</td>
+									<td><img src='".$images."' class='img-thumbnail' width='150px' height='150px' /></td>
+									<td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id='".$row["id"]."'>Edit</button></td>
+									<td><button type='button' class='btn btn-danger btn-sm delete-btn' data-id='".$row["id"]."'>Delete</button></td>
+								</tr>";
+				}
+			
+				// echo "<pre>";
+				// print_r($output);
+				// echo "</pre>";
+		
+				// exit;
+	
+			$output .="</tbody>
+
+						</table>";
+				echo $output;
+		}else{
+		echo "<h3 style='text-align:center'>No Image found</h3>";
+		}
+
+
+		
+		
+		$this->load->view('tem/fetch_data'); 
+		
+	} 
+
+
+	public function edit(){
+
+		if (isset($_POST['editId'])) {
+	    $editId = $_POST['editId'];
+		}
+
+		if (!empty($editId)) {
+		
+	   
+			$this->db->select('*');
+			$this->db->from('table_images');
+	
+			$query = $this->db->get();
+			$query = $query->result_array();
+
+			// echo "<pre>";
+				// print_r($output);
+				// echo "</pre>";
+		
+				// exit;
+	 
+			if (count($query) > 0) {
+						
+					$output = "";
+					
+					foreach ($query as $key => $row) {
+				
+
+						$image = '/images/upload/'.$row['images'];
+						
+						
+						$output.="<form id='editForm'>
+						<div class='modal-body' style='height: 200px;'>
+											<input type='hidden' name='image_id' id='image_id' value='".$row['id']."'/>
+									<div class='form-group'>
+							<div class='custom-file mb-3'>
+								<input type='file' class='custom-file-input' name='file_name' id='file_name'>
+								<label class='custom-file-label'>Choose Images to Upload</label>
+								<img src='".$image."' class='img-thumbnail' width='200px' height='200px'/>
+								</div>
+									</div>
+						</div>
+						<div class='modal-footer'>
+							<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+							<button type='submit' class='btn btn-success'>Update</button>
+						</div>
+							</form>";
+					}
+					echo $output;	
+			}
+  	}
+	
+		
+		$this->load->view('tem/edit'); 
+		
+	} 
+	public function update(){
+
+
+		if (isset($_POST['image_id'])) {
+		
+	    $image_id = $_POST['image_id'];
+		}
+	
+		if (!empty($_FILES['file_name']['name'])) {
+
+
+			
+				// echo "<pre>";
+				// print_r($image_id);
+				// echo "</pre>";
+
+			
+
+				$fileTmp = $_FILES['file_name']['tmp_name'];
+
+				$allowImg = array('png','jpeg','jpg','gif');
+
+				$fileExnt = explode('.', $_FILES['file_name']['name']);
+
+				$fileActExt   = strtolower(end($fileExnt));
+
+				$newFile = rand(). '.'. $fileActExt;
+
+				$destination = './images/upload/'.$newFile;
+
+			
+			
+
+					
+					// exit;
+
+				if (in_array($fileActExt, $allowImg)) {
+						if ($_FILES['file_name']['size'] > 0 && $_FILES['file_name']['error']==0) {
+
+
+							
+			
+					$this->db->select('*');
+					$this->db->from('table_images');
+					$this->db->where('id', $image_id);
+					$query = $this->db->get();
+					$query = $query->result_array();
+					$row =  $query[0];
+
+		
+
+
+	
+			
+
+					$filePath = './images/upload/'.$row['images'];
+					
+					if (move_uploaded_file($fileTmp, $destination)) {
+
+						
+				// $update = "UPDATE table_images SET images = '$images' WHERE id = '$image_id'";
+				// mysqli_query($con, $update);
+
+		
+					// echo "<pre>";
+					// print_r($row);
+					// echo "</pre>";
+
+					// echo "<pre>";
+					// print_r($fileTmp);
+					// echo "</pre>";
+
+					// echo "<pre>";
+					// print_r($destination);
+					// echo "</pre>";
+
+				$this->db->where('id', $image_id);
+				$this->db->set('images',  $newFile);
+				$this->db->update('table_images');
+
+
+
+
+				unlink($filePath);
+					}
+			}
+				}
+		}
+		
+		$this->load->view('tem/update'); 
+		
+	} 
+	public function delete(){
+
+		if (isset($_POST['deleteId'])) {
+		
+	    $deleteId = $_POST['deleteId'];
+
+  
+			$this->db->select('*');
+			$this->db->from('table_images');
+			$this->db->where('id', $deleteId);
+			$query = $this->db->get();
+			$query = $query->result_array();
+
+
+			// echo "<pre>";
+			// print_r($query);
+			// echo "</pre>";
+	
+			// exit;
+
+
+
+    	
+
+	    $row =  $query[0];
+
+	    $filePath = 'uploads/'.$row['images'];
+			
+			$this->db->delete('table_images', array('id' => $deleteId)); 
+	    // $query = "DELETE FROM table_images WHERE id = $deleteId";
+
+			if (mysqli_query($con, $query)) {
+					unlink($filePath);
+			}
+   	}
+
+	
+		
+		$this->load->view('tem/delete'); 
+		
+	} 
 } 
 
 
