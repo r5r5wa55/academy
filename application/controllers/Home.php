@@ -1324,29 +1324,35 @@ class Home extends CI_Controller {
 		if (isset($_POST['editId'])) {
 	    $editId = $_POST['editId'];
 		}
+		// echo "<pre>";
+		// print_r($editId);
+		// echo "</pre>";
 
+		// exit;
+
+ 
 		if (!empty($editId)) {
-		
-	   
+	
 			$this->db->select('*');
 			$this->db->from('table_images');
-	
+			$this->db->where('id', $editId);
 			$query = $this->db->get();
-			$query = $query->result_array();
-
+			$query = $query->row_array();
+// 
 			// echo "<pre>";
-				// print_r($output);
-				// echo "</pre>";
+			// 	print_r($query);
+			// 	echo "</pre>";
 		
-				// exit;
+			// 	exit;
 	 
 			if (count($query) > 0) {
 						
 					$output = "";
 					
-					foreach ($query as $key => $row) {
-				
-
+					// foreach ($query as $key => $row) {
+						
+						$row = $query;
+						
 						$image = '/images/upload/'.$row['images'];
 						
 						
@@ -1366,7 +1372,7 @@ class Home extends CI_Controller {
 							<button type='submit' class='btn btn-success'>Update</button>
 						</div>
 							</form>";
-					}
+					// }
 					echo $output;	
 			}
   	}
