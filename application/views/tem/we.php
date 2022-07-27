@@ -1,44 +1,68 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Ajax Multiple Image Upload with Edit Update Delete using PHP Mysql</title>
-  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Dashboard</title>
   <?php 
     $this->load->view('tem/inc_css');
   ?>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 
-<div class="jumbotron text-center">
-  <h2>Ajax Multiple Image Upload with Edit Update Delete using PHP Mysql</h2>
-</div>
 
+<div class="wrapper">
+  <!-- Navbar -->
+ 
+  <?php $this->load->view('tem/inc_head_menu.php')?>
+
+  <?php $this->load->view('tem/inc_lift_menu')?>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 2646.44px;">  <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>ข้อมูลผู้ใช้งาน</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">ข้อมูลผู้ใช้</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    
 <div class="container">
   <div class="row">
-  	<div class="col-md-3"></div>
+  	<div class="col-md-4"></div>
       <div class="col-md-6">
         <div class="alert alert-success alert-dismissible" id="success" style="display: none;">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
-          File uploaded successfully
+            จัดเก็บรูปภาพเสร็จสิ้น
         </div>
       <form id="submitForm">
         <div class="form-group">
-          <div class="custom-file mb-3">
-            <input type="file" class="custom-file-input" name="multipleFile[]" id="multipleFile" required="" multiple>
-            <label class="custom-file-label" for="multipleFile">Choose Multiple Images to Upload</label>
+          <div class="custom-file mb-2">
+            <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
+           
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" name="upload" class="btn btn-primary" style="float:right;" >Upload</button><br>
+          <button type="submit" name="upload" class="btn btn-primary" style="float:right;" >อัพเดทรูปภาพ</button><br>
         </div>  
       </form><br>
     </div>
@@ -62,11 +86,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>    
     </div>
   </div>
+  </div>
+  <!-- /.content-wrapper -->
+ 
+ 
 
 
+  <!-- Control Sidebar -->
+ <!-- /.control-sidebar -->
+
+
+
+<!-- ./wrapper -->
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
-</body>
 <script type="text/javascript">
 $(document).ready(function(){
     $("#submitForm").on("submit", function(e){
@@ -109,7 +142,7 @@ $(document).ready(function(){
   // Edit Data from Database
   $(document).on("click",".btn-success", function(){
     var editId = $(this).data('id');
-    // console.log(editId);
+    console.log(editId);
     $.ajax({
       url  :window.location.origin+"/index.php/Home/edit",
       type : "POST",
@@ -162,5 +195,9 @@ $(document).ready(function(){
   });
 });
 
+
+
 </script>
+</script>
+</body>
 </html>

@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 	// Database connection 
 	
@@ -53,4 +53,4 @@
   //   exit;
   // }
 
-?>
+?> -->

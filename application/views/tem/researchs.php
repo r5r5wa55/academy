@@ -90,6 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="upload-btn-wrapper box-btn-center">
                 <button class="btn">Upload a file</button>
                 <input type="file" name="files"  id="files" data-id-RESEARCH_ID="<?php echo $value['RESEARCH_ID']?>" onchange="main.upload_file_researchs(this)">
+                
               </div>
           
           </div>

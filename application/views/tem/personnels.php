@@ -402,18 +402,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   // $('.id-show').text("").text('we')
 
   $('.id-show').each(function(index,val){
-    // if($(val).text() == "รหัส"){
-    //    $(val).text("").text('we')
-    // }
-    // if($(val).text() == "สถานะการทำงาน"){
-    //    $(val).text("").text('we2')
-    // }
-    // if($(val).text()== "ขื่อ"){
-    //   $(val).text("").text("we3")
-    // }
-    // if($(val).text()== "นามสกุล"){
-    //   $(val).text("").text("we4")
-    // }
   
   })
   $('.page-link').each(function(index ,val){

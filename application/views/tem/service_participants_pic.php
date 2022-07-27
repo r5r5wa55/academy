@@ -6,7 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Dashboard</title>
   <?php 
@@ -15,160 +14,234 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?php echo base_url()."public/"?>dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
-  
+
+<div class="wrapper">
+  <!-- Navbar -->
+ 
   <?php $this->load->view('tem/inc_head_menu.php')?>
 
   <?php $this->load->view('tem/inc_lift_menu')?>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
+  <div class="content-wrapper" style="min-height: 2646.44px;">  <!-- Content Header (Page header) -->
+    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0" >ตารางวิชาการ ตำแหน่งทางวิชาการ</h1>
-          </div><!-- /.col -->
+            <h1>เพิ่มรูปภาพการเข้าร่วมการบริการวิชาการ</h1>
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">ตารางวิชาการ</li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">เพิ่มรูปภาพ</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+          </div>
+        </div>
       </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+    </section>
 
-    <div class="content">
-      <div class="row">
     
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">เพืมรูปภาพ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้รูปภาพ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบรูปภาพ</div>
-       
-      </div>
-      <?php foreach($services as $key=>$value):?>
-        <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['SERVICE_ID'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['SERVICE_TITLE'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show">
-            <button type="button" class="btn btn-block btn-outline-primary" onclick="main.open_add_service_participants_pic('<?php echo $value['SERVICE_ID'];?>')">เพืมรูปภาพ</button>
-          </div>
-
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_service_participants_pic(
-              '<?php echo $value['SERVICE_ID'];?>',
-              '<?php echo $value['SERVICE_TITLE'];?>',
-              '<?php echo $value['SERVICE_TITLE'];?>',
-              '<?php echo $value['SERVICE_TITLE'];?>');">
-              แก้ไขข้อมูล
-            </button>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_service_participants_pic('<?php echo $value['SERVICE_ID'];?>')">ลบข้อมูล</button>
+<div class="container">
+  <div class="row">
+  	<div class="col-md-4"></div>
+      <div class="col-md-6">
+        <!-- <div class="alert alert-success alert-dismissible" id="success" style="display: none;" style="float:left;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+            จัดเก็บรูปภาพเสร็จสิ้น
+        </div> -->
+        
+      <form id="submitForm">
+        <div class="form-group">
+          
+          <div class="custom-file mb-2">
+            <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
+           
           </div>
         </div>
-      <?php endforeach; ?>
+        <div class="form-group">
+          <button type="submit" name="upload" class="btn btn-primary" style="float:left;" >อัพเดทรูปภาพ</button><br>
+        </div> 
     
+      </form>
+        <div class="">
+              <a href="<?php echo base_url()?>index.php/Home/service_participants" class="btn btn-info" style="float:right;">  
+                
+                ย้อนกลับ
+            
+              </a>
+          <br>
+        </div>  
+      <br>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="add_service_participants_pic" tabindex="-1"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล คณตำแหน่งทางวิชาการ</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> 
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="formGroupExampleInput">กรุณาเลือก ตำแหน่งทางวิชาการ</label>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-              </div>
+        <div class="container" id="gallery"><table class="table table-striped"><thead>
+								<tr>
+									<th>เลขรูป</th>
+									<th>ชื่อรูป</th>
+									<th>แก้ไข</th>
+									<th>ลบ</th>
+								</tr>
+							</thead>
+              <tbody>
+                <?php foreach($service_participants_pic as $key=>$value): ?>
+                  <tr>
+                    <td>  <?php echo $key+1?></td>
+                    <td><img src="/images/services_img/<?php echo $value['PIC_GARRY']?>" class="img-thumbnail" width="150px" height="150px"></td>
+
+                    <td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id="<?php echo $value['ID_S_P']?>">แก้ไข</button></td>
+			              <td><button type='button' class='btn btn-danger btn-sm delete-btn' data-id="<?php echo $value['ID_S_P']?>">ลบ</button></td>
+
+                
+                  </tr>
+                <?php endforeach; ?>
+							</tbody>
+
+						</table></div>
+
+  
+  <!--Edit Multiple image form -->
+    <div class='modal' id='exampleModal'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h4 class='modal-title'>แก้ไขรูปภาพ</h4>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
             </div>
-            <div class="col-md-4">
-              <di class="form-group"> 
-                <label>เลือกรูป</label>
-                <input type="file" name="files" id="files" multiple/>
-                <input type="hidden" name="SERVICE_ID"/>
-              </div>
+            <div id="editForm">
+                เรียบร้อย
             </div>
-            <div class="col-md-4">
-              <di class="form-group">
-              </di>
-            </div>
-          </div>
-          <div class="modal-footer uploaded_images">
-            <div style="clear:both"></div>
-            <div class="row" id="uploaded_images"></div>
-          </div>
+          </div>    
         </div>
       </div>
     </div>
-  </div>
-</div>
+  <!-- /.content-wrapper -->
+ 
+ 
 
 
+  <!-- Control Sidebar -->
+ <!-- /.control-sidebar -->
 
-<div class="modal fade" id="edit_service_participants_pic" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล ตำแหน่งทางวิชาการ</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-        <label for="formGroupExampleInput">กรุณาเลือก ตำแหน่งทางวิชาการ</label>
-          <select class="form-control" name="ACADEMIC_ID" >
-            <option value="">กรุณาเลือก</option>
-            <?php foreach($academics as $key=>$value): ?>
-              <option value="<?php echo $value['ACADEMIC_ID'];?>"><?php echo $value['ACADEMIC_NAME'];?></option>
-            <?php endforeach; ?>
-          </select>
-          <label for="formGroupExampleInput">กรุณาเลือก ชิ่อ-นามสกุล</label>
-          <select class="form-control" name="PERSONNEL_ID" >
-            <option value="">กรุณาเลือก</option>
-            <?php foreach($personnels as $key=>$value): ?>
-              <option value="<?php echo $value['PERSONNEL_ID'];?>"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></php></option>
-            <?php endforeach; ?>
-          </select>
-          <input type="hidden"  name="ACADEMIC_POSITION_ID" placeholder="ชื่อคณะ">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="main.edit_academic_positions();">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> 
+
 
 <!-- ./wrapper -->
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
-<script>
-  $('#files').change(function(){
-     main.upload_img()   
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#submitForm").on("submit", function(e){
+    e.preventDefault();
+    var editId = $(this).data('id');
+    var get =   '<?php echo $_GET['img']?>';
+    // console.log('aa');
+    // console.log(get);
+    // return false;
+
+    
+    var get = {
+
+      'get':get
+      }
+
+    $.ajax({
+      url  :window.location.origin+"/index.php/Home/upload1",
+      type :"POST",
+      cache:false,
+      contentType : false, // you can also use multipart/form-data replace of false
+      processData : false,
+      data: new FormData(this,'get'),
+      success:function(response){
+        setInterval("refresh()", 10000);
+        location.reload();
+        $("#success").show();
+        $("#multipleFile").val("");
+        fetchData();
+       
+      }
+    
+    });
+   
+});
+
+  // Fetch Data from Database
+
+
+  // Edit Data from Database
+  $(document).on("click",".btn-success", function(){
+    var editId = $(this).data('id');
+    // console.log(editId);
+    $.ajax({
+      url  :window.location.origin+"/index.php/Home/edit",
+      type : "POST",
+      cache: false,
+      data : {editId:editId},
+      success:function(data){
+       
+        $("#editForm").html(data);
+      
+      }
+      
+    });
+    
   });
+
+  // Delete Data from database
+
+
+
+  $(document).on('click','.delete-btn', function(){
+    var deleteId = $(this).data('id');
+    console.log(deleteId);
+    if (confirm("ยืนยันการลบ")) {
+      $.ajax({
+        url  :window.location.origin+"/index.php/Home/delete",
+     
+        type : "POST",
+        cache:false,
+        data:{deleteId:deleteId},
+        success:function(data){
+          location.reload();
+          fetchData();
+          alert("Image is deleted successfully");
+        }
+      });
+    }
+  });
+
+  // Update Data from database
+  $(document).on("submit", "#editForm", function(e){
+    e.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+      url  :window.location.origin+"/index.php/Home/update",
+    
+      type : "POST",
+      cache: false,
+      contentType : false, // you can also use multipart/form-data replace of false
+      processData : false,
+      data: formData,
+      success:function(response){
+        location.reload();
+        $("#exampleModal").modal();
+        alert("Image updated successfully");
+       
+        fetchData();
+       
+      }
+    });
+  });
+});
+
+
+
+</script>
 </script>
 </body>
 </html>

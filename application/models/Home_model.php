@@ -1120,9 +1120,19 @@ class Home_model extends CI_Model {
       };
       $services = $this->db->get();
       $services = $services->result_array();
+      $personnels = $this->select_personnels_all();
+    
+  
       $DATA = array(
-        'services'=>$services
+        'services'=>$services,
+        'personnels'=>$personnels['personnels']
       );
+
+      // echo '<pre>';
+      // print_r($personnels['personnels']);
+      // echo '</pre>';
+      // exit;
+      
       return $DATA;
     }else{
       $this->db->select('*');
@@ -1137,14 +1147,33 @@ class Home_model extends CI_Model {
       };
       $services = $this->db->get();
       $services = $services->result_array();
+      $personnels = $this->select_personnels_all();
+
       $DATA = array(
-        'services'=>$services
+        'services'=>$services,
+        'personnels'=>$personnels['personnels']
       );
+
+      // echo '<pre>';
+      // print_r($personnels['personnels']);
+      // echo '</pre>';
+      // exit;
+      
+
+
+
+
       return $DATA;
     }
  
   }
   public function add_services($data){
+
+
+      // echo '<pre>';
+      // print_r($data);
+      // echo '</pre>';
+      // exit;
     $st = array('st'=>0);
     if(is_array($data) && $data['SERVICE_TITLE']!="" && $data['SERVICE_PLACE']!=""){
       $data = array(
@@ -1158,7 +1187,7 @@ class Home_model extends CI_Model {
         'TOTAL_HOUR' => $data['TOTAL_HOUR'],
         'SERVICE_START_DATE' => $data['SERVICE_START_DATE'], 
         'SERVICE_END_DATE' => $data['SERVICE_END_DATE'],
-        'FILE_DOCUMENT' => $data['FILE_DOCUMENT'], 
+       
       );
      
       $data = $this->db->insert('services', $data);
@@ -1168,6 +1197,11 @@ class Home_model extends CI_Model {
     return $st;
   }
   public function edit_services($data){
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+
     $st = array('st'=>0);
     if(is_array($data) && $data['SERVICE_TITLE']!=""){
       $this->db->where('SERVICE_ID', $data['SERVICE_ID']);
@@ -1186,10 +1220,7 @@ class Home_model extends CI_Model {
       $st = array('st'=>1);
     }
   
-    //   echo "<pre>";
-		// print_r($st);
-		// echo "</pre>";
-		// exit(); 
+  
 
     return $st;
   }
@@ -1201,6 +1232,94 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  public function save_upload_file_services($data){
+    // echo "<pre>";
+		// print_r($data['img_name']);
+		// echo "</pre>";
+    // exit;
+
+    $this->db->where('SERVICE_ID', $data['SERVICE_ID']);
+    $this->db->set('FILE_DOCUMENT', $data['img_name']);
+    $this->db->update('services');
+    // $this->db->insert_batch('personnels', $data['img_name']); 
+   
+    // echo "<pre>";
+		// print_r($data['img_name']);
+		// echo "</pre>";
+    // exit;
+    $this->db->select('*');
+    $this->db->from('services');
+    $this->db->where('SERVICE_ID', $data['SERVICE_ID']);
+    $data = $this->db->get();
+    $data = $data->row_array();
+
+
+    // $path_delete= './images/researchs/';
+    // if(file_exists($path_delete.$data['FILE_RESEARCHS'])){
+    //   unlink($path_delete.$data['FILE_RESEARCHS']);
+    // }
+
+    
+
+ 
+
+    $data_html = array(
+      'st'=>0
+    );
+    if($data != array()){
+  
+      $data_html = array(
+        'st'=>1
+      );
+    }
+    //  echo "<pre>";
+		// print_r($data_html);
+		// echo "</pre>";
+    // exit;
+    return $data_html;
+  }
+
+  public function show_service_participants_pic(){
+   
+      $id = isset($_GET['img'])?$_GET['img']:"";
+      // echo '<pre>';
+      // print_r($data);
+      // echo '</pre>';
+      // exit;
+      
+      $DATA = array();
+
+    if($id != ""){
+      $this->db->select('*');
+      $this->db->from('service_participants_pic');
+      // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
+      $this->db->where('SERVICE_ID', $_GET['img']);
+      $this->db->order_by("service_participants_pic.ID_S_P", "DESC");  
+
+      $service_participants_pic = $this->db->get();
+      $service_participants_pic = $service_participants_pic->result_array();
+      // $personnels = $this->select_personnels_all();
+    
+      // echo '<pre>';
+      // print_r($service_participants_pic);
+      // echo '</pre>';
+      // exit;
+  
+      $DATA = array(
+        'service_participants_pic'=>$service_participants_pic
+      
+      );
+
+      
+    
+
+    }
+    return $DATA;
+   
+  }
+
+
+  
   //
 
   public function select_service_participants($data_search = ""){

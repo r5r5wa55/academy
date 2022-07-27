@@ -198,7 +198,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group">
             <div class="row">    
               <div class="col-md-6">
-              <?php if ($_SESSION['level'] === '1'): ?>     
+                <?php if ($_SESSION['level'] === '1'): ?>     
                   <label for="formGroupExampleInput" >ผู้ให้คำปรึกษา</label>
                     <select class="form-control" name="ADVISOR_ID">
                       <option value="">กรุณาเลือก</option>

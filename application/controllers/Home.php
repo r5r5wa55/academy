@@ -525,6 +525,201 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_services($_POST);
 		echo json_encode($data);
 	}
+	public function upload_file_services(){
+    // echo "<pre>";
+		// print_r($_FILES);
+		// echo "</pre>";
+		// exit(); 
+
+		if($_FILES["files"]["name"] != '')
+      $output = '';
+			$config['image_library'] = 'gd2';
+      $config["upload_path"] = './images/services_file/';
+      $config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
+			// $config['encrypt_name'] = FALSE;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+      $this->load->library('upload', $config);
+			$this->load->library('image_lib', $config);
+      $this->upload->initialize($config);
+
+			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
+			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
+			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
+			$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
+			$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
+
+
+			$new_name = $_FILES["file"]["name"];
+			$config['file_name'] = $new_name;
+			
+			if($this->upload->do_upload('file')){
+				$data = $this->upload->data();
+			}
+
+				
+			$data = array(
+				'SERVICE_ID' => $_POST['SERVICE_ID'],
+				'img_name' => $new_name
+			);
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// exit;
+
+			$data = $this->mhome->save_upload_file_services($data);
+			echo json_encode($data);
+  }
+	
+	public function edit_services_file(){
+
+		if (isset($_POST['editId'])) {
+	    $editId = $_POST['editId'];
+		}
+		// echo "<pre>";
+		// print_r($editId);
+		// echo "</pre>";
+
+		// exit;
+
+ 
+		if (!empty($editId)) {
+	
+			$this->db->select('*');
+			$this->db->from('services');
+			$this->db->where('SERVICE_ID', $editId);
+			$query = $this->db->get();
+			$query = $query->row_array();
+
+		
+	 
+			if (count($query) > 0) {
+						
+					$output = "";
+					
+					// foreach ($query as $key => $row) {
+						
+						$row = $query;
+						
+						$image = '/images/services_file/'.$row['FILE_DOCUMENT'];
+						
+						
+						$output.="<form id='editForm'>
+						<div class='modal-body' style='height: 200px;'>
+											<input type='hidden' name='image_id' id='image_id' value='".$row['SERVICE_ID']."'/>
+									<div class='form-group'>
+							<div class='custom-file mb-3'>
+								<input type='file' class='custom-file-input' name='file_name' id='file_name'>
+								<label class='custom-file-label'>Choose Images to Upload</label>
+								<img src='".$image."' class='img-thumbnail' width='200px' height='200px'/>
+								</div>
+									</div>
+						</div>
+						<div class='modal-footer'>
+							<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
+							<button type='submit' class='btn btn-success'>Update</button>
+						</div>
+							</form>";
+					// }
+					echo $output;	
+			}
+  	}
+	
+		
+	
+		
+	} 
+	public function update_services_file(){
+
+
+		if (isset($_POST['image_id'])) {
+		
+	    $image_id = $_POST['image_id'];
+		}
+	
+		if (!empty($_FILES['file_name']['name'])) {
+
+
+			
+				// echo "<pre>";
+				// print_r($image_id);
+				// echo "</pre>";
+
+
+				$fileTmp = $_FILES['file_name']['tmp_name'];
+
+				$allowImg = array('png','jpeg','jpg','gif');
+
+				$fileExnt = explode('.', $_FILES['file_name']['name']);
+
+				$fileActExt   = strtolower(end($fileExnt));
+
+				$newFile = rand(). '.'. $fileActExt;
+
+				$destination = './images/upload/'.$newFile;
+
+			
+			
+
+					
+					// exit;
+
+				if (in_array($fileActExt, $allowImg)) {
+						if ($_FILES['file_name']['size'] > 0 && $_FILES['file_name']['error']==0) {
+
+
+							
+			
+					$this->db->select('*');
+					$this->db->from('table_images');
+					$this->db->where('id', $image_id);
+					$query = $this->db->get();
+					$query = $query->result_array();
+					$row =  $query[0];
+
+		
+
+
+	
+			
+
+					$filePath = './images/upload/'.$row['images'];
+					
+					if (move_uploaded_file($fileTmp, $destination)) {
+
+				$this->db->where('id', $image_id);
+				$this->db->set('images',  $newFile);
+				$this->db->update('table_images');
+
+
+
+
+				unlink($filePath);
+					}
+			}
+				}
+		}
+		
+		$this->load->view('tem/update'); 
+		
+	} 
+
+	
+	public function show_service_participants_pic(){
+		$this->check_login_session();
+		$data_search = $this->search_all();
+		$data = $this->mhome->show_service_participants_pic($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		
+		$this->load->view('tem/service_participants_pic',$data); 
+
+	}
 	///
 	public function service_participants(){
 		$this->check_login_session();
@@ -1221,8 +1416,17 @@ class Home extends CI_Controller {
 	} 
 	public function upload1(){
 	
+
+
+		
+		
+	
+		
+	
 		if (!empty($_FILES['multipleFile']['name'])) {
 
+
+	 
 	    $multiplefile = $_FILES['multipleFile']['name'];
 
 				// $data = array();
@@ -1234,14 +1438,15 @@ class Home extends CI_Controller {
             $fileExnt = explode('.', $multiplefile[$name]);
             $fileTmp = $_FILES['multipleFile']['tmp_name'][$name];        
             $newFile = 	rand(). '.'. $fileExnt[1];
-            $target_dir = './images/upload/'.$newFile; 
+            $target_dir = './images/services_img/'.$newFile; 
 
             if (in_array($fileExnt[1], $allowImg)) {
                 if ($_FILES['multipleFile']['size'][$name] > 0 && $_FILES['multipleFile']['error'][$name]== 0) {  
                     if (move_uploaded_file($fileTmp, $target_dir)) {
 
 											$data[]=array(
-												'images'=>$newFile
+												'PIC_GARRY'=>$newFile,
+												'SERVICE_ID'=>20
 											);
 								
 
@@ -1249,75 +1454,16 @@ class Home extends CI_Controller {
                 }
             }
         }
-				$this->db->insert_batch('table_images', $data); 
+				$this->db->insert_batch('service_participants_pic', $data); 
 				
 
 		}
 
 		echo json_encode($data);
 
-		// exit(); 
-		$this->load->view('tem/upload1'); 
+		exit(); 
+
 	} 
-	public function fetch_data(){
-
-
-			$this->db->select('*');
-			$this->db->from('table_images');
-	
-			$query = $this->db->get();
-			$query = $query->result_array();
-			$output = "";
-
-		
-		if (count($query) > 0) {
-			$output .= "<table class='table table-striped'>";
-			$output .= "<thead>
-								<tr>
-									<th>S.no</th>
-									<th>Image Name</th>
-									<th>Edit</th>
-									<th>Delete</th>
-								</tr>
-							</thead>";
-		
-									// echo "<pre>";
-				// print_r($query);
-				// echo "</pre>";
-		
-				// exit;
-				foreach ($query as $key => $row) {
-					
-					$images = '/images/upload/'. $row['images'];
-					$output .=  "<tr>
-									<td>".$row["id"]."</td>
-									<td><img src='".$images."' class='img-thumbnail' width='150px' height='150px' /></td>
-									<td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id='".$row["id"]."'>Edit</button></td>
-									<td><button type='button' class='btn btn-danger btn-sm delete-btn' data-id='".$row["id"]."'>Delete</button></td>
-								</tr>";
-				}
-			
-				// echo "<pre>";
-				// print_r($output);
-				// echo "</pre>";
-		
-				// exit;
-	
-			$output .="</tbody>
-
-						</table>";
-				echo $output;
-		}else{
-		echo "<h3 style='text-align:center'>No Image found</h3>";
-		}
-
-
-		
-		
-		$this->load->view('tem/fetch_data'); 
-		
-	} 
-
 
 	public function edit(){
 
@@ -1334,16 +1480,12 @@ class Home extends CI_Controller {
 		if (!empty($editId)) {
 	
 			$this->db->select('*');
-			$this->db->from('table_images');
-			$this->db->where('id', $editId);
+			$this->db->from('service_participants_pic');
+			$this->db->where('ID_S_P', $editId);
 			$query = $this->db->get();
 			$query = $query->row_array();
-// 
-			// echo "<pre>";
-			// 	print_r($query);
-			// 	echo "</pre>";
+
 		
-			// 	exit;
 	 
 			if (count($query) > 0) {
 						
@@ -1353,12 +1495,12 @@ class Home extends CI_Controller {
 						
 						$row = $query;
 						
-						$image = '/images/upload/'.$row['images'];
+						$image = '/images/services_img/'.$row['PIC_GARRY'];
 						
 						
 						$output.="<form id='editForm'>
 						<div class='modal-body' style='height: 200px;'>
-											<input type='hidden' name='image_id' id='image_id' value='".$row['id']."'/>
+											<input type='hidden' name='image_id' id='image_id' value='".$row['ID_S_P']."'/>
 									<div class='form-group'>
 							<div class='custom-file mb-3'>
 								<input type='file' class='custom-file-input' name='file_name' id='file_name'>
@@ -1368,17 +1510,18 @@ class Home extends CI_Controller {
 									</div>
 						</div>
 						<div class='modal-footer'>
-							<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>
-							<button type='submit' class='btn btn-success'>Update</button>
+							<button type='button' class='btn btn-danger' data-dismiss='modal'>ปิด</button>
+							<button type='submit' class='btn btn-success'>แก้ไข</button>
 						</div>
 							</form>";
 					// }
 					echo $output;	
 			}
+			exit;
   	}
 	
 		
-		$this->load->view('tem/edit'); 
+	
 		
 	} 
 	public function update(){
@@ -1409,7 +1552,7 @@ class Home extends CI_Controller {
 
 				$newFile = rand(). '.'. $fileActExt;
 
-				$destination = './images/upload/'.$newFile;
+				$destination = './images/services_img/'.$newFile;
 
 			
 			
@@ -1424,8 +1567,8 @@ class Home extends CI_Controller {
 							
 			
 					$this->db->select('*');
-					$this->db->from('table_images');
-					$this->db->where('id', $image_id);
+					$this->db->from('service_participants_pic');
+					$this->db->where('ID_S_P', $image_id);
 					$query = $this->db->get();
 					$query = $query->result_array();
 					$row =  $query[0];
@@ -1436,30 +1579,15 @@ class Home extends CI_Controller {
 	
 			
 
-					$filePath = './images/upload/'.$row['images'];
+					$filePath = './images/services_img/'.$row['images'];
 					
 					if (move_uploaded_file($fileTmp, $destination)) {
 
-						
-				// $update = "UPDATE table_images SET images = '$images' WHERE id = '$image_id'";
-				// mysqli_query($con, $update);
 
-		
-					// echo "<pre>";
-					// print_r($row);
-					// echo "</pre>";
 
-					// echo "<pre>";
-					// print_r($fileTmp);
-					// echo "</pre>";
-
-					// echo "<pre>";
-					// print_r($destination);
-					// echo "</pre>";
-
-				$this->db->where('id', $image_id);
-				$this->db->set('images',  $newFile);
-				$this->db->update('table_images');
+				$this->db->where('ID_S_P', $image_id);
+				$this->db->set('PIC_GARRY',  $newFile);
+				$this->db->update('service_participants_pic');
 
 
 
@@ -1475,23 +1603,25 @@ class Home extends CI_Controller {
 	} 
 	public function delete(){
 
+		// echo "<pre>";
+		// print_r($_POST['deleteId']);
+		// echo "</pre>";
+		// exit;
+
+
 		if (isset($_POST['deleteId'])) {
 		
 	    $deleteId = $_POST['deleteId'];
 
   
 			$this->db->select('*');
-			$this->db->from('table_images');
-			$this->db->where('id', $deleteId);
+			$this->db->from('service_participants_pic');
+			$this->db->where('ID_S_P', $deleteId);
 			$query = $this->db->get();
 			$query = $query->result_array();
 
-
-			// echo "<pre>";
-			// print_r($query);
-			// echo "</pre>";
-	
-			// exit;
+		
+		
 
 
 
@@ -1499,9 +1629,9 @@ class Home extends CI_Controller {
 
 	    $row =  $query[0];
 
-	    $filePath = 'uploads/'.$row['images'];
+	    $filePath = 'services_img/'.$row['ID_S_P'];
 			
-			$this->db->delete('table_images', array('id' => $deleteId)); 
+			$this->db->delete('service_participants_pic', array('ID_S_P' => $deleteId)); 
 	    // $query = "DELETE FROM table_images WHERE id = $deleteId";
 
 			if (mysqli_query($con, $query)) {
