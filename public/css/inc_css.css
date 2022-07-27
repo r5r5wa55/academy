@@ -63,7 +63,7 @@ img.img-reponsive.img-thumbnail.img-profile {
   border-radius: 150px;
 }
 a.btn-edit {
-  border: 1px solid #00bc8c;
+  border: 1px solid #09cf9d;
   padding: 3px 10px;
   border-radius: 8px;
   color: #00bc8c;
@@ -78,8 +78,6 @@ a.btn-edit:hover{
   color: rgb(255, 255, 255);
   letter-spacing:  0.25em;
   transition: 0.5s;
-
-
 }
 .box-btn-center {
   text-align: center;
@@ -158,7 +156,7 @@ span.text-file-FILE_RESEARCHS {
 }
 
 
-.btn {
+.btn-file {
   border: 4px solid gray;
   color: gray;
   background-color: white;
@@ -219,6 +217,7 @@ span:hover + div.show-text  {
   text-decoration: none;
   color: #ca0505;
 }
+
 .text-long {
   white-space: nowrap; 
   width: 200px; 
@@ -226,6 +225,31 @@ span:hover + div.show-text  {
 
   text-overflow: ellipsis;
 
+}
+
+.text-hidden {
+  white-space: nowrap; 
+  width: 375px; 
+  height: 56px;
+
+}
+
+a.btn-pic {
+  border: 1px solid #000000;
+  padding: 3px 10px;
+  border-radius: 8px;
+  color: #000000;
+  letter-spacing:  0.1em;
+
+}
+a.btn-pic:hover{
+  border: 1px solid #000000;
+  padding: 3px 10px; 
+  background: #000000;
+  border-radius: 8px;
+  color: rgb(255, 255, 255);
+  letter-spacing:  0.25em;
+  transition: 0.5s;
 }
 
 

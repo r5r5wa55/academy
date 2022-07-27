@@ -2184,9 +2184,22 @@ var main = {
     var TOTAL_HOUR = $('#add_services [name=TOTAL_HOUR]').val();
     var SERVICE_START_DATE = $('#add_services [name=SERVICE_START_DATE]').val();
     var SERVICE_END_DATE = $('#add_services [name=SERVICE_END_DATE]').val();
-    var FILE_DOCUMENT = $('#add_services [name=FILE_DOCUMENT]').val();
+   
   
     var url = window.location.origin+"/index.php/Home/add_services";
+
+
+
+
+    // console.log(SERVICE_TITLE);
+    // console.log(SERVICE_PLACE);
+    // console.log(SERVICE_OWNER);
+    // console.log(PARTICIPANT_TYPE);
+    // console.log(PARTICIPANT);
+    // console.log(TOTAL_PARTICIPANT);
+    // console.log(TOTAL_HOUR);
+    // console.log(SERVICE_START_DATE);
+    // console.log(SERVICE_END_DATE);
     // console.log(FILE_DOCUMENT);
     // return false;
     var data = {
@@ -2198,8 +2211,7 @@ var main = {
       'TOTAL_PARTICIPANT':TOTAL_PARTICIPANT,
       'TOTAL_HOUR':TOTAL_HOUR,
       'SERVICE_START_DATE':SERVICE_START_DATE,
-      'SERVICE_END_DATE':SERVICE_END_DATE,
-      'FILE_DOCUMENT':FILE_DOCUMENT
+      'SERVICE_END_DATE':SERVICE_END_DATE
     }
    
     $.ajax({
@@ -2242,8 +2254,8 @@ var main = {
     $('#edit_services [name=PARTICIPANT]').val(PARTICIPANT);
     $('#edit_services [name=TOTAL_PARTICIPANT]').val(TOTAL_PARTICIPANT);
     $('#edit_services [name=TOTAL_HOUR]').val(TOTAL_HOUR);
-    $('#edit_services [name=SERVICE_START_DATE]').val(SERVICE_START_DATE);
-    $('#edit_services [name=SERVICE_END_DATE]').val(SERVICE_END_DATE);
+    $('#edit_services [name=edit_SERVICE_START_DATE]').val(SERVICE_START_DATE);
+    $('#edit_services [name=edit_SERVICE_END_DATE]').val(SERVICE_END_DATE);
     $('#edit_services').modal('show'); 
    ;
   },
@@ -2257,8 +2269,8 @@ var main = {
     var PARTICIPANT = $('#edit_services [name=PARTICIPANT]').val()
     var TOTAL_PARTICIPANT = $('#edit_services [name=TOTAL_PARTICIPANT]').val()
     var TOTAL_HOUR = $('#edit_services [name=TOTAL_HOUR]').val()
-    var SERVICE_START_DATE = $('#edit_services [name=SERVICE_START_DATE]').val()
-    var SERVICE_END_DATE = $('#edit_services [name=SERVICE_END_DATE]').val()
+    var SERVICE_START_DATE = $('#edit_services [name=edit_SERVICE_START_DATE]').val()
+    var SERVICE_END_DATE = $('#edit_services [name=edit_SERVICE_END_DATE]').val()
   
 
     var url = window.location.origin+"/index.php/Home/edit_services";
@@ -2272,7 +2284,7 @@ var main = {
     // console.log(TOTAL_HOUR);
     // console.log(SERVICE_START_DATE);
     // console.log(SERVICE_END_DATE);
-    // console.log(FILE_DOCUMENT);
+    // console.log(SERVICE_START_DATE);
     // return false
   
 
@@ -2352,6 +2364,69 @@ var main = {
       }
     })
   },
+
+  upload_file_services(obj){
+    var files = $(obj)[0].files;
+    var error = '';
+    var form_data = new FormData();
+    for(var count = 0; count<files.length; count++){
+      var name = files[count].name;
+      var extension = name.split('.').pop().toLowerCase();
+      if(jQuery.inArray(extension, ['pdf']) == -1){
+        error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ PDF"
+      }else{
+        form_data.append("files[]", files[count]);
+
+      }
+    }
+
+    // form_data.append('RESEARCH_ID', $('[name=RESEARCH_ID]').val());
+    form_data.append('SERVICE_ID', $(obj).attr('data-id-SERVICE_ID'));
+
+    
+    if(error == ''){
+      $.ajax({
+        url:window.location.origin+"/index.php/Home/upload_file_services",
+        method:"POST",
+        data:form_data,
+        contentType:false,
+        dataType : 'JSON',
+        cache:false,
+        processData:false,
+        beforeSend:function(){
+          $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+        },
+      }).done(function(data) {
+        // console.log(data);
+        // return false;
+        if(data.st == 1){
+          location.reload();
+        }else{
+          alert('sud')
+        }
+        
+      })
+    }else{
+      alert(error);
+    }
+  },
+
+  show_service_participants_pic(ID){
+   
+
+
+
+    // console.log(ID);
+    // return false  ; 
+    
+    var url = window.location.origin+"/index.php/Home/show_service_participants_pic?ID=".ID;
+
+
+   
+  }, 
+  
+
+
   ///
   add_service_participants(){
    
@@ -2433,8 +2508,8 @@ var main = {
     $('#edit_service_participants [name=SERVICE_ID]').val(SERVICE_ID);
     $('#edit_service_participants [name=PERSONNEL_ID]').val(PERSONNEL_ID);
     $('#edit_service_participants [name=TOTAL_HOUR_SERVICE_P]').val(TOTAL_HOUR_SERVICE_P);
-    $('#edit_service_participants [name=SERVICE_P_START_DATE]').val(SERVICE_P_START_DATE);
-    $('#edit_service_participants [name=SERVICE_P_END_DATE]').val(SERVICE_P_END_DATE);
+    $('#edit_service_participants [name=edit_SERVICE_P_START_DATE]').val(SERVICE_P_START_DATE);
+    $('#edit_service_participants [name=edit_SERVICE_P_END_DATE]').val(SERVICE_P_END_DATE);
     $('#edit_service_participants').modal('show'); 
    ;
   },
@@ -2444,8 +2519,8 @@ var main = {
     var SERVICE_ID = $('#edit_service_participants [name=SERVICE_ID] option:selected').val()
     var PERSONNEL_ID = $('#edit_service_participants [name=PERSONNEL_ID] option:selected').val()
     var TOTAL_HOUR_SERVICE_P = $('#edit_service_participants [name=TOTAL_HOUR_SERVICE_P]').val()
-    var SERVICE_P_START_DATE = $('#edit_service_participants [name=SERVICE_P_START_DATE]').val()
-    var SERVICE_P_END_DATE = $('#edit_service_participants [name=SERVICE_P_END_DATE]').val()
+    var SERVICE_P_START_DATE = $('#edit_service_participants [name=edit_SERVICE_P_START_DATE]').val()
+    var SERVICE_P_END_DATE = $('#edit_service_participants [name=edit_SERVICE_P_END_DATE]').val()
 
   
 
@@ -2481,7 +2556,6 @@ var main = {
       'SERVICE_ID':SERVICE_ID,
       'PERSONNEL_ID':PERSONNEL_ID,
       'TOTAL_HOUR_SERVICE_P':TOTAL_HOUR_SERVICE_P,
-
       'SERVICE_P_START_DATE':SERVICE_P_START_DATE,
       'SERVICE_P_END_DATE':SERVICE_P_END_DATE
     }
