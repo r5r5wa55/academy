@@ -33,12 +33,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>ข้อมูลผู้ใช้งาน</h1>
+            <h1>เพิ่มรูปภาพการเข้าร่วมการบริการวิชาการ</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">ข้อมูลผู้ใช้</li>
+              <li class="breadcrumb-item active">เพิ่มรูปภาพ</li>
             </ol>
           </div>
         </div>
@@ -50,43 +50,77 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="row">
   	<div class="col-md-4"></div>
       <div class="col-md-6">
-        <div class="alert alert-success alert-dismissible" id="success" style="display: none;">
+        <!-- <div class="alert alert-success alert-dismissible" id="success" style="display: none;" style="float:left;">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
             จัดเก็บรูปภาพเสร็จสิ้น
-        </div>
+        </div> -->
+        
       <form id="submitForm">
         <div class="form-group">
+          
           <div class="custom-file mb-2">
             <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
            
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" name="upload" class="btn btn-primary" style="float:right;" >อัพเดทรูปภาพ</button><br>
+          <button type="submit" name="upload" class="btn btn-primary" style="float:left;" >อัพเดทรูปภาพ</button><br>
+        </div> 
+    
+      </form>
+        <div class="">
+              <a href="<?php echo base_url()?>index.php/Home/service_participants" class="btn btn-info" style="float:right;">  
+                
+                ย้อนกลับ
+            
+              </a>
+          <br>
         </div>  
-      </form><br>
+      <br>
     </div>
   </div>
 </div>
 
-  <!-- view of uploaded images -->
-  <div class="container" id="gallery"></div>
+        <div class="container" id="gallery"><table class="table table-striped"><thead>
+								<tr>
+									<th>เลขรูป</th>
+									<th>ชื่อรูป</th>
+									<th>แก้ไข</th>
+									<th>ลบ</th>
+								</tr>
+							</thead>
+              <tbody>
+                <?php foreach($service_participants_pic as $key=>$value): ?>
+                  <tr>
+                    <td>  <?php echo $key+1?></td>
+                    <td><img src="/images/services_img/<?php echo $value['PIC_GARRY']?>" class="img-thumbnail" width="150px" height="150px"></td>
 
+                    <td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id="<?php echo $value['ID_S_P']?>">แก้ไข</button></td>
+			              <td><button type='button' class='btn btn-danger btn-sm delete-btn' data-id="<?php echo $value['ID_S_P']?>">ลบ</button></td>
+
+                
+                  </tr>
+                <?php endforeach; ?>
+							</tbody>
+
+						</table></div>
+
+  
   <!--Edit Multiple image form -->
-  <div class='modal' id='exampleModal'>
-    <div class='modal-dialog'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <h4 class='modal-title'>Update Image</h4>
-          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+    <div class='modal' id='exampleModal'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h4 class='modal-title'>แก้ไขรูปภาพ</h4>
+              <button type='button' class='close' data-dismiss='modal'>&times;</button>
+            </div>
+            <div id="editForm">
+                เรียบร้อย
+            </div>
+          </div>    
         </div>
-        <div id="editForm">
-            เรียบร้อย
-        </div>
-      </div>    
+      </div>
     </div>
-  </div>
-  </div>
   <!-- /.content-wrapper -->
  
  
@@ -104,62 +138,68 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $(document).ready(function(){
     $("#submitForm").on("submit", function(e){
     e.preventDefault();
+    var editId = $(this).data('id');
+    var get =   '<?php echo $_GET['img']?>';
+    // console.log('aa');
+    // console.log(get);
+    // return false;
+
+    
+    var get = {
+
+      'get':get
+      }
 
     $.ajax({
-    
       url  :window.location.origin+"/index.php/Home/upload1",
       type :"POST",
       cache:false,
       contentType : false, // you can also use multipart/form-data replace of false
       processData : false,
-      data: new FormData(this),
+      data: new FormData(this,'get'),
       success:function(response){
+        setInterval("refresh()", 10000);
+        location.reload();
         $("#success").show();
         $("#multipleFile").val("");
         fetchData();
-
-    // console.log(url);
-    // console.log(data);
-    
+       
       }
+    
     });
    
 });
 
   // Fetch Data from Database
-  function fetchData(){
-    $.ajax({
-      url  :window.location.origin+"/index.php/Home/fetch_data",
 
-      type : "POST",
-      cache: false,
-      success:function(data){
-        $("#gallery").html(data);
-      }
-    });
-  }
-  fetchData();
 
   // Edit Data from Database
   $(document).on("click",".btn-success", function(){
     var editId = $(this).data('id');
-    console.log(editId);
+    // console.log(editId);
     $.ajax({
       url  :window.location.origin+"/index.php/Home/edit",
       type : "POST",
       cache: false,
       data : {editId:editId},
       success:function(data){
+       
         $("#editForm").html(data);
+      
       }
+      
     });
+    
   });
 
   // Delete Data from database
 
+
+
   $(document).on('click','.delete-btn', function(){
     var deleteId = $(this).data('id');
-    if (confirm("Are you sure want to delete this image")) {
+    console.log(deleteId);
+    if (confirm("ยืนยันการลบ")) {
       $.ajax({
         url  :window.location.origin+"/index.php/Home/delete",
      
@@ -167,6 +207,7 @@ $(document).ready(function(){
         cache:false,
         data:{deleteId:deleteId},
         success:function(data){
+          location.reload();
           fetchData();
           alert("Image is deleted successfully");
         }
@@ -187,10 +228,12 @@ $(document).ready(function(){
       processData : false,
       data: formData,
       success:function(response){
+        location.reload();
         $("#exampleModal").modal();
         alert("Image updated successfully");
+       
         fetchData();
-        
+       
       }
     });
   });

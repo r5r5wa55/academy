@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($individual_counseling_services as $key=>$value): ?>
-        <div class="row">
+        <div class="row body-show-long">
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['COUNSELING_PROBLEM'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><?php echo $value['PERSONNEL_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_SURNAME'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><?php echo $value['STUDENT_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['STUDENT_SURNAME'];?></div>

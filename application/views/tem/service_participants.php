@@ -91,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
           <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-center">
-          <a href="/index.php/Home/show_service_participants_pic?img=<?php echo $value['ID'];?>" class="btn-pic">
+            <a href="/index.php/Home/show_service_participants_pic?img=<?php echo $value['ID'];?>" class="btn-pic">
               แสดงรูปภาพ
             </a>
           </div>

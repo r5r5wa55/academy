@@ -1548,6 +1548,57 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  public function save_upload_file_activities($data){
+    // echo "<pre>";
+		// print_r($data['img_name']);
+		// echo "</pre>";
+    // exit;
+
+    $this->db->where('ACTIVITY_ID', $data['ACTIVITY_ID']);
+    $this->db->set('ACTIVITIES_FILE', $data['img_name']);
+    $this->db->update('activities');
+    // $this->db->insert_batch('personnels', $data['img_name']); 
+   
+    // echo "<pre>";
+		// print_r($data['img_name']);
+		// echo "</pre>";
+    // exit;
+    $this->db->select('*');
+    $this->db->from('activities');
+    $this->db->where('ACTIVITY_ID', $data['ACTIVITY_ID']);
+    $data = $this->db->get();
+    $data = $data->row_array();
+
+
+    // $path_delete= './images/researchs/';
+    // if(file_exists($path_delete.$data['FILE_RESEARCHS'])){
+    //   unlink($path_delete.$data['FILE_RESEARCHS']);
+    // }
+
+    
+
+ 
+
+    $data_html = array(
+      'st'=>0
+    );
+    if($data != array()){
+  
+      $data_html = array(
+        'st'=>1
+      );
+    }
+    //  echo "<pre>";
+		// print_r($data_html);
+		// echo "</pre>";
+    // exit;
+    return $data_html;
+  }
+
+ 
+
+
+  
   //
   
   public function select_activity_participants($data_search = ""){
@@ -1651,7 +1702,44 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  public function show_activity_participants_pic(){
+   
+    $id = isset($_GET['img'])?$_GET['img']:"";
+    // echo '<pre>';
+    // print_r($data);
+    // echo '</pre>';
+    // exit;
+    
+    $DATA = array();
 
+    if($id != ""){
+    $this->db->select('*');
+    $this->db->from('service_participants_pic');
+    // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
+    $this->db->where('SERVICE_ID', $_GET['img']);
+    $this->db->order_by("service_participants_pic.ID_S_P", "DESC");  
+
+    $service_participants_pic = $this->db->get();
+    $service_participants_pic = $service_participants_pic->result_array();
+    // $personnels = $this->select_personnels_all();
+  
+    // echo '<pre>';
+    // print_r($service_participants_pic);
+    // echo '</pre>';
+    // exit;
+
+    $DATA = array(
+      'service_participants_pic'=>$service_participants_pic
+    
+    );
+
+    
+  
+
+    }
+    return $DATA;
+ 
+  }
   //
   public function select_trainings($data_search = ""){
     if($_SESSION['level'] != "1"){

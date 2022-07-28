@@ -706,8 +706,6 @@ class Home extends CI_Controller {
 		$this->load->view('tem/update'); 
 		
 	} 
-
-	
 	public function show_service_participants_pic(){
 		$this->check_login_session();
 		$data_search = $this->search_all();
@@ -720,6 +718,7 @@ class Home extends CI_Controller {
 		$this->load->view('tem/service_participants_pic',$data); 
 
 	}
+
 	///
 	public function service_participants(){
 		$this->check_login_session();
@@ -788,6 +787,71 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_activities($_POST);
 		echo json_encode($data);
 	}
+
+	
+	public function upload_file_activities(){
+    // echo "<pre>";
+		// print_r($_FILES);
+		// echo "</pre>";
+		// exit(); 
+
+		if($_FILES["files"]["name"] != '')
+      $output = '';
+			$config['image_library'] = 'gd2';
+      $config["upload_path"] = './images/activities_file/';
+      $config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
+			// $config['encrypt_name'] = FALSE;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+      $this->load->library('upload', $config);
+			$this->load->library('image_lib', $config);
+      $this->upload->initialize($config);
+
+			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
+			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
+			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
+			$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
+			$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
+
+
+			$new_name = $_FILES["file"]["name"];
+			$config['file_name'] = $new_name;
+			
+			if($this->upload->do_upload('file')){
+				$data = $this->upload->data();
+			}
+
+				
+			$data = array(
+				'ACTIVITY_ID' => $_POST['ACTIVITY_ID'],
+				'img_name' => $new_name
+			);
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// exit;
+
+			$data = $this->mhome->save_upload_file_activities($data);
+			echo json_encode($data);
+  }
+
+		
+	public function show_activity_participants_pic(){
+		$this->check_login_session();
+
+		$data = $this->mhome->show_activity_participants_pic($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		
+		$this->load->view('tem/service_participants_pic',$data); 
+
+	}
+
 	///
 	public function activity_participants(){
 		
@@ -1417,9 +1481,14 @@ class Home extends CI_Controller {
 	public function upload1(){
 	
 
-
+		// echo "<pre>";
+		// print_r($_FILES);
+		// echo "</pre>";
 		
-		
+		// echo "<pre>";
+		// print_r($_REQUEST);
+		// echo "</pre>";
+		// exit(); 
 	
 		
 	
@@ -1446,7 +1515,7 @@ class Home extends CI_Controller {
 
 											$data[]=array(
 												'PIC_GARRY'=>$newFile,
-												'SERVICE_ID'=>20
+												'SERVICE_ID'=>$_REQUEST['id-img']
 											);
 								
 

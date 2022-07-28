@@ -55,12 +55,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             จัดเก็บรูปภาพเสร็จสิ้น
         </div> -->
         
-      <form id="submitForm">
+      <form id="submitForm" method="POST">
         <div class="form-group">
           
           <div class="custom-file mb-2">
             <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
-           
+            <input type="hidden" class="" name="id-img" id="id-img"  value="<?php echo $_GET['img']?>">
           </div>
         </div>
         <div class="form-group">
@@ -135,41 +135,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
 <script type="text/javascript">
+  
 $(document).ready(function(){
     $("#submitForm").on("submit", function(e){
     e.preventDefault();
-    var editId = $(this).data('id');
-    var get =   '<?php echo $_GET['img']?>';
-    // console.log('aa');
-    // console.log(get);
-    // return false;
-
-    
-    var get = {
-
-      'get':get
-      }
 
     $.ajax({
+    
       url  :window.location.origin+"/index.php/Home/upload1",
       type :"POST",
       cache:false,
       contentType : false, // you can also use multipart/form-data replace of false
       processData : false,
-      data: new FormData(this,'get'),
+      data: new FormData(this),
       success:function(response){
-        setInterval("refresh()", 10000);
         location.reload();
         $("#success").show();
         $("#multipleFile").val("");
         fetchData();
-       
-      }
+
+    // console.log(url);
+    // console.log(data);
     
+      }
     });
    
 });
-
   // Fetch Data from Database
 
 

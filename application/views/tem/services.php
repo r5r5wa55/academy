@@ -32,136 +32,136 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0" >การบริการวิชาการ</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">การให้บริการ</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-
-    <div class="content">
-      <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
-          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_services').modal('show');">
-          เพิ่มข้อมูล
-          </a>
-        </div> 
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0" >การบริการวิชาการ</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
+                <li class="breadcrumb-item active">การให้บริการ</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
       </div>
-      <div class="row ">
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อการบริการวิชาการ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานที่ให้บริการ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">เจ้าของผู้ให้บริการ</div>
-        <div class="col-lg-3 col-md-2 col-sm-2 hade-show">ไฟล์ข้อมูล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-1 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
-      </div>
-      <?php foreach($services as $key=>$value): ?>
-        <div class="row body-show-long">
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['SERVICE_TITLE'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['SERVICE_PLACE'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left">
-            <?php echo $value['PERSONNEL_SURNAME'];?>
-            &nbsp&nbsp&nbsp&nbsp&nbsp
-            <?php echo $value['PERSONNEL_NAME'];?>
-          </div>
-          <div class="col-lg-3 col-md-2 col-sm-2 body-show text-long">
-
-                <?php if ($value['FILE_DOCUMENT'] != ''): ?>     
-
-                         
-                    <div class="col-lg-10">
-                      <label class="file text-long  col-lg-10 box-btn-center">
-                        <a href="<?php echo base_url("/images/services_file/".$value['FILE_DOCUMENT']);?>" target="_blank">
-                          <span class=""> 
-                            <?php echo $value['FILE_DOCUMENT'];?>
-                          </span>
-                        </a>
-                      </label>
-                      <label class="file text-long col-lg-4 ext-long box-btn-center">
-                        
+      <!-- /.content-header -->
 
 
-                      <div class="upload-btn-wrapper">
-                        <button class="btn btn-success btn-sm">แก้ไข</button>
-                        <input type="file" id="file" aria-label="File browser example" data-id-SERVICE_ID="<?php echo $value['SERVICE_ID']?>" onchange="main.upload_file_services(this)">
+      <div class="content">
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+            <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_services').modal('show');">
+            เพิ่มข้อมูล
+            </a>
+          </div> 
+        </div>
+        <div class="row ">
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อการบริการวิชาการ</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานที่ให้บริการ</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">เจ้าของผู้ให้บริการ</div>
+          <div class="col-lg-3 col-md-2 col-sm-2 hade-show">ไฟล์ข้อมูล</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+          <div class="col-lg-1 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
+        </div>
+        <?php foreach($services as $key=>$value): ?>
+          <div class="row body-show-long">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['SERVICE_TITLE'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['SERVICE_PLACE'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left">
+              <?php echo $value['PERSONNEL_SURNAME'];?>
+              &nbsp&nbsp&nbsp&nbsp&nbsp
+              <?php echo $value['PERSONNEL_NAME'];?>
+            </div>
+            <div class="col-lg-3 col-md-2 col-sm-2 body-show text-long">
+
+                  <?php if ($value['FILE_DOCUMENT'] != ''): ?>     
+
+                          
+                      <div class="col-lg-10">
+                        <label class="file text-long  col-lg-10 box-btn-center">
+                          <a href="<?php echo base_url("/images/services_file/".$value['FILE_DOCUMENT']);?>" target="_blank">
+                            <span class=""> 
+                              <?php echo $value['FILE_DOCUMENT'];?>
+                            </span>
+                          </a>
+                        </label>
+                        <label class="file text-long col-lg-4 ext-long box-btn-center">
+                          
+
+
+                        <div class="upload-btn-wrapper">
+                          <button class="btn btn-success btn-sm">แก้ไข</button>
+                          <input type="file" id="file" aria-label="File browser example" data-id-SERVICE_ID="<?php echo $value['SERVICE_ID']?>" onchange="main.upload_file_services(this)">
+                          
+                        </div>
+                        </label>
                         
                       </div>
-                      </label>
-                      
-                    </div>
-                 
-                <?php endif; ?>
-                
-                <!-- level 1 แสดงไอดีผู้เพื่ม-->
-                <?php if ($value['FILE_DOCUMENT'] == ''): ?> 
-
-                
+                  
+                  <?php endif; ?>
+                  
+                  <!-- level 1 แสดงไอดีผู้เพื่ม-->
+                  <?php if ($value['FILE_DOCUMENT'] == ''): ?> 
 
                   
-                  <div class="col-lg-10">
-                    <label class="file text-long col-lg-8 ext-long box-btn-center">
-                      <input type="file" id="file" aria-label="File browser example" data-id-SERVICE_ID="<?php echo $value['SERVICE_ID']?>" onchange="main.upload_file_services(this)">
-                    </label>
-                  </div>
-              
 
-                <?php endif; ?>   
+                    
+                    <div class="col-lg-10">
+                      <label class="file text-long col-lg-8 ext-long box-btn-center">
+                        <input type="file" id="file" aria-label="File browser example" data-id-SERVICE_ID="<?php echo $value['SERVICE_ID']?>" onchange="main.upload_file_services(this)">
+                      </label>
+                    </div>
+                
+
+                  <?php endif; ?>   
+
+
+            
 
 
           
+            </div>
+          
 
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+              <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_services(
 
-         
+                '<?php echo $value['SERVICE_ID'];?>',
+                '<?php echo $value['SERVICE_TITLE'];?>',
+                '<?php echo $value['SERVICE_PLACE'];?>',
+                '<?php echo $value['SERVICE_OWNER'];?>',
+                '<?php echo $value['PARTICIPANT_TYPE'];?>',
+                '<?php echo $value['PARTICIPANT'];?>',
+                '<?php echo $value['TOTAL_PARTICIPANT'];?>',
+                '<?php echo $value['TOTAL_HOUR'];?>',
+                '<?php echo $value['SERVICE_START_DATE'];?>',
+                '<?php echo $value['SERVICE_END_DATE'];?>',
+                '<?php echo $value['FILE_DOCUMENT'];?>');">
+                แก้ไขข้อมูล
+              </a>
+
+            </div>
+
+            <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center">
+              <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_services(
+                '<?php echo $value['SERVICE_ID'];?>');">
+                ลบข้อมูล
+              </a>
           </div>
-         
-
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
-            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_services(
-
-              '<?php echo $value['SERVICE_ID'];?>',
-              '<?php echo $value['SERVICE_TITLE'];?>',
-              '<?php echo $value['SERVICE_PLACE'];?>',
-              '<?php echo $value['SERVICE_OWNER'];?>',
-              '<?php echo $value['PARTICIPANT_TYPE'];?>',
-              '<?php echo $value['PARTICIPANT'];?>',
-              '<?php echo $value['TOTAL_PARTICIPANT'];?>',
-              '<?php echo $value['TOTAL_HOUR'];?>',
-              '<?php echo $value['SERVICE_START_DATE'];?>',
-              '<?php echo $value['SERVICE_END_DATE'];?>',
-              '<?php echo $value['FILE_DOCUMENT'];?>');">
-              แก้ไขข้อมูล
-            </a>
-
-          </div>
-
-          <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center">
-            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_services(
-              '<?php echo $value['SERVICE_ID'];?>');">
-              ลบข้อมูล
-            </a>
         </div>
+        <?php endforeach; ?>
+
       </div>
-      <?php endforeach; ?>
->
-    </div>
-    </div>
-    </div>
+  </div>
+   
 
 
 <div class="modal fade" id="add_services" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

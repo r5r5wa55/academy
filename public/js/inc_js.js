@@ -2425,8 +2425,55 @@ var main = {
    
   }, 
   
+  
+  save_img_show_service_participants_pic(obj){
 
 
+    var files = $(obj)[0].files;
+    var error = '';
+    var form_data = new FormData();
+    for(var count = 0; count<files.length; count++){
+      var name = files[count].name;
+      var extension = name.split('.').pop().toLowerCase();
+      if(jQuery.inArray(extension, [  'pdf']) == -1){
+        error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ PDF"
+      }else{
+        form_data.append("files[]", files[count]);
+
+      }
+    }
+    console.log($_FIEL);
+    return false;
+    // form_data.append('RESEARCH_ID', $('[name=RESEARCH_ID]').val());
+    form_data.append('RESEARCH_ID', $(obj).attr('data-id-RESEARCH_ID'));
+
+    
+    if(error == ''){
+      $.ajax({
+        url:window.location.origin+"/index.php/Home/upload_file_researchs",
+        method:"POST",
+        data:form_data,
+        contentType:false,
+        dataType : 'JSON',
+        cache:false,
+        processData:false,
+        beforeSend:function(){
+          $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+        },
+      }).done(function(data) {
+        // console.log(data);
+        // return false;
+        if(data.st == 1){
+          location.reload();
+        }else{
+          alert('sud')
+        }
+        
+      })
+    }else{
+      alert(error);
+    }
+  },
   ///
   add_service_participants(){
    
@@ -2619,7 +2666,10 @@ var main = {
   
     var url = window.location.origin+"/index.php/Home/add_activities";
     $('input').removeClass('red')
-        
+    if(ACTIVITY_OWNER_ID==""){
+      $('#add_activities [name=ACTIVITY_OWNER_ID]').addClass("red")
+      return false;
+    }
     if(ACTIVITY_NAME==""){
       $('#add_activities [name=ACTIVITY_NAME]').addClass("red")
       return false;
@@ -2644,10 +2694,7 @@ var main = {
       $('#add_activities [name=ACTIVITY_DETAIL]').addClass("red")
       return false;
     }
-    if(ACTIVITY_OWNER_ID==""){
-      $('#add_activities [name=ACTIVITY_OWNER_ID]').addClass("red")
-      return false;
-    }
+  
     // console.log(ACTIVITY_TYPE_ID);
     // console.log(ACTIVITY_CATEGORY_ID);
     // console.log(ACTIVITY_NAME);
@@ -2805,6 +2852,55 @@ var main = {
       }
     })
   },
+
+  upload_file_activities(obj){
+    var files = $(obj)[0].files;
+    var error = '';
+    var form_data = new FormData();
+    for(var count = 0; count<files.length; count++){
+      var name = files[count].name;
+      var extension = name.split('.').pop().toLowerCase();
+      if(jQuery.inArray(extension, [  'pdf']) == -1){
+        error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ PDF"
+      }else{
+        form_data.append("files[]", files[count]);
+
+      }
+    }
+
+    // form_data.append('RESEARCH_ID', $('[name=RESEARCH_ID]').val());
+    form_data.append('ACTIVITY_ID', $(obj).attr('data-id-ACTIVITY_ID'));
+
+    
+    if(error == ''){
+      $.ajax({
+        url:window.location.origin+"/index.php/Home/upload_file_activities",
+        method:"POST",
+        data:form_data,
+        contentType:false,
+        dataType : 'JSON',
+        cache:false,
+        processData:false,
+        beforeSend:function(){
+          $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+        },
+      }).done(function(data) {
+        // console.log(data);
+        // return false;
+        if(data.st == 1){
+          location.reload();
+        }else{
+          alert('sud')
+        }
+        
+      })
+    }else{
+      alert(error);
+    }
+  },
+
+  
+
   ///
   add_trainings(){
 
@@ -3111,6 +3207,21 @@ var main = {
       }
     })
   },
+
+
+  show_activity_participants_pic(ID){
+   
+
+
+
+    // console.log(ID);
+    // return false  ; 
+    
+    var url = window.location.origin+"/index.php/Home/show_activity_participants_pic?ID=".ID;
+
+
+   
+  }, 
   ///
   add_training_participants(){
 
@@ -4537,13 +4648,16 @@ var main = {
       })
   },
   upload_file_researchs(obj){
+
+    // console.log($_F);
+    // return false;
     var files = $(obj)[0].files;
     var error = '';
     var form_data = new FormData();
     for(var count = 0; count<files.length; count++){
       var name = files[count].name;
       var extension = name.split('.').pop().toLowerCase();
-      if(jQuery.inArray(extension, ['gif','png','jpg','jpeg','pdf','csv']) == -1){
+      if(jQuery.inArray(extension, [  'pdf']) == -1){
         error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ PDF"
       }else{
         form_data.append("files[]", files[count]);
@@ -6158,6 +6272,3 @@ var main = {
   
 
 }
-
-
-

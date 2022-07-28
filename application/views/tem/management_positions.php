@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($management_positions as $key=>$value): ?>
-        <div class="row">
+        <div class="row body-show-long">
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
@@ -127,7 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </select>
     
           <label for="formGroupExampleInput">สาขา</label>
-          <input type="text" class="form-control"  name="DEPARTMENT_ID" placeholder="สาขา">
+          <input type="text" class="form-control"  name="DEPARTMENT_ID" placeholder="สาขา" readonly>
    
    
 

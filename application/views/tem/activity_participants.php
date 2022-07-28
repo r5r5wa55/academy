@@ -64,19 +64,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div> 
       </div>
       <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ชื่อกิจกรรม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ชื่อผู้เข้าร่วม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">นามสกุลผู้เข้าร่วม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">วันที่จัดกิจกรรม</div>
+        <div class="col-lg-3 col-md-2 col-sm-2 hade-show">ชื่อกิจกรรม</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ผู้เข้าร่วม</div>
+        <div class="col-lg-1 col-md-2 col-sm-2 hade-show">วันที่จัดกิจกรรม</div>
+        <div class="col-lg-2 col-md-1 col-sm-2 hade-show">แสดงรูปภาพ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($activity_participants as $key=>$value): ?>
-        <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['ACTIVITY_NAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['ACTIVITY_DATE'];?></div>
+        <div class="row body-show-long">
+          <div class="col-lg-3 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['ACTIVITY_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left">
+            <?php echo $value['PERSONNEL_NAME'];?>
+            &nbsp&nbsp&nbsp&nbsp&nbsp
+            <?php echo $value['PERSONNEL_SURNAME'];?>
+          </div>
+          <div class="col-lg-1 col-md-2 col-sm-1 body-show text-long box-btn-center"><?php echo $value['ACTIVITY_DATE'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-center">
+           
+            <a href="/index.php/Home/show_activity_participants_pic?img=<?php echo $value['ACTIVITY_ID'];?>" class="btn-pic">
+              แสดงรูปภาพ
+            </a>
+          </div>
          
 
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
@@ -160,7 +169,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
-<<div class="modal fade" id="edit_activity_participants" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="edit_activity_participants" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">

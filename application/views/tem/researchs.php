@@ -29,107 +29,143 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- Content Wrapper. Contains page content -->
 
 
+
+   
   
+
+
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0" >งานวิจัย</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">งานวิจัย</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0" >งานวิจัย</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
+                <li class="breadcrumb-item active">งานวิจัย</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
 
 
-    <div class="content">
-      <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
-          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_researchs').modal('show');">
-          เพิ่มข้อมูล
-          </a>
-        </div> 
-      </div>
-      <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่องานวิจัย</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่องานวิจัยภาษาอังกฤษ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อ/นามสกุล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ไฟล์งานวิจัย</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
-      </div>
-      <?php foreach($researchs as $key=>$value): ?>
+      <div class="content">
         <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['RESEARCH_TITLE_TH'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show">
-              <a href="<?php echo base_url("/images/researchs/".$value['FILE_RESEARCHS']);?>" target="_blank">
-                <span class="text-file-FILE_RESEARCHS"> 
-                  <?php echo $value['FILE_RESEARCHS'];?>
-                </span>
-              </a></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
-    
-              <!-- ใช้ไม่ได้เพราะ จะลูปเอา name อันแรกมาเสมอ -->
-              <!-- <input type="hidden" name="RESEARCH_ID" id="RESEARCH_ID" value="////<?php echo $value['RESEARCH_ID']?>"> -->
-        
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-1 col-md-2 col-sm-2"></div>
+          <div class="col-lg-3 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2"></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+            <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_researchs').modal('show');">
+            เพิ่มข้อมูล
+            </a>
+          </div> 
+        </div>
+        <div class="row ">
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long ">ขื่องานวิจัย</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long ">หัวหน้าโครการ</div>
+          <div class="col-lg-1 col-md-1 col-sm-1 hade-show text-long ">งบงานวิจัย</div>
+          <div class="col-lg-3 col-md-3 col-sm-2 hade-show text-long ">ไฟล์งานวิจัย</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long ">แก้ไขข้อมูล</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long ">ลบข้อมูล</div>
+        </div>
+        <?php foreach($researchs as $key=>$value): ?>
+          <div class="row body-show-long">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['RESEARCH_TITLE_TH'];?></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['PERSONNEL_SURNAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_NAME'];?></div>
+            <div class="col-lg-1 col-md-2 col-sm-2 body-show text-long box-btn-left">
+              <?php echo $value['RESEARCH_BUDGETT'];?>
+            </div>
+            <div class="col-lg-3 col-md-2 col-sm-2 body-show text-long">
 
-              <div class="upload-btn-wrapper box-btn-center">
-                <button class="btn">Upload a file</button>
-                <input type="file" name="files"  id="files" data-id-RESEARCH_ID="<?php echo $value['RESEARCH_ID']?>" onchange="main.upload_file_researchs(this)">
+                  <?php if ($value['FILE_RESEARCHS'] != ''): ?>     
+
+                          
+                      <div class="col-lg-10">
+                        <label class="file text-long  col-lg-10 box-btn-left">
+                          <a href="<?php echo base_url("/images/services_file/".$value['FILE_RESEARCHS']);?>" target="_blank">
+                            <span class=""> 
+                              <?php echo $value['FILE_RESEARCHS'];?>
+                            </span>
+                          </a>
+                        </label>
+                        <label class="file text-long col-lg-4 ext-long box-btn-center">
+                          <div class="upload-btn-wrapper">
+                            <button class="btn btn-success btn-sm">แก้ไข</button>
+                            <input type="file" id="file" aria-label="File browser example" data-id-RESEARCH_ID="<?php echo $value['RESEARCH_ID']?>" onchange="main.upload_file_researchs(this)">
+                          </div>
+                        </label>
+                        
+                      </div>
+                  
+                  <?php endif; ?>
+                  
+                  <!-- level 1 แสดงไอดีผู้เพื่ม-->
+                  <?php if ($value['FILE_RESEARCHS'] == ''): ?> 
+
+                  
+
+                    
+                    <div class="col-lg-10">
+                      <label class="file text-long col-lg-8 ext-long box-btn-center">
+                        <input type="file" id="file" aria-label="File browser example" data-id-RESEARCH_ID="<?php echo $value['RESEARCH_ID']?>" onchange="main.upload_file_researchs(this)">
+                      </label>
+                    </div>
                 
-              </div>
-          
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
-            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_researchs(
-              '<?php echo $value['RESEARCH_ID'];?>',
-              '<?php echo $value['RESEARCH_TITLE_TH'];?>',
-              '<?php echo $value['RESEARCH_TITLE_EN'];?>',
-              '<?php echo $value['RESEARCH_ABSTRACT_TH'];?>',
-              '<?php echo $value['RESEARCH_ABSTRACT_EN'];?>',
-              '<?php echo $value['RESEARCH_TYPE'];?>',
-              '<?php echo $value['RESEARCH_BUDGETT'];?>',
-              '<?php echo $value['RESEARCH_START_DATE'];?>',
-              '<?php echo $value['RESEARCH_END_DATE'];?>',
-              '<?php echo $value['RESEARCHER_ID'];?>',
-              '<?php echo $value['RESEARCHER_TYPE'];?>',
-              '<?php echo $value['FILE_RESEARCHS'];?>');">
-              แก้ไขข้อมูล
-            </a>
-          </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+                  <?php endif; ?>   
+
+
+            
+
+
+          
+            </div>
+          
+
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_researchs(
+                '<?php echo $value['RESEARCH_ID'];?>',
+                '<?php echo $value['RESEARCH_TITLE_TH'];?>',
+                '<?php echo $value['RESEARCH_TITLE_EN'];?>',
+                '<?php echo $value['RESEARCH_ABSTRACT_TH'];?>',
+                '<?php echo $value['RESEARCH_ABSTRACT_EN'];?>',
+                '<?php echo $value['RESEARCH_TYPE'];?>',
+                '<?php echo $value['RESEARCH_BUDGETT'];?>',
+                '<?php echo $value['RESEARCH_START_DATE'];?>',
+                '<?php echo $value['RESEARCH_END_DATE'];?>',
+                '<?php echo $value['RESEARCHER_ID'];?>',
+                '<?php echo $value['RESEARCHER_TYPE'];?>',
+                '<?php echo $value['FILE_RESEARCHS'];?>');">
+                แก้ไขข้อมูล
+              </a>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_researchs(
-              '<?php echo $value['RESEARCH_ID'];?>');">
-              ลบข้อมูล
-            </a>
+                '<?php echo $value['RESEARCH_ID'];?>');">
+                ลบข้อมูล
+              </a>
           </div>
         </div>
-      <?php endforeach; ?>
-    </div>
-    </div>
-    </div>
+        <?php endforeach; ?>
 
+      </div>
+  </div>
+   
 
 <div class="modal fade" id="add_researchs" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล การให้คำปรีกษา</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล งานวิจัย</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -169,9 +205,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <option value="1">ผู้ทำการวิจัย</option>
                     <option value="2">ผู้ร่วมทำการวิจัย</option>
                 </select>
-
-                
-
               </div>
               <div class="col-md-6">
                 <label for="formGroupExampleInput">ประเภทงานวิจัย</label>
@@ -191,7 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="date" class="form-control"  name="RESEARCH_END_DATE" placeholder="">
 
                 <label for="formGroupExampleInput">งบประมาณ</label>
-                <input type="text" class="form-control"  name="RESEARCH_BUDGETT" placeholder="">
+                <input type="text" class="form-control"  name="RESEARCH_BUDGETT" placeholder="" onkeyup="main.checkcountinput(this)">
 
               </div>    
           </div>  
@@ -212,7 +245,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล การให้คำปรีกษา</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">แก้ไข งานวิจัย</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
