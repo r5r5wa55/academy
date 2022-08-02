@@ -46,46 +46,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </section>
 
     
-<div class="container">
-  <div class="row">
-  	<div class="col-md-4"></div>
-      <div class="col-md-6">
-        <!-- <div class="alert alert-success alert-dismissible" id="success" style="display: none;" style="float:left;">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-            จัดเก็บรูปภาพเสร็จสิ้น
-        </div> -->
-        
-      <form id="submitForm" method="POST">
-        <div class="form-group">
-          
-          <div class="custom-file mb-2">
-            <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
-            <input type="hidden" class="" name="id-img" id="id-img"  value="<?php echo $_GET['img']?>">
-          </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" name="upload" class="btn btn-primary" style="float:left;" >อัพเดทรูปภาพ</button><br>
-        </div> 
-    
-      </form>
-        <div class="">
-              <a href="<?php echo base_url()?>index.php/Home/service_participants" class="btn btn-info" style="float:right;">  
-                
-                ย้อนกลับ
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"></div>
+          <div class="col-md-6">
+            <!-- <div class="alert alert-success alert-dismissible" id="success" style="display: none;" style="float:left;">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+                จัดเก็บรูปภาพเสร็จสิ้น
+            </div> -->
             
-              </a>
-          <br>
-        </div>  
-      <br>
-    </div>
-  </div>
-</div>
+          <form id="submitForm" method="POST">
+            <div class="form-group">
+              
+              <div class="custom-file mb-2">
+                <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
+                <input type="hidden" class="" name="id-img" id="id-img"  value="<?php echo $_GET['img']?>">
+                <input type="hidden" class="" name="personel" id="personel"  value="<?php echo $_GET['id_personal']?>">
 
-        <div class="container" id="gallery"><table class="table table-striped"><thead>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" name="upload" class="btn btn-primary" style="float:left;" >อัพเดทรูปภาพ</button><br>
+            </div> 
+        
+          </form>
+            <div class="">
+                  <a href="<?php echo base_url()?>index.php/Home/service_participants" class="btn btn-info" style="float:right;">  
+                    
+                    ย้อนกลับ
+                
+                  </a>
+              <br>
+            </div>  
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="gallery"><table class="table table-striped"><thead>
 								<tr>
 									<th>เลขรูป</th>
 									<th>ชื่อรูป</th>
-									<th>แก้ไข</th>
+									<!-- <th>แก้ไข</th> -->
 									<th>ลบ</th>
 								</tr>
 							</thead>
@@ -95,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <td>  <?php echo $key+1?></td>
                     <td><img src="/images/services_img/<?php echo $value['PIC_GARRY']?>" class="img-thumbnail" width="150px" height="150px"></td>
 
-                    <td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id="<?php echo $value['ID_S_P']?>">แก้ไข</button></td>
+                    <!-- <td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id="<?php echo $value['ID_S_P']?>">แก้ไข</button></td> -->
 			              <td><button type='button' class='btn btn-danger btn-sm delete-btn' data-id="<?php echo $value['ID_S_P']?>">ลบ</button></td>
 
                 
@@ -106,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</table></div>
 
   
-  <!--Edit Multiple image form -->
+    <!--Edit Multiple image form -->
     <div class='modal' id='exampleModal'>
         <div class='modal-dialog'>
           <div class='modal-content'>
@@ -121,6 +123,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
     </div>
+  </div>
   <!-- /.content-wrapper -->
  
  
@@ -137,30 +140,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript">
   
 $(document).ready(function(){
-    $("#submitForm").on("submit", function(e){
-    e.preventDefault();
+  $("#submitForm").on("submit", function(e){
+      e.preventDefault();
 
-    $.ajax({
-    
-      url  :window.location.origin+"/index.php/Home/upload1",
-      type :"POST",
-      cache:false,
-      contentType : false, // you can also use multipart/form-data replace of false
-      processData : false,
-      data: new FormData(this),
-      success:function(response){
-        location.reload();
-        $("#success").show();
-        $("#multipleFile").val("");
-        fetchData();
+      $.ajax({
+      
+        url  :window.location.origin+"/index.php/Home/upload1",
+        type :"POST",
+        cache:false,
+        contentType : false, // you can also use multipart/form-data replace of false
+        processData : false,
+        data: new FormData(this),
+        success:function(response){
+          location.reload();
+          $("#success").show();
+          $("#multipleFile").val("");
+          fetchData();
 
-    // console.log(url);
-    // console.log(data);
+      // console.log(url);
+      // console.log(data);
+      
+        }
+      });
     
-      }
-    });
-   
-});
+  });
   // Fetch Data from Database
 
 
@@ -233,6 +236,6 @@ $(document).ready(function(){
 
 
 </script>
-</script>
+
 </body>
 </html>

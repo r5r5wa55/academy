@@ -1281,9 +1281,15 @@ class Home_model extends CI_Model {
 
   public function show_service_participants_pic(){
    
+
+
+
       $id = isset($_GET['img'])?$_GET['img']:"";
+
+      $id_personal = isset($_GET['id_personal'])?$_GET['id_personal']:"";
+      
       // echo '<pre>';
-      // print_r($data);
+      // print_r($id_personal);
       // echo '</pre>';
       // exit;
       
@@ -1294,6 +1300,9 @@ class Home_model extends CI_Model {
       $this->db->from('service_participants_pic');
       // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
       $this->db->where('SERVICE_ID', $_GET['img']);
+      $this->db->where('CREATE_BY_SE', $_GET['id_personal']);
+
+
       $this->db->order_by("service_participants_pic.ID_S_P", "DESC");  
 
       $service_participants_pic = $this->db->get();
@@ -1419,6 +1428,7 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+ 
   //
 
   public function select_activities($data_search = ""){
@@ -1705,8 +1715,10 @@ class Home_model extends CI_Model {
   public function show_activity_participants_pic(){
    
     $id = isset($_GET['img'])?$_GET['img']:"";
+    $id_personal = isset($_GET['id_personal'])?$_GET['id_personal']:"";
+
     // echo '<pre>';
-    // print_r($data);
+    // print_r($id_personal);
     // echo '</pre>';
     // exit;
     
@@ -1714,13 +1726,18 @@ class Home_model extends CI_Model {
 
     if($id != ""){
     $this->db->select('*');
-    $this->db->from('service_participants_pic');
+    $this->db->from('activity_participants_pic');
     // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
-    $this->db->where('SERVICE_ID', $_GET['img']);
-    $this->db->order_by("service_participants_pic.ID_S_P", "DESC");  
+    $this->db->where('ACTIVITY_ID', $_GET['img']);
+    $this->db->where('ADD_BY', $id_personal);
+   
+    $this->db->order_by("activity_participants_pic.ID", "DESC");  
 
-    $service_participants_pic = $this->db->get();
-    $service_participants_pic = $service_participants_pic->result_array();
+    $activity_participants_pic = $this->db->get();
+    $activity_participants_pic = $activity_participants_pic->result_array();
+    // $this->db->where('CREATE_BY_SE', $_GET['id_personal']);
+
+    // echo '<pre>';
     // $personnels = $this->select_personnels_all();
   
     // echo '<pre>';
@@ -1729,7 +1746,7 @@ class Home_model extends CI_Model {
     // exit;
 
     $DATA = array(
-      'service_participants_pic'=>$service_participants_pic
+      'activity_participants_pic'=>$activity_participants_pic
     
     );
 
@@ -1740,6 +1757,7 @@ class Home_model extends CI_Model {
     return $DATA;
  
   }
+
   //
   public function select_trainings($data_search = ""){
     if($_SESSION['level'] != "1"){
@@ -1803,11 +1821,9 @@ class Home_model extends CI_Model {
         'TRAINING_PLACE' => $data['TRAINING_PLACE'],
 
         'TRAINING_OWNER' => $data['TRAINING_OWNER'],
-        'TRAINING_COMMENT' => $data['TRAINING_COMMENT'], 
         'TOTAL_HOUR_TRAINING' => $data['TOTAL_HOUR_TRAINING'],
         'TRAINING_START_DATE' => $data['TRAINING_START_DATE'],
         'TRAINING_END_DATE' => $data['TRAINING_END_DATE'],
-        'FILE_TAINING' => $data['FILE_TAINING'],
       );
      
       $data = $this->db->insert('trainings', $data);
@@ -1823,11 +1839,11 @@ class Home_model extends CI_Model {
       $this->db->set('TRAINING_TITLE', $data['TRAINING_TITLE']);
       $this->db->set('TRAINING_PLACE',  $data['TRAINING_PLACE']);
       $this->db->set('TRAINING_OWNER', $data['TRAINING_OWNER']);
-      $this->db->set('TRAINING_COMMENT', $data['TRAINING_COMMENT']);
+ 
       $this->db->set('TOTAL_HOUR_TRAINING', $data['TOTAL_HOUR_TRAINING']);
       $this->db->set('TRAINING_START_DATE',  $data['TRAINING_START_DATE']);
       $this->db->set('TRAINING_END_DATE', $data['TRAINING_END_DATE']);
-      $this->db->set('FILE_TAINING', $data['FILE_TAINING']);
+
       $this->db->update('trainings');
       $st = array('st'=>1);
     }
@@ -1846,6 +1862,52 @@ class Home_model extends CI_Model {
       $st = array('st'=>1);
     }
     return $st;
+  }
+  public function save_upload_file_trainings($data){
+    // echo "<pre>";
+		// print_r($data['img_name']);
+		// echo "</pre>";
+    // exit;
+
+    $this->db->where('TRAINING_ID', $data['TRAINING_ID']);
+    $this->db->set('FILE_TAINING', $data['img_name']);
+    $this->db->update('trainings');
+    // $this->db->insert_batch('personnels', $data['img_name']); 
+   
+    // echo "<pre>";
+		// print_r($data['img_name']);
+		// echo "</pre>";
+    // exit;
+    $this->db->select('*');
+    $this->db->from('trainings');
+    $this->db->where('TRAINING_ID', $data['TRAINING_ID']);
+    $data = $this->db->get();
+    $data = $data->row_array();
+
+
+    // $path_delete= './images/researchs/';
+    // if(file_exists($path_delete.$data['FILE_RESEARCHS'])){
+    //   unlink($path_delete.$data['FILE_RESEARCHS']);
+    // }
+
+    
+
+ 
+
+    $data_html = array(
+      'st'=>0
+    );
+    if($data != array()){
+  
+      $data_html = array(
+        'st'=>1
+      );
+    }
+    //  echo "<pre>";
+		// print_r($data_html);
+		// echo "</pre>";
+    // exit;
+    return $data_html;
   }
 
   ///
@@ -1954,6 +2016,58 @@ class Home_model extends CI_Model {
     }
     return $st;
   }
+  
+  public function select_training_participants_pic(){
+   
+
+
+
+    $id = isset($_GET['img'])?$_GET['img']:"";
+
+    $id_personal = isset($_GET['id_personal'])?$_GET['id_personal']:"";
+    
+    // echo '<pre>';
+    // print_r($id_personal);
+    // echo '</pre>';
+    // exit;
+    
+    $DATA = array();
+
+    if($id != ""){
+      $this->db->select('*');
+      $this->db->from('training_participants_pic');
+      // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
+      $this->db->where('TRAINING_ID', $_GET['img']);
+      $this->db->where('CREATE_BY_TR', $_GET['id_personal']);
+
+
+      $this->db->order_by("training_participants_pic.ID", "DESC");  
+
+      $training_participants_pic = $this->db->get();
+      $training_participants_pic = $training_participants_pic->result_array();
+      // $personnels = $this->select_personnels_all();
+    
+      // echo '<pre>';
+      // print_r($service_participants_pic);
+      // echo '</pre>';
+      // exit;
+
+      $DATA = array(
+        'training_participants_pic'=>$training_participants_pic
+      
+      );
+
+      
+    
+
+    }
+    return $DATA;
+ 
+  }
+
+
+
+
 
   //
   public function select_counseling_types($data_search = ""){
@@ -2162,7 +2276,6 @@ class Home_model extends CI_Model {
       
     return $st;
   }
-  
   public function get_edit_leaves($data){
     
  
@@ -2391,7 +2504,6 @@ class Home_model extends CI_Model {
 
     return $st;
   }
-  
   public function delete_leaves($data){
     $st = array('st'=>0);
   
@@ -2664,24 +2776,7 @@ class Home_model extends CI_Model {
   }
   
   ///
-  public function select_service_participants_pic(){
-    $this->db->select('*');
-    $this->db->from('services');
-  
-    $services = $this->db->get();
-    $services = $services->result_array();
-  
-  
-    $DATA = array(
-      'services'=>$services
-    );
-    // echo "<pre>";
-    // print_r($service_participants);
-    // echo "</pre>";
-    // exit(); 
-    // // หน้า network
-    return $DATA;
-  }
+ 
   
   public function save_upload($data){
     // echo '<pre>';

@@ -2907,11 +2907,9 @@ var main = {
     var TRAINING_TITLE = $('#add_trainings [name=TRAINING_TITLE]').val();
     var TRAINING_PLACE = $('#add_trainings [name=TRAINING_PLACE]').val();
     var TRAINING_OWNER = $('#add_trainings [name=TRAINING_OWNER]').val();
-    var TRAINING_COMMENT = $('#add_trainings [name=TRAINING_COMMENT]').val();
     var TOTAL_HOUR_TRAINING = $('#add_trainings [name=TOTAL_HOUR_TRAINING]').val();
     var TRAINING_START_DATE = $('#add_trainings [name=TRAINING_START_DATE]').val();
     var TRAINING_END_DATE = $('#add_trainings [name=TRAINING_END_DATE]').val();
-    var FILE_TAINING = $('#add_trainings [name=FILE_TAINING]').val();
   
     var url = window.location.origin+"/index.php/Home/add_trainings";
   
@@ -2933,11 +2931,9 @@ var main = {
       'TRAINING_TITLE':TRAINING_TITLE,
       'TRAINING_PLACE':TRAINING_PLACE,
       'TRAINING_OWNER':TRAINING_OWNER,
-      'TRAINING_COMMENT':TRAINING_COMMENT,
       'TOTAL_HOUR_TRAINING':TOTAL_HOUR_TRAINING,
       'TRAINING_START_DATE':TRAINING_START_DATE,
-      'TRAINING_END_DATE':TRAINING_END_DATE,
-      'FILE_TAINING':FILE_TAINING
+      'TRAINING_END_DATE':TRAINING_END_DATE
     }
    
     $.ajax({
@@ -2958,30 +2954,30 @@ var main = {
       }
     })
   },
-  get_edit_trainings(TRAINING_ID,TRAINING_TITLE,TRAINING_PLACE,TRAINING_OWNER,TRAINING_COMMENT,TOTAL_HOUR_TRAINING,
-    TRAINING_START_DATE,TRAINING_END_DATE,FILE_TAINING){
+  get_edit_trainings(TRAINING_ID,TRAINING_TITLE,TRAINING_PLACE,TRAINING_OWNER,TOTAL_HOUR_TRAINING,
+    TRAINING_START_DATE,TRAINING_END_DATE){
 
     // console.log(TRAINING_ID);
     // console.log(TRAINING_TITLE);
     // console.log(TRAINING_PLACE);
     // console.log(TRAINING_OWNER);
-    // console.log(TRAINING_COMMENT);
+  
     // console.log(TOTAL_HOUR_TRAINING);
     // console.log(TRAINING_START_DATE);
     // console.log(TRAINING_END_DATE);
     // console.log(FILE_TAINING);
 
-    //       return false;
+          // return false;
 
     $('#edit_trainings [name=TRAINING_ID]').val(TRAINING_ID);
     $('#edit_trainings [name=TRAINING_TITLE]').val(TRAINING_TITLE);
     $('#edit_trainings [name=TRAINING_PLACE]').val(TRAINING_PLACE);
     $('#edit_trainings [name=TRAINING_OWNER]').val(TRAINING_OWNER);
-    $('#edit_trainings [name=TRAINING_COMMENT]').val(TRAINING_COMMENT);
+
     $('#edit_trainings [name=TOTAL_HOUR_TRAINING]').val(TOTAL_HOUR_TRAINING);
     $('#edit_trainings [name=TRAINING_START_DATE]').val(TRAINING_START_DATE);
     $('#edit_trainings [name=TRAINING_END_DATE]').val(TRAINING_END_DATE);
-    $('#edit_trainings [name=FILE_TAINING]').val(FILE_TAINING);
+  
 
     $('#edit_trainings').modal('show'); 
    ;
@@ -2992,11 +2988,11 @@ var main = {
     var TRAINING_TITLE = $('#edit_trainings [name=TRAINING_TITLE]').val()
     var TRAINING_PLACE = $('#edit_trainings [name=TRAINING_PLACE]').val()
     var TRAINING_OWNER = $('#edit_trainings [name=TRAINING_OWNER]').val()
-    var TRAINING_COMMENT = $('#edit_trainings [name=TRAINING_COMMENT]').val()
+  
     var TOTAL_HOUR_TRAINING = $('#edit_trainings [name=TOTAL_HOUR_TRAINING]').val()
     var TRAINING_START_DATE = $('#edit_trainings [name=TRAINING_START_DATE]').val()
     var TRAINING_END_DATE = $('#edit_trainings [name=TRAINING_END_DATE]').val()
-    var FILE_TAINING = $('#edit_trainings [name=FILE_TAINING]').val()
+
   
 
     var url = window.location.origin+"/index.php/Home/edit_trainings";
@@ -3020,12 +3016,9 @@ var main = {
       'TRAINING_TITLE':TRAINING_TITLE,
       'TRAINING_PLACE':TRAINING_PLACE,
       'TRAINING_OWNER':TRAINING_OWNER,
-
-      'TRAINING_COMMENT':TRAINING_COMMENT,
       'TOTAL_HOUR_TRAINING':TOTAL_HOUR_TRAINING,
       'TRAINING_START_DATE':TRAINING_START_DATE,
-      'TRAINING_END_DATE':TRAINING_END_DATE,
-      'FILE_TAINING':FILE_TAINING
+      'TRAINING_END_DATE':TRAINING_END_DATE
     }
 
     $.ajax({
@@ -3073,6 +3066,55 @@ var main = {
       }
     })
   },
+
+  upload_file_trainings(obj){
+    var files = $(obj)[0].files;
+    var error = '';
+    var form_data = new FormData();
+    for(var count = 0; count<files.length; count++){
+      var name = files[count].name;
+      var extension = name.split('.').pop().toLowerCase();
+      if(jQuery.inArray(extension, ['pdf']) == -1){
+        error += "ไฟล์ที่เลือกไม่ใช่ไฟล์ PDF"
+      }else{
+        form_data.append("files[]", files[count]);
+
+      }
+    }
+
+    // form_data.append('RESEARCH_ID', $('[name=RESEARCH_ID]').val());
+    form_data.append('TRAINING_ID', $(obj).attr('data-id-TRAINING_ID'));
+
+    
+    if(error == ''){
+      $.ajax({
+        url:window.location.origin+"/index.php/Home/upload_file_trainings",
+        method:"POST",
+        data:form_data,
+        contentType:false,
+        dataType : 'JSON',
+        cache:false,
+        processData:false,
+        beforeSend:function(){
+          $('#uploaded_images').html("<label class='text-succes'>Uploading...</label>");
+        },
+      }).done(function(data) {
+        // console.log(data);
+        // return false;
+        if(data.st == 1){
+          location.reload();
+        }else{
+          alert('sud')
+        }
+        
+      })
+    }else{
+      alert(error);
+    }
+  },
+
+
+
   ///
   add_activity_participants(){
 

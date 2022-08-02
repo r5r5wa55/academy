@@ -55,20 +55,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </a>
         </div> 
       </div>
-      <div class="row">
+      <div class="row ">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ชื่อการอบรม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ชื่อผู้เข้าร่วม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">นามสกุลผู้เข้าร่วม</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ผู้เข้าร่วม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">งบประมาณ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">จัดการรูปภาพ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($training_participants as $key=>$value): ?>
-        <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show"><?php echo $value['TRAINING_TITLE'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show"><?php echo $value['TRAINING_BUDGET'];?></div>
+        <div class="row body-show-long">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long box-btn-left"><?php echo $value['TRAINING_TITLE'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long box-btn-left">
+            <?php echo $value['PERSONNEL_NAME'];?>
+            &nbsp&nbsp&nbsp&nbsp&nbsp
+            <?php echo $value['PERSONNEL_SURNAME'];?>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long box-btn-center"><?php echo $value['TRAINING_BUDGET'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long box-btn-left">
+            <a href="/index.php/Home/training_participants_pic?img=<?php echo $value['ID_TRAINING_PARTICIPANTS'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
+              แสดงรูปภาพ
+            </a>
+          </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show box-btn-center">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_training_participants(
               '<?php echo $value['ID_TRAINING_PARTICIPANTS'];?>',

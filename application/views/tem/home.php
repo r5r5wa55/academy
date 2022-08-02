@@ -54,9 +54,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
     <!-- /.card-body -->
   </div>
-  <div class="card-header text-center">
-      <a href="<?php echo base_url()?>index.php/Home/students_login"  class="h2"><b>เข้าสู่ระบบนักศึกษา</b></a>
-    </div>
+  <div class=" text-center">
+      <br>
+      <a href="<?php echo base_url()?>"  class="h2"><b>กลับสู่หน้าหลัก</b></a>
+   
   <!-- /.card -->
 </div>
 

@@ -43,7 +43,7 @@ class Home extends CI_Controller {
 		$ADMIN_USER_check = isset( $_SESSION['ADMIN_USER_check'])? $_SESSION['ADMIN_USER_check']:"";
 		$ADMIN_PASS_check = isset( $_SESSION['ADMIN_PASS_check'])? $_SESSION['ADMIN_PASS_check']:"";
 		if($ADMIN_USER_check == "" && $ADMIN_PASS_check == ""){
-			$this->load->view('tem/home');
+			$this->load->view('tem/home_we');
 		}else{
 			$this->personnels();
 			// $this->load->view('tem/profile');
@@ -75,10 +75,17 @@ class Home extends CI_Controller {
 		return $depart;
 	}
 	///
-	public function page1(){
+	public function home(){
+		$ADMIN_USER_check = isset( $_SESSION['ADMIN_USER_check'])? $_SESSION['ADMIN_USER_check']:"";
+		$ADMIN_PASS_check = isset( $_SESSION['ADMIN_PASS_check'])? $_SESSION['ADMIN_PASS_check']:"";
+		if($ADMIN_USER_check == "" && $ADMIN_PASS_check == ""){
+			$this->load->view('tem/home');
+		}else{
+			$this->personnels();
+			// $this->load->view('tem/profile');
+		}
 
-		$data['academics'] = $this->mhome->select_data();
-		$this->load->view('tem/page1'); 
+	
 	}
 	public function academics(){
 		$this->check_login_session();
@@ -753,6 +760,14 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_service_participants($_POST);
 		echo json_encode($data);
 	}
+	
+	public function service_participants_pic(){
+		$this->check_login_session();
+		$data = $this->mhome->select_service_participants_pic($_POST);
+			// exit(); 
+		$this->load->view('tem/service_participants_pic',$data); 
+	
+	}
 	///
 	public function activities(){
 		$this->check_login_session();
@@ -838,19 +853,6 @@ class Home extends CI_Controller {
 			echo json_encode($data);
   }
 
-		
-	public function show_activity_participants_pic(){
-		$this->check_login_session();
-
-		$data = $this->mhome->show_activity_participants_pic($_POST);
-		// 	echo "<pre>";
-		// print_r($data);
-		// echo "</pre>";
-		// exit(); 
-		
-		$this->load->view('tem/service_participants_pic',$data); 
-
-	}
 
 	///
 	public function activity_participants(){
@@ -887,6 +889,121 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_activity_participants($_POST);
 		echo json_encode($data);
 	}
+	public function show_activity_participants_pic(){
+		$this->check_login_session();
+
+		$data = $this->mhome->show_activity_participants_pic($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		
+		$this->load->view('tem/activity_participants_pic',$data); 
+
+	}
+	public function upload_activity_participants_pic(){
+	
+
+		// echo "<pre>";
+		// print_r($_FILES);
+		// echo "</pre>";
+		
+		// echo "<pre>";
+		// print_r($_REQUEST);
+		// echo "</pre>";
+		// exit(); 
+	
+		
+	
+		if (!empty($_FILES['multipleFile']['name'])) {
+
+
+	 
+	    $multiplefile = $_FILES['multipleFile']['name'];
+
+				// $data = array();
+
+
+        foreach ($multiplefile as $name => $value) {
+            
+            $allowImg = array('png','jpeg','jpg','gif');	
+            $fileExnt = explode('.', $multiplefile[$name]);
+            $fileTmp = $_FILES['multipleFile']['tmp_name'][$name];        
+            $newFile = 	rand(). '.'. $fileExnt[1];
+            $target_dir = './images/activities_img/'.$newFile; 
+
+            if (in_array($fileExnt[1], $allowImg)) {
+                if ($_FILES['multipleFile']['size'][$name] > 0 && $_FILES['multipleFile']['error'][$name]== 0) {  
+                    if (move_uploaded_file($fileTmp, $target_dir)) {
+
+											$data[]=array(
+												'PIC_GARRY'=>$newFile,
+												'ACTIVITY_ID'=>$_REQUEST['id-img'],
+												'ADD_BY'=>$_REQUEST['personel']
+												
+											);
+								
+
+                    }
+                }
+            }
+        }
+				$this->db->insert_batch('activity_participants_pic', $data); 
+				
+
+		}
+
+		echo json_encode($data);
+
+		exit(); 
+
+	} 
+	public function delete_activity_participants_pic(){
+
+		// echo "<pre>";
+		// print_r($_POST['deleteId']);
+		// echo "</pre>";
+		// exit;
+
+
+		if (isset($_POST['deleteId'])) {
+		
+	    $deleteId = $_POST['deleteId'];
+
+  
+			$this->db->select('*');
+			$this->db->from('activity_participants_pic');
+			$this->db->where('ID', $deleteId);
+			$query = $this->db->get();
+			$query = $query->result_array();
+
+		
+		
+
+
+
+    	
+
+	    $row =  $query[0];
+
+	    $filePath = 'activities_img/'.$row['ID'];
+			
+			$this->db->delete('activity_participants_pic', array('ID' => $deleteId)); 
+	    // $query = "DELETE FROM table_images WHERE id = $deleteId";
+
+			if (mysqli_query($con, $query)) {
+					unlink($filePath);
+			}
+   	}
+
+	
+		
+		$this->load->view('tem/delete'); 
+		
+	} 
+
+
+
 	///
 	public function trainings(){
 		$this->check_login_session();
@@ -921,6 +1038,54 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_trainings($_POST);
 		echo json_encode($data);
 	}
+	public function upload_file_trainings(){
+    // echo "<pre>";
+		// print_r($_FILES);
+		// echo "</pre>";
+		// exit(); 
+
+		if($_FILES["files"]["name"] != '')
+      $output = '';
+			$config['image_library'] = 'gd2';
+      $config["upload_path"] = './images/trainings_file/';
+      $config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
+			// $config['encrypt_name'] = FALSE;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+      $this->load->library('upload', $config);
+			$this->load->library('image_lib', $config);
+      $this->upload->initialize($config);
+
+			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
+			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
+			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
+			$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
+			$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
+
+
+			$new_name = $_FILES["file"]["name"];
+			$config['file_name'] = $new_name;
+			
+			if($this->upload->do_upload('file')){
+				$data = $this->upload->data();
+			}
+
+				
+			$data = array(
+				'TRAINING_ID' => $_POST['TRAINING_ID'],
+				'img_name' => $new_name
+			);
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// exit;
+
+			$data = $this->mhome->save_upload_file_trainings($data);
+			echo json_encode($data);
+  }
 	///	
 	public function training_participants(){
 		$this->check_login_session();
@@ -950,7 +1115,6 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
-	///
 	public function delete_training_participants(){
 		$this->check_login_session();
 		// echo '<pre>';
@@ -960,6 +1124,116 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_training_participants($_POST);
 		echo json_encode($data);
 	}
+
+	public function training_participants_pic(){
+		$this->check_login_session();
+		$data = $this->mhome->select_training_participants_pic($_POST);
+			// exit(); 
+		$this->load->view('tem/training_participants_pic',$data); 
+	
+	}
+	public function upload_training_participants_pic(){
+	
+
+		// echo "<pre>";
+		// print_r($_FILES);
+		// echo "</pre>";
+		
+		// echo "<pre>";
+		// print_r($_REQUEST);
+		// echo "</pre>";
+		// exit(); 
+	
+		
+	
+		if (!empty($_FILES['multipleFile']['name'])) {
+
+
+	 
+	    $multiplefile = $_FILES['multipleFile']['name'];
+
+				// $data = array();
+
+
+        foreach ($multiplefile as $name => $value) {
+            
+            $allowImg = array('png','jpeg','jpg','gif');	
+            $fileExnt = explode('.', $multiplefile[$name]);
+            $fileTmp = $_FILES['multipleFile']['tmp_name'][$name];        
+            $newFile = 	rand(). '.'. $fileExnt[1];
+            $target_dir = './images/trainings_img/'.$newFile; 
+
+            if (in_array($fileExnt[1], $allowImg)) {
+                if ($_FILES['multipleFile']['size'][$name] > 0 && $_FILES['multipleFile']['error'][$name]== 0) {  
+                    if (move_uploaded_file($fileTmp, $target_dir)) {
+
+											$data[]=array(
+												'PIC_GARRY'=>$newFile,
+												'TRAINING_ID'=>$_REQUEST['id-img'],
+												'CREATE_BY_TR'=>$_REQUEST['personel']
+												
+											);
+								
+
+                    }
+                }
+            }
+        }
+				$this->db->insert_batch('training_participants_pic', $data); 
+				
+
+		}
+
+		echo json_encode($data);
+
+		exit(); 
+
+	} 
+	public function delete_training_participants_pic(){
+
+		// echo "<pre>";
+		// print_r($_POST['deleteId']);
+		// echo "</pre>";
+		// exit;
+
+
+		if (isset($_POST['deleteId'])) {
+		
+	    $deleteId = $_POST['deleteId'];
+
+  
+			$this->db->select('*');
+			$this->db->from('training_participants_pic');
+			$this->db->where('ID', $deleteId);
+			$query = $this->db->get();
+			$query = $query->result_array();
+
+		
+		
+
+
+
+    	
+
+	    $row =  $query[0];
+
+	    $filePath = 'trainings_img/'.$row['ID'];
+			
+			$this->db->delete('training_participants_pic', array('ID' => $deleteId)); 
+	    // $query = "DELETE FROM table_images WHERE id = $deleteId";
+
+			if (mysqli_query($con, $query)) {
+					unlink($filePath);
+			}
+   	}
+
+	
+		
+	
+		
+	} 
+
+	
 	///
 	public function counseling_types(){
 		$this->check_login_session();
@@ -1038,8 +1312,6 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	} 
-	
-
 	public function update_leaves_approve(){
 		$this->check_login_session();		
 		$data = $this->mhome->update_leaves_approve($_POST);
@@ -1068,62 +1340,8 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	}
-	public function service_participants_pic(){
-		$this->check_login_session();
-		$data = $this->mhome->select_service_participants_pic($_POST);
-			// exit(); 
-		$this->load->view('tem/service_participants_pic',$data); 
 	
-	}
-	// public function upload(){
-	// 		// echo "<pre>";
-	// 		// print_r($_POST);
-	// 		// echo "</pre>";
-	// 		// // echo "<pre>";
-	// 		// // print_r($data);
-	// 		// // echo "</pre>";
-	// 		// exit(); 
-  //   if($_FILES["files"]["name"] != '')
-  //     $output = '';
-  //     $config["upload_path"] = './images/upload/';
-  //     $config["allowed_types"] = './jpg|jpeg|png|gif';
-  //     $this->load->library('upload', $config);
-  //     $this->upload->initialize($config);
-	// 		$img_name = array();
-  //     for($count = 0; $count<count($_FILES["files"]["name"]); $count ++){
-	// 			$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
-	// 			$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
-	// 			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
-	// 			$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
-	// 			$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
-	// 			if($this->upload->do_upload('file')){
-	// 				$data = $this->upload->data();
-	// 				// $output .= '
-	// 				// <div class="col-md-3">
-	// 				//   <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-reponsive img-thumbnail"/>
-	// 				// </div>
-	// 				// ';
-	// 				$img_name[] = array(
-	// 					'PIC_GARRY'=>$data["file_name"],
-	// 					'SERVICE_ID' => $_POST['SERVICE_ID'],
-	// 					'CREATE_BY_SE' => $_SESSION['ADMIN_USER_check'],
-	// 				);
-	// 			}
-	// 		}
-
-
-	// 		// echo "<pre>";
-	// 		// print_r($img_name);
-	// 		// echo "</pre>";
-	// 		// exit(); 
-	// 		$data = array(
-	// 			'SERVICE_ID' => $_POST['SERVICE_ID'],
-	// 			'img_name' => $img_name
-	// 		);
-
-	// 		$data = $this->mhome->save_upload($data);
-	// 		echo json_encode($data);
-  // }
+	
 	public function upload_profile(){
 
     if($_FILES["files"]["name"] != '')
@@ -1503,7 +1721,7 @@ class Home extends CI_Controller {
 
         foreach ($multiplefile as $name => $value) {
             
-            $allowImg = array('png','jpeg','jpg','gif','pdf');	
+            $allowImg = array('png','jpeg','jpg','gif');	
             $fileExnt = explode('.', $multiplefile[$name]);
             $fileTmp = $_FILES['multipleFile']['tmp_name'][$name];        
             $newFile = 	rand(). '.'. $fileExnt[1];
@@ -1515,7 +1733,9 @@ class Home extends CI_Controller {
 
 											$data[]=array(
 												'PIC_GARRY'=>$newFile,
-												'SERVICE_ID'=>$_REQUEST['id-img']
+												'SERVICE_ID'=>$_REQUEST['id-img'],
+												'CREATE_BY_SE'=>$_REQUEST['personel']
+												
 											);
 								
 
