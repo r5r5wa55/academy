@@ -106,46 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
               <a class="success">ผ่านการอนุมัติ</a>
-<?php if ($value['FILE_DOCUMENT'] != ''): ?>     
 
-                          
-                      <div class="col-lg-10">
-                        <label class="file text-long  col-lg-10 box-btn-center">
-                          <a href="<?php echo base_url("/images/services_file/".$value['FILE_DOCUMENT']);?>" target="_blank">
-                            <span class=""> 
-                              <?php echo $value['FILE_DOCUMENT'];?>
-                            </span>
-                          </a>
-                        </label>
-                        <label class="file text-long col-lg-4 ext-long box-btn-center">
-                          
-
-
-                        <div class="upload-btn-wrapper">
-                          <button class="btn btn-success btn-sm">แก้ไข</button>
-                          <input type="file" id="file" aria-label="File browser example" data-id-SERVICE_ID="<?php echo $value['SERVICE_ID']?>" onchange="main.upload_file_services(this)">
-                          
-                        </div>
-                        </label>
-                        
-                      </div>
-                  
-                  <?php endif; ?>
-                  
-                  <!-- level 1 แสดงไอดีผู้เพื่ม-->
-                  <?php if ($value['FILE_DOCUMENT'] == ''): ?> 
-
-                  
-
-                    
-                    <div class="col-lg-10">
-                      <label class="file text-long col-lg-8 ext-long box-btn-center">
-                        <input type="file" id="file" aria-label="File browser example" data-id-SERVICE_ID="<?php echo $value['SERVICE_ID']?>" onchange="main.upload_file_services(this)">
-                      </label>
-                    </div>
-                
-
-                  <?php endif; ?>   
               
             <?php endif; ?>
             <?php if ($value['SUPERVISOR_STATUS'] == '3'): ?>
