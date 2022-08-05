@@ -134,22 +134,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <h6>
 
 
-                                <?php if ($researchs['FILE_RESEARCHS'] != ''): ?>
+                                <?php if ($researchs != ''): ?>
                                   <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="researchs">
                                     <?php echo $researchs['FILE_RESEARCHS'];?>
                                   </a>
                                 <?php endif; ?>
                              
-
-                                <?php if ($researchs['FILE_RESEARCHS'] === ''): ?>
-                                  <a class="leave">
+                                <?php if ($researchs != '' && $researchs['FILE_RESEARCHS'] == ''): ?>
+                                  <a>
+                                    ยังไม่ได้เพิ่มไฟล์ข้อมูล
+                                  </a>    
+                                <?php endif; ?>
+                                <?php if ($researchs == ''): ?>
+                                  <a>
                                     ยังไม่ได้ทำรายการ
                                   </a>    
                                 <?php endif; ?>
 
 
                               </h6>
-                              <h6>มีการดำเนินการวิจัยแล้วทั้งหมด งาน</h6>
+                              <h6>มีการดำเนินการวิจัยแล้วทั้งหมด <?php echo $researchs_status?> </h6>
                             </span> 
                           </div>
                         </div>
@@ -164,7 +168,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span href="<?php echo base_url()?>index.php/Home/online">การให้คำปรึกษา</span>
                                 <br>
                                 <br>
-                                <h6 class="leave-online">แก้ปัญหาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
+                                
+                                <h6 class="leave-online">แก้ปัญหาไปแล้ว <?php echo $individual_counseling_services_status?> ครั้ง</h6>
                              
                               </div>
                             </div>
@@ -177,14 +182,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                
                                 <br>
 
-                                <?php if ($researchs['FILE_RESEARCHS'] != ''): ?>
-                                  <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="leave">
-                                    <?php echo $researchs['FILE_RESEARCHS'];?>
+                                <?php if ($leaves_name != ''): ?>
+                                  <a  class="leave">
+                                    <?php echo $leaves_name['LEAVE_TYPE'];?>
                                   </a>
                                 <?php endif; ?>
                              
 
-                                <?php if ($researchs['FILE_RESEARCHS'] === ''): ?>
+                                <?php if ($leaves_name == ''): ?>
                                   <a class="leave">
                                     ยังไม่ได้ทำรายการ
                                   </a>    
@@ -192,7 +197,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <br>
                                 <h6 class="leave-1">ลาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
                                 <br>
-                                <h3 class="leave-file">ไฟล์การลาครั้งล่าสุด</h3>
+                                <h3 class="leave-file">หัวข้อการลาครั้งล่าสุด</h3>
                               </div>
                   
 

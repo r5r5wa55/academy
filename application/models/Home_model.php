@@ -2704,8 +2704,19 @@ class Home_model extends CI_Model {
 
     $this->db->from('researchs');
     $this->db->join('personnels', 'personnels.PERSONNEL_ID = researchs.RESEARCHER_ID');
+    $this->db->where('researchs.RESEARCHER_ID',   $_SESSION['PERSONNEL_ID']);
     $researchs = $this->db->get();
     $researchs = $researchs->row_array();
+
+
+    $this->db->from('researchs');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = researchs.RESEARCHER_ID');
+    $this->db->where('researchs.RESEARCHER_ID',   $_SESSION['PERSONNEL_ID']);
+    $researchs_status = $this->db->get();
+    $researchs_status = $researchs_status->result_array();
+    $researchs_status = count($researchs_status); 
+
+
 
 
     $this->db->select('*');
@@ -2717,11 +2728,28 @@ class Home_model extends CI_Model {
     $leaves_status = count($leaves_status); 
 
     
+    $this->db->from('individual_counseling_services');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = individual_counseling_services.ADVISOR_ID');
+    $this->db->where('individual_counseling_services.ADVISOR_ID',   $_SESSION['PERSONNEL_ID']);
+    $individual_counseling_services_status = $this->db->get();
+    $individual_counseling_services_status = $individual_counseling_services_status->result_array();
+    $individual_counseling_services_status = count($individual_counseling_services_status); 
+
+    
+
+       
+    $this->db->from('leaves');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
+    $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
+    $this->db->where('leaves.PERSONNEL_ID',   $_SESSION['PERSONNEL_ID']);
+    $leaves_name = $this->db->get();
+    $leaves_name = $leaves_name->row_array();
 
 
     
+    
     // echo '<pre>';
-    // print_r($leaves_status);
+    // print_r($leaves_name);
     // echo '</pre>';
     // exit;
     
@@ -2732,7 +2760,11 @@ class Home_model extends CI_Model {
       'personnel_types' => $personnel_types,
       'departments' => $departments['departments'],
       'researchs' => $researchs,
-      'leaves_status' => $leaves_status
+      'leaves_status' => $leaves_status,
+      'researchs_status' => $researchs_status,
+      'individual_counseling_services_status' => $individual_counseling_services_status,
+      'leaves_name' => $leaves_name,
+      
       
     );
 
