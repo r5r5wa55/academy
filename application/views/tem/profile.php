@@ -132,19 +132,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span href="">งานวิจัยล่าสุด 
                               <br>
                               <h6>
-                                <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="researchs">
-                                    <?php echo $researchs['FILE_RESEARCHS'];?>
-                                </a>
-                              </h6>
 
-                               
-                      
-                             <h6>มีการดำเนินการวิจัยแล้วทั้งหมด งาน</h6>
-                            </span>
-                          
-                           
+
+                                <?php if ($researchs['FILE_RESEARCHS'] != ''): ?>
+                                  <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="researchs">
+                                    <?php echo $researchs['FILE_RESEARCHS'];?>
+                                  </a>
+                                <?php endif; ?>
+                             
+
+                                <?php if ($researchs['FILE_RESEARCHS'] === ''): ?>
+                                  <a class="leave">
+                                    ยังไม่ได้ทำรายการ
+                                  </a>    
+                                <?php endif; ?>
+
+
+                              </h6>
+                              <h6>มีการดำเนินการวิจัยแล้วทั้งหมด งาน</h6>
+                            </span> 
                           </div>
-                     
                         </div>
                         
                         <div class="form-group we3 col-md-12">
@@ -153,15 +160,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-6 we4">
                             
                               <img src="/backg/online.png" width="100%" height="100%" class="img-resear">
-                              <div class="col-md-12 front-tect">
+                              <div class="col-md-12 front-online">
                                 <span href="<?php echo base_url()?>index.php/Home/online">การให้คำปรึกษา</span>
+                                <br>
+                                <br>
+                                <h6 class="leave-online">แก้ปัญหาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
+                             
                               </div>
                             </div>
                             
                             <div class="col-md-6 we5">
                             <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
-                              <div class="col-md-12 front-tect">
+                              <div class="col-md-12 front-leave">
                                 <span href="<?php echo base_url()?>index.php/Home/online">การลาป่วย</span>
+                                
+                               
+                                <br>
+
+                                <?php if ($researchs['FILE_RESEARCHS'] != ''): ?>
+                                  <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="leave">
+                                    <?php echo $researchs['FILE_RESEARCHS'];?>
+                                  </a>
+                                <?php endif; ?>
+                             
+
+                                <?php if ($researchs['FILE_RESEARCHS'] === ''): ?>
+                                  <a class="leave">
+                                    ยังไม่ได้ทำรายการ
+                                  </a>    
+                                <?php endif; ?>
+                                <br>
+                                <h6 class="leave-1">ลาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
+                                <br>
+                                <h3 class="leave-file">ไฟล์การลาครั้งล่าสุด</h3>
                               </div>
                   
 

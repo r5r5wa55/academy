@@ -374,13 +374,9 @@ a.btn-o:hover{
 
 
 .front-tect{
-  font-family: 'Source Sans Pro';
-  color: rgb(255, 254, 253);
   font-weight: 900;
-  font-size: 20px;
   padding-left: 15px;
   text-align: center;
-
   top: -60%;
 }
 
@@ -388,6 +384,7 @@ img.img-resear{
   width:  100%;
   height: 100%;
   object-fit: cover;
+  
 }
 .col-md-12.front-tect span{
   font-family: 'Source Sans Pro';
@@ -400,6 +397,7 @@ img.img-resear{
 }
 a.researchs {
   color: #fff;
+  
 }
 .btn-left {
   align-items: flex-end;
@@ -407,3 +405,95 @@ a.researchs {
 }
 
 
+h6.leave-1 {
+  font-family: 'Source Sans Pro';
+  color: rgb(255, 254, 253);
+  font-weight: 900;
+  font-size: 20px;
+  padding-left: 15px;
+  text-align: center;
+ 
+  top: -60%;
+
+}
+
+
+
+.col-md-12.front-leave {
+  font-family: 'Source Sans Pro';
+
+    padding-left: 15px;
+    text-align: center;
+    top: -60%;
+}
+.col-md-12.front-leave span {
+  font-size: 44px;
+  font-weight: 900;
+  color: rgb(255, 254, 253);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-104%, -131%);
+
+}
+a.leave{
+  font-size: 17px;
+  top: 34px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-107%, 14%);
+  color: #fff;
+  white-space: nowrap;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ 
+}
+
+h6.leave-1 {
+  font-size: 22px;
+  font-weight: 700;
+  top: 34px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-119%, 126%);
+}
+h3.leave-file {
+  color:white;
+  font-size: 15px;
+  font-weight: 700;
+  top: 34px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-130%, -110%);
+}
+.col-md-12.front-online {
+  font-family: 'Source Sans Pro';
+    padding-left: 15px;
+    text-align: center;
+    top: -60%;
+
+}
+.col-md-12.front-online span {
+  color: white;
+  font-size: 31px;
+  font-weight: 700;
+  top: 34px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-4%, -50%);
+}
+h6.leave-online {
+  font-size: 20px;
+  font-weight: 700;
+  top: 34px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, 90%);
+  color: white;
+}

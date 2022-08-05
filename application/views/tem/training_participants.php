@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php echo $value['PERSONNEL_SURNAME'];?>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long box-btn-center"><?php echo $value['TRAINING_BUDGET'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long box-btn-left">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long  box-btn-center">
             <a href="/index.php/Home/training_participants_pic?img=<?php echo $value['ID_TRAINING_PARTICIPANTS'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
               แสดงรูปภาพ
             </a>

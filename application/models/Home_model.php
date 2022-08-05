@@ -2704,14 +2704,24 @@ class Home_model extends CI_Model {
 
     $this->db->from('researchs');
     $this->db->join('personnels', 'personnels.PERSONNEL_ID = researchs.RESEARCHER_ID');
-    // $this->db->where('personnels.PERSONNEL_ID', researchs['PERSONNEL_ID']);
-
-
     $researchs = $this->db->get();
     $researchs = $researchs->row_array();
 
+
+    $this->db->select('*');
+    $this->db->from('leaves');
+    $this->db->where('leaves.PERSONNEL_ID',   $_SESSION['PERSONNEL_ID']);
+    $this->db->where('leaves.SUPERVISOR_STATUS', '3');
+    $leaves_status = $this->db->get();
+    $leaves_status = $leaves_status->result_array();
+    $leaves_status = count($leaves_status); 
+
+    
+
+
+    
     // echo '<pre>';
-    // print_r($researchs);
+    // print_r($leaves_status);
     // echo '</pre>';
     // exit;
     
@@ -2721,10 +2731,13 @@ class Home_model extends CI_Model {
       'personnel_statuses' => $personnel_statuses,
       'personnel_types' => $personnel_types,
       'departments' => $departments['departments'],
-      'researchs' => $researchs
+      'researchs' => $researchs,
+      'leaves_status' => $leaves_status
       
     );
 
+
+    
     // echo '<pre>';
     // print_r($DATA);
     // echo '</pre>';
@@ -4103,7 +4116,7 @@ class Home_model extends CI_Model {
 
 
     // echo "<pre>";
-    // print_r($intWorkDay);
+    // print_r($data);
     // echo "</pre>";
     // exit();
     // $this->db->select('*');
@@ -4118,7 +4131,8 @@ class Home_model extends CI_Model {
 
   
     $DATA = array(
-      'intWorkDay'=>$intWorkDay
+      'intWorkDay'=>$intWorkDay,
+      'data'=>$data
     );
 
 

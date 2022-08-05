@@ -99,7 +99,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['LAST_LEAVE_TYPE_ID'];?>',
               '<?php echo $value['OFFICER'];?>',
               '<?php echo $value['SUPERVISOR_ID'];?>',
-              '<?php echo $value['PERSONNEL_ID'];?>');">
+              '<?php echo $value['PERSONNEL_ID'];?>',
+              '<?php echo $value['LEAVE_TOAL'];?>');">
                ยังไม่ได้อนุมัติ
             </a>
 
@@ -131,7 +132,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 '<?php echo $value['LAST_LEAVE_TYPE_ID'];?>',
                 '<?php echo $value['OFFICER'];?>',
                 '<?php echo $value['SUPERVISOR_ID'];?>',
-                '<?php echo $value['PERSONNEL_ID'];?>');">
+                '<?php echo $value['PERSONNEL_ID'];?>',
+                '<?php echo $value['LEAVE_TOAL'];?>');">
                 แก้ไขข้อมูล
               </a>
               
@@ -446,7 +448,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <div class="col-lg-12 col-md-12 col-sm-12 body-leave-number">
                   <input type="checkbox"  class="form-check-input" id="myCheck" name="myCheck" onclick="myFunction()">
-                  <label for="formGroupExampleInput">กรณีที่ลาครึ่งวัน</label>
+                  <label for="formGroupExampleInput">มีการลาครึ่งวัน</label>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 body-leave-number" style="display:none" id="HALF_DATE" >
@@ -567,13 +569,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   function myFunction() {
       var checkBox = document.getElementById("myCheck");
-      var HALF_DATE = document.getElementById("HALF_DATE");
-      var LEAVE_HALF_DATE = $('#edit_leaves [name=LEAVE_HALF_DATE]').val();
+      var HALFDATE = document.getElementById("HALF_DATE");
+      var LEAVE_HALF_DATE = $('#add_edit_leaves_approve [name=LEAVE_HALF_DATE]').val();
 
       if (checkBox.checked == true){
-        HALF_DATE.style.display = "block";
+        HALFDATE.style.display = "block";
       } else {
-        HALF_DATE.style.display = "none" ;
+        HALFDATE.style.display = "none" ;
      
       
     }  
