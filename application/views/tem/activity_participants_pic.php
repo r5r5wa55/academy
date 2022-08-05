@@ -49,12 +49,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
   <div class="row">
   	<div class="col-md-4"></div>
-      <div class="col-md-6">
-        <!-- <div class="alert alert-success alert-dismissible" id="success" style="display: none;" style="float:left;">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-            จัดเก็บรูปภาพเสร็จสิ้น
-        </div> -->
-        
+    <div class="col-md-6">
+      <!-- <div class="alert alert-success alert-dismissible" id="success" style="display: none;" style="float:left;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+          จัดเก็บรูปภาพเสร็จสิ้น
+      </div> -->
+      
       <form id="submitForm">
         <div class="form-group">
           
@@ -69,19 +69,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div> 
     
       </form>
-        <div class="">
-              <a href="<?php echo base_url()?>index.php/Home/activity_participants" class="btn btn-info" style="float:right;">  
-                
-                ย้อนกลับ
-            
-              </a>
-          <br>
-        </div>  
-      <br>
+
+
     </div>
   </div>
 </div>
+ <div class="container">
 
+        <div class="row col-lg-12">
+          <div class="col-md-2"></div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+              <a href="<?php echo base_url()?>index.php/Home/activity_participants" class="btn btn-info" >
+                      ย้อนกลับ
+                  
+              </a>
+          </div>
+        </div>
+      
+      </div>
+      <br>
+      
         <div class="container" id="gallery"><table class="table table-striped"><thead>
 								<tr>
 									<th>เลขรูป</th>

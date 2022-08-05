@@ -94,7 +94,6 @@ a.btn-edit:hover{
   padding-bottom: 10px;
   border: none solid none;   
   justify-content: left;
- 
   align-items: center;
 }
 a.btn-delete {
@@ -260,10 +259,10 @@ body  {
 }
 
 .container{
-  max-width: 960px;
+  /* max-width: 960px; */
   /* border: 2pc solid rgb(158, 13, 13); */
   margin: 0 auto ;
-  padding: 3rem;
+  /* padding: 3rem;s */
   display: flex;
   justify-content: center;
 }
@@ -318,5 +317,93 @@ a.btn-o:hover{
   box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #03edf5;
   color: #fff;
 }
-/* margin-bottom: 18px;
-margin-left: 903px; */
+
+.form-group.we3.col-md-12 {
+  right: 10px;
+  height: 240px;
+}
+
+.form-group.row.we {
+  height: 250px;
+  width: 100%;
+  color: #241c1c;
+  background: #260b0b;
+  /* background:rgba(12, 228, 232, 0.7)url("/backg/researchers.png"); */
+  background-size: cover;
+  min-width: 50%;
+
+}
+.front-we{
+  font-family: 'Source Sans Pro';
+  color: rgb(255, 254, 253);
+  font-weight: 900;
+  font-size: 50px;
+  padding-left: 15px;
+  text-align: center;
+  top: -60%;
+}
+.front-we1{
+  font-family: 'Source Sans Pro';
+  color: rgb(255, 254, 253);
+  font-weight: 900;
+  font-size: 20px;
+  padding-left: 15px;
+  text-align: center;
+  position: relative;
+  top: -30%;
+}
+.col-md-12.front-we span {
+  position: absolute;
+  left: 37%;
+  top:50%;
+  transform: translate(-50%, -50%);
+}
+.col-md-12.front-we1 span {
+  position: absolute;
+  left: 37%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+}
+.col-md-6.we4 {
+  height: 250px;
+  position: relative;
+}
+.col-md-6.we5 {
+  height: 250px;
+}
+
+
+.front-tect{
+  font-family: 'Source Sans Pro';
+  color: rgb(255, 254, 253);
+  font-weight: 900;
+  font-size: 20px;
+  padding-left: 15px;
+  text-align: center;
+
+  top: -60%;
+}
+
+img.img-resear{
+  width:  100%;
+  height: 100%;
+  object-fit: cover;
+}
+.col-md-12.front-tect span{
+  font-family: 'Source Sans Pro';
+  color: rgb(249, 248, 255);
+  font-size: 30px; */
+  position: absolute;
+  transform: translate(-50%, -90%);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+a.researchs {
+  color: #fff;
+}
+.btn-left {
+  align-items: flex-end;
+  
+}
+
+

@@ -48,40 +48,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <div class="container">
       <div class="row">
-        <div class="col-md-4"></div>
+          <div class="col-md-4"></div>
           <div class="col-md-6">
             <!-- <div class="alert alert-success alert-dismissible" id="success" style="display: none;" style="float:left;">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
                 จัดเก็บรูปภาพเสร็จสิ้น
             </div> -->
             
-          <form id="submitForm" method="POST">
-            <div class="form-group">
-              
-              <div class="custom-file mb-2">
-                <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
-                <input type="hidden" class="" name="id-img" id="id-img"  value="<?php echo $_GET['img']?>">
-                <input type="hidden" class="" name="personel" id="personel"  value="<?php echo $_GET['id_personal']?>">
-
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" name="upload" class="btn btn-primary" style="float:left;" >อัพเดทรูปภาพ</button><br>
-            </div> 
-        
-          </form>
-            <div class="">
-                  <a href="<?php echo base_url()?>index.php/Home/training_participants" class="btn btn-info" style="float:right;">  
-                    
-                    ย้อนกลับ
+            <form id="submitForm" method="POST">
+              <div class="form-group">
                 
-                  </a>
-              <br>
-            </div>  
-          <br>
-        </div>
+                <div class="custom-file mb-2">
+                  <input type="file" class="" name="multipleFile[]" id="multipleFile" required="" multiple>
+                  <input type="hidden" class="" name="id-img" id="id-img"  value="<?php echo $_GET['img']?>">
+                  <input type="hidden" class="" name="personel" id="personel"  value="<?php echo $_GET['id_personal']?>">
+
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" name="upload" class="btn btn-primary" style="float:left;" >อัพเดทรูปภาพ</button><br>
+              </div> 
+          
+            </form>
+          </div>
       </div>
     </div>
+    
+    <div class="container">
+      <div class="row col-lg-12">
+        <div class="col-md-2"></div>
+          <div class="col-md-8"></div>
+          <div class="col-md-2">
+            <a href="<?php echo base_url()?>index.php/Home/training_participants" class="btn btn-info" >
+                    ย้อนกลับ
+                
+            </a>
+          </div>
+      </div>
+    </div>
+    <br>
+
+
 
     <div class="container" id="gallery"><table class="table table-striped"><thead>
 								<tr>
@@ -139,99 +146,99 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_js')?>
 <script type="text/javascript">
   
-$(document).ready(function(){
-  $("#submitForm").on("submit", function(e){
-      e.preventDefault();
+  $(document).ready(function(){
+    $("#submitForm").on("submit", function(e){
+        e.preventDefault();
 
-      $.ajax({
+        $.ajax({
+        
+          url  :window.location.origin+"/index.php/Home/upload_training_participants_pic",
+          type :"POST",
+          cache:false,
+          contentType : false, // you can also use multipart/form-data replace of false
+          processData : false,
+          data: new FormData(this),
+          success:function(response){
+            location.reload();
+            $("#success").show();
+            $("#multipleFile").val("");
+            fetchData();
+
+        // console.log(url);
+        // console.log(data);
+        
+          }
+        });
       
-        url  :window.location.origin+"/index.php/Home/upload_training_participants_pic",
-        type :"POST",
-        cache:false,
+    });
+    // Fetch Data from Database
+
+
+    // Edit Data from Database
+    $(document).on("click",".btn-success", function(){
+      var editId = $(this).data('id');
+      // console.log(editId);
+      $.ajax({
+        url  :window.location.origin+"/index.php/Home/edit",
+        type : "POST",
+        cache: false,
+        data : {editId:editId},
+        success:function(data){
+        
+          $("#editForm").html(data);
+        
+        }
+        
+      });
+      
+    });
+
+    // Delete Data from database
+
+
+
+    $(document).on('click','.delete-btn', function(){
+      var deleteId = $(this).data('id');
+      console.log(deleteId);
+      if (confirm("ยืนยันการลบ")) {
+        $.ajax({
+          url  :window.location.origin+"/index.php/Home/delete_training_participants_pic",
+      
+          type : "POST",
+          cache:false,
+          data:{deleteId:deleteId},
+          success:function(data){
+            location.reload();
+            fetchData();
+            alert("Image is deleted successfully");
+          }
+        });
+      }
+    });
+
+    // Update Data from database
+    $(document).on("submit", "#editForm", function(e){
+      e.preventDefault();
+      var formData = new FormData(this);
+      $.ajax({
+        url  :window.location.origin+"/index.php/Home/update",
+      
+        type : "POST",
+        cache: false,
         contentType : false, // you can also use multipart/form-data replace of false
         processData : false,
-        data: new FormData(this),
+        data: formData,
         success:function(response){
           location.reload();
-          $("#success").show();
-          $("#multipleFile").val("");
+          $("#exampleModal").modal();
+          alert("Image updated successfully");
+        
           fetchData();
-
-      // console.log(url);
-      // console.log(data);
-      
+        
         }
       });
-    
-  });
-  // Fetch Data from Database
-
-
-  // Edit Data from Database
-  $(document).on("click",".btn-success", function(){
-    var editId = $(this).data('id');
-    // console.log(editId);
-    $.ajax({
-      url  :window.location.origin+"/index.php/Home/edit",
-      type : "POST",
-      cache: false,
-      data : {editId:editId},
-      success:function(data){
-       
-        $("#editForm").html(data);
-      
-      }
-      
-    });
-    
-  });
-
-  // Delete Data from database
-
-
-
-  $(document).on('click','.delete-btn', function(){
-    var deleteId = $(this).data('id');
-    console.log(deleteId);
-    if (confirm("ยืนยันการลบ")) {
-      $.ajax({
-        url  :window.location.origin+"/index.php/Home/delete_training_participants_pic",
-     
-        type : "POST",
-        cache:false,
-        data:{deleteId:deleteId},
-        success:function(data){
-          location.reload();
-          fetchData();
-          alert("Image is deleted successfully");
-        }
-      });
-    }
-  });
-
-  // Update Data from database
-  $(document).on("submit", "#editForm", function(e){
-    e.preventDefault();
-    var formData = new FormData(this);
-    $.ajax({
-      url  :window.location.origin+"/index.php/Home/update",
-    
-      type : "POST",
-      cache: false,
-      contentType : false, // you can also use multipart/form-data replace of false
-      processData : false,
-      data: formData,
-      success:function(response){
-        location.reload();
-        $("#exampleModal").modal();
-        alert("Image updated successfully");
-       
-        fetchData();
-       
-      }
     });
   });
-});
 
 
 

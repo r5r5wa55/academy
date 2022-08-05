@@ -90,7 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           
                       <div class="col-lg-10">
                         <label class="file text-long  col-lg-10 box-btn-left">
-                          <a href="<?php echo base_url("/images/services_file/".$value['FILE_RESEARCHS']);?>" target="_blank">
+                          <a href="<?php echo base_url("/images/researchs/".$value['FILE_RESEARCHS']);?>" target="_blank">
                             <span class=""> 
                               <?php echo $value['FILE_RESEARCHS'];?>
                             </span>

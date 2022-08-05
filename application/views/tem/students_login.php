@@ -54,7 +54,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
     <!-- /.card-body -->
   </div>
-
+  <div class=" text-center">
+        <br>
+        <a href="<?php echo base_url()?>"  class="h2"><b>กลับสู่หน้าหลัก</b></a>
+    
+    <!-- /.card -->
+  </div>
   <!-- /.card -->
 </div>
 

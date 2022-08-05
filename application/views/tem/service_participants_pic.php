@@ -69,19 +69,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <button type="submit" name="upload" class="btn btn-primary" style="float:left;" >อัพเดทรูปภาพ</button><br>
             </div> 
         
+            
           </form>
-            <div class="">
-                  <a href="<?php echo base_url()?>index.php/Home/service_participants" class="btn btn-info" style="float:right;">  
-                    
-                    ย้อนกลับ
-                
-                  </a>
-              <br>
-            </div>  
-          <br>
         </div>
       </div>
+    
+         
     </div>
+      
+      <div class="container">
+
+        <div class="row col-lg-12">
+          <div class="col-md-2"></div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+              <a href="<?php echo base_url()?>index.php/Home/service_participants" class="btn btn-info" >
+                      ย้อนกลับ
+                  
+              </a>
+          </div>
+        </div>
+      
+      </div>
+      <br>
 
     <div class="container" id="gallery"><table class="table table-striped"><thead>
 								<tr>
@@ -105,7 +115,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php endforeach; ?>
 							</tbody>
 
-						</table></div>
+						</table>
+      </div>
 
   
     <!--Edit Multiple image form -->

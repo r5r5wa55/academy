@@ -121,75 +121,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              
                   <!-- /.tab-pane -->
 
-                  <!-- <div class="tab-content" id="settings">
+                  <div class="tab-content" id="settings">
                     <form class="form-horizontal">
-                        <div class="form-group row">
-                          <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุล</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_NAME'].'&nbsp;&nbsp;&nbsp;&nbsp;'.$personnels['PERSONNEL_SURNAME']?></label>
+                        <div class="form-group row we">
+                          <img src="/backg/researchers.png" class="img-resear">
+                          <div class="col-md-12 front-we">
+                            <span href="<?php echo base_url()?>index.php/Home/researchs">งานวิจัย</span>
                           </div>
+                          <div class="col-md-12 front-we1">
+                            <span href="">งานวิจัยล่าสุด 
+                              <br>
+                              <h6>
+                                <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="researchs">
+                                    <?php echo $researchs['FILE_RESEARCHS'];?>
+                                </a>
+                              </h6>
+
+                               
+                      
+                             <h6>มีการดำเนินการวิจัยแล้วทั้งหมด งาน</h6>
+                            </span>
+                          
+                           
+                          </div>
+                     
                         </div>
-                        <div class="form-group row">
-                          <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_NAME_EN'].'&nbsp;&nbsp;&nbsp;&nbsp;'.$personnels['PERSONNEL_SURNAME_EN']?></label>
-                          </div>
+                        
+                        <div class="form-group we3 col-md-12">
+                          <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
+                          <div class="row">
+                            <div class="col-md-6 we4">
+                            
+                              <img src="/backg/online.png" width="100%" height="100%" class="img-resear">
+                              <div class="col-md-12 front-tect">
+                                <span href="<?php echo base_url()?>index.php/Home/online">การให้คำปรึกษา</span>
+                              </div>
+                            </div>
+                            
+                            <div class="col-md-6 we5">
+                            <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
+                              <div class="col-md-12 front-tect">
+                                <span href="<?php echo base_url()?>index.php/Home/online">การลาป่วย</span>
+                              </div>
+                  
+
+                            </div>
+                          </div>              
                         </div>
                   
-                        <div class="form-group row">
-                          <label for="inputName2" class="col-sm-4 col-form-label">Email</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_EMAIL']?></label>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-4 col-form-label">เบอร์โทรศัพท์</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_MOBILE']?></label>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-4 col-form-label">เบอร์เลขที่บ้าน</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_PHONE']?></label>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-4 col-form-label">เบอร์สำนักงาน</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_PHONE_EXTENSION']?></label>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-4 col-form-label">สายงาน</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_CATEGORY_DETAIL']?></label>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-4 col-form-label">รูปแบบการทำงาน</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_TYPE_DETAIL']?></label>
-                          </div>
-                        </div> 
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-4 col-form-label">สถานะการทำงาน</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['PERSONNEL_STATUS_DETAIL']?></label>
-                          </div>
-                        </div> 
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-4 col-form-label">แผนกที่รับผิดชอบ</label>
-                          <div class="col-sm-8">
-                            <label for="inputName" class="col-sm-8 col-form-label">:<?php echo $personnels['DEPARTMENT_NAME_TH']?></label>
-                          </div>
-                        </div>         
-                        <div class="form-group row">
-                         
-                        </div>
+                
 
                     </form>
-                  </div> -->
+                  </div>
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->

@@ -20,46 +20,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="login-box">
   
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="" class="h1"><b>เข้าสู่ระบบ</b></a>
-    </div>
-    <div class="card-body">
-      <p class="login-box-msg">ระบบจัดการฐานข้อมูล</p>
-  
-
-
-
-      <form method="post" id="admin_login">
-        <div class="input-group mb-3">
-          <input type="text" name="ADMIN_USER" class="form-control" placeholder="Username">
-          <span class="text-danger"></span>  
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" name="ADMIN_PASS" class="form-control" placeholder="Password">
-          <span class="text-danger"></span>  
-        </div>
-        <div class="row">
-          <div class="col-12"><button type="button" class="btn btn-block btn-outline-primary btn-lg" onclick="main.check_login();">เข้าสู่ระบบ</button></div>
-          <!-- /.col -->
-        </div>
-        
-      </form>
-
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a href="" class="h1"><b>เข้าสู่ระบบ</b></a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">ระบบจัดการฐานข้อมูล</p>
     
- 
+
+
+
+        <form method="post" id="admin_login">
+          <div class="input-group mb-3">
+            <input type="text" name="ADMIN_USER" class="form-control" placeholder="Username">
+            <span class="text-danger"></span>  
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" name="ADMIN_PASS" class="form-control" placeholder="Password">
+            <span class="text-danger"></span>  
+          </div>
+          <div class="row">
+            <div class="col-12"><button type="button" class="btn btn-block btn-outline-primary btn-lg" onclick="main.check_login();">เข้าสู่ระบบ</button></div>
+            <!-- /.col -->
+          </div>
+          
+        </form>
+
+      
   
- 
+    
+  
+      </div>
+  
+      <!-- /.card-body -->
     </div>
- 
-    <!-- /.card-body -->
-  </div>
-  <div class=" text-center">
-      <br>
-      <a href="<?php echo base_url()?>"  class="h2"><b>กลับสู่หน้าหลัก</b></a>
-   
-  <!-- /.card -->
-</div>
+    <div class=" text-center">
+          <br>
+          <a href="<?php echo base_url()?>"  class="h2"><b>กลับสู่หน้าหลัก</b></a>
+      
+      <!-- /.card -->
+    </div>
 
 <!-- /.login-box -->
 

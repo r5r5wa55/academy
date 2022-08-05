@@ -2442,8 +2442,8 @@ var main = {
 
       }
     }
-    console.log($_FIEL);
-    return false;
+    // console.log($_FIEL);
+    // return false;
     // form_data.append('RESEARCH_ID', $('[name=RESEARCH_ID]').val());
     form_data.append('RESEARCH_ID', $(obj).attr('data-id-RESEARCH_ID'));
 
@@ -3629,10 +3629,10 @@ var main = {
 
 
   get_edit_leaves(LEAVE_ID,LEAVE_TYPE_ID,WRITE_DATE,LEAVE_START_DATE,LEAVE_END_DATE,MY_CHECK,
-    LAST_LEAVE_TYPE_ID,OFFICER,SUPERVISOR_ID,PERSONNEL_ID){
+    LAST_LEAVE_TYPE_ID,OFFICER,SUPERVISOR_ID,PERSONNEL_ID,LEAVE_TOAL){
 
       
-      
+  
       var startDate = new Date(LEAVE_START_DATE);
       var currentDate = new Date(LEAVE_END_DATE);
       var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
@@ -3648,8 +3648,8 @@ var main = {
       
       
 
-      // console.log(startDate);
-      // console.log($('#LEAVE_START_DATE').val());
+      // // console.log(startDate);
+      // // console.log($('#LEAVE_START_DATE').val());
       // console.log(daysDiff);
       // console.log(MY_CHECK);
       // return false;
@@ -3667,7 +3667,9 @@ var main = {
       'OFFICER':OFFICER,
       'WRITE_DATE':WRITE_DATE,
       'LAST_LEAVE_TYPE_ID':LAST_LEAVE_TYPE_ID,
-      'daysDiff':daysDiff
+      'daysDiff':daysDiff,
+      'LEAVE_TOAL':LEAVE_TOAL
+      
       
     }
 
@@ -3706,7 +3708,7 @@ var main = {
           $('#edit_leaves [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
           $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
           $('#edit_leaves [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
-          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.LEAVE_TOAL);
           $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
           $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
           $('#edit_leaves [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
@@ -3758,7 +3760,7 @@ var main = {
           $('#edit_leaves [name=LEAVE_TYPE_ID]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_ID);
           $('#edit_leaves [name=LEAVE_TYPE_MAX_SHOW]').val(resp.LEAVE_TYPE_ID.LEAVE_TYPE_MAX);
           $('#edit_leaves [name=LEAVE_TOAL]').val(resp.NUM_LEAVE_TOAL);
-          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.daysDiff);
+          $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.LEAVE_TOAL);
           $('#edit_leaves [name=edit_LEAVE_START_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_START_DATE);
           $('#edit_leaves [name=edit_LEAVE_END_DATE]').val(resp.LEAVE_TYPE_ID.LEAVE_END_DATE);
           $('#edit_leaves [name=OFFICER]').val(resp.LEAVE_TYPE_ID.OFFICER);
@@ -5048,71 +5050,99 @@ var main = {
   },
 
   last_leave_end_date_onchange(obj){
+    var LEAVE_START_DATE = ($('#LEAVE_START_DATE').val());
+    var LEAVE_END_DATE = ($('#LEAVE_END_DATE').val());
+    var LEAVE_HALF_DATE = ($('#LEAVE_HALF_DATE').val());
+
+
     var startDate = new Date($('#LEAVE_START_DATE').val());
     var currentDate = new Date($('#LEAVE_END_DATE').val());
     var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
     var aDay = 24 * 60 * 60 * 1000, daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
 
-    // console.log($('#LEAVE_START_DATE').val());
-    // console.log(aDay);
+    // console.log(LEAVE_START_DATE);
+    // console.log(LEAVE_END_DATE);
     // return false;
- 
-    if($('#LEAVE_START_DATE').val() == "" && $('#LEAVE_END_DATE').val() == "" && $('#LEAVE_HALF_DATE').val() == ""){
-
-      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
-    }else if($('#LEAVE_START_DATE').val() == "" && $('#LEAVE_END_DATE').val() == ""){
-
-      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val('0.5').val();
-      $('#add_leaves [name=LEAVE_START_DATE]').val($('#LEAVE_HALF_DATE').val()).val();
-      $('#add_leaves [name=LEAVE_END_DATE]').val($('#LEAVE_HALF_DATE').val()).val();
-    }else if($('#LEAVE_END_DATE').val() == ""){
-
-      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
-    }else if($('#LEAVE_START_DATE').val() == ""){
-
-      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
-    }else if($('#LEAVE_HALF_DATE').val() != ""){
-
-      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val(daysDiff-0.5).val();
-    }else{
-
-      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val(daysDiff).val();
+      
+    var url = window.location.origin+"/index.php/Home/last_leave_end_date_onchange";
+  // console.log(FACUALTY_NAME_TH);
+  // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    var data = {
+      'LEAVE_START_DATE':LEAVE_START_DATE,
+      'LEAVE_END_DATE':LEAVE_END_DATE,
+      'LEAVE_HALF_DATE':LEAVE_HALF_DATE
     }
+
+
+
+    
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      // console.log(resp.intWorkDay)
+      // return false;
+
+      $('#add_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.intWorkDay).val();
+    })
+
+
+
+  
   },
 
 
   last_edit_leave_end_date_onchange(obj){
-    
-    var startDate = new Date($('#edit_LEAVE_START_DATE').val());
-    var currentDate = new Date($('#edit_LEAVE_END_DATE').val());
-    var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
-    var aDay = 24 * 60 * 60 * 1000, daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
 
-    // console.log($('#LEAVE_START_DATE').val());
-    // console.log(aDay);
+    var LEAVE_START_DATE = ($('#edit_LEAVE_START_DATE').val());
+    var LEAVE_END_DATE = ($('#edit_LEAVE_END_DATE').val());
+    var LEAVE_HALF_DATE = ($('#edit_LEAVE_HALF_DATE').val());
+
+
+    // var startDate = new Date($('#LEAVE_START_DATE').val());
+    // var currentDate = new Date($('#LEAVE_END_DATE').val());
+    // var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
+    // var aDay = 24 * 60 * 60 * 1000, daysDiff = parseInt((currentDate.getTime()-startDate.getTime())/aDay,10)+1;
+
+    // console.log(LEAVE_START_DATE);
+    // console.log(LEAVE_END_DATE);
     // return false;
- 
-    if($('#edit_LEAVE_START_DATE').val() == "" && $('#edit_LEAVE_END_DATE').val() == "" && $('#edit_LEAVE_HALF_DATE').val() == ""){
-
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
-    }else if($('#edit_LEAVE_START_DATE').val() == "" && $('#edit_LEAVE_END_DATE').val() == ""){
-
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0.5').val();
-      $('#edit_leaves [name=edit_LEAVE_START_DATE]').val($('#edit_LEAVE_HALF_DATE').val()).val();
-      $('#edit_leaves [name=edit_LEAVE_END_DATE]').val($('#edit_LEAVE_HALF_DATE').val()).val();
-    }else if($('#edit_LEAVE_END_DATE').val() == ""){
-
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
-    }else if($('#edit_LEAVE_START_DATE').val() == ""){
-
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val('0').val();
-    }else if($('#edit_LEAVE_HALF_DATE').val() != ""){
-
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(daysDiff-0.5).val();
-    }else{
-
-      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(daysDiff).val();
+      
+    var url = window.location.origin+"/index.php/Home/last_edit_leave_end_date_onchange";
+  // console.log(FACUALTY_NAME_TH);
+  // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    var data = {
+      'LEAVE_START_DATE':LEAVE_START_DATE,
+      'LEAVE_END_DATE':LEAVE_END_DATE,
+      'LEAVE_HALF_DATE':LEAVE_HALF_DATE
     }
+
+
+
+    
+    $.ajax({
+      url : url,
+      method : 'POST',
+      dataType : 'JSON',
+      data:data,
+      cache : false,
+      beforeSend: function(jqXHR, settings) {
+        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+      },
+    }).done(function(resp) {
+      // console.log(resp.intWorkDay)
+      // return false;
+
+      $('#edit_leaves [name=LEAVES_NUMBER_PLUS]').val(resp.intWorkDay).val();
+    })
+
+    
   },
 
   

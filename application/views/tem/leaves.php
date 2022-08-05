@@ -151,7 +151,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['LAST_LEAVE_TYPE_ID'];?>',
               '<?php echo $value['OFFICER'];?>',
               '<?php echo $value['SUPERVISOR_ID'];?>',
-              '<?php echo $value['PERSONNEL_ID'];?>');">
+              '<?php echo $value['PERSONNEL_ID'];?>',
+              '<?php echo $value['LEAVE_TOAL'];?>');">
                แก้ไขข้อมูล
             </a>
             <?php endif; ?>
@@ -719,20 +720,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   });
 
 
+
   $(function(){
     jQuery(function(){
       $.datetimepicker.setLocale('th');
+      
       jQuery('#edit_LEAVE_START_DATE').datetimepicker({
+        onGenerate:function( ct ){
+        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+          .addClass('xdsoft_disabled');
+      },
+
+        weekends:['01.01.2014','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'],
         format:'Y/m/d',
-    
+        startDate:new Date(),
+        // minDate:'-1970/01/02' ,
+        minDate:new Date(),
         onShow:function( ct ){
+          // console.log(ct);
+          // return false;
           this.setOptions({
             maxDate:jQuery('#edit_LEAVE_END_DATE').val()?jQuery('#edit_LEAVE_END_DATE').val():false
+            
           })
         },
+  
         timepicker:false
       });
       jQuery('#edit_LEAVE_END_DATE').datetimepicker({
+        onGenerate:function( ct ){
+        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+          .addClass('xdsoft_disabled');
+      },
+        weekends:['01.01.2014','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'],
         format:'Y/m/d',
         onShow:function( ct ){
           this.setOptions({
@@ -746,7 +766,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
 
   });
+
+ 
   
+
+
+
   function myFunction() {
     var checkBox = document.getElementById("myCheck");
     var HALF_DATE = document.getElementById("HALF_DATE");

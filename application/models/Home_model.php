@@ -2343,6 +2343,7 @@ class Home_model extends CI_Model {
       'LAST_LEAVE_TYPE_ID' => $LAST_LEAVE_TYPE_ID,
       'daysDiff' => $data['daysDiff'],
       'NUM_LEAVE_TOAL' => $NUM_LEAVE_TOAL,
+      'LEAVE_TOAL' => $data['LEAVE_TOAL'],
       
     );
     // echo '<pre>';
@@ -2689,14 +2690,9 @@ class Home_model extends CI_Model {
     $this->db->join('personnel_statuses', 'personnel_statuses.PERSONNEL_STATUS_ID  = personnels.PERSONNEL_STATUS_ID');
     $this->db->join('personnel_types', 'personnel_types.PERSONNEL_TYPE_ID  = personnels.PERSONNEL_TYPE_ID');
     $this->db->join('departments', 'departments.DEPARTMENT_ID  = personnels.DEPARTMENT_ID');
+
     $this->db->where('personnels.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
 
-
-    
-
-  
-  
-  
 
     $personnels = $this->db->get();
     $personnels = $personnels->row_array();
@@ -2704,12 +2700,29 @@ class Home_model extends CI_Model {
     $personnel_statuses = $this->select_personnel_statuses();
     $personnel_types = $this->select_personnel_types();
     $departments = $this->select_departments();
+
+
+    $this->db->from('researchs');
+    $this->db->join('personnels', 'personnels.PERSONNEL_ID = researchs.RESEARCHER_ID');
+    // $this->db->where('personnels.PERSONNEL_ID', researchs['PERSONNEL_ID']);
+
+
+    $researchs = $this->db->get();
+    $researchs = $researchs->row_array();
+
+    // echo '<pre>';
+    // print_r($researchs);
+    // echo '</pre>';
+    // exit;
+    
     $DATA = array(
       'personnels'=>$personnels,
       'personnel_categories' => $personnel_categories,
       'personnel_statuses' => $personnel_statuses,
       'personnel_types' => $personnel_types,
-      'departments' => $departments['departments']
+      'departments' => $departments['departments'],
+      'researchs' => $researchs
+      
     );
 
     // echo '<pre>';
@@ -3045,10 +3058,9 @@ class Home_model extends CI_Model {
     $data = $data->row_array();
 
 
-    // $path_delete= './images/researchs/';
-    // if(file_exists($path_delete.$data['FILE_RESEARCHS'])){
-    //   unlink($path_delete.$data['FILE_RESEARCHS']);
-    // }
+    // $path_delete = './images/researchs/';
+    // unlink($path_delete.$data['FILE_RESEARCHS']);
+  
 
     
 
@@ -4028,6 +4040,178 @@ class Home_model extends CI_Model {
 
   }
 
+
+  public function last_leave_end_date_onchange($data){
+
+    // echo "<pre>";
+    // print_r($data['LEAVE_START_DATE']);
+    // echo "</pre>";
+    if($data['LEAVE_HALF_DATE'] == ""){
+      $strStartDate = $data['LEAVE_START_DATE'];
+      $strEndDate = $data['LEAVE_END_DATE'];
+      
+      $intWorkDay = 0;
+      $intHoliday = 0;
+      $intTotalDay = ((strtotime($strEndDate) - strtotime($strStartDate))/  ( 60 * 60 * 24 )) + 1; 
+    
+      while (strtotime($strStartDate) <= strtotime($strEndDate)) {
+        
+        $DayOfWeek = date("w", strtotime($strStartDate));
+        if($DayOfWeek == 0 or $DayOfWeek ==6)  // 0 = Sunday, 6 = Saturday;
+        {
+          $intHoliday++;
+          // echo "$strStartDate = <font color=red>Holiday</font><br>";
+        }
+        else
+        {
+          $intWorkDay++;
+          // echo "$strStartDate = <b>Work Day</b><br>";
+        }
+        //$DayOfWeek = date("l", strtotime($strStartDate)); // return Sunday, Monday,Tuesday....
+    
+        $strStartDate = date ("Y-m-d", strtotime("+1 day", strtotime($strStartDate)));
+      }
+  
+    }else{
+      $strStartDate = $data['LEAVE_START_DATE'];
+      $strEndDate = $data['LEAVE_END_DATE'];
+      
+      $intWorkDay = -0.5;
+      $intHoliday = 0;
+      $intTotalDay = ((strtotime($strEndDate) - strtotime($strStartDate))/  ( 60 * 60 * 24 )) + 1; 
+    
+      while (strtotime($strStartDate) <= strtotime($strEndDate)) {
+        
+        $DayOfWeek = date("w", strtotime($strStartDate));
+        if($DayOfWeek == 0 or $DayOfWeek ==6)  // 0 = Sunday, 6 = Saturday;
+        {
+          $intHoliday++;
+          // echo "$strStartDate = <font color=red>Holiday</font><br>";
+        }
+        else
+        {
+          $intWorkDay++;
+          // echo "$strStartDate = <b>Work Day</b><br>";
+        }
+        //$DayOfWeek = date("l", strtotime($strStartDate)); // return Sunday, Monday,Tuesday....
+    
+        $strStartDate = date ("Y-m-d", strtotime("+1 day", strtotime($strStartDate)));
+      
+      }
+    }
+
+
+
+    // echo "<pre>";
+    // print_r($intWorkDay);
+    // echo "</pre>";
+    // exit();
+    // $this->db->select('*');
+    // $this->db->from('table_images');
+
+    // $table_images = $this->db->get();
+    // $table_images = $table_images->result_array();
+
+
+
+
+
+  
+    $DATA = array(
+      'intWorkDay'=>$intWorkDay
+    );
+
+
+    return $DATA;
+
+
+  }
+  public function last_edit_leave_end_date_onchange($data){
+
+    // echo "<pre>";
+    // print_r($data['LEAVE_START_DATE']);
+    // echo "</pre>";
+    if($data['LEAVE_HALF_DATE'] == ""){
+      $strStartDate = $data['LEAVE_START_DATE'];
+      $strEndDate = $data['LEAVE_END_DATE'];
+      
+      $intWorkDay = 0;
+      $intHoliday = 0;
+      $intTotalDay = ((strtotime($strEndDate) - strtotime($strStartDate))/  ( 60 * 60 * 24 )) + 1; 
+    
+      while (strtotime($strStartDate) <= strtotime($strEndDate)) {
+        
+        $DayOfWeek = date("w", strtotime($strStartDate));
+        if($DayOfWeek == 0 or $DayOfWeek ==6)  // 0 = Sunday, 6 = Saturday;
+        {
+          $intHoliday++;
+          // echo "$strStartDate = <font color=red>Holiday</font><br>";
+        }
+        else
+        {
+          $intWorkDay++;
+          // echo "$strStartDate = <b>Work Day</b><br>";
+        }
+        //$DayOfWeek = date("l", strtotime($strStartDate)); // return Sunday, Monday,Tuesday....
+    
+        $strStartDate = date ("Y-m-d", strtotime("+1 day", strtotime($strStartDate)));
+      }
+  
+    }else{
+      $strStartDate = $data['LEAVE_START_DATE'];
+      $strEndDate = $data['LEAVE_END_DATE'];
+      
+      $intWorkDay = -0.5;
+      $intHoliday = 0;
+      $intTotalDay = ((strtotime($strEndDate) - strtotime($strStartDate))/  ( 60 * 60 * 24 )) + 1; 
+    
+      while (strtotime($strStartDate) <= strtotime($strEndDate)) {
+        
+        $DayOfWeek = date("w", strtotime($strStartDate));
+        if($DayOfWeek == 0 or $DayOfWeek ==6)  // 0 = Sunday, 6 = Saturday;
+        {
+          $intHoliday++;
+          // echo "$strStartDate = <font color=red>Holiday</font><br>";
+        }
+        else
+        {
+          $intWorkDay++;
+          // echo "$strStartDate = <b>Work Day</b><br>";
+        }
+        //$DayOfWeek = date("l", strtotime($strStartDate)); // return Sunday, Monday,Tuesday....
+    
+        $strStartDate = date ("Y-m-d", strtotime("+1 day", strtotime($strStartDate)));
+      
+      }
+    }
+
+
+
+    // echo "<pre>";
+    // print_r($intWorkDay);
+    // echo "</pre>";
+    // exit();
+    // $this->db->select('*');
+    // $this->db->from('table_images');
+
+    // $table_images = $this->db->get();
+    // $table_images = $table_images->result_array();
+
+
+
+
+
+  
+    $DATA = array(
+      'intWorkDay'=>$intWorkDay
+    );
+
+
+    return $DATA;
+
+
+  }
+  
   
 }
 

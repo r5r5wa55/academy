@@ -1933,6 +1933,27 @@ class Home extends CI_Controller {
 		$this->load->view('tem/delete'); 
 		
 	} 
+
+	/// วันที่
+	public function last_leave_end_date_onchange(){
+	
+		$data = $this->mhome->last_leave_end_date_onchange($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	public function last_edit_leave_end_date_onchange(){
+	
+		$data = $this->mhome->last_edit_leave_end_date_onchange($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		echo json_encode($data);
+	}
+	
 } 
 
 
