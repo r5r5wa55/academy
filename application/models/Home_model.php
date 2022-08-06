@@ -2722,7 +2722,7 @@ class Home_model extends CI_Model {
     $this->db->select('*');
     $this->db->from('leaves');
     $this->db->where('leaves.PERSONNEL_ID',   $_SESSION['PERSONNEL_ID']);
-    $this->db->where('leaves.SUPERVISOR_STATUS', '3');
+    $this->db->where('leaves.SUPERVISOR_STATUS', '2');
     $leaves_status = $this->db->get();
     $leaves_status = $leaves_status->result_array();
     $leaves_status = count($leaves_status); 
@@ -2742,6 +2742,7 @@ class Home_model extends CI_Model {
     $this->db->join('personnels', 'personnels.PERSONNEL_ID = leaves.PERSONNEL_ID');
     $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
     $this->db->where('leaves.PERSONNEL_ID',   $_SESSION['PERSONNEL_ID']);
+    $this->db->where('leaves.SUPERVISOR_STATUS', '2');
     $leaves_name = $this->db->get();
     $leaves_name = $leaves_name->row_array();
 
