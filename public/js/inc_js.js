@@ -1175,16 +1175,18 @@ var main = {
   get_edit_personnels(PERSONNEL_ID,PERSONNEL_NAME,PERSONNEL_SURNAME,PERSONNEL_NAME_EN,PERSONNEL_SURNAME_EN,
     PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,PERSONNEL_CREATE_BY,
     PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
-    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD,level,PERSONNEL_LINE,PERSONNEL_FACEBOOK){
+    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD,level,PIC,PERSONNEL_LINE,PERSONNEL_FACEBOOK){
 
 
       
-    // console.log(PERSONNEL_CRETTE_DATE);
+   
+    // console.log(PIC);
     // return false;
 
 
-
-    
+    // absPath = $('#img1').attr('src');
+    // console.log(filename);
+    // return false;
 
 
 
@@ -1252,7 +1254,14 @@ var main = {
     $('#edit_personnels [name=PERSONNEL_LINE]').val(PERSONNEL_LINE);
     $('#edit_personnels [name=PERSONNEL_FACEBOOK]').val(PERSONNEL_FACEBOOK);
 
- 
+    $('#edit_personnels [name=PERSONNEL_FACEBOOK]').val(PERSONNEL_FACEBOOK);
+    var img = location.origin+"/images/profile/"+PIC;
+    // console.log&
+    // http://academy.com/images/profile/Daeng-Phra-Khanong-2022-แดงพระโขนง-170x250.png
+    $('#edit_personnels .img-profile-edit').attr('src',img);
+    // $('#edit_personnels [name=PIC]').attr(PIC);
+    // $('#img1').attr(PIC);
+    
     $('#edit_personnels').modal('show'); 
    ;
   }, 

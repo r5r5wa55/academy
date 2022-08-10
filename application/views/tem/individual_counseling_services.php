@@ -73,10 +73,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <?php foreach($individual_counseling_services as $key=>$value): ?>
         <div class="row body-show-long">
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['COUNSELING_PROBLEM'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><?php echo $value['PERSONNEL_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_SURNAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><?php echo $value['STUDENT_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['STUDENT_SURNAME'];?></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left text-long"><?php echo $value['COUNSELING_PROBLEM'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long"><?php echo $value['PERSONNEL_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['PERSONNEL_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long"><?php echo $value['STUDENT_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $value['STUDENT_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
 
               <?php if ($value['INDIVIDUAL_COUNSELING_STATUS'] == '0'): ?>
                 <a>

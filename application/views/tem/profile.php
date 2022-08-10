@@ -59,7 +59,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <input type="file" name="files" id="files">
                   <input type="hidden" name="PERSONNEL_ID"/>
                   <div class="box-img">
-
                     <img src="<?php echo base_url("/images/profile/".$_SESSION['PIC']);?>" class="img-reponsive img-thumbnail img-profile" alt="กรุณาใส่รูป">
                   </div>
                 </div>
@@ -80,27 +79,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </li>
                 </ul>
                 <a href="javascript:void(0)" class="btn btn-edit-profile" onclick="main.get_edit_profile(
-                                '<?php echo $personnels['PERSONNEL_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_NAME'];?>',
-                                '<?php echo $personnels['PERSONNEL_SURNAME'];?>',
-                                '<?php echo $personnels['PERSONNEL_NAME_EN'];?>',
-                                '<?php echo $personnels['PERSONNEL_SURNAME_EN'];?>',
-                                '<?php echo $personnels['PERSONNEL_EMAIL'];?>',
-                                '<?php echo $personnels['PERSONNEL_MOBILE'];?>',
-                                '<?php echo $personnels['PERSONNEL_PHONE'];?>',
-                                '<?php echo $personnels['PERSONNEL_PHONE_EXTENSION'];?>',
-                                '<?php echo $personnels['PERSONNEL_SEX'];?>',
-                                '<?php echo $personnels['PERSONNEL_CREATE_BY'];?>',
-                                '<?php echo $personnels['PERSONNEL_CRETTE_DATE'];?>',
-                                '<?php echo $personnels['DEPARTMENT_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_TYPE_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_STATUS_ID'];?>',
-                                '<?php echo $personnels['PERSONNEL_CATEGORY_ID'];?>', 
-                                '<?php echo $personnels['PERSONNEL_USERNAME'];?>',
-                                '<?php echo $personnels['PERSONNEL_PASSWORD'];?>',
-                                '<?php echo $personnels['level'];?>');">
-                              แก้ไขข้อมูล
-                            </a>
+                    '<?php echo $personnels['PERSONNEL_ID'];?>',
+                    '<?php echo $personnels['PERSONNEL_NAME'];?>',
+                    '<?php echo $personnels['PERSONNEL_SURNAME'];?>',
+                    '<?php echo $personnels['PERSONNEL_NAME_EN'];?>',
+                    '<?php echo $personnels['PERSONNEL_SURNAME_EN'];?>',
+                    '<?php echo $personnels['PERSONNEL_EMAIL'];?>',
+                    '<?php echo $personnels['PERSONNEL_MOBILE'];?>',
+                    '<?php echo $personnels['PERSONNEL_PHONE'];?>',
+                    '<?php echo $personnels['PERSONNEL_PHONE_EXTENSION'];?>',
+                    '<?php echo $personnels['PERSONNEL_SEX'];?>',
+                    '<?php echo $personnels['PERSONNEL_CREATE_BY'];?>',
+                    '<?php echo $personnels['PERSONNEL_CRETTE_DATE'];?>',
+                    '<?php echo $personnels['DEPARTMENT_ID'];?>',
+                    '<?php echo $personnels['PERSONNEL_TYPE_ID'];?>',
+                    '<?php echo $personnels['PERSONNEL_STATUS_ID'];?>',
+                    '<?php echo $personnels['PERSONNEL_CATEGORY_ID'];?>', 
+                    '<?php echo $personnels['PERSONNEL_USERNAME'];?>',
+                    '<?php echo $personnels['PERSONNEL_PASSWORD'];?>',
+                    '<?php echo $personnels['level'];?>');">
+                  แก้ไขข้อมูล
+                </a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -114,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           <!-- /.col -->
           <div class="col-md-9">
-            <div class="card">
+            <div class="card fix-766">
              <!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
@@ -123,90 +122,76 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                   <div class="tab-content" id="settings">
                     <form class="form-horizontal">
-                        <div class="form-group row we">
-                          <img src="/backg/researchers.png" class="img-resear">
-                          <div class="col-md-12 front-we">
-                            <span href="<?php echo base_url()?>index.php/Home/researchs">งานวิจัย</span>
-                          </div>
-                          <div class="col-md-12 front-we1">
-                            <span href="">งานวิจัยล่าสุด 
+                      <div class="form-group row we">
+                        <img src="/backg/researchers.png" class="img-resear">
+                        <div class="col-md-12 front-we">
+                          <span href="<?php echo base_url()?>index.php/Home/researchs">งานวิจัย</span>
+                        </div>
+                        <div class="col-md-12 front-we1">
+                          <span href="">งานวิจัยล่าสุด 
+                            <br>
+                            <h6>
+                              <?php if ($researchs != ''): ?>
+                                <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="researchs">
+                                  <?php echo $researchs['FILE_RESEARCHS'];?>
+                                </a>
+                              <?php endif; ?>
+                            
+                              <?php if ($researchs != '' && $researchs['FILE_RESEARCHS'] == ''): ?>
+                                <a>
+                                  ยังไม่ได้เพิ่มไฟล์ข้อมูล
+                                </a>    
+                              <?php endif; ?>
+                              <?php if ($researchs == ''): ?>
+                                <a>
+                                  ยังไม่ได้ทำรายการ
+                                </a>    
+                              <?php endif; ?>
+                            </h6>
+                            <h6>มีการดำเนินการวิจัยแล้วทั้งหมด <?php echo $researchs_status?> </h6>
+                          </span> 
+                        </div>
+                      </div>
+                      
+                      <div class="form-group we3 col-md-12">
+                        <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
+                        <div class="row">
+                          <div class="col-md-6 we4">
+                          
+                            <img src="/backg/online.png" width="100%" height="100%" class="img-resear">
+                            <div class="col-md-12 front-online">
+                              <span href="<?php echo base_url()?>index.php/Home/online">การให้คำปรึกษา</span>
                               <br>
-                              <h6>
+                              <br>        
+                              <h6 class="leave-online">มีคำร้องขอ <?php echo $individual_counseling_services_status?> รายการ</h6>
+                                </div>
+                          </div>         
+                          <div class="col-md-6 we5">
+                          <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
+                            <div class="col-md-12 front-leave">
+                              <span href="<?php echo base_url()?>index.php/Home/online">การลาป่วย</span>
+                              <br>
+                              <?php if ($leaves_name != ''): ?>
+                                <a  class="leave">
+                                  <?php echo $leaves_name['LEAVE_TYPE'];?>
+                                </a>
+                              <?php endif; ?>
 
-
-                                <?php if ($researchs != ''): ?>
-                                  <a href="<?php echo base_url("/images/researchs/".$researchs['FILE_RESEARCHS']);?>" target="_blank" class="researchs">
-                                    <?php echo $researchs['FILE_RESEARCHS'];?>
-                                  </a>
-                                <?php endif; ?>
-                             
-                                <?php if ($researchs != '' && $researchs['FILE_RESEARCHS'] == ''): ?>
-                                  <a>
-                                    ยังไม่ได้เพิ่มไฟล์ข้อมูล
-                                  </a>    
-                                <?php endif; ?>
-                                <?php if ($researchs == ''): ?>
-                                  <a>
-                                    ยังไม่ได้ทำรายการ
-                                  </a>    
-                                <?php endif; ?>
-
-
-                              </h6>
-                              <h6>มีการดำเนินการวิจัยแล้วทั้งหมด <?php echo $researchs_status?> </h6>
-                            </span> 
-                          </div>
-                        </div>
-                        
-                        <div class="form-group we3 col-md-12">
-                          <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
-                          <div class="row">
-                            <div class="col-md-6 we4">
-                            
-                              <img src="/backg/online.png" width="100%" height="100%" class="img-resear">
-                              <div class="col-md-12 front-online">
-                                <span href="<?php echo base_url()?>index.php/Home/online">การให้คำปรึกษา</span>
-                                <br>
-                                <br>
-                                
-                                <h6 class="leave-online">แก้ปัญหาไปแล้ว <?php echo $individual_counseling_services_status?> ครั้ง</h6>
-                             
-                              </div>
+                              <?php if ($leaves_name == ''): ?>
+                                <a class="leave">
+                                  ยังไม่ได้ทำรายการ
+                                </a>    
+                              <?php endif; ?>
+                              <br>
+                              <h6 class="leave-1">ลาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
+                              <br>
+                              <h3 class="leave-file">หัวข้อการลาครั้งล่าสุด</h3>
                             </div>
-                            
-                            <div class="col-md-6 we5">
-                            <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
-                              <div class="col-md-12 front-leave">
-                                <span href="<?php echo base_url()?>index.php/Home/online">การลาป่วย</span>
-                                
-                               
-                                <br>
-
-                                <?php if ($leaves_name != ''): ?>
-                                  <a  class="leave">
-                                    <?php echo $leaves_name['LEAVE_TYPE'];?>
-                                  </a>
-                                <?php endif; ?>
-                             
-
-                                <?php if ($leaves_name == ''): ?>
-                                  <a class="leave">
-                                    ยังไม่ได้ทำรายการ
-                                  </a>    
-                                <?php endif; ?>
-                                <br>
-                                <h6 class="leave-1">ลาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
-                                <br>
-                                <h3 class="leave-file">หัวข้อการลาครั้งล่าสุด</h3>
-                              </div>
-                  
-
-                            </div>
-                          </div>              
-                        </div>
-                  
                 
 
+                          </div>
+                        </div>              
+                      </div>                
                     </form>
                   </div>
                   <!-- /.tab-pane -->
@@ -309,9 +294,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->load->view('tem/inc_modal_center')?>
 <?php $this->load->view('tem/inc_js')?>
 <script>
-    $('#files').change(function(){
-     main.upload_img_profile()   
-    });
+  $('#files').change(function(){
+    main.upload_img_profile()   
+  });
   function myFunctionedit() {
     var x = document.getElementById("myInputedit");
     if (x.type === "password") {
@@ -330,6 +315,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   }
 </script>
-</script>
+
 </body>
 </html>

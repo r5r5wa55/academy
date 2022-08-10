@@ -421,6 +421,10 @@ class Home extends CI_Controller {
 		$this->check_login_session();
 		$data_search = $this->search_all();
 		$data = $this->mhome->select_personnels($data_search);
+			// 		echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit();
 		$this->load->view('tem/personnels',$data); 
 	} 
 	public function add_personnels(){
@@ -720,12 +724,26 @@ class Home extends CI_Controller {
 		// 	echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
-		// exit(); 
+		// exit(); 	
 		
 		$this->load->view('tem/service_participants_pic',$data); 
 
 	}
+	public function show_service_participants_pic_show(){
+		$this->check_login_session();
+		$data_search = $this->search_all();
+		$data = $this->mhome->show_service_participants_pic_show($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		
+		$this->load->view('tem/show_service_participants_pic_show',$data); 
 
+	}
+
+
+	
 	///
 	public function service_participants(){
 		$this->check_login_session();

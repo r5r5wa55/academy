@@ -79,22 +79,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             &nbsp&nbsp&nbsp&nbsp&nbsp
             <?php echo $value['PERSONNEL_SURNAME'];?>
           </div>
-          <div class="col-lg-1 col-md-2 col-sm-2 body-show text-long box-btn-center">
-            <?php echo $value['SERVICE_P_START_DATE'];?>
-            &nbsp&nbsp&nbsp&nbsp&nbsp
-            <?php echo $value['SERVICE_P_END_DATE'];?>
-          </div>
-          <div class="col-lg-1 col-md-2 col-sm-2 body-show text-long box-btn-left">น.
-            &nbsp&nbsp&nbsp&nbsp&nbsp
-            <?php echo $value['TOTAL_HOUR_SERVICE_P'];?> &nbsp&nbsp ช.ม
-          </div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-center">
-            <a href="/index.php/Home/show_service_participants_pic?img=<?php echo $value['ID'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
-              แสดงรูปภาพ
+           <a href="/index.php/Home/show_service_participants_pic_show?img=<?php echo $value['ID'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
+              รายละเอียด
             </a>
           </div>
+       
+        
+       
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-center">
+            <a href="/index.php/Home/show_service_participants_pic?img=<?php echo $value['ID'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
+              จัดการรูปภาพ
+            </a>
+       
+          </div>
          
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long ">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_service_participants(
               '<?php echo $value['ID'];?>',
               '<?php echo $value['SERVICE_ID'];?>',
@@ -106,7 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
           </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long ">
             <a a href="javascript:void(0)" class="btn-delete" onclick="main.delete_service_participants(
               '<?php echo $value['ID'];?>');">
               ลบข้อมูล

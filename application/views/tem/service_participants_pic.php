@@ -116,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</tbody>
 
 						</table>
-      </div>
+    </div>
 
   
     <!--Edit Multiple image form -->

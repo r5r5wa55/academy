@@ -99,8 +99,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></div>
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['PERSONNEL_NAME'];?></div>
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left"><!-- get_edit_personnels -->
-              <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_personnels(
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><!-- get_edit_personnels -->
+              <a href="javascript:void(0)" class="btn-edit " onclick="main.get_edit_personnels(
               '<?php echo $value['PERSONNEL_ID'];?>',
               '<?php echo $value['PERSONNEL_NAME'];?>',
               '<?php echo $value['PERSONNEL_SURNAME'];?>',
@@ -120,6 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['PERSONNEL_USERNAME'];?>',
               '<?php echo $value['PERSONNEL_PASSWORD'];?>',
               '<?php echo $value['level'];?>',
+              '<?php echo $value['PIC'];?>',
               '<?php echo $value['PERSONNEL_LINE'];?>',
                 '<?php echo $value['PERSONNEL_FACEBOOK'];?>');">
                 แก้ไขข้อมูล
@@ -134,7 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       <?php endforeach; ?>
       <?php echo $create_links; ?>
-      
+     
 
     </div>
   </div>
@@ -263,6 +264,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+      <div class="modal-header">
+       
+          <div class="col-md-4"> 
+          </div>
+          <div class="img1 col-md-4 box-btn-center">
+              <img src="" class="img-reponsive img-thumbnail img-profile-edit" alt="กรุณาใส่รูป" name="PIC" type="hidden">
+          </div>
+        
+          <div class="col-md-4"> 
+          </div>
       </div>
       <div class="modal-body">
           <div class="form-group">

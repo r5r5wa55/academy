@@ -702,6 +702,7 @@ class Home_model extends CI_Model {
 
 
 
+
     return $DATA;
   }
   public function select_personnels($data_search = ""){
@@ -747,8 +748,9 @@ class Home_model extends CI_Model {
     }
     $this->db->limit(5, $pages);
     $personnels = $this->db->get();
-
     $personnels = $personnels->result_array();
+
+    
     $personnel_categories = $this->select_personnel_categories();
     $personnel_statuses = $this->select_personnel_statuses();
     $personnel_types = $this->select_personnel_types();
@@ -761,6 +763,10 @@ class Home_model extends CI_Model {
       'departments' => $departments['departments'],
       'create_links' => $create_links
     );
+      // echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+		// exit();
     return $DATA;
   }
   public function add_personnels($data){
@@ -1327,7 +1333,53 @@ class Home_model extends CI_Model {
    
   }
 
+  public function show_service_participants_pic_show(){
+   
 
+
+
+    $id = isset($_GET['img'])?$_GET['img']:"";
+
+    $id_personal = isset($_GET['id_personal'])?$_GET['id_personal']:"";
+    
+    // echo '<pre>';
+    // print_r($id_personal);
+    // echo '</pre>';
+    // exit;
+    
+    $DATA = array();
+
+  if($id != ""){
+    $this->db->select('*');
+    $this->db->from('service_participants_pic');
+    // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
+    $this->db->where('SERVICE_ID', $_GET['img']);
+    $this->db->where('CREATE_BY_SE', $_GET['id_personal']);
+
+
+    $this->db->order_by("service_participants_pic.ID_S_P", "DESC");  
+
+    $service_participants_pic = $this->db->get();
+    $service_participants_pic = $service_participants_pic->result_array();
+    // $personnels = $this->select_personnels_all();
+  
+    // echo '<pre>';
+    // print_r($service_participants_pic);
+    // echo '</pre>';
+    // exit;
+
+    $DATA = array(
+      'service_participants_pic'=>$service_participants_pic
+    
+    );
+
+    
+  
+
+  }
+  return $DATA;
+ 
+}
   
   //
 

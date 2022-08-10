@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   ?>
   
 </head>
-<body class="">
+<body class="we">
    
 
     <div class="">
@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-2 col-md-2 col-sm-2"></div>
             <div class="col-lg-2 col-md-2 col-sm-2"></div>
             <div class="col-lg-2 col-md-2 col-sm-2"></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center text-long">
               <a a href="javascritp:void(0)" class="box-btn-add" onclick="$('#add_individual_counseling_services').modal('show');">
                 เพิ่มข้อมูล
               </a>
@@ -58,21 +58,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แสดงข้อมูล</div>
           </div>
           <?php foreach($individual_counseling_services as $key=>$value): ?>
-            <div class="row">
-              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left">
+            <div class="row body-show-long">
+              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left text-long">
                 &nbsp&nbsp&nbsp<?php echo $value['COUNSELING_PROBLEM'];?>
               </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
                 <?php echo $value['COUNSELING_NAME'];?>
               </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
                 <?php echo $value['PERSONNEL_NAME'];?>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <?php echo $value['PERSONNEL_SURNAME'];?>
               </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
                 <?php echo $value['COUNSELING_CREATE_DATE'];?>
               </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+              <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-cente text-long">
                 <?php if ($value['INDIVIDUAL_COUNSELING_STATUS'] == '0'): ?>
                   <a>
                   ยกเลิกรายการ

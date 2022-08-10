@@ -202,8 +202,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label for="formGroupExampleInput">ประเภทนักวิจัย</label>
                 <select name="RESEARCHER_TYPE" class="form-control" id="RESEARCHER_TYPE">
                     <option value="">กรุณาเลือก</option>
-                    <option value="1">ผู้ทำการวิจัย</option>
-                    <option value="2">ผู้ร่วมทำการวิจัย</option>
+                    <option value="1">หัวหน้าโครงการ</option>
+                    <option value="2">ผู้ร่วมโครงการ</option>
                 </select>
               </div>
               <div class="col-md-6">
@@ -272,8 +272,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label for="formGroupExampleInput">ประเภทนักวิจัย</label>
                 <select name="RESEARCHER_TYPE" class="form-control" id="RESEARCHER_TYPE">
                     <option value="">กรุณาเลือก</option>
-                    <option value="1">ผู้ทำการวิจัย</option>
-                    <option value="2">ผู้ร่วมทำการวิจัย</option>
+                    <option value="1">หัวหน้าโครงการ </option>
+                    <option value="2">ผู้ร่วมโครงการ</option>
                 </select>
 
                 
