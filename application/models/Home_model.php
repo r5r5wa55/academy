@@ -1347,9 +1347,8 @@ class Home_model extends CI_Model {
     // echo '</pre>';
     // exit;
     
-    $DATA = array();
-
-  if($id != ""){
+    
+    if($id != ""){
     $this->db->select('*');
     $this->db->from('service_participants_pic');
     // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
@@ -1363,18 +1362,34 @@ class Home_model extends CI_Model {
     $service_participants_pic = $service_participants_pic->result_array();
     // $personnels = $this->select_personnels_all();
   
+
+
+    $this->db->select('*');
+    $this->db->from('services');
+    $this->db->join('service_participants', 'service_participants.SERVICE_ID = services.SERVICE_ID');
+    $this->db->where('SERVICE_OWNER', $_GET['id_personal']);
+    $this->db->where('service_participants.ID', $_GET['img']);
+  
+
+    $services = $this->db->get();
+    $services = $services->row_array();
     // echo '<pre>';
-    // print_r($service_participants_pic);
+    // print_r($services);
     // echo '</pre>';
     // exit;
 
     $DATA = array(
-      'service_participants_pic'=>$service_participants_pic
+      'service_participants_pic'=>$service_participants_pic,
+      'services'=>$services
+      
     
     );
 
     
-  
+    // echo '<pre>';
+    // print_r($DATA);
+    // echo '</pre>';
+    // exit;
 
   }
   return $DATA;
@@ -2672,7 +2687,8 @@ class Home_model extends CI_Model {
       $this->db->where('management_positions.MANAGEMENT_ID', '1');
 
       $check_OFFICER = $this->db->get();
-      $check_OFFICER = $check_OFFICER->result_array();
+      $check_OFFICER = $check_OFFICER->row_array();
+
       $_SESSION['check_OFFICER'] = $check_OFFICER;
 
       
@@ -2680,21 +2696,21 @@ class Home_model extends CI_Model {
       $this->db->select('*');
       $this->db->from('management_positions');
       $this->db->where('management_positions.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
-      // $this->db->where('management_positions.MANAGEMENT_ID', '2');
+      $this->db->where_not_in('management_positions.MANAGEMENT_ID', '1');
 
       // $this->db->where_in('management_positions.MANAGEMENT_ID', '4');
     
       
       $check_SUPERVISOR_ID = $this->db->get();
-      $check_SUPERVISOR_ID = $check_SUPERVISOR_ID->result_array();  
+      $check_SUPERVISOR_ID = $check_SUPERVISOR_ID->row_array();  
       $_SESSION['check_SUPERVISOR_ID'] = $check_SUPERVISOR_ID;
 
       
       // echo "<pre>";
-      // print_r($_SESSION['OFFICER_STATUS']);
+      // print_r($_SESSION['check_OFFICER']);
       // echo "</pre>";
       // echo "<pre>";
-      // print_r($_SESSION['PERSONNEL_ID']);
+      // print_r($_SESSION['check_SUPERVISOR_ID']);
       // echo "</pre>";
       // echo "<pre>";
       // print_r($check_OFFICER);
@@ -3602,10 +3618,19 @@ class Home_model extends CI_Model {
       
 
 
+    
+    $this->db->select('*');
+    $this->db->from('leaves');
+    $this->db->where('leaves.OFFICER',   $_SESSION['PERSONNEL_ID']);
+    $this->db->where('leaves.SUPERVISOR_STATUS', '0');
 
- 
+    $leaves_status = $this->db->get();
+    $leaves_status = $leaves_status->result_array();
+    $leaves_status = count($leaves_status); 
+    $_SESSION['OFFICER_STATUS'] = $leaves_status;
+
     // echo "<pre>";
-    // print_r($check_login['level']);
+    // print_r($_SESSION['OFFICER_STATUS']);
     // echo "</pre>";
     // exit();
 

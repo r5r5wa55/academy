@@ -407,7 +407,7 @@ a.researchs {
 
 h6.leave-1 {
   font-family: 'Source Sans Pro';
-  color: rgb(255, 254, 253);
+  color: rgb(0, 0, 0);
   font-weight: 900;
   font-size: 20px;
   padding-left: 15px;
@@ -429,7 +429,7 @@ h6.leave-1 {
 .col-md-12.front-leave span {
   font-size: 44px;
   font-weight: 900;
-  color: rgb(255, 254, 253);
+  color: rgb(0, 0, 0);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -443,14 +443,13 @@ a.leave{
   left: 50%;
   top: 50%;
   transform: translate(-107%, 14%);
-  color: #fff;
+  color: rgb(0, 0, 0);
   white-space: nowrap;
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
  
 }
-
 h6.leave-1 {
   font-size: 22px;
   font-weight: 700;
@@ -461,7 +460,7 @@ h6.leave-1 {
   transform: translate(-119%, 126%);
 }
 h3.leave-file {
-  color:white;
+  color:rgb(4, 4, 4);
   font-size: 15px;
   font-weight: 700;
   top: 34px;
@@ -478,7 +477,7 @@ h3.leave-file {
 
 }
 .col-md-12.front-online span {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 31px;
   font-weight: 700;
   top: 34px;
@@ -495,7 +494,7 @@ h6.leave-online {
   left: 50%;
   top: 50%;
   transform: translate(0%, 90%);
-  color: white;
+  color: rgb(0, 0, 0);
 }
 body.we {
     background: #d3cece;
@@ -585,49 +584,30 @@ body.we {
 }
 
  
-@media only screen and (max-width: 500px) {
-  .col-md-12.front-leave span {
-    font-size: 39px;
-    font-weight: 500;
-    }
-}
+
 @media only screen and (max-width: 500px) {
     a.leave  {
       transform: translate(-94%, 14%);
-      color: #fff;
+   
     }
 }
 @media only screen and (max-width: 500px) {
   h3.leave-file  {
     transform: translate(-116%, -110%);
-    color: #fff;
-  }
-}
-@media only screen and (max-width: 500px) {
-  h6.leave-1  {
-    transform: translate(-108%, 126%);
-    color: #fff;
-  }
-}
-@media only screen and (max-width: 1500px) {
-  h6.leave-1  {
-    transform: translate(-108%, 126%);
-    color: #fff;
+  
   }
 }
 
-@media only screen and (max-width: 1530px) {
-    .col-md-12.front-leave span   {
-    transform: translate(-112%, -131%);
-    font-size: 38px;
-  }
-}
+
+
+
+
 
 
 
 @media only screen and (max-width: 767px) {
   .card.fix-766 {
-    height: 820px;
+    height: 809px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -686,7 +666,7 @@ img.img-show{
     }
 }
 
-@media only screen and (max-width: 575px)  {
+@media only screen and (max-width: 375px)  {
   img.img-show{
   width:400px;
   height:400px;
@@ -698,4 +678,212 @@ img.img-reponsive.img-thumbnail.img-profile-edit {
   height: 200px;
   object-fit: cover;
 }
+
+img.img-thumbnail.img-profile-edit.img-show-center {
+  width: 50%;
+
+}
+
+.img1{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.btn.btn-danger {
+  transform: translate(18px, 10px);
+}
+
+
+img#myImg {
+  cursor: zoom-in;
+}
+
+
+.col-md-6.leave-mannger {
+  position: relative;
+  height: 250px;
+  padding: 0.5em;
+}
+.col-md-12.leave-ma {
+  font-family: 'Source Sans Pro';
+  padding-left: 15px;
+  text-align: center;
+  top: -69%;
+  font-size: 21px;
+  font-weight: 500;
+  color: #0a0a0a;
+  right: 24%;
+  font-weight: 800;
+}
+h6.leave-ma {
+  font-weight: 700;
+  /* top: 35%; */
+  transform: translate(0px, -18px);
+}
+
+
+.col-md-6.leave-mannger2 {
+  position: relative;
+  height: 250px;
+  padding: 0.5em;
+}
+.col-md-12.leave-ma2 {
+  font-family: 'Source Sans Pro';
+  padding-left: 15px;
+  text-align: center;
+  top: -72%;
+  font-size: 21px;
+  font-weight: 500;
+  color: #0a0a0a;
+  right: -23%;
+  font-weight: 800;
+}
+h6.leave-ma2 {
+  font-weight: 700;
+  /* top: 35%; */
+  transform: translate(0px, -18px);
+}
+
+
+@media only screen and (min-width: 375px)  {
+  .card.fix {
+    height: 537px;
+  }
+}
+@media only screen and (min-width: 768px)  {
+  .card.fix {
+    height: 275px;
+  }
+}
+.col-md-6.leave-mannger3 {
+  position: relative;
+  height: 250px;
+  padding: 0.5em;
+}
+.col-md-12.leave-ma3 {
+  font-family: 'Source Sans Pro';
+  padding-left: 15px;
+  text-align: center;
+  top: -72%;
+  font-size: 21px;
+  font-weight: 500;
+  color: #0a0a0a;
+  right: 25%;
+  font-weight: 800;
+}
+a.leave3{
+  font-size: 11px;
+  top: 34px;
+  position: absolute;
+  color: #000000;
+  /* left: 74%; */
+  /* top: 55%; */
+  transform: translate(-51%, 62%);
+  white-space: nowrap;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+@media only screen and (min-width: 375px)  {
+  .col-md-12.leave-ma3  {
+    font-size: 22px;
+    top: -150;
+    top: -79%;
+  }
+}
+@media only screen and (min-width: 375px)  {
+  a.leave3.text-long  {
+    font-size: 15px;
+    top: -150;
+    top: 53%;
+  }
+}
+@media only screen and (min-width: 375px)  {
+  h6.leave-ma3  {
+    font-size: 23px;
+    top: -150;
+    top: 45%;
+  }
+}
+
+@media only screen and (min-width: 768px)  {
+  .col-md-12.leave-ma3  {
+    font-size: 12px;
+    top: -150;
+    top: -63%;
+  }
+}
+@media only screen and (min-width: 768px)  {
+  a.leave3.text-long  {
+    font-size: 11px;
+    top: -150;
+    top: 36%;
+    right: -54%;
+  }
+}
+@media only screen and (min-width: 768px)  {
+  h6.leave-ma3  {
+    font-size: 16px;
+  }
+}
+
+
+@media only screen and (min-width: 877px)  {
+  a.leave3.text-long  {
+    font-size: 11px;
+    top: -150;
+    top: 36%;
+    right: -36%;
+  }
+}
+
+@media only screen and (min-width: 1195px)  {
+  a.leave3.text-long  {
+    font-size: 11px;
+    top: -150;
+    top: 36%;
+    right: -25%;
+  }
+}
+@media only screen and (min-width: 1476px)  {
+  a.leave3.text-long  {
+    font-size: 11px;
+    top: -150;
+    top: 36%;
+    right: 0%;
+  }
+}
+@media only screen and (min-width: 1568px)  {
+  a.leave3.text-long  {
+    font-size: 14px;
+    top: -150;
+    top: 49%;
+    right: 0%;
+  }
+}
+@media only screen and (min-width: 1566px){
+.col-md-12.leave-ma3 {
+    font-size: 21px;
+    top: -150;
+    top: -78%;
+  }
+}
+
+
+
+
+@media only screen and (min-width: 5442px)  {
+  .col-md-12.leave-ma3  {
+    font-size: 26px;
+    transform: translate(9px, -15px);
+  }
+}
+
+
+
+
 

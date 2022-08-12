@@ -270,7 +270,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-md-4"> 
           </div>
           <div class="img1 col-md-4 box-btn-center">
-              <img src="" class="img-reponsive img-thumbnail img-profile-edit" alt="กรุณาใส่รูป" name="PIC" type="hidden">
+              <img src="" class="img-reponsive img-thumbnail img-profile-edit" alt="กรุณาใส่รูป" name="PIC">
           </div>
         
           <div class="col-md-4"> 

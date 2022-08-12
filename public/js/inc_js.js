@@ -2434,6 +2434,20 @@ var main = {
    
   }, 
   
+
+  get_show_services_img(obj){
+   
+    var imgsrc = $(obj).attr('src'); 
+    var img = location.origin+imgsrc;
+    // console.log(imgsrc);
+    // console.log(img);
+    // return false;
+    // var url = window.location.origin+"/index.php/Home/show_service_participants_pic?ID=".ID;
+    $('#myModal .img-profile-edit').attr('src',img);
+    $('#myModal').modal('show'); 
+  
+
+  }, 
   
   save_img_show_service_participants_pic(obj){
 

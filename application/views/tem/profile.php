@@ -37,8 +37,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">ข้อมูลผู้ใช้</li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li> 
+              <li class="breadcrumb-item active">ข้อมูลผู้ใช้ </li>
             </ol>
           </div>
         </div>
@@ -104,9 +104,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-
-
-            
             <!-- About Me Box -->
           
             <!-- /.card -->
@@ -166,27 +163,88 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <h6 class="leave-online">มีคำร้องขอ <?php echo $individual_counseling_services_status?> รายการ</h6>
                                 </div>
                           </div>         
-                          <div class="col-md-6 we5">
-                          <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
-                            <div class="col-md-12 front-leave">
-                              <span href="<?php echo base_url()?>index.php/Home/online">การลาป่วย</span>
+                          
+
+
+
+
+
+                          <div class="col-md-6 leave-mannger3">
+                            
+                            <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
+                            <div class="col-md-12 leave-ma3">
+                              <span class="header">การลาป่วย</span>
+                              <br>
+                              <span href="<?php echo base_url()?>index.php/Home/online">หัวข้อการลาครั้งล่าสุด</span>
                               <br>
                               <?php if ($leaves_name != ''): ?>
-                                <a  class="leave">
+                                <a  class="leave3 text-long">
                                   <?php echo $leaves_name['LEAVE_TYPE'];?>
                                 </a>
                               <?php endif; ?>
 
                               <?php if ($leaves_name == ''): ?>
-                                <a class="leave">
+                                <a class="leave3">
                                   ยังไม่ได้ทำรายการ
                                 </a>    
                               <?php endif; ?>
-                              <br>
-                              <h6 class="leave-1">ลาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
-                              <br>
-                              <h3 class="leave-file">หัวข้อการลาครั้งล่าสุด</h3>
+                              <br>        
+                              <h6 class="leave-ma3">ลาไปแล้ว <?php echo $leaves_status?> ครั้ง</h6>
+
                             </div>
+                          </div> 
+
+                        </div>              
+                      </div>                
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+
+          <div class="col-md-12">
+            <div class="card fix">
+             <!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+             
+                  <!-- /.tab-pane -->
+
+                  <div class="tab-content" id="settings">
+                    <form class="form-horizontal">
+                   
+                      
+                      <div class="form-group we3 col-md-12">
+                        <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
+                        <div class="row">
+                          <div class="col-md-6 leave-mannger">
+                          
+                            <img src="/backg/leave-manager.png" width="100%" height="100%" class="img-resear">
+                            <div class="col-md-12 leave-ma">
+                              <span>การอนุมัติ</span>
+                              <br>
+                               <span >ระดับเจ้าหน้าที่</span>
+                              <br>
+                              <br>        
+                              <h6 class="leave-ma">มีรายการร้องขอ   <?php echo $_SESSION['OFFICER_STATUS']?> รายการ</h6>
+                                </div>
+                          </div>         
+                          <div class="col-md-6 leave-mannger2">
+                            
+                            <img src="/backg/leave-pro.png" width="100%" height="100%" class="img-resear">
+                            <div class="col-md-12 leave-ma2">
+                              <span href="<?php echo base_url()?>index.php/Home/online">การอนุมัติ</span>
+                              <br>
+                              <span href="<?php echo base_url()?>index.php/Home/online">ระดับหัวหน้า</span>
+                              <br>
+                              <br>        
+                              <h6 class="leave-ma">มีรายการร้องขอ  <?php echo $_SESSION['SUPERVISOR_ID']?> รายการ</h6>
+                                </div>
+                          </div> 
                 
 
                           </div>
@@ -203,13 +261,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           <!-- /.col -->
         </div>
+    
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
- 
+
+
+            
   <div class="modal fade" id="edit_profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">

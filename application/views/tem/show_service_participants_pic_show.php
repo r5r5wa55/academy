@@ -64,19 +64,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <br>
       
       <div class="container">
+        <div class="row col-lg-12 card">
+          <br>
+          <center><h1><?php echo $services['SERVICE_TITLE'];?></h1></center>
+          <br>
+          <center><h2>เจ้าของ &nbsp;:&nbsp;<?php echo $services['SERVICE_TITLE'];?></h2></center>
+          <br>
+          <div class="row">
+            <div class="col-lg-1"><?php echo $services['SERVICE_TITLE'];?></div> 
+            <div class="col-lg-5"><?php echo $services['SERVICE_TITLE'];?></div> 
+            <div class="col-lg-1"><?php echo $services['SERVICE_TITLE'];?></div> 
+            <div class="col-lg-5"><?php echo $services['SERVICE_TITLE'];?></div> 
+          </div>
+          <div class="row">
+            <div class="col-lg-1"><?php echo $services['SERVICE_TITLE'];?></div> 
+            <div class="col-lg-5"><?php echo $services['SERVICE_TITLE'];?></div> 
+            <div class="col-lg-1"><?php echo $services['SERVICE_TITLE'];?></div> 
+            <div class="col-lg-5"><?php echo $services['SERVICE_TITLE'];?></div> 
+          </div>
 
-        <div class="row col-lg-12 card img-reponsive">
-        
+        </div>
+      </div>
 
-              <?php foreach($service_participants_pic as $key=>$value): ?>
-                <img src="/images/services_img/<?php echo $value['PIC_GARRY']?>" class="img-show" id="myImg">
-              <?php endforeach; ?>
-          
+
+        <div class="container">
+            <?php if ($service_participants_pic != ''): ?>
+              <div class="row col-lg-12 card img-reponsive">
+                <?php foreach($service_participants_pic as $key=>$value): ?>
+                  <img src="/images/services_img/<?php echo $value['PIC_GARRY']?>" class="img-show" id="myImg" onclick="main.get_show_services_img(this)">
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
+
+            <?php if ($service_participants_pic === null): ?>
+              <div class="row col-lg-12 card img-reponsive">
+                <h1 > ยังไม่ได้เพิ่มรูป</h1>
+              </div>
+            <?php endif; ?> 
         </div>
     
       </div>
 
-</div>
+  </div>
 
    
 
@@ -88,9 +117,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 
   <div id="myModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="img01">
-    <div id="caption"></div>
+    <div class="img1">
+        <button class="btn btn-danger" data-dismiss="modal">&times;</button>
+        <img src="" class="img-thumbnail img-profile-edit img-show-center hover-img" alt="กรุณาใส่รูป" name="PIC" type="hidden">
+    </div>
   </div>
 
   <!-- Control Sidebar -->
