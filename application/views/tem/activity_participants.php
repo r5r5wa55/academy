@@ -57,38 +57,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2 col-sm-2"></div>
         <div class="col-lg-2 col-md-2 col-sm-2"></div>
         <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center text-long">
           <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_activity_participants').modal('show');">
           เพิ่มข้อมูล
           </a>
         </div> 
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-2 col-sm-2 hade-show">ชื่อกิจกรรม</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ชื่อกิจกรรม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ผู้เข้าร่วม</div>
-        <div class="col-lg-1 col-md-2 col-sm-2 hade-show">วันที่จัดกิจกรรม</div>
-        <div class="col-lg-2 col-md-1 col-sm-2 hade-show">แสดงรูปภาพ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แสดงรูปภาพ</div>
+        <div class="col-lg-2 col-md-1 col-sm-2 hade-show">จัดการรูปภาพ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($activity_participants as $key=>$value): ?>
         <div class="row body-show-long">
-          <div class="col-lg-3 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['ACTIVITY_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left"><?php echo $value['ACTIVITY_NAME'];?></div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-left">
             <?php echo $value['PERSONNEL_NAME'];?>
-            &nbsp&nbsp&nbsp&nbsp&nbsp
+              &nbsp&nbsp&nbsp&nbsp&nbsp
             <?php echo $value['PERSONNEL_SURNAME'];?>
           </div>
-          <div class="col-lg-1 col-md-2 col-sm-1 body-show text-long box-btn-center"><?php echo $value['ACTIVITY_DATE'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-1 body-show text-long box-btn-center">
+            <a href="/index.php/Home/show_activity_participants_pic_show?img=<?php echo $value['ACTIVITY_ID'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
+                รายละเอียด
+            </a>
+          </div>
           <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long box-btn-center">
 
             <a href="/index.php/Home/show_activity_participants_pic?img=<?php echo $value['ACTIVITY_ID'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
-              แสดงรูปภาพ
+              จัดการรูปภาพ
             </a>
           </div>
          
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_activity_participants(
               '<?php echo $value['ACTIVITY_ID'];?>',
               '<?php echo $value['PERSONNEL_ID'];?>',
@@ -96,7 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               แก้ไขข้อมูล
             </a>
           </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
             <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_activity_participants(
               '<?php echo $value['ID_ACTIVITY_PARTICIPANTS'];?>');">
               ลบข้อมูล

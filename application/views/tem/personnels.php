@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <?php if ($_SESSION['level'] === '1'): ?>  <!-- add_personnels ช่อน -->
       
-      <?php endif; ?>
+    <?php endif; ?>
       <!-- /.content-header -->
     <div class="content">
       <div class="row">
@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php foreach($personnels as $key=>$value):?><!-- show_personnels -->
         <div class="row row body-show-long">
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center zoom-in"
-                onclick="main.get_edit_personnels(
+                onclick="main.get_show_personnels(
                 '<?php echo $value['PERSONNEL_ID'];?>',
                 '<?php echo $value['PERSONNEL_NAME'];?>',
                 '<?php echo $value['PERSONNEL_SURNAME'];?>',
@@ -92,6 +92,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 '<?php echo $value['PERSONNEL_USERNAME'];?>',
                 '<?php echo $value['PERSONNEL_PASSWORD'];?>',
                 '<?php echo $value['level'];?>',
+                '<?php echo $value['PIC'];?>',
                 '<?php echo $value['PERSONNEL_LINE'];?>',
                 '<?php echo $value['PERSONNEL_FACEBOOK'];?>');">
                 <?php echo $value['PERSONNEL_ID'];?>
@@ -125,7 +126,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 '<?php echo $value['PERSONNEL_FACEBOOK'];?>');">
                 แก้ไขข้อมูล
               </a>
-        
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center"><!-- delete_personnels -->
               <a href="javascript:void(0)" class="btn-delete"  onclick="main.delete_personnels('<?php echo $value['PERSONNEL_ID'];?>')">
@@ -135,8 +135,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       <?php endforeach; ?>
       <?php echo $create_links; ?>
-     
-
     </div>
   </div>
 </div>
@@ -241,14 +239,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
                 <?php endforeach; ?>
               </select>
-            
             </div>    
           </div>  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
           <button type="button" class="btn btn-primary" onclick="main.add_personnels();">ยืนยันข้อมูล</button>
-          
         </div>
       </div>
     </div>
@@ -387,6 +383,150 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 
+
+<div class="modal fade" id="show_personnels" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">ข้อมูลบุคลากร</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container heigth-cont">  
+          <div class="col-md-4"> 
+          </div>
+          <div class="img1 col-md-4 box-btn-center">
+            <label for=""><h5>รหัสบุคลากร</h5></label>
+            &nbsp;&nbsp;&nbsp;<h5><label for="formGroupExampleInput" id="PERSONNEL_ID"></label></h5>
+          </div>
+          <div class="col-md-4"> 
+          </div>
+      </div>
+
+      <div class="modal-header">
+                  
+          <div class="col-md-4"> 
+          </div>
+          <div class="img1 col-md-4 box-btn-center">
+              <img src="" class="img-reponsive img-thumbnail img-profile-edit" alt="กรุณาใส่รูป" name="PIC">
+          </div>
+          <div class="col-md-4"> 
+          </div>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <div class="row">    
+              <div class="col-md-6">
+                <label for="formGroupExampleInput"><h5>ชื่อ/นามสกุล</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_NAME" placeholder="ชื่อ"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label  name="PERSONNEL_SURNAME" placeholder="นามสกุล"></label>
+                </div>
+                <label for="formGroupExampleInput"><h5>Line</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_LINE"></label>
+                </div>
+            
+                <label for="formGroupExampleInput"><h5>เพศ</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_SEX"></label>
+                </div>
+        
+                <label for="formGroupExampleInput"><h5>เบอร์โทรศัพท์บ้าน</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_MOBILE"></label>
+                </div>
+               
+                <label for="formGroupExampleInput"><h5>สิทธ์การเข้าถึง</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="level"></label>
+                </div>
+
+              
+                <label for="formGroupExampleInput" >รูปแบบการทำงาน</label>
+              <select class="form-control" name="PERSONNEL_TYPE_ID" disabled>
+                <?php foreach($personnel_types as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_TYPE_ID'];?>"><?php echo $value['PERSONNEL_TYPE_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+              <label for="formGroupExampleInput">สายงาน</label>
+              <select class="form-control" name="PERSONNEL_CATEGORY_ID" disabled >
+                <?php foreach($personnel_categories as $key=>$value): ?>
+                  <option value="<?php echo $value['PERSONNEL_CATEGORY_ID'];?>"><?php echo $value['PERSONNEL_CATEGORY_DETAIL'];?></option>
+                <?php endforeach; ?>
+              </select>
+
+             
+              </div>
+              <div class="col-md-6">
+
+                <label for="formGroupExampleInput"><h5>ชื่อ/นามสกุล(ภาษาอังกฤษ)</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_NAME_EN"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label  name="PERSONNEL_SURNAME_EN"></label>
+                </div>
+                <label for="formGroupExampleInput"><h5>FACEBOOK</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_FACEBOOK"></label>
+                </div>
+
+                <label for="formGroupExampleInput"><h5>อีเมล</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_EMAIL"></label>
+                </div>
+
+                <label for="formGroupExampleInput"><h5>เบอร์โทรศัพท์ส่วนตัว</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_PHONE"></label>
+                </div>
+
+                <label for="formGroupExampleInput"><h5>เบอร์โทรศัพท์สำนักงาน</h5></label>
+                <br>
+                <div class="label-text">
+                  <label  name="PERSONNEL_PHONE_EXTENSION"></label>
+                </div>
+
+
+    
+           
+                <label for="formGroupExampleInput">สถานะการทำงาน</label>
+                <select class="form-control" name="PERSONNEL_STATUS_ID" disabled >
+                  <?php foreach($personnel_statuses as $key=>$value): ?>
+                    <option  value="<?php echo $value['PERSONNEL_STATUS_ID'];?>"><?php echo $value['PERSONNEL_STATUS_DETAIL'];?></option>
+                  <?php endforeach; ?>
+                </select>
+    
+              <label for="formGroupExampleInput">แผนก</label>
+              <select class="form-control" name="DEPARTMENT_ID" disabled >
+                <?php foreach($departments as $key=>$value): ?>
+                  <option value="<?php echo $value['DEPARTMENT_ID'];?>"><?php echo $value['DEPARTMENT_NAME_TH'];?></option>
+                <?php endforeach; ?>
+              </select>
+         
+
+            </div>    
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+          <button type="button" class="btn btn-primary" onclick="main.edit_personnels();">ยืนยันข้อมูล</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ./wrapper -->
 <?php $this->load->view('tem/inc_modal_center')?>

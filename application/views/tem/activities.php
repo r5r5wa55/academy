@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-lg-2 col-md-2 col-sm-2"></div>
           <div class="col-lg-2 col-md-2 col-sm-2"></div>
           <div class="col-lg-2 col-md-2 col-sm-2"></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center text-long">
             <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_activities').modal('show');">
             เพิ่มข้อมูล
             </a>
@@ -105,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <?php if ($value['ACTIVITIES_FILE'] == ''): ?> 
   
                 <div class="col-lg-10">
-                  <label class="file text-long col-lg-8 ext-long box-btn-center">
+                  <label class="file text-long col-lg-8 ext-long box-btn-center text-long">
                     <input type="file" id="file" aria-label="File browser example" data-id-ACTIVITY_ID="<?php echo $value['ACTIVITY_ID']?>" onchange="main.upload_file_activities(this)">
                   </label>
                 </div>
@@ -121,7 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
           
 
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
               <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_activities(
                 '<?php echo $value['ACTIVITY_ID'];?>',
                 '<?php echo $value['ACTIVITY_TYPE_ID'];?>',
@@ -136,7 +136,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </a>
             </div>
 
-            <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center">
+            <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center text-long">
               <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_activities(
                 '<?php echo $value['ACTIVITY_ID'];?>');">
                 ลบข้อมูล

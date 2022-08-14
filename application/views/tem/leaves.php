@@ -75,8 +75,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ประเภทการลา</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ/นามสกุล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">จำนวนวันที่ขอลา</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานะการลา  </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานที่</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">จำนวนวันที่ขอลา  </div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
@@ -108,7 +108,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-left text-long"><?php echo $value['PERSONNEL_NAME'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['PERSONNEL_SURNAME'];?></div>
           
-
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
+              <a>
+               <?php echo $value['WRITE_PLACE'];?>
+              </a>
+          </div>
 
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
             <?php echo $value['LEAVE_TOAL'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วัน
@@ -174,11 +178,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       
           </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
-              <a href="javascript:void(0);" class="btn-delete" onclick="main.delete_leaves('<?php echo $value['LEAVE_ID'];?>');">
-                ลบข้อมูล
-              </a>
-          </div>
+       
         </div>
       <?php endforeach; ?>
     </div>

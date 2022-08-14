@@ -33,12 +33,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>รายละเอียดการเข้าร่วมการบริการวิชาการ</h1>
+            <h1>รายละเอียดการเข้าร่วมกิจกรรม</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">เพิ่มรูปภาพ</li>
+              <li class="breadcrumb-item active">รายละเอียด</li>
             </ol>
           </div>
         </div>
@@ -46,14 +46,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </section>
 
     
-
+    
         <div class="container ">
 
           <div class="row col-lg-12">
             <div class="col-md-2"></div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
-                <a href="<?php echo base_url()?>index.php/Home/service_participants" class="btn btn-info" >
+                <a href="<?php echo base_url()?>index.php/Home/activity_participants" class="btn btn-info" >
                         ย้อนกลับ
                     
                 </a>
@@ -66,51 +66,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="container show-ser">
           <div class="row col-lg-12 card">
             <br>
-            <center><h1><?php echo $services['SERVICE_TITLE'];?></h1></center>
+            <center><h1><?php echo $activities['PERSONNEL_NAME'];?></h1></center>
             <br>
-            <center><h2>เจ้าของ &nbsp;:&nbsp;<?php echo $services['PERSONNEL_NAME'];?> &nbsp;&nbsp;<?php echo $services['PERSONNEL_SURNAME'];?></h2></center>
+            <center><h2>เจ้าของ &nbsp;:&nbsp;<?php echo $activities['PERSONNEL_NAME'];?> &nbsp;&nbsp;<?php echo $activities['PERSONNEL_SURNAME'];?></h2></center>
             <br>
+            <div class="row service-show  ">
+              <div class="col-lg-1"></div> 
+              <div class="col-lg-3 ">ชื่อกิจกรรม</div> 
+              <div class="col-lg-8"><?php echo $activities['ACTIVITY_NAME'];?></div> 
+            </div>
             <div class="row service-show">
               <div class="col-lg-1"></div> 
-              <div class="col-lg-2">สถานที่ให้บริการ</div> 
-              <div class="col-lg-9"><?php echo $services['SERVICE_PLACE'];?></div> 
+              <div class="col-lg-3">สถานที่จัดกิจกรรม</div> 
+              <div class="col-lg-8"><?php echo $activities['ACTIVITY_PLACE'];?></div> 
         
             </div>
             <div class="row service-show">
               <div class="col-lg-1"></div> 
-              <div class="col-lg-2">กลุ่มเป้าหมาย</div> 
-              <div class="col-lg-3"><?php echo $services['PARTICIPANT'];?></div> 
-              <div class="col-lg-2">ลักษณะผู้เข้าร่วม</div> 
-              <div class="col-lg-1"><?php echo $services['PARTICIPANT_TYPE'];?></div> 
+              <div class="col-lg-3">วันที่จัดกิจกรรม</div> 
+              <div class="col-lg-8"><?php echo $activities['ACTIVITY_DATE'];?></div> 
+            
             </div>
             <div class="row service-show">
               <div class="col-lg-1"></div> 
-              <div class="col-lg-2">เวลาในการบริการ</div> 
-              <div class="col-lg-3"><?php echo $services['TOTAL_HOUR'];?></div> 
-              <div class="col-lg-2">จำนวนผู้เข้าร่วม</div> 
-              <div class="col-lg-1"><?php echo $services['TOTAL_PARTICIPANT'];?></div> 
+              <div class="col-lg-3">รายละเอียด</div> 
+              <div class="col-lg-8"><?php echo $activities['ACTIVITY_DETAIL'];?></div> 
             </div>
             <div class="row service-show">
               <div class="col-lg-1"></div> 
-              <div class="col-lg-2">ตั้งแต่เวลา</div> 
-              <div class="col-lg-3"><?php echo $services['SERVICE_START_DATE'];?></div> 
-              <div class="col-lg-2">จนถึง</div> 
-              <div class="col-lg-1"><?php echo $services['SERVICE_END_DATE'];?></div> 
+              <div class="col-lg-3">ประเภทกิจกรรม</div> 
+              <div class="col-lg-8"><?php echo $activities['ACTIVITY_TYPE_NAME'];?></div> 
+            </div>
+            <div class="row service-show">
+              <div class="col-lg-1"></div> 
+              <div class="col-lg-3">หมวดหมู่กิจกรรม</div> 
+              <div class="col-lg-8"><?php echo $activities['ACTIVITY_CATEGORY_NAME'];?></div> 
             </div>
           </div>
         </div>
 
 
         <div class="container">
-            <?php if ($service_participants_pic != ''): ?>
+            <?php if ($activity_participants_pic != ''): ?>
               <div class="row col-lg-12 card img-reponsive">
-                <?php foreach($service_participants_pic as $key=>$value): ?>
-                  <img src="/images/services_img/<?php echo $value['PIC_GARRY']?>" class="img-show" id="myImg" onclick="main.get_show_services_img(this)">
+                <?php foreach($activity_participants_pic as $key=>$value): ?>
+                  <img src="/images/activities_img/<?php echo $value['PIC_GARRY']?>" class="img-show" id="myImg" onclick="main.get_show_services_img(this)">
                 <?php endforeach; ?>
               </div>
             <?php endif; ?>
 
-            <?php if ($service_participants_pic === null): ?>
+            <?php if ($activity_participants_pic === null): ?>
               <div class="row col-lg-12 card img-reponsive">
                 <h1 > ยังไม่ได้เพิ่มรูป</h1>
               </div>

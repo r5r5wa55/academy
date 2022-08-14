@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">หัวข้อการบริการ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ชื่อ/นามสกุลผู้เข้าร่วม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">เวลาในการบริการวิชาการ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รายละเอียด</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รูปภาพ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
@@ -151,7 +151,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
 
                 <label for="formGroupExampleInput">ชั่วโมงในการเข้าร่วม</label>
-                <input class="form-control" rows="3" placeholder="ชั่วโมงในการเข้าร่วม" name="TOTAL_HOUR_SERVICE_P" onkeyup="main.checkcountinput(this)"></input>
+                <input class="form-control" rows="3" placeholder="ชั่วโมงในการเข้าร่วม" name="TOTAL_HOUR_SERVICE_P" ></input>
           
 
                 
@@ -218,7 +218,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
 
                 <label for="formGroupExampleInput">ชั่วโมงในการเข้าร่วม</label>
-                <input class="form-control" rows="3" placeholder="ชั่วโมงในการเข้าร่วม" name="TOTAL_HOUR_SERVICE_P" onkeyup="main.checkcountinput(this)"></input>
+                <input class="form-control" rows="3" placeholder="ชั่วโมงในการเข้าร่วม" name="TOTAL_HOUR_SERVICE_P"></input>
           
 
                 

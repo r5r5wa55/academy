@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-lg-2 col-md-2 col-sm-2"></div>
           <div class="col-lg-2 col-md-2 col-sm-2"></div>
           <div class="col-lg-2 col-md-2 col-sm-2"></div>
-          <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center text-long">
             <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_services').modal('show');">
             เพิ่มข้อมูล
             </a>
@@ -131,7 +131,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
           
 
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
               <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_services(
 
                 '<?php echo $value['SERVICE_ID'];?>',
@@ -150,7 +150,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             </div>
 
-            <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center">
+            <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center text-long">
               <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_services(
                 '<?php echo $value['SERVICE_ID'];?>');">
                 ลบข้อมูล
@@ -204,7 +204,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input class="form-control" rows="3" placeholder="ผู้เข้าร่วมการบริการ" name="PARTICIPANT"></input>
 
                 <label for="formGroupExampleInput">เวลาในการบริการวิชาการ</label>
-                <input class="form-control" rows="3" placeholder="เวลาในการอบรม" name="TOTAL_HOUR" onkeyup="main.checkcountinput(this)"></input>
+                <input class="form-control" rows="3" placeholder="เวลาในการอบรม" name="TOTAL_HOUR" ></input>
 
                 <label for="formGroupExampleInput">เวลาในการเริ่มการบริการวิชาการ</label>
                 <input type="text" class="form-control" rows="3" placeholder="เวลาเริ่มการบริการ" id="SERVICE_START_DATE" name="SERVICE_START_DATE"  value="<?php echo "".date("08:00");?>">
@@ -224,7 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="text" class="form-control"  name="PARTICIPANT_TYPE" placeholder="ลักษณะผู้เข้าร่วมการบริการ">
 
                 <label for="formGroupExampleInput">ผู้เข้าร่วมการบริการวิชาการ</label>
-                <input type="text" class="form-control"  name="TOTAL_PARTICIPANT" placeholder="จำนวนผู้เข้าร่วม" onkeyup="main.checkcountinput(this)">
+                <input type="text" class="form-control"  name="TOTAL_PARTICIPANT" placeholder="จำนวนผู้เข้าร่วม" onkeyup="main.checkcountinput(this)" >
     
                 <label for="formGroupExampleInput">ถึงเวลา</label>
                 <input type="text" class="form-control"  name="SERVICE_END_DATE" id="SERVICE_END_DATE" placeholder="เวลาเสร็จสิ้นการบริการ" value="<?php echo "".date("16:00");?>">
@@ -291,7 +291,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input class="form-control" rows="3" placeholder="ผู้เข้าร่วมการบริการ" name="PARTICIPANT"></input>
 
                 <label for="formGroupExampleInput">เวลาในการบริการวิชาการ</label>
-                <input class="form-control" rows="3" placeholder="เวลาในการอบรม" name="TOTAL_HOUR" onkeyup="main.checkcountinput(this)"></input>
+                <input class="form-control" rows="3" placeholder="เวลาในการอบรม" name="TOTAL_HOUR"></input>
 
                 <label for="formGroupExampleInput">เวลาในการเริ่มการบริการวิชาการ</label>
                 <input type="text" class="form-control" rows="3" placeholder="เวลาเริ่มการบริการ" id="edit_SERVICE_START_DATE" name="edit_SERVICE_START_DATE" >

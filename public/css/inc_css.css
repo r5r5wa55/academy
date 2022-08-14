@@ -652,7 +652,7 @@ img.img-show{
   
   overflow:auto; 
   width:120px; 
-  height:800px; 
+  /* height:800px;  */
   
 }
 @media only screen and (max-width: 991px)  {
@@ -760,7 +760,7 @@ h6.leave-ma2 {
 .col-md-6.leave-mannger3 {
   position: relative;
   height: 250px;
-  padding: 0.5em;
+
 }
 .col-md-12.leave-ma3 {
   font-family: 'Source Sans Pro';
@@ -884,6 +884,23 @@ a.leave3{
 }
 
 
+.container.heigth-cont {
+  height: 5px;
+  padding: 0.5em;
+}
+.label-text {
+  width: 100%;
+  right: 53px;
+  height: 34px;
+  transform: translate(25px, -11px);
+  font-size: 20px;
+  font-weight: 20;
+}
 
-
-
+.row.service-show {
+  height: 42px;
+  font-size: 21px;
+}
+.container.show-ser {
+  height: 460px;
+}

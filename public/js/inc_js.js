@@ -1266,37 +1266,51 @@ var main = {
    ;
   }, 
   get_show_personnels(PERSONNEL_ID,PERSONNEL_NAME,PERSONNEL_SURNAME,PERSONNEL_NAME_EN,PERSONNEL_SURNAME_EN,
-    PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,
-    PERSONNEL_CREATE_BY,PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
-    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD){
-    // console.log(PERSONNEL_CRETTE_DATE);
-    // return false;
-    $('#show_personnels [name=PERSONNEL_ID]').val(PERSONNEL_ID); 
-    $('#show_personnels [name=PERSONNEL_NAME]').val(PERSONNEL_NAME); 
-    $('#show_personnels [name=PERSONNEL_SURNAME]').val(PERSONNEL_SURNAME);
-    $('#show_personnels [name=PERSONNEL_NAME_EN]').val(PERSONNEL_NAME_EN);
-    $('#show_personnels [name=PERSONNEL_SURNAME_EN]').val(PERSONNEL_SURNAME_EN);
-    $('#show_personnels [name=PERSONNEL_EMAIL]').val(PERSONNEL_EMAIL);
-    $('#show_personnels [name=PERSONNEL_MOBILE]').val(PERSONNEL_MOBILE);
-    $('#show_personnels [name=PERSONNEL_PHONE]').val(PERSONNEL_PHONE);
-    $('#show_personnels [name=PERSONNEL_PHONE_EXTENSION]').val(PERSONNEL_PHONE_EXTENSION); 
-    // $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
-    $('#show_personnels [name=PERSONNEL_SEX]').each(function(key,value){
-      
-      if($(value).val()==PERSONNEL_SEX){
-        // console.log($(value).val());
-        // console.log(PERSONNEL_SEX);
-        $(value).prop( "checked", true );
-        
-      }
-      
+    PERSONNEL_EMAIL,PERSONNEL_MOBILE,PERSONNEL_PHONE,PERSONNEL_PHONE_EXTENSION,PERSONNEL_SEX,PERSONNEL_CREATE_BY,
+    PERSONNEL_CRETTE_DATE,DEPARTMENT_ID,PERSONNEL_TYPE_ID,PERSONNEL_STATUS_ID,
+    PERSONNEL_CATEGORY_ID,PERSONNEL_USERNAME,PERSONNEL_PASSWORD,level,PIC,PERSONNEL_LINE,PERSONNEL_FACEBOOK){
 
-    })
+    if(PERSONNEL_SEX == '1'){
+      PERSONNEL_SEX = 'ชาย'
+    }else{
+      PERSONNEL_SEX = 'หญิง'
+    }
+
     
-    $('#show_personnels .PERSONNEL_CREATE_BY').text(PERSONNEL_CREATE_BY); 
+    if(level == '1'){
+      level = 'ผู้ใช้'
+    }else{
+      level = 'แอดมิน'
+    }
+    
+    // // absPath = $('#img1').attr('src');
+    // console.log(PERSONNEL_SEX);
+    // return false;
+    // $('#<%=PERSONNEL_ID.ClientID%>').val(PERSONNEL_ID);
+    $("#show_personnels #PERSONNEL_ID").text(PERSONNEL_ID);
 
-  
+    $('#show_personnels [name=PERSONNEL_NAME]').text(PERSONNEL_NAME); 
+    $('#show_personnels [name=PERSONNEL_SURNAME]').text(PERSONNEL_SURNAME);
+    $('#show_personnels [name=PERSONNEL_NAME_EN]').text(PERSONNEL_NAME_EN);
+    $('#show_personnels [name=PERSONNEL_SURNAME_EN]').text(PERSONNEL_SURNAME_EN);
+    $('#show_personnels [name=PERSONNEL_LINE]').text(PERSONNEL_LINE);
+    $('#show_personnels [name=PERSONNEL_FACEBOOK]').text(PERSONNEL_FACEBOOK);
+    $('#show_personnels [name=PERSONNEL_SEX]').text(PERSONNEL_SEX);
+    $('#show_personnels [name=PERSONNEL_EMAIL]').text(PERSONNEL_EMAIL);
+    $('#show_personnels [name=PERSONNEL_MOBILE]').text(PERSONNEL_MOBILE);
+    $('#show_personnels [name=PERSONNEL_PHONE]').text(PERSONNEL_PHONE);
+    $('#show_personnels [name=PERSONNEL_PHONE_EXTENSION]').text(PERSONNEL_PHONE_EXTENSION);
+    $('#show_personnels [name=level]').text(level);
+   
+
+ 
+   
+
+    // $('#edit_personnels [name=PERSONNEL_SEX]').val(PERSONNEL_SEX);
+
+    
     $('#show_personnels [name=PERSONNEL_CRETTE_DATE]').val(PERSONNEL_CRETTE_DATE);
+
     $('#show_personnels [name=DEPARTMENT_ID] option').each(function(key,value){
       $(value).removeAttr('selected');
       if(DEPARTMENT_ID === $(value).val()){
@@ -1321,10 +1335,31 @@ var main = {
         $(value).attr("selected","selected")
       }
     });
+  
+    $('#show_personnels [name=level] option').each(function(key,value){
+      $(value).removeAttr('selected');
+      if(level === $(value).val()){
+        $(value).attr("selected","selected")
+      }
+    });
     $('#show_personnels [name=PERSONNEL_USERNAME]').val(PERSONNEL_USERNAME);
     $('#show_personnels [name=PERSONNEL_PASSWORD]').val(PERSONNEL_PASSWORD);
+    $('#show_personnels [name=level]').val(level);
+
+
+    $('#show_personnels [name=PERSONNEL_FACEBOOK]').val(PERSONNEL_FACEBOOK);
+    var img = location.origin+"/images/profile/"+PIC;
+
+    // console.log&
+    // http://academy.com/images/profile/Daeng-Phra-Khanong-2022-แดงพระโขนง-170x250.png
+    $('#show_personnels .img-profile-edit').attr('src',img);
+    // $('#edit_personnels [name=PIC]').attr(PIC);
+    // $('#img1').attr(PIC);
+    
     $('#show_personnels').modal('show'); 
-  }, 
+   ;
+  },
+  
   edit_personnels(){
     var PERSONNEL_ID = $('#edit_personnels [name=PERSONNEL_ID]').val()
     var PERSONNEL_NAME = $('#edit_personnels [name=PERSONNEL_NAME]').val()
@@ -5048,10 +5083,10 @@ var main = {
 
 
       }else{
- 
+        
         // $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').attr(resp.leaves.LEAVE_TYPE_ID).val();
         $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').attr('data-id-leave_type_id',resp.leaves.LEAVE_TYPE_ID).val();
-        $('#add_leaves [name=LAST_LEAVE_TYPE_ID]').val(resp.leaves.LEAVE_TYPE).val();
+        $('#add_leaves [name=LEAVE_TYPE]').val(resp.leaves.LEAVE_TYPE).val();
         $('#add_leaves [name=LAST_LEAVE_TYPE_MAX_SHOW]').val(resp.leaves.LEAVE_TYPE_MAX).val();
         $('#add_leaves [name=LAST_LEAVE_TOAL]').val(resp.leaves.LEAVE_TOAL).val();
         // $('#add_leaves [name=LAST_LEAVES_NUMBER_SHOW]').val(Number($('[name=LAST_LEAVE_TYPE_MAX_SHOW]').val()) - Number($('[name=LAST_LEAVE_TOAL]').val())).val();

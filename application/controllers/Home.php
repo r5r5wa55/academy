@@ -919,6 +919,18 @@ class Home extends CI_Controller {
 		$this->load->view('tem/activity_participants_pic',$data); 
 
 	}
+	public function show_activity_participants_pic_show(){
+		$this->check_login_session();
+		$data_search = $this->search_all();
+		$data = $this->mhome->show_activity_participants_pic_show($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		
+		$this->load->view('tem/show_activity_participants_pic_show',$data); 
+
+	}
 	public function upload_activity_participants_pic(){
 	
 

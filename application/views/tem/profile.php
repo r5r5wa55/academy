@@ -163,14 +163,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <h6 class="leave-online">มีคำร้องขอ <?php echo $individual_counseling_services_status?> รายการ</h6>
                                 </div>
                           </div>         
-                          
-
-
-
-
-
                           <div class="col-md-6 leave-mannger3">
-                            
                             <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
                             <div class="col-md-12 leave-ma3">
                               <span class="header">การลาป่วย</span>
@@ -184,7 +177,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <?php endif; ?>
 
                               <?php if ($leaves_name == ''): ?>
-                                <a class="leave3">
+                                <a class="leave3 text-long">
                                   ยังไม่ได้ทำรายการ
                                 </a>    
                               <?php endif; ?>
@@ -205,60 +198,139 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <!-- /.card -->
           </div>
-
-          <div class="col-md-12">
-            <div class="card fix">
-             <!-- /.card-header -->
-              <div class="card-body">
-                <div class="tab-content">
-             
-                  <!-- /.tab-pane -->
-
-                  <div class="tab-content" id="settings">
-                    <form class="form-horizontal">
-                   
-                      
-                      <div class="form-group we3 col-md-12">
-                        <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
-                        <div class="row">
-                          <div class="col-md-6 leave-mannger">
-                          
-                            <img src="/backg/leave-manager.png" width="100%" height="100%" class="img-resear">
-                            <div class="col-md-12 leave-ma">
-                              <span>การอนุมัติ</span>
-                              <br>
-                               <span >ระดับเจ้าหน้าที่</span>
-                              <br>
-                              <br>        
-                              <h6 class="leave-ma">มีรายการร้องขอ   <?php echo $_SESSION['OFFICER_STATUS']?> รายการ</h6>
+          <!-- /การอนุมิต -->
+          <?php if ($_SESSION['check_OFFICER'] != null && $_SESSION['check_SUPERVISOR_ID'] != null ): ?>
+            <div class="col-md-12">
+              <div class="card fix">
+              <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+              
+                    <!-- /.tab-pane -->
+                    <div class="tab-content" id="settings">
+                      <form class="form-horizontal">
+                    
+                        
+                        <div class="form-group we3 col-md-12">
+                          <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
+                            <div class="row">
+                                <div class="col-md-6 leave-mannger">  
+                                  <img src="/backg/leave-manager.png" width="100%" height="100%" class="img-resear">
+                                  <div class="col-md-12 leave-ma">
+                                    <span>การอนุมัติ</span>
+                                    <br>
+                                    <span >ระดับเจ้าหน้าที่</span>
+                                    <br>
+                                    <br>        
+                                    <h6 class="leave-ma">มีรายการร้องขอ <?php echo $_SESSION['OFFICER_STATUS']?> รายการ</h6>
+                                  </div>
+                                </div> 
+                                <div class="col-md-6 leave-mannger2">
+                                  <img src="/backg/leave-pro.png" width="100%" height="100%" class="img-resear">
+                                  <div class="col-md-12 leave-ma2">
+                                    <span href="<?php echo base_url()?>index.php/Home/online">การอนุมัติ</span>
+                                    <br>
+                                    <span href="<?php echo base_url()?>index.php/Home/online">ระดับหัวหน้า</span>
+                                    <br>
+                                    <br>        
+                                    <h6 class="leave-ma">มีรายการร้องขอ  <?php echo $_SESSION['SUPERVISOR_ID']?> รายการ</h6>
+                                  </div>
                                 </div>
-                          </div>         
-                          <div class="col-md-6 leave-mannger2">
-                            
-                            <img src="/backg/leave-pro.png" width="100%" height="100%" class="img-resear">
-                            <div class="col-md-12 leave-ma2">
-                              <span href="<?php echo base_url()?>index.php/Home/online">การอนุมัติ</span>
-                              <br>
-                              <span href="<?php echo base_url()?>index.php/Home/online">ระดับหัวหน้า</span>
-                              <br>
-                              <br>        
-                              <h6 class="leave-ma">มีรายการร้องขอ  <?php echo $_SESSION['SUPERVISOR_ID']?> รายการ</h6>
-                                </div>
-                          </div> 
-                
-
-                          </div>
-                        </div>              
-                      </div>                
-                    </form>
+                            </div>
+                          </div>              
+                        </div>                
+                      </form>
+                    </div>
+                    <!-- /.tab-pane -->
                   </div>
-                  <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
-              </div><!-- /.card-body -->
+                  <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+              </div>
+              <!-- /.card -->
             </div>
-            <!-- /.card -->
-          </div>
+          <?php endif; ?>  
+
+          <?php if ($_SESSION['check_OFFICER'] != null && $_SESSION['check_SUPERVISOR_ID'] == null ): ?>
+            <div class="col-md-12">
+              <div class="card fix">
+              <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+              
+                    <!-- /.tab-pane -->
+                    <div class="tab-content" id="settings">
+                      <form class="form-horizontal">
+                    
+                        
+                        <div class="form-group we3 col-md-12">
+                          <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
+                            <div class="row">
+                                <div class="col-md-6 leave-mannger">  
+                                  <img src="/backg/leave-manager.png" width="100%" height="100%" class="img-resear">
+                                  <div class="col-md-12 leave-ma">
+                                    <span>การอนุมัติ</span>
+                                    <br>
+                                    <span >ระดับเจ้าหน้าที่</span>
+                                    <br>
+                                    <br>        
+                                    <h6 class="leave-ma">มีรายการร้องขอ <?php echo $_SESSION['OFFICER_STATUS']?> รายการ</h6>
+                                  </div>
+                                </div> 
+                               
+                            </div>
+                          </div>              
+                        </div>                
+                      </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                  </div>
+                  <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          <?php endif; ?>  
+        
+          <?php if ($_SESSION['check_OFFICER'] == null && $_SESSION['check_SUPERVISOR_ID'] != null ): ?>
+            <div class="col-md-12">
+              <div class="card fix">
+              <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+              
+                    <!-- /.tab-pane -->
+                    <div class="tab-content" id="settings">
+                      <form class="form-horizontal">
+                    
+                        
+                        <div class="form-group we3 col-md-12">
+                          <!-- <label for="inputName" class="col-sm-4 col-form-label">ชื่อ-นามสกุลภาษาอังกฤษ</label> -->
+                            <div class="row">
+                             
+                                <div class="col-md-6 leave-mannger2">
+                                  <img src="/backg/leave-pro.png" width="100%" height="100%" class="img-resear">
+                                  <div class="col-md-12 leave-ma2">
+                                    <span href="<?php echo base_url()?>index.php/Home/online">การอนุมัติ</span>
+                                    <br>
+                                    <span href="<?php echo base_url()?>index.php/Home/online">ระดับหัวหน้า</span>
+                                    <br>
+                                    <br>        
+                                    <h6 class="leave-ma">มีรายการร้องขอ  <?php echo $_SESSION['SUPERVISOR_ID']?> รายการ</h6>
+                                  </div>
+                                </div>
+                            </div>
+                          </div>              
+                        </div>                
+                      </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                  </div>
+                  <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          <?php endif; ?>  
           <!-- /.col -->
         </div>
     
