@@ -1417,7 +1417,7 @@ class Home_model extends CI_Model {
     $this->db->from('services');
     $this->db->join('service_participants', 'service_participants.SERVICE_ID = services.SERVICE_ID');
     $this->db->join('personnels', 'services.SERVICE_OWNER = personnels.PERSONNEL_ID');
-    $this->db->where('SERVICE_OWNER', $_GET['id_personal']);
+   
     $this->db->where('service_participants.ID', $_GET['img']);
   
 
