@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- /.content-header -->
 
     <div class="content">
-      <div class="row">
+      <div class="row ">
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
         <div class="col-lg-4 col-md-4 col-sm-4"></div>
@@ -57,26 +57,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             เพิ่มข้อมูล
           </a>
         </div>
-        <div class="col-lg-1 "></div>
+
       </div>
       <div class="row">
-        <div class="col-lg-1"></div>
+    
         <div class="col-lg-5 col-md-5 col-sm-5 hade-show">หัวข้อประเภทการลา</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 hade-show">เพศ</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 hade-show">ครึ่งวัน</div>
         <div class="col-lg-1 col-md-1 col-sm-1 hade-show">จำนวน</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
-        <div class="col-lg-1 "></div>
+      
       </div>
       <?php foreach($leave_types as $key=>$value): ?>
-        <div class="row">
-          <div class="col-lg-1"></div>
+        <div class="row body-show-long">
+     
           <div class="col-lg-5 col-md-5 col-sm-5 body-show box-btn-left"><?php echo $value['LEAVE_TYPE'];?></div>
           <div class="col-lg-1 col-md-1 col-sm-1 body-show box-btn-center"><?php echo $value['LEAVE_TYPE_MAX'];?></div>
+          <div class="col-lg-1 col-md-1 col-sm-1 body-show box-btn-center">
+          <label>
+
+            <?php if ($value['PERSONNEL_SEX'] == '1'): ?>
+              <a>ชาย</a>
+            <?php endif; ?>
+            <?php if ($value['PERSONNEL_SEX'] == '2'): ?>
+              <a>หญิง</a>
+            <?php endif; ?>
+            <?php if ($value['PERSONNEL_SEX'] == '3'): ?>
+              <a>ช/ญ</a>
+            <?php endif; ?>
+
+          </label>
+          </div>
+          <div class="col-lg-1 col-md-1 col-sm-1 body-show box-btn-center">
+            <label><?php echo $value['HALF_ONE'] != 1 ? 'ได้' : 'ไม่ได้'?></a>
+          </div>
+
+          
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
             <a href="javascript:void(0);" class="btn-edit" onclick="main.get_edit_leave_types(
               '<?php echo $value['LEAVE_TYPE_ID'];?>',
               '<?php echo $value['LEAVE_TYPE'];?>',
-              '<?php echo $value['LEAVE_TYPE_MAX'];?>')">
+              '<?php echo $value['LEAVE_TYPE_MAX'];?>',
+              '<?php echo $value['PERSONNEL_SEX'];?>',
+              '<?php echo $value['HALF_ONE'];?>')">
               แก้ไขข้อมูล
             </a>
           </div>

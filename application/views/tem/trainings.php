@@ -63,12 +63,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div> 
         </div>
         <div class="row ">
-          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ชื่อการอบรม</div>
-          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานที่จัดการอบรม</div>
-          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">เจ้าของการอบรม</div>
-          <div class="col-lg-3 col-md-2 col-sm-2 hade-show">ไฟล์ข้อมูล</div>
-          <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
-          <div class="col-lg-1 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">ชื่อการอบรม</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">สถานที่จัดการอบรม</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">เจ้าของการอบรม</div>
+          <div class="col-lg-3 col-md-2 col-sm-2 hade-show text-long">ไฟล์ข้อมูล</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">แก้ไขข้อมูล</div>
+          <div class="col-lg-1 col-md-2 col-sm-2 hade-show text-long">ลบข้อมูล</div>
         </div>
         <?php foreach($trainings as $key=>$value): ?>
           <div class="row body-show-long">
@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               &nbsp&nbsp&nbsp&nbsp&nbsp
               <?php echo $value['PERSONNEL_SURNAME'];?>
             </div>
-            <div class="col-lg-3 col-md-2 col-sm-2 body-show text-long">
+            <div class="col-lg-3 col-md-2 col-sm-2 body-show text-long text-long">
                   <?php if ($value['FILE_TAINING'] != ''): ?>             
                       <div class="col-lg-10">
                         <label class="file text-long  col-lg-10 box-btn-center">
@@ -114,7 +114,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
           
 
-            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
             <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_trainings(
               '<?php echo $value['TRAINING_ID'];?>',
               '<?php echo $value['TRAINING_TITLE'];?>',
@@ -123,15 +123,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               '<?php echo $value['TOTAL_HOUR_TRAINING'];?>',
               '<?php echo $value['TRAINING_START_DATE'];?>',
               '<?php echo $value['TRAINING_END_DATE'];?>');">
-
-
-
               แก้ไขข้อมูล
             </a>
 
             </div>
 
-            <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center">
+            <div class="col-lg-1 col-md-2 col-sm-2 body-show box-btn-center text-long">
               <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_trainings(
                 '<?php echo $value['TRAINING_ID'];?>');">
                 ลบข้อมูล
@@ -186,7 +183,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="col-md-6">
                 <label for="formGroupExampleInput">เวลาในการอบรม</label>
-                <input type="text" class="form-control"  name="TOTAL_HOUR_TRAINING" placeholder="ระยะเวลา" onkeyup="main.checkcountinput(this)">
+                <input type="text" class="form-control"  name="TOTAL_HOUR_TRAINING" placeholder="ระยะเวลา">
                 <label for="formGroupExampleInput">สถานที่จัดการอบรม</label>
                 <textarea type="text" class="form-control" rows="3"  name="TRAINING_PLACE" placeholder="สถานที่จัดการอบรม"></textarea>
 
@@ -255,7 +252,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="col-md-6">
                 <label for="formGroupExampleInput">เวลาในการอบรม</label>
-                <input type="text" class="form-control"  name="TOTAL_HOUR_TRAINING" placeholder="ระยะเวลา" onkeyup="main.checkcountinput(this)">
+                <input type="text" class="form-control"  name="TOTAL_HOUR_TRAINING" placeholder="ระยะเวลา">
                 <label for="formGroupExampleInput">สถานที่จัดการอบรม</label>
                 <textarea type="text" class="form-control" rows="3"  name="TRAINING_PLACE" placeholder="สถานที่จัดการอบรม"></textarea>
 

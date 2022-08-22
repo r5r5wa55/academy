@@ -171,6 +171,38 @@
           <input type="text" class="form-control m-2 p-2" name="LEAVE_TYPE" placeholder="ประเภทการลา">
           <label for="">จำนวนการลา</label>
           <input type="text" class="form-control m-2 p-2" name="LEAVE_TYPE_MAX" placeholder="จำนวนการลา">
+          <label for="formGroupExampleInput">เพศ</label>
+          <div class="row radioinput">    
+            <div class="col-md-3">  
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PERSONNEL_SEX_leave_type" value="1" checked>
+                <label class="form-check-label" >ชาย</label>
+              </div>
+            </div>
+              <div class="form-check col-md-3">
+                <input class="form-check-input" type="radio" name="PERSONNEL_SEX_leave_type" value="2">
+                <label class="form-check-label">หญิง</label>
+              </div>
+              <div class="form-check col-md-3">
+                <input class="form-check-input" type="radio" name="PERSONNEL_SEX_leave_type" value="3">
+                <label class="form-check-label">ชาย/หญิง</label>
+              </div>
+          </div>  
+          
+          <label for="formGroupExampleInput">ลาครึ่งวัน</label>
+          <div class="row radioinput">    
+            <div class="col-md-3">  
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="HALF_ONE_leave_type" value="1" checked>
+                <label class="form-check-label" >ได้</label>
+              </div>
+            </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="HALF_ONE_leave_type"  value="2">
+                <label class="form-check-label">ไม่ได้</label>
+              </div>
+          </div> 
+                
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -180,6 +212,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="edit_leave_types" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -195,8 +228,42 @@
           <input type="text" class="form-control"  name="LEAVE_TYPE" placeholder="ประเภทการลา">
           <label for="">จำนวนการลา</label>
           <input type="text" class="form-control"  name="LEAVE_TYPE_MAX" placeholder="จำนวนการลา">
-          
           <input type="hidden"   name="LEAVE_TYPE_ID">
+
+
+          <label for="formGroupExampleInput">เพศ</label>
+          <div class="row radioinput">    
+            <div class="col-md-3">  
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="PERSONNEL_SEX_leave_edit" value="1" checked>
+                <label class="form-check-label" >ชาย</label>
+              </div>
+            </div>
+              <div class="form-check col-md-3">
+                <input class="form-check-input" type="radio" name="PERSONNEL_SEX_leave_edit" value="2">
+                <label class="form-check-label">หญิง</label>
+              </div>
+            <div class="form-check col-md-3">
+              <input class="form-check-input" type="radio" name="PERSONNEL_SEX_leave_edit" value="3">
+              <label class="form-check-label">ชาย/หญิง</label>
+            </div>
+          </div>  
+        
+
+          <label for="formGroupExampleInput">ลาครึ่งวัน</label>
+          <div class="row radioinput">    
+            <div class="col-md-3">  
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="HALF_ONE_leave_edit" value="1" checked>
+                <label class="form-check-label" >ได้</label>
+              </div>
+            </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="HALF_ONE_leave_edit"  value="2">
+                <label class="form-check-label">ไม่ได้</label>
+              </div>
+          </div> 
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

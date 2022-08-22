@@ -242,6 +242,9 @@ class Home_model extends CI_Model {
        
         'LEAVE_TYPE' => $data['LEAVE_TYPE'],
         'LEAVE_TYPE_MAX' => $data['LEAVE_TYPE_MAX'],
+        'PERSONNEL_SEX' => $data['PERSONNEL_SEX'],
+        'HALF_ONE' => $data['HALF_ONE'],
+
      
       );
       $data = $this->db->insert('leave_types', $data);
@@ -250,22 +253,68 @@ class Home_model extends CI_Model {
     return $st;
   }
   public function edit_leave_types($data){
+
+
     $st = array('st'=>0);
     if(is_array($data) && $data['LEAVE_TYPE']!=""){
       $this->db->where('LEAVE_TYPE_ID', $data['LEAVE_TYPE_ID']);
       $this->db->set('LEAVE_TYPE', $data['LEAVE_TYPE']);
       $this->db->set('LEAVE_TYPE_MAX',  $data['LEAVE_TYPE_MAX']);
+
+      $this->db->set('PERSONNEL_SEX', $data['PERSONNEL_SEX']);
+      $this->db->set('HALF_ONE',  $data['HALF_ONE']);
+
       $this->db->update('leave_types');
       $st = array('st'=>1);
     }
     return $st;
   }
   public function delete_leave_types($data){
+  
+
+
+    $this->db->select('*');
+    $this->db->from('leave_types');
+    $this->db->join('leaves', 'leaves.LEAVE_TYPE_ID  = leave_types.LEAVE_TYPE_ID ');
+    $this->db->where('leave_types.LEAVE_TYPE_ID', $data['LEAVE_TYPE_ID']);
+    $query = $this->db->get();
+    $query = $query->result_array();
+
+    
     $st = array('st'=>0);
-    if(is_array($data) && $data['LEAVE_TYPE_ID']!=""){
+    if($query == ""){
       $this->db->delete('leave_types', array('LEAVE_TYPE_ID' => $data['LEAVE_TYPE_ID'])); 
       $st = array('st'=>1);
+    }else{
+      $st = array('st'=>2);
     }
+
+
+
+
+    
+    if($query != array()){
+      $st = array('st'=>2);
+    }else if($query == array()){
+      $this->db->delete('leave_types', array('LEAVE_TYPE_ID' => $data['LEAVE_TYPE_ID'])); 
+      $st = array('st'=>1);
+    }else{
+      $st = array('st'=>0);
+    }
+
+
+
+    // echo "<pre>";
+		// print_r($st);
+		// echo "</pre>";
+
+    // echo "<pre>";
+		// print_r($query);
+		// echo "</pre>";
+		// exit(); 
+  
+
+
     return $st;
   }
   //
@@ -2049,7 +2098,81 @@ class Home_model extends CI_Model {
     // exit;
     return $data_html;
   }
+  public function show_training_participants_pic_show(){
+   
 
+
+
+    $id = isset($_GET['img'])?$_GET['img']:"";
+
+    $id_personal = isset($_GET['id_personal'])?$_GET['id_personal']:"";
+    
+    // echo '<pre>';
+    // print_r($id_personal);
+    // echo '</pre>';
+    // echo '<pre>';
+    // print_r($id);
+    // echo '</pre>';
+    // exit;
+    
+    
+
+    if($id != ""){
+    $this->db->select('*');
+    $this->db->from('training_participants_pic');
+    // $this->db->join('service_participants', 'service_participants.ID = service_participants_pic.SERVICE_ID');
+    $this->db->where('TRAINING_ID', $_GET['img']);
+    $this->db->where('CREATE_BY_TR', $_GET['id_personal']);
+
+
+    $this->db->order_by("training_participants_pic.ID", "DESC");  
+
+    $training_participants_pic = $this->db->get();
+    $training_participants_pic = $training_participants_pic->result_array();
+    // $personnels = $this->select_personnels_all();
+  
+
+
+    
+    $this->db->select('*');
+    $this->db->from('trainings');
+    $this->db->join('training_participants', 'training_participants.TRAINING_ID = trainings.TRAINING_ID');
+
+    $this->db->join('personnels', 'trainings.TRAINING_OWNER = personnels.PERSONNEL_ID');
+
+    // $this->db->join('activity_categories', 'activity_categories.ACTIVITY_CATEGORY_ID = activities.ACTIVITY_CATEGORY_ID');
+    // $this->db->join('activity_types', 'activity_types.ACTIVITY_TYPE_ID = activity_types.ACTIVITY_TYPE_ID');
+    $this->db->where('TRAINING_OWNER', $_GET['id_personal']);
+
+    $this->db->where('training_participants.ID_TRAINING_PARTICIPANTS', $_GET['img']);
+  
+
+    $trainings = $this->db->get();
+    $trainings = $trainings->row_array();
+
+
+    // echo '<pre>';
+    // print_r($trainings);
+    // echo '</pre>';
+    // exit;
+
+
+
+    $DATA = array(
+      'training_participants_pic'=>$training_participants_pic,
+      'trainings'=>$trainings
+    );
+
+    
+    // echo '<pre>';
+    // print_r($DATA);
+    // echo '</pre>';
+    // exit;
+
+    }
+    return $DATA;
+ 
+  }
   ///
   public function select_training_participants($data_search = ""){
     if($_SESSION['level'] != "1"){

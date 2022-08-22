@@ -1263,6 +1263,18 @@ class Home extends CI_Controller {
 		
 	} 
 
+	public function show_training_participants_pic_show(){
+		$this->check_login_session();
+		$data_search = $this->search_all();
+		$data = $this->mhome->show_training_participants_pic_show($_POST);
+		// 	echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+		
+		$this->load->view('tem/show_training_participants_pic_show',$data); 
+
+	}
 	
 	///
 	public function counseling_types(){
