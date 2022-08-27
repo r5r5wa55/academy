@@ -71,32 +71,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <center><h2>เจ้าของ &nbsp;:&nbsp;<?php echo $services['PERSONNEL_NAME'];?> &nbsp;&nbsp;<?php echo $services['PERSONNEL_SURNAME'];?></h2></center>
             <br>
             <div class="row service-show">
+              <div class="row col-lg-6">
+                <div class="col-lg-1"></div> 
+                <div class="col-lg-4">สถานที่ให้บริการ</div> 
+                <div class="col-lg-7"><?php echo $services['SERVICE_PLACE'];?></div>
+                <div class="col-lg-1"></div> 
+                <div class="col-lg-4">กลุ่มเป้าหมาย</div> 
+                <div class="col-lg-7"><?php echo $services['PARTICIPANT'];?></div>  
+                <div class="col-lg-1"></div> 
+                <div class="col-lg-4">เวลาในการบริการ</div> 
+                <div class="col-lg-7"><?php echo $services['TOTAL_HOUR'];?></div>  
+                <div class="col-lg-1"></div> 
+                <div class="col-lg-4">ตั้งแต่เวลา</div> 
+                <div class="col-lg-7"><?php echo $services['SERVICE_START_DATE'];?></div>  
+              </div>
+              <div class="row col-lg-6">
               <div class="col-lg-1"></div> 
-              <div class="col-lg-2">สถานที่ให้บริการ</div> 
-              <div class="col-lg-9"><?php echo $services['SERVICE_PLACE'];?></div> 
-        
-            </div>
-            <div class="row service-show">
-              <div class="col-lg-1"></div> 
-              <div class="col-lg-2">กลุ่มเป้าหมาย</div> 
-              <div class="col-lg-3"><?php echo $services['PARTICIPANT'];?></div> 
-              <div class="col-lg-2">ลักษณะผู้เข้าร่วม</div> 
-              <div class="col-lg-1"><?php echo $services['PARTICIPANT_TYPE'];?></div> 
-            </div>
-            <div class="row service-show">
-              <div class="col-lg-1"></div> 
-              <div class="col-lg-2">เวลาในการบริการ</div> 
-              <div class="col-lg-3"><?php echo $services['TOTAL_HOUR'];?></div> 
-              <div class="col-lg-2">จำนวนผู้เข้าร่วม</div> 
-              <div class="col-lg-1"><?php echo $services['TOTAL_PARTICIPANT'];?></div> 
-            </div>
-            <div class="row service-show">
-              <div class="col-lg-1"></div> 
-              <div class="col-lg-2">ตั้งแต่เวลา</div> 
-              <div class="col-lg-3"><?php echo $services['SERVICE_START_DATE'];?></div> 
-              <div class="col-lg-2">จนถึง</div> 
-              <div class="col-lg-1"><?php echo $services['SERVICE_END_DATE'];?></div> 
-            </div>
+                <div class="col-lg-4"></div> 
+                <div class="col-lg-7"></div> 
+                <div class="col-lg-1"></div> 
+                <div class="col-lg-4">สถานที่ให้บริการ</div> 
+                <div class="col-lg-7"><?php echo $services['SERVICE_PLACE'];?></div> 
+                <div class="col-lg-1"></div> 
+                <div class="col-lg-4">ลักษณะผู้เข้าร่วม</div> 
+                <div class="col-lg-7"><?php echo $services['PARTICIPANT_TYPE'];?></div> 
+                <div class="col-lg-1"></div> 
+                <div class="col-lg-4">จนถึง</div> 
+                <div class="col-lg-7"><?php echo $services['SERVICE_END_DATE'];?></div>  
+              </div>
+            </div> 
           </div>
         </div>
 

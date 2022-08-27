@@ -122,7 +122,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <div class="form-group row we">
                         <img src="/backg/researchers.png" class="img-resear">
                         <div class="col-md-12 front-we">
-                          <span href="<?php echo base_url()?>index.php/Home/researchs">งานวิจัย</span>
+                          <a href="<?php echo base_url()?>index.php/Home/researchs"><span class="text-resear">งานวิจัย</span></a>
                         </div>
                         <div class="col-md-12 front-we1">
                           <span href="">งานวิจัยล่าสุด 
@@ -157,7 +157,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           
                             <img src="/backg/online.png" width="100%" height="100%" class="img-resear">
                             <div class="col-md-12 front-online">
-                              <span href="<?php echo base_url()?>index.php/Home/online">การให้คำปรึกษา</span>
+                              <a href="<?php echo base_url()?>index.php/Home/individual_counseling_services"><span>การให้คำปรึกษา</span></a>
                               <br>
                               <br>        
                               <h6 class="leave-online">มีคำร้องขอ <?php echo $individual_counseling_services_status?> รายการ</h6>
@@ -166,9 +166,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="col-md-6 leave-mannger3">
                             <img src="/backg/sick.png" width="100%" height="100%" class="img-resear">
                             <div class="col-md-12 leave-ma3">
-                              <span class="header">การลาป่วย</span>
+                              <a href="<?php echo base_url()?>index.php/Home/leaves"><span class="header">การลาป่วย</span></a>
                               <br>
-                              <span href="<?php echo base_url()?>index.php/Home/online">หัวข้อการลาครั้งล่าสุด</span>
+                              <span>หัวข้อการลาครั้งล่าสุด</span>
                               <br>
                               <?php if ($leaves_name != ''): ?>
                                 <a  class="leave3 text-long">
@@ -217,9 +217,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-6 leave-mannger">  
                                   <img src="/backg/leave-manager.png" width="100%" height="100%" class="img-resear">
                                   <div class="col-md-12 leave-ma">
-                                    <span>การอนุมัติ</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve"><span class="color-b">การอนุมัติ</span></a>
                                     <br>
-                                    <span >ระดับเจ้าหน้าที่</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve"><span class="color-b">ระดับเจ้าหน้าที่</span></a>
                                     <br>
                                     <br>        
                                     <h6 class="leave-ma">มีรายการร้องขอ <?php echo $_SESSION['OFFICER_STATUS']?> รายการ</h6>
@@ -228,9 +228,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-6 leave-mannger2">
                                   <img src="/backg/leave-pro.png" width="100%" height="100%" class="img-resear">
                                   <div class="col-md-12 leave-ma2">
-                                    <span href="<?php echo base_url()?>index.php/Home/online">การอนุมัติ</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve_supervisor"><span class="color-b">การอนุมัติ</span></a>
                                     <br>
-                                    <span href="<?php echo base_url()?>index.php/Home/online">ระดับหัวหน้า</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve_supervisor"><span class="color-b">ระดับหัวหน้า</span></a>
                                     <br>
                                     <br>        
                                     <h6 class="leave-ma">มีรายการร้องขอ  <?php echo $_SESSION['SUPERVISOR_ID']?> รายการ</h6>
@@ -268,9 +268,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-6 leave-mannger">  
                                   <img src="/backg/leave-manager.png" width="100%" height="100%" class="img-resear">
                                   <div class="col-md-12 leave-ma">
-                                    <span>การอนุมัติ</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve"><span class="color-b">การอนุมัติ</span></a>
                                     <br>
-                                    <span >ระดับเจ้าหน้าที่</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve"><span class="color-b">ระดับเจ้าหน้าที่</span></a>
                                     <br>
                                     <br>        
                                     <h6 class="leave-ma">มีรายการร้องขอ <?php echo $_SESSION['OFFICER_STATUS']?> รายการ</h6>
@@ -310,9 +310,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-6 leave-mannger2">
                                   <img src="/backg/leave-pro.png" width="100%" height="100%" class="img-resear">
                                   <div class="col-md-12 leave-ma2">
-                                    <span href="<?php echo base_url()?>index.php/Home/online">การอนุมัติ</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve_supervisor"><span >การอนุมัติ</span></a>
                                     <br>
-                                    <span href="<?php echo base_url()?>index.php/Home/online">ระดับหัวหน้า</span>
+                                    <a href="<?php echo base_url()?>index.php/Home/leaves_approve_supervisor"><span >ระดับหัวหน้า</span></a>
                                     <br>
                                     <br>        
                                     <h6 class="leave-ma">มีรายการร้องขอ  <?php echo $_SESSION['SUPERVISOR_ID']?> รายการ</h6>

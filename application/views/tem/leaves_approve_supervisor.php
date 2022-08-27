@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0" >การอนุมัติการลา</h1>
+            <h1 class="m-0" >การอนุมัติการลา(หัวหน้างาน)</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

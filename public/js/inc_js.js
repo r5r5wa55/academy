@@ -271,16 +271,24 @@ var main = {
   },
 ///
   add_leave_types(){
-    var LEAVE_TYPE = $('[name=LEAVE_TYPE]').val()
-    var LEAVE_TYPE_MAX = $('[name=LEAVE_TYPE_MAX]').val()
-    console.log (LEAVE_TYPE,LEAVE_TYPE_MAX)
+    var LEAVE_TYPE = $('[name=LEAVE_TYPE]').val();
+    var LEAVE_TYPE_MAX = $('[name=LEAVE_TYPE_MAX]').val();
+
+    var PERSONNEL_SEX = $('[name=PERSONNEL_SEX_leave_type]:checked').val();
+    var HALF_ONE = $('[name=HALF_ONE_leave_type]:checked').val();
+
+    // console.log (HALF_ONE)
+    // console.log (PERSONNEL_SEX)
+    // return false;
     var url = window.location.origin+"/index.php/Home/add_leave_types";
     // console.log(window.location.origin);
-    // return false;
+
     var data = {
     
       'LEAVE_TYPE':LEAVE_TYPE,
-      'LEAVE_TYPE_MAX':LEAVE_TYPE_MAX
+      'LEAVE_TYPE_MAX':LEAVE_TYPE_MAX,
+      'PERSONNEL_SEX':PERSONNEL_SEX,
+      'HALF_ONE':HALF_ONE
     }
     $.ajax({
       url : url,
@@ -301,29 +309,54 @@ var main = {
       }
     })
   },
-  get_edit_leave_types(LEAVE_TYPE_ID,LEAVE_TYPE,LEAVE_TYPE_MAX){
+  get_edit_leave_types(LEAVE_TYPE_ID,LEAVE_TYPE,LEAVE_TYPE_MAX,PERSONNEL_SEX,HALF_ONE){
     // console.log(ID_F);
     // console.log(FACULTY_ID);
-    // console.log(FACUALTY_NAME_TH);
-    // console.log(FACUALTY_NAME_EN); ไว้เรีบกดู
+    // console.log(PERSONNEL_SEX);
+    // console.log(HALF_ONE); 
+    // return false;
     $('#edit_leave_types [name=LEAVE_TYPE_ID]').val(LEAVE_TYPE_ID);  
     $('#edit_leave_types [name=LEAVE_TYPE]').val(LEAVE_TYPE);
     $('#edit_leave_types [name=LEAVE_TYPE_MAX]').val(LEAVE_TYPE_MAX);
+    
+
+    $('#edit_leave_types [name=PERSONNEL_SEX_leave_edit]').each(function(key,value){
+      
+      if($(value).val()==PERSONNEL_SEX){
+        // console.log($(value).val());
+        // console.log(PERSONNEL_SEX);
+        $(value).prop( "checked", true );    
+      }
+    })
+    $('#edit_leave_types [name=HALF_ONE_leave_edit]').each(function(key,value){
+      if($(value).val()==HALF_ONE){
+        // console.log($(value).val());
+        // console.log(HALF_ONE);
+        $(value).prop( "checked", true ); 
+      }
+    })
     $('#edit_leave_types').modal('show'); 
+
+
+
   },
   edit_leave_types(){
     var LEAVE_TYPE_ID = $('#edit_leave_types [name=LEAVE_TYPE_ID]').val()  
     var LEAVE_TYPE = $('#edit_leave_types [name=LEAVE_TYPE]').val()
     var LEAVE_TYPE_MAX = $('#edit_leave_types [name=LEAVE_TYPE_MAX]').val()
+    var PERSONNEL_SEX = $('#edit_leave_types [name=PERSONNEL_SEX_leave_edit]:checked').val()
+    var HALF_ONE = $('#edit_leave_types [name=HALF_ONE_leave_edit]:checked').val()
     // console.log(LEAVE_TYPE_ID),
-    // console.log(LEAVE_TYPE),
-    // console.log(LEAVE_TYPE_MAX);
-    // return false หยุดการทำงาน 
+    // console.log(PERSONNEL_SEX),
+    // console.log(HALF_ONE);
+    // return false  
     var url = window.location.origin+"/index.php/Home/edit_leave_types";
     var data = {
       'LEAVE_TYPE_ID':LEAVE_TYPE_ID,
       'LEAVE_TYPE':LEAVE_TYPE,
-      'LEAVE_TYPE_MAX':LEAVE_TYPE_MAX
+      'LEAVE_TYPE_MAX':LEAVE_TYPE_MAX,
+      'PERSONNEL_SEX':PERSONNEL_SEX,
+      'HALF_ONE':HALF_ONE
     }
     $.ajax({
       url : url,
@@ -362,11 +395,12 @@ var main = {
         delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
       },
     }).done(function(resp) {
-      if(resp.st == 1){
-        alert('ลบสำเร็จ')
+      if(resp.st == 2){
+        alert('ไม่สามารถได้ เนื่องจากมีข้อมูลอยู่ในตารางอื่น')
         location.reload();
       }else{
-        alert('ลบไม่สำเร็จ')
+        alert('ลบสำเร็จ')
+        location.reload();
       }
     })
   },
@@ -2219,62 +2253,144 @@ var main = {
   },
   ////
   add_services(){
-    var SERVICE_TITLE = $('#add_services [name=SERVICE_TITLE]' ).val();
-    var SERVICE_PLACE = $('#add_services [name=SERVICE_PLACE]').val();
-    var SERVICE_OWNER = $('#add_services [name=SERVICE_OWNER]').val();
-    var PARTICIPANT_TYPE = $('#add_services [name=PARTICIPANT_TYPE]').val();
-    var PARTICIPANT = $('#add_services [name=PARTICIPANT]').val();
-    var TOTAL_PARTICIPANT = $('#add_services [name=TOTAL_PARTICIPANT]').val();
-    var TOTAL_HOUR = $('#add_services [name=TOTAL_HOUR]').val();
     var SERVICE_START_DATE = $('#add_services [name=SERVICE_START_DATE]').val();
     var SERVICE_END_DATE = $('#add_services [name=SERVICE_END_DATE]').val();
-   
-  
-    var url = window.location.origin+"/index.php/Home/add_services";
-
-
-
-
-    // console.log(SERVICE_TITLE);
-    // console.log(SERVICE_PLACE);
-    // console.log(SERVICE_OWNER);
-    // console.log(PARTICIPANT_TYPE);
-    // console.log(PARTICIPANT);
-    // console.log(TOTAL_PARTICIPANT);
-    // console.log(TOTAL_HOUR);
     // console.log(SERVICE_START_DATE);
     // console.log(SERVICE_END_DATE);
-    // console.log(FILE_DOCUMENT);
     // return false;
     var data = {
-      'SERVICE_TITLE':SERVICE_TITLE,
-      'SERVICE_PLACE':SERVICE_PLACE,
-      'SERVICE_OWNER':SERVICE_OWNER,
-      'PARTICIPANT_TYPE':PARTICIPANT_TYPE,
-      'PARTICIPANT':PARTICIPANT,
-      'TOTAL_PARTICIPANT':TOTAL_PARTICIPANT,
-      'TOTAL_HOUR':TOTAL_HOUR,
       'SERVICE_START_DATE':SERVICE_START_DATE,
       'SERVICE_END_DATE':SERVICE_END_DATE
     }
-   
-    $.ajax({
-      url : url,
-      method : 'POST',
-      dataType : 'JSON',
-      data:data,
-      cache : false,
-      beforeSend: function(jqXHR, settings) {
-        delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
-      },
-    }).done(function(resp) {
-      if(resp.st == 1){
-        alert('บันทึกสำเร็จ')
-        location.reload();
-      }else{
-        alert('บันทึกไม่สำเร็จ')
+    if(SERVICE_START_DATE > SERVICE_END_DATE){
+    
+
+      var datas = confirm("ข้อมูลเวลาในการเริ่มการบริการวิชาการไม่ตรงกับข้อกำหนด");
+      if(confirm("ยืนยันข้อมูล") === false){
+        return false;
       }
-    })
+
+      var SERVICE_TITLE = $('#add_services [name=SERVICE_TITLE]' ).val();
+      var SERVICE_PLACE = $('#add_services [name=SERVICE_PLACE]').val();
+      var SERVICE_OWNER = $('#add_services [name=SERVICE_OWNER]').val();
+      var PARTICIPANT_TYPE = $('#add_services [name=PARTICIPANT_TYPE]').val();
+      var PARTICIPANT = $('#add_services [name=PARTICIPANT]').val();
+      var TOTAL_PARTICIPANT = $('#add_services [name=TOTAL_PARTICIPANT]').val();
+      var TOTAL_HOUR = $('#add_services [name=TOTAL_HOUR]').val();
+      var SERVICE_START_DATE = $('#add_services [name=SERVICE_START_DATE]').val();
+      var SERVICE_END_DATE = $('#add_services [name=SERVICE_END_DATE]').val();
+    
+    
+      var url = window.location.origin+"/index.php/Home/add_services";
+
+
+
+
+      // console.log(SERVICE_TITLE);
+      // console.log(SERVICE_PLACE);
+      // console.log(SERVICE_OWNER);
+      // console.log(PARTICIPANT_TYPE);
+      // console.log(PARTICIPANT);
+      // console.log(TOTAL_PARTICIPANT);
+      // console.log(TOTAL_HOUR);
+      // console.log(SERVICE_START_DATE);
+      // console.log(SERVICE_END_DATE);
+      // console.log(FILE_DOCUMENT);
+      // return false;
+      var data = {
+        'SERVICE_TITLE':SERVICE_TITLE,
+        'SERVICE_PLACE':SERVICE_PLACE,
+        'SERVICE_OWNER':SERVICE_OWNER,
+        'PARTICIPANT_TYPE':PARTICIPANT_TYPE,
+        'PARTICIPANT':PARTICIPANT,
+        'TOTAL_PARTICIPANT':TOTAL_PARTICIPANT,
+        'TOTAL_HOUR':TOTAL_HOUR,
+        'SERVICE_START_DATE':SERVICE_START_DATE,
+        'SERVICE_END_DATE':SERVICE_END_DATE
+      }
+    
+      $.ajax({
+        url : url,
+        method : 'POST',
+        dataType : 'JSON',
+        data:data,
+        cache : false,
+        beforeSend: function(jqXHR, settings) {
+          delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        },
+      }).done(function(resp) {
+        if(resp.st == 1){
+          alert('บันทึกสำเร็จ')
+          location.reload();
+        }else{
+          alert('บันทึกไม่สำเร็จ')
+        }
+      })
+
+      
+
+      
+    }else{
+      var SERVICE_TITLE = $('#add_services [name=SERVICE_TITLE]' ).val();
+      var SERVICE_PLACE = $('#add_services [name=SERVICE_PLACE]').val();
+      var SERVICE_OWNER = $('#add_services [name=SERVICE_OWNER]').val();
+      var PARTICIPANT_TYPE = $('#add_services [name=PARTICIPANT_TYPE]').val();
+      var PARTICIPANT = $('#add_services [name=PARTICIPANT]').val();
+      var TOTAL_PARTICIPANT = $('#add_services [name=TOTAL_PARTICIPANT]').val();
+      var TOTAL_HOUR = $('#add_services [name=TOTAL_HOUR]').val();
+      var SERVICE_START_DATE = $('#add_services [name=SERVICE_START_DATE]').val();
+      var SERVICE_END_DATE = $('#add_services [name=SERVICE_END_DATE]').val();
+    
+    
+      var url = window.location.origin+"/index.php/Home/add_services";
+
+
+
+
+      // console.log(SERVICE_TITLE);
+      // console.log(SERVICE_PLACE);
+      // console.log(SERVICE_OWNER);
+      // console.log(PARTICIPANT_TYPE);
+      // console.log(PARTICIPANT);
+      // console.log(TOTAL_PARTICIPANT);
+      // console.log(TOTAL_HOUR);
+      // console.log(SERVICE_START_DATE);
+      // console.log(SERVICE_END_DATE);
+      // console.log(FILE_DOCUMENT);
+      // return false;
+      var data = {
+        'SERVICE_TITLE':SERVICE_TITLE,
+        'SERVICE_PLACE':SERVICE_PLACE,
+        'SERVICE_OWNER':SERVICE_OWNER,
+        'PARTICIPANT_TYPE':PARTICIPANT_TYPE,
+        'PARTICIPANT':PARTICIPANT,
+        'TOTAL_PARTICIPANT':TOTAL_PARTICIPANT,
+        'TOTAL_HOUR':TOTAL_HOUR,
+        'SERVICE_START_DATE':SERVICE_START_DATE,
+        'SERVICE_END_DATE':SERVICE_END_DATE
+      }
+    
+      $.ajax({
+        url : url,
+        method : 'POST',
+        dataType : 'JSON',
+        data:data,
+        cache : false,
+        beforeSend: function(jqXHR, settings) {
+          delete jqXHR.setRequestHeader('X-CSRF-TOKEN');
+        },
+      }).done(function(resp) {
+        if(resp.st == 1){
+          alert('บันทึกสำเร็จ')
+          location.reload();
+        }else{
+          alert('บันทึกไม่สำเร็จ')
+        }
+      })
+      
+    }
+
+    
   }, 
   get_edit_services(SERVICE_ID,SERVICE_TITLE,SERVICE_PLACE,SERVICE_OWNER,PARTICIPANT_TYPE,PARTICIPANT,
     TOTAL_PARTICIPANT,TOTAL_HOUR,SERVICE_START_DATE,SERVICE_END_DATE,FILE_DOCUMENT){
