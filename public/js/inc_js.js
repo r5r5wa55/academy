@@ -2000,11 +2000,11 @@ var main = {
       $('#add_individual_counseling_services [name=ADVISOR_ID]').addClass("red")
       return false;
     }
+    $('input').removeClass('red')
     if(STUDENT_ID==""){
       $('#add_individual_counseling_services [name=STUDENT_ID]').addClass("red")
       return false;
     }
-
     if(COUNSELING_TYPE_ID==""){
       $('#add_individual_counseling_services [name=COUNSELING_TYPE_ID]').addClass("red")
       return false;
@@ -2013,10 +2013,12 @@ var main = {
       $('#add_individual_counseling_services [name=COUNSELING_CREATE_DATE').addClass("red")
       return false;
     }
+    $('input').removeClass('red')
     if(COUNSELING_PROBLEM==""){
       $('#add_individual_counseling_services [name=COUNSELING_PROBLEM]').addClass("red")
       return false;
     }
+    $('input').removeClass('red')
     if(COUNSELING_DETAIL==""){
       $('#add_individual_counseling_services [name=COUNSELING_DETAIL]').addClass("red")
       return false;

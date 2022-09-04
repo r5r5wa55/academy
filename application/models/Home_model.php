@@ -1099,6 +1099,9 @@ class Home_model extends CI_Model {
 
   }
   public function add_individual_counseling_services($data){
+
+
+
     if(is_array($data) && $data['ADVISOR_ID']!="" && $data['STUDENT_ID']!=""){
       $data = array(
         'ADVISOR_ID' => $data['ADVISOR_ID'],
@@ -1116,6 +1119,10 @@ class Home_model extends CI_Model {
       $data = $this->db->insert('individual_counseling_services', $data);
       $st = array('st'=>1,'ms'=>'สำเร็จ');
     }
+    echo "<pre>";
+		print_r($data);
+		echo "</pre>";
+		exit(); 
   
     return $st;
   }

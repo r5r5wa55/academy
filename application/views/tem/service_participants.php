@@ -190,7 +190,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล การเข้าร่วมบริการ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล การเข้าร่วมบริการ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -225,7 +225,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               </div>
               <div class="col-md-6">
-                
                 <label for="formGroupExampleInput">ผู้เข้าร่วมการบริการ</label>
                 <select class="form-control" name="PERSONNEL_ID">
                 <option value="">กรุณาเลือก</option>
@@ -235,11 +234,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </select>
                 <label for="formGroupExampleInput">เวลาสิ้นสุดการบริการ</label>
                 <input type="text" class="form-control" rows="3"  id="edit_SERVICE_P_END_DATE" name="edit_SERVICE_P_END_DATE"  value="<?php echo "".date("16:00");?>">
-
-                
-       
-
- 
             </div>    
           </div>  
         </div>

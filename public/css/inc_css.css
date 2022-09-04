@@ -861,8 +861,9 @@ a.leave3{
   a.leave3.text-long  {
     font-size: 14px;
     top: -150;
-    top: 49%;
-    right: 0%;
+    top: 31%;
+    right: 11%;
+}
   }
 }
 @media only screen and (min-width: 1566px){

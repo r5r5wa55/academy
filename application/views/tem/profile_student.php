@@ -239,13 +239,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล การลา</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <label for="formGroupExampleInpt"><h3>การลาครั้งล่าสุด</h3></label>
+            <label for="formGroupExampleInpt"><h3>การขอคำปรึกษา</h3></label>
             <div class="form-group">
               <div class="row">   
                 

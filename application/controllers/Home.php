@@ -1694,12 +1694,13 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function update_conf_individual_counseling_service_studen(){
-		$this->check_login_session();
-		$data = $this->mhome->update_conf_individual_counseling_service_studen($_POST);
-		// 	echo "<pre>";
-		// print_r($data);
+		
+		// echo "<pre>";
+		// print_r($_POST);
 		// echo "</pre>";
 		// exit(); 
+		$data = $this->mhome->update_conf_individual_counseling_service_studen($_POST);
+	
 		echo json_encode($data);
 	}
 	public function update_conf_teacher_individual_counseling_service_studen(){
@@ -1713,7 +1714,7 @@ class Home extends CI_Controller {
 	}
 	
 	public function update_individual_counseling_filnel(){
-		$this->check_login_session();
+	
 		$data = $this->mhome->update_individual_counseling_filnel($_POST);
 		// 	echo "<pre>";
 		// print_r($data);

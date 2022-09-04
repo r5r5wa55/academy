@@ -77,8 +77,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ/นามสกุล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานที่</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">จำนวนวันที่ขอลา  </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">สถานะ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($leaves as $key=>$value):?>
         <div class="row body-show-long">
@@ -348,7 +348,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล การลา</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล การลา</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -513,7 +513,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล การลา</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">ข้อมูลการลา</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -655,7 +655,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-          <button type="button" class="btn btn-primary" onclick="main.add_leaves();">ยืนยันข้อมูล</button>
+       
         </div>
       </div>
     </div>
