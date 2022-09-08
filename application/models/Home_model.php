@@ -2412,7 +2412,7 @@ class Home_model extends CI_Model {
       $this->db->join('leave_types', 'leave_types.LEAVE_TYPE_ID = leaves.LEAVE_TYPE_ID');
       
       $this->db->where('personnels.PERSONNEL_ID', $_SESSION['PERSONNEL_ID']);
- // $this->db->group_by('management_positions.PERSONNEL_ID'); 
+    // $this->db->group_by('management_positions.PERSONNEL_ID'); 
       
       if($data_search != ""){
         $this->db->like('personnels.PERSONNEL_ID', $data_search);
