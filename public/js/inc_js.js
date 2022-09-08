@@ -2,8 +2,8 @@ var main = {
 
   add_academics(){
     var ACADEMIC_NAME = $('[name=ACADEMIC_NAME]').val()
-      console.log($('[name=ACADEMIC_NAME]').val());
-      return false;
+    // console.log($('[name=ACADEMIC_NAME]').val());
+    // return false;
     var url = window.location.origin+"/index.php/Home/add_academics";
     // console.log(url);
     // return false;
@@ -1044,7 +1044,6 @@ var main = {
     })
   },
 ////
-
   add_personnels(){
     var PERSONNEL_ID = $('#add_personnels [name=PERSONNEL_ID]').val()
     var PERSONNEL_NAME = $('#add_personnels [name=PERSONNEL_NAME]').val()
