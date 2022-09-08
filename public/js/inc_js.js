@@ -2,8 +2,8 @@ var main = {
 
   add_academics(){
     var ACADEMIC_NAME = $('[name=ACADEMIC_NAME]').val()
-    // console.log($('[name=ACADEMIC_NAME]').val());
-    // return false;
+      console.log($('[name=ACADEMIC_NAME]').val());
+      return false;
     var url = window.location.origin+"/index.php/Home/add_academics";
     // console.log(url);
     // return false;
