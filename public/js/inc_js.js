@@ -1044,6 +1044,7 @@ var main = {
     })
   },
 ////
+
   add_personnels(){
     var PERSONNEL_ID = $('#add_personnels [name=PERSONNEL_ID]').val()
     var PERSONNEL_NAME = $('#add_personnels [name=PERSONNEL_NAME]').val()
