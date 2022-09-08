@@ -98,9 +98,9 @@ class Home extends CI_Controller {
 
 
 		// echo '<pre>';
-    // print_r ($data);
-    // echo '</pre>';
-    // exit;
+		// print_r ($data);
+		// echo '</pre>';
+		// exit;
 		$this->load->view('tem/academics',$data); 
 	
 	}
@@ -114,11 +114,11 @@ class Home extends CI_Controller {
 		$data = $this->mhome->edit_academics($_POST);
 		echo json_encode($data);
 	} 
-  public function delete_academics(){
-		$this->check_login_session();
-   	$data = $this->mhome->delete_academics($_POST);
-    echo json_encode($data);
-  }
+	public function delete_academics(){
+			$this->check_login_session();
+		$data = $this->mhome->delete_academics($_POST);
+		echo json_encode($data);
+	}
 	//		activity_categories
  	public function activity_categories(){
 		$this->check_login_session();
@@ -126,7 +126,7 @@ class Home extends CI_Controller {
 		$data['activity_categories'] = $this->mhome->select_activity_categories($data_search);
     $this->load->view('tem/activity_categories',$data);
  	}
-  public function add_activity_categories(){
+  	public function add_activity_categories(){
 		$this->check_login_session();
 		$data = $this->mhome->add_activity_categories($_POST);
 		echo json_encode($data);
@@ -138,9 +138,9 @@ class Home extends CI_Controller {
 	} 
 	public function delete_activity_categories(){
 		$this->check_login_session();
-   	$data = $this->mhome->delete_activity_categories($_POST);
-    echo json_encode($data);
-  }
+		$data = $this->mhome->delete_activity_categories($_POST);
+		echo json_encode($data);
+  	}
 	//  	activity_types
 	public function activity_types(){
 		$this->check_login_session();
@@ -374,16 +374,16 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
   public function edit_departments(){
-		$this->check_login_session();
+	$this->check_login_session();
     $data = $this->mhome->edit_departments($_POST);
-		echo json_encode($data);
- 	}
-	public function delete_departments(){
-		$this->check_login_session();
-		$data = $this->mhome->delete_departments($_POST);
-		echo json_encode($data);
-	}
-	//	academic_positions
+	echo json_encode($data);
+}
+public function delete_departments(){
+	$this->check_login_session();
+	$data = $this->mhome->delete_departments($_POST);
+	echo json_encode($data);
+}
+//	academic_positions
 	public function academic_positions(){
 
 		$this->check_login_session();
@@ -537,7 +537,7 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function upload_file_services(){
-    // echo "<pre>";
+    	// echo "<pre>";
 		// print_r($_FILES);
 		// echo "</pre>";
 		// exit(); 
@@ -583,7 +583,7 @@ class Home extends CI_Controller {
 
 			$data = $this->mhome->save_upload_file_services($data);
 			echo json_encode($data);
-  }
+  	}
 	
 	public function edit_services_file(){
 
@@ -637,7 +637,7 @@ class Home extends CI_Controller {
 					// }
 					echo $output;	
 			}
-  	}
+  		}
 	
 		
 	
@@ -823,7 +823,7 @@ class Home extends CI_Controller {
 
 	
 	public function upload_file_activities(){
-    // echo "<pre>";
+    	// echo "<pre>";
 		// print_r($_FILES);
 		// echo "</pre>";
 		// exit(); 
@@ -869,7 +869,7 @@ class Home extends CI_Controller {
 
 			$data = $this->mhome->save_upload_file_activities($data);
 			echo json_encode($data);
-  }
+  	}
 
 
 	///
@@ -1069,22 +1069,22 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function upload_file_trainings(){
-    // echo "<pre>";
+    	// echo "<pre>";
 		// print_r($_FILES);
 		// echo "</pre>";
 		// exit(); 
 
 		if($_FILES["files"]["name"] != '')
-      $output = '';
-			$config['image_library'] = 'gd2';
-      $config["upload_path"] = './images/trainings_file/';
-      $config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
-			// $config['encrypt_name'] = FALSE;
-			$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
-      $this->load->library('upload', $config);
-			$this->load->library('image_lib', $config);
-      $this->upload->initialize($config);
+			$output = '';
+					$config['image_library'] = 'gd2';
+			$config["upload_path"] = './images/trainings_file/';
+			$config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
+					// $config['encrypt_name'] = FALSE;
+					$config['create_thumb'] = TRUE;
+					$config['maintain_ratio'] = TRUE;
+			$this->load->library('upload', $config);
+					$this->load->library('image_lib', $config);
+			$this->upload->initialize($config);
 
 			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
 			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
@@ -1104,7 +1104,7 @@ class Home extends CI_Controller {
 			$data = array(
 				'TRAINING_ID' => $_POST['TRAINING_ID'],
 				'img_name' => $new_name
-			);
+		);
 			// echo '<pre>';
 			// print_r($data);
 			// echo '</pre>';
@@ -1115,7 +1115,7 @@ class Home extends CI_Controller {
 
 			$data = $this->mhome->save_upload_file_trainings($data);
 			echo json_encode($data);
-  }
+  	}
 	///	
 	public function training_participants(){
 		$this->check_login_session();
@@ -1229,33 +1229,33 @@ class Home extends CI_Controller {
 
 		if (isset($_POST['deleteId'])) {
 		
-	    $deleteId = $_POST['deleteId'];
+			$deleteId = $_POST['deleteId'];
 
-  
-			$this->db->select('*');
-			$this->db->from('training_participants_pic');
-			$this->db->where('ID', $deleteId);
-			$query = $this->db->get();
-			$query = $query->result_array();
+	
+				$this->db->select('*');
+				$this->db->from('training_participants_pic');
+				$this->db->where('ID', $deleteId);
+				$query = $this->db->get();
+				$query = $query->result_array();
 
-		
-		
-
-
-
-    	
-
-	    $row =  $query[0];
-
-	    $filePath = 'trainings_img/'.$row['ID'];
 			
-			$this->db->delete('training_participants_pic', array('ID' => $deleteId)); 
-	    // $query = "DELETE FROM table_images WHERE id = $deleteId";
+			
 
-			if (mysqli_query($con, $query)) {
-					unlink($filePath);
-			}
-   	}
+
+
+			
+
+			$row =  $query[0];
+
+			$filePath = 'trainings_img/'.$row['ID'];
+				
+				$this->db->delete('training_participants_pic', array('ID' => $deleteId)); 
+			// $query = "DELETE FROM table_images WHERE id = $deleteId";
+
+				if (mysqli_query($con, $query)) {
+						unlink($filePath);
+				}
+   			}
 
 	
 		
@@ -1302,7 +1302,7 @@ class Home extends CI_Controller {
 		$this->check_login_session();
 		$data = $this->mhome->delete_counseling_types($_POST);
 		echo json_encode($data);
-  }
+  	}
 	//
 	public function leaves(){
 		// $this->check_login_session();		
@@ -1370,7 +1370,7 @@ class Home extends CI_Controller {
 		$this->check_login_session();
 		$data = $this->mhome->delete_leaves($_POST);
 		echo json_encode($data);
-  }
+  	}
 	
 	//
 	public function check_login(){
@@ -1386,39 +1386,39 @@ class Home extends CI_Controller {
 	
 	public function upload_profile(){
 
-    if($_FILES["files"]["name"] != '')
-      $output = '';
-			$config['image_library'] = 'gd2';
-      $config["upload_path"] = './images/profile/';
-      $config["allowed_types"] = './jpg|jpeg|png|gif';
-			// $config['encrypt_name'] = FALSE;
-			$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
-      $this->load->library('upload', $config);
-			$this->load->library('image_lib', $config);
-      $this->upload->initialize($config);
+    	if($_FILES["files"]["name"] != '')
+		$output = '';
+				$config['image_library'] = 'gd2';
+		$config["upload_path"] = './images/profile/';
+		$config["allowed_types"] = './jpg|jpeg|png|gif';
+				// $config['encrypt_name'] = FALSE;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+		$this->load->library('upload', $config);
+				$this->load->library('image_lib', $config);
+		$this->upload->initialize($config);
 
-			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
-			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
-			$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
-			$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
-			$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
+				$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
+				$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
+				$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][0];
+				$_FILES["file"]["error"] = $_FILES["files"]["error"][0];
+				$_FILES["file"]["size"] = $_FILES["files"]["size"][0];
 
-			$new_name = $_FILES["file"]["name"];
-			$config['file_name'] = $new_name;
-			
-			if($this->upload->do_upload('file')){
-				$data = $this->upload->data();
-			}
-
+				$new_name = $_FILES["file"]["name"];
+				$config['file_name'] = $new_name;
 				
-			$data = array(
-				'img_name' => $new_name
-			);
-			$data = $this->mhome->save_upload_profile($data);
-			echo json_encode($data);
-  }
-  public function get_img_SERVICE(){
+				if($this->upload->do_upload('file')){
+					$data = $this->upload->data();
+				}
+
+					
+				$data = array(
+					'img_name' => $new_name
+				);
+				$data = $this->mhome->save_upload_profile($data);
+				echo json_encode($data);
+  	}
+ 	public function get_img_SERVICE(){
 		$data = $this->mhome->Mget_img_SERVICE($_POST);
 		echo json_encode($data);
 	}
@@ -1492,7 +1492,7 @@ class Home extends CI_Controller {
 			echo json_encode($data);
 	}
 	public function upload_file_researchs(){
-    // echo "<pre>";
+    	// echo "<pre>";
 		// print_r($_FILES);
 		// echo "</pre>";
 		// exit(); 
@@ -1538,7 +1538,7 @@ class Home extends CI_Controller {
 
 			$data = $this->mhome->save_upload_file_researchs($data);
 			echo json_encode($data);
-  }
+  	}
 	public function edit_researchs(){
 		$this->check_login_session();
 
@@ -1553,8 +1553,9 @@ class Home extends CI_Controller {
 		$this->check_login_session();
 		$data = $this->mhome->delete_researchs($_POST);
 		echo json_encode($data);
-  }
-	////
+  	}
+
+	
 	public function getleaves(){
 		$this->check_login_session();		
 		$data = $this->mhome->getleaves($_POST);
@@ -1622,7 +1623,7 @@ class Home extends CI_Controller {
 	} 
 	public function leaves_approve_supervisor(){
 		$this->check_login_session();	
-			$data_search = $this->search_all(); 	
+		$data_search = $this->search_all(); 	
 		$data = $this->mhome->select_leaves_approve_supervisor($data_search);
 		// 	echo "<pre>";
 		// print_r($data);
@@ -1639,8 +1640,6 @@ class Home extends CI_Controller {
 		// exit(); 
 		echo json_encode($data);
 	} 
-	
-
 	///
 
 	public function students_login(){
@@ -1850,7 +1849,7 @@ class Home extends CI_Controller {
 					echo $output;	
 			}
 			exit;
-  	}
+  		}
 	
 		
 	
@@ -1969,7 +1968,7 @@ class Home extends CI_Controller {
 			if (mysqli_query($con, $query)) {
 					unlink($filePath);
 			}
-   	}
+   		}
 
 	
 		
