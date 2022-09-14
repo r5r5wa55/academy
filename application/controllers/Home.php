@@ -332,57 +332,54 @@ class Home extends CI_Controller {
 			$a = $_GET['search_all'];
 			
 		}
-    $data['faculties'] = $this->mhome->select_faculties($a);
-    
-	
-
-    $this->load->view('tem/faculties',$data); 
+    	$data['faculties'] = $this->mhome->select_faculties($a);
+    	$this->load->view('tem/faculties',$data); 
  	}
-  public function add_faculties(){
-		$this->check_login_session();
-		$data = $this->mhome->add_faculties($_POST);
-		// echo '<pre>';
-		// print_r($data);
-		// echo '</pre>';
-		// exit;
-		echo json_encode($data);
+	public function add_faculties(){
+			$this->check_login_session();
+			$data = $this->mhome->add_faculties($_POST);
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// exit;
+			echo json_encode($data);
 	}
-  public function edit_faculties(){
-		$this->check_login_session();
-		$data = $this->mhome->edit_faculties($_POST);
-		echo json_encode($data);
+	public function edit_faculties(){
+			$this->check_login_session();
+			$data = $this->mhome->edit_faculties($_POST);
+			echo json_encode($data);
 	} 
 	public function delete_faculties(){
 		$this->check_login_session();
 		$data = $this->mhome->delete_faculties($_POST);
 		echo json_encode($data);
 	}
-	//	departments
- 	public function departments(){
+		//	departments
+	public function departments(){
 		$this->check_login_session();
 
 		// print_r($_GET['search_all']);
 		// exit;
 		$depart = $this->we_search();
 		$data = $this->mhome->select_departments($depart);
- 
+
 		$this->load->view('tem/departments',$data); 
 	}
-  public function add_departments(){
+	public function add_departments(){
+			$this->check_login_session();
+			$data = $this->mhome->add_departments($_POST);
+			echo json_encode($data);
+	}
+	public function edit_departments(){
 		$this->check_login_session();
-		$data = $this->mhome->add_departments($_POST);
+		$data = $this->mhome->edit_departments($_POST);
 		echo json_encode($data);
 	}
-  public function edit_departments(){
-	$this->check_login_session();
-    $data = $this->mhome->edit_departments($_POST);
-	echo json_encode($data);
-}
-public function delete_departments(){
-	$this->check_login_session();
-	$data = $this->mhome->delete_departments($_POST);
-	echo json_encode($data);
-}
+	public function delete_departments(){
+		$this->check_login_session();
+		$data = $this->mhome->delete_departments($_POST);
+		echo json_encode($data);
+	}
 //	academic_positions
 	public function academic_positions(){
 
@@ -998,33 +995,33 @@ public function delete_departments(){
 
 		if (isset($_POST['deleteId'])) {
 		
-	    $deleteId = $_POST['deleteId'];
+			$deleteId = $_POST['deleteId'];
 
-  
-			$this->db->select('*');
-			$this->db->from('activity_participants_pic');
-			$this->db->where('ID', $deleteId);
-			$query = $this->db->get();
-			$query = $query->result_array();
+	
+				$this->db->select('*');
+				$this->db->from('activity_participants_pic');
+				$this->db->where('ID', $deleteId);
+				$query = $this->db->get();
+				$query = $query->result_array();
 
-		
-		
-
-
-
-    	
-
-	    $row =  $query[0];
-
-	    $filePath = 'activities_img/'.$row['ID'];
 			
-			$this->db->delete('activity_participants_pic', array('ID' => $deleteId)); 
-	    // $query = "DELETE FROM table_images WHERE id = $deleteId";
+			
 
-			if (mysqli_query($con, $query)) {
-					unlink($filePath);
+
+
+			
+
+			$row =  $query[0];
+
+			$filePath = 'activities_img/'.$row['ID'];
+				
+				$this->db->delete('activity_participants_pic', array('ID' => $deleteId)); 
+			// $query = "DELETE FROM table_images WHERE id = $deleteId";
+
+				if (mysqli_query($con, $query)) {
+						unlink($filePath);
+				}
 			}
-   	}
 
 	
 		

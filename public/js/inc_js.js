@@ -6457,10 +6457,7 @@ var main = {
 
     var INDIVIDUAL_COUNSELING_ID = $('#individual_counseling_filnel [name=INDIVIDUAL_COUNSELING_ID]').val()
     var COUNSELING_SOLVE = $('#individual_counseling_filnel [name=COUNSELING_SOLVE]').val()
-
     var COUNSELING_RESULT = $('#individual_counseling_filnel [name=COUNSELING_RESULT]').val()
-
-    
     var url = window.location.origin+"/index.php/Home/update_individual_counseling_filnel";
 
     
@@ -6536,3 +6533,5 @@ var main = {
   
 
 }
+
+
