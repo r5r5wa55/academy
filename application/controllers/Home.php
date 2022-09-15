@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		// exit(); หน้า network
 class Home extends CI_Controller {
 	public function __construct() {
-	parent::__construct();
+		parent::__construct();
 		$this->load->library('session');
 		$this->load->model('Home_model','mhome');
 		
@@ -61,10 +61,18 @@ class Home extends CI_Controller {
 	}
 	//
 	public function search_all(){
+
+
 		$search_all = "";
+	
 		if(isset($_GET['search_all']) && $_GET['search_all'] != ""){
 			$search_all = $_GET['search_all'];
-		}
+		};
+		
+		// echo '<pre>';
+		// print_r ($search_all);
+		// echo '</pre>';
+		// exit;
 		return $search_all ;
 	}
 	public function we_search(){
@@ -97,10 +105,7 @@ class Home extends CI_Controller {
 		// $data = $this->mhome->select_academics();
 
 
-		// echo '<pre>';
-		// print_r ($data);
-		// echo '</pre>';
-		// exit;
+		
 		$this->load->view('tem/academics',$data); 
 	
 	}
@@ -115,16 +120,22 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	} 
 	public function delete_academics(){
-			$this->check_login_session();
+		$this->check_login_session();
 		$data = $this->mhome->delete_academics($_POST);
 		echo json_encode($data);
 	}
+
 	//		activity_categories
  	public function activity_categories(){
 		$this->check_login_session();
-		$data_search = $this->search_all(); 
+		// $data_search = $this->search_all(); 
+		$data_search = "";
+		if(isset($_GET['search_all']) && $_GET['search_all'] != ""){
+			$data_search = $_GET['search_all'];
+		};
+
 		$data['activity_categories'] = $this->mhome->select_activity_categories($data_search);
-    $this->load->view('tem/activity_categories',$data);
+    	$this->load->view('tem/activity_categories',$data);
  	}
   	public function add_activity_categories(){
 		$this->check_login_session();
@@ -380,7 +391,7 @@ class Home extends CI_Controller {
 		$data = $this->mhome->delete_departments($_POST);
 		echo json_encode($data);
 	}
-//	academic_positions
+	//	academic_positions
 	public function academic_positions(){
 
 		$this->check_login_session();
