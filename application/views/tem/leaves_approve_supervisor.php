@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-lg-3 col-md-3 col-sm-3 hade-show">ประเภทการลา</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">จำนวนวันที่ขอลา</div>
         <div class="col-lg-2 col-md-2 col-sm-2 hade-show">การอนุมัติ</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ดูข้อมูล</div>
       </div>
       <?php foreach($leaves as $key=>$value):?>
         <div class="row body-show-long">
@@ -112,13 +112,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php if ($value['SUPERVISOR_STATUS'] == '3'): ?>
               <a class="danger">ไม่ผ่านการอนุมัติ</a>
             <?php endif; ?>
-
-        
           </div>
+
+
           <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
-              <a href="javascript:void(0);" class="btn-edit" onclick="main.edit_leaves('<?php echo $value['LEAVE_ID'];?>');">
-                แก้ไขข้อมูล
+          <?php if ($value['CONFINED'] == '1' || $value['SUPERVISOR_STATUS'] == '0' ): ?>
+              <a href="javascript:void(0)" class="btn-edit text-long" onclick="main.get_edit_leaves(
+                '<?php echo $value['LEAVE_ID'];?>',
+                '<?php echo $value['LEAVE_TYPE_ID'];?>',     
+                '<?php echo $value['WRITE_DATE'];?>',
+                '<?php echo $value['LEAVE_START_DATE'];?>',
+                '<?php echo $value['LEAVE_END_DATE'];?>',
+                '<?php echo $value['MY_CHECK'];?>',
+                '<?php echo $value['LAST_LEAVE_TYPE_ID'];?>',
+                '<?php echo $value['OFFICER'];?>',
+                '<?php echo $value['SUPERVISOR_ID'];?>',
+                '<?php echo $value['PERSONNEL_ID'];?>',
+                '<?php echo $value['LEAVE_TOAL'];?>');">
+                ดูข้อมูล
               </a>
+              
+            <?php endif; ?>
+
+
           </div>
         </div>
       <?php endforeach; ?>
