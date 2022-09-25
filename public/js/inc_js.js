@@ -4077,10 +4077,10 @@ var main = {
           if(resp.LEAVE_TYPE_ID.MY_CHECK === "on"){
            
             $('#add_edit_leaves_approve [name=myCheck]').prop('checked',true);
-            HALF_DATEA.style.display = "block";
+            HALF_DATE.style.display = "block";
           }else{
             $('#add_edit_leaves_approve [name=myCheck]').prop('checked',false);
-            HALF_DATEA.style.display = "none" ;
+            HALF_DATE.style.display = "none" ;
           }
         
    

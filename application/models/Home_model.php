@@ -380,7 +380,7 @@ class Home_model extends CI_Model {
       $this->db->or_like('managements.MANAGEMENT_NAME', $data_search);
       $this->db->or_like('departments.DEPARTMENT_ID', $data_search);
       $this->db->or_like('departments.DEPARTMENT_NAME_TH', $data_search);
-      $this->db->or_like('departments.DEPARTMENT_NAME_EN', $data_search);
+      $this->db->or_like('departments.DEPARTMENT_NAME_EN', $data_search); 
       
 
     };
@@ -964,6 +964,11 @@ class Home_model extends CI_Model {
     return $DATA;
   }
   public function add_academic_positions($data){
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// exit(); 
+
     $st = array('st'=>0);
     if(is_array($data) && $data['ACADEMIC_ID']!="" && $data['PERSONNEL_ID']!=""){
       $data = array(
@@ -986,10 +991,7 @@ class Home_model extends CI_Model {
       $this->db->update('academic_positions');
       $st = array('st'=>1);
     }
-    //   echo "<pre>";
-		// print_r($st);
-		// echo "</pre>";
-		// exit(); 
+  
 
     return $st;
   }
@@ -4040,7 +4042,7 @@ class Home_model extends CI_Model {
 
     return $st;
   }
-
+  
 
   public function check_login_student($data){
 
@@ -4537,6 +4539,54 @@ class Home_model extends CI_Model {
 
 
   }
+  
+
+
+  public function select_test(){
+   
+
+  
+    $we[] = array(
+      '*',
+      '*',
+      '',
+      '',
+      '',
+      '',
+      ''
+    );
+    $we2 = array(
+      '*',
+      '*',
+      '',
+      '',
+      '',
+      '*'
+    );
+
+  
+    $DATA = array(
+      'we'=>$we,
+      'we2'=>$we2
+
+    );
+   
+
+
+    echo "<pre>";
+    print_r($DATA);
+    echo "</pre>";
+    exit();
+
+
+    
+
+
+
+    return $DATA;
+  }
+  
+
   
   
 }
