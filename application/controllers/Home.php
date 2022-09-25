@@ -307,7 +307,7 @@ class Home extends CI_Controller {
 		$this->check_login_session();
    		$data = $this->mhome->delete_personnel_statuses($_POST);
     	echo json_encode($data);
-  }
+  	}
 	//	personnel_types
 	public function personnel_types(){
 		$this->check_login_session();
@@ -439,7 +439,7 @@ class Home extends CI_Controller {
 		$this->check_login_session();
 		$data = $this->mhome->add_personnels($_POST);
 
-		// 		echo "<pre>";
+		// echo "<pre>";
 		// print_r($data);
 		// echo "</pre>";
 		// exit();
@@ -2004,6 +2004,24 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 	
+
+	public function test(){
+	
+
+
+	
+		$data = $this->mhome->select_test();
+
+		// $data = $this->mhome->select_academics();
+
+		//  echo '<pre>';'
+		//  echo </pre>'
+
+		
+		
+		$this->load->view('tem/test',$data); 
+	
+	}
 } 
 
 
