@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="row ">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ชื่อการอบรม</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ผู้เข้าร่วม</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">แสดงรูปภาพ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">รายละเอียด</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">จัดการรูปภาพ</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">แก้ไขข้อมูล</div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 hade-show">ลบข้อมูล</div>
@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show text-long  box-btn-center">
             <a href="/index.php/Home/training_participants_pic?img=<?php echo $value['ID_TRAINING_PARTICIPANTS'];?>&id_personal=<?php echo $value['PERSONNEL_ID'];?>" class="btn-pic">
-              แสดงรูปภาพ
+              จัดการรูปภาพ
             </a>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 body-show box-btn-center">

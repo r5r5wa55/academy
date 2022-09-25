@@ -2140,18 +2140,20 @@ class Home_model extends CI_Model {
     $training_participants_pic = $training_participants_pic->result_array();
     // $personnels = $this->select_personnels_all();
   
-
+    // echo '<pre>';
+    // print_r($training_participants_pic);
+    // echo '</pre>';
+    // exit;
 
     
     $this->db->select('*');
     $this->db->from('trainings');
     $this->db->join('training_participants', 'training_participants.TRAINING_ID = trainings.TRAINING_ID');
-
     $this->db->join('personnels', 'trainings.TRAINING_OWNER = personnels.PERSONNEL_ID');
 
     // $this->db->join('activity_categories', 'activity_categories.ACTIVITY_CATEGORY_ID = activities.ACTIVITY_CATEGORY_ID');
     // $this->db->join('activity_types', 'activity_types.ACTIVITY_TYPE_ID = activity_types.ACTIVITY_TYPE_ID');
-    $this->db->where('TRAINING_OWNER', $_GET['id_personal']);
+    // $this->db->where('TRAINING_OWNER', $id_personal);
 
     $this->db->where('training_participants.ID_TRAINING_PARTICIPANTS', $_GET['img']);
   
@@ -4042,7 +4044,7 @@ class Home_model extends CI_Model {
 
     return $st;
   }
-  
+
 
   public function check_login_student($data){
 
