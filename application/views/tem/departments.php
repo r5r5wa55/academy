@@ -32,12 +32,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0" >ตารางวิชาการ departments</h1>
+            <h1 class="m-0" >ตารางสาขา</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">ตารางวิชาการ</li>
+              <li class="breadcrumb-item active">สาขา</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -45,66 +45,75 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <!-- /.content-header -->
 
+
     <div class="content">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_departments').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div>
+      </div>
       <div class="row">
-    
-        <div class="col-lg-2 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-2 hade-show">ลบข้อมูล</div>
-       
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อสาขา</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อภาษาอังกฤษ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">คณะ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($departments as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-2 body-show"><?php echo $value['DEPARTMENT_ID'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['DEPARTMENT_NAME_TH'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['DEPARTMENT_NAME_EN'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['FACUALTY_NAME_TH'];?></div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_departments(
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['DEPARTMENT_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['DEPARTMENT_NAME_TH'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['DEPARTMENT_NAME_EN'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['FACUALTY_NAME_TH'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_departments(
               '<?php echo $value['ID_DEP'];?>',
               '<?php echo $value['DEPARTMENT_ID'];?>',
               '<?php echo $value['DEPARTMENT_NAME_TH'];?>',
               '<?php echo $value['DEPARTMENT_NAME_EN'];?>',
               '<?php echo $value['FACULTY_ID'];?>');">
               แก้ไขข้อมูล
-            </button>
+            </a>
           </div>
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_departments('<?php echo $value['ID_DEP'];?>')">ลบข้อมูล</button>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_departments('<?php echo $value['ID_DEP'];?>');">
+            ลบข้อมูล
+            </a>
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_personnels').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
+
     </div>
   </div>
 </div>
 
 
-<div class="modal fade" id="add_personnels" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="add_departments" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล คณะ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มข้อมูล สาขา</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">DEPARTMENT_ID</label>
-          <input type="text" class="form-control"  name="DEPARTMENT_ID" placeholder="ชื่อคณะ">
-          <label for="formGroupExampleInput">DEPARTMENT_NAME_TH</label>
+          <label for="formGroupExampleInput">ไอดีสาขา</label>
+          <input type="text" class="form-control"  name="DEPARTMENT_ID" placeholder="ไอดีสาขา">
+          <label for="formGroupExampleInput">ชื่อสาขา</label>
           <input type="text" class="form-control"  name="DEPARTMENT_NAME_TH" placeholder="ชื่อคณะ">
-          <label for="formGroupExampleInput">DEPARTMENT_NAME_EN</label>
-          <input type="text" class="form-control"  name="DEPARTMENT_NAME_EN" placeholder="ชื่อคณะ">
-          <label for="formGroupExampleInput">FACULTY_ID</label>
+          <label for="formGroupExampleInput">ชื่อสาขาภาษาอังกฤษ</label>
+          <input type="text" class="form-control"  name="DEPARTMENT_NAME_EN" placeholder="ชื่อสาขาภาษาอังกฤษ">
+          <label for="formGroupExampleInput">ไอดีคณะ</label>
           <select class="form-control" name="FACULTY_ID" >
             <option value="">กรุณาเลือก</option>
             <?php foreach($faculties as $key=>$value): ?>
@@ -125,20 +134,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล คณะ</h5>
+        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล สาขา</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="formGroupExampleInput">DEPARTMENT_ID</label>
-          <input type="text" class="form-control"  name="DEPARTMENT_ID" placeholder="ชื่อคณะ">
-          <label for="formGroupExampleInput">DEPARTMENT_NAME_TH</label>
-          <input type="text" class="form-control"  name="DEPARTMENT_NAME_TH" placeholder="ชื่อคณะ">
-          <label for="formGroupExampleInput">DEPARTMENT_NAME_EN</label>
-          <input type="text" class="form-control"  name="DEPARTMENT_NAME_EN" placeholder="ชื่อคณะ">
-          <label for="formGroupExampleInput">FACULTY_ID</label>
+          <label for="formGroupExampleInput">ไอดีสาขา</label>
+          <input type="text" class="form-control"  name="DEPARTMENT_ID" placeholder="ไอดีสาขา">
+          <label for="formGroupExampleInput">ชื่อสาขา</label>
+          <input type="text" class="form-control"  name="DEPARTMENT_NAME_TH" placeholder="ชื่อสาขา">
+          <label for="formGroupExampleInput">ชื่อสาขาภาษาอังกฤษ</label>
+          <input type="text" class="form-control"  name="DEPARTMENT_NAME_EN" placeholder="ชื่อสาขาภาษาอังกฤษ">
+          <label for="formGroupExampleInput">ไอดีคณะ</label>
           <select class="form-control" name="FACULTY_ID" >
             <option value="">กรุณาเลือก</option>
             <?php foreach($faculties as $key=>$value): ?>

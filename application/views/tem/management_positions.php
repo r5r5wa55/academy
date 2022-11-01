@@ -33,57 +33,67 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0" >ตารางวิชาการ management_positions</h1>
+            <h1 class="m-0" >ตำแหน่งผู้บริหาร</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">ตารางวิชาการ</li>
+              <li class="breadcrumb-item active">ตำแหน่งผู้บริหาร</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+   
 
     <div class="content">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center">
+          <a href="javascript: void(0)" class="box-btn-add" onclick="$('#add_management_positions').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-lg-1 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">นามสกุล</div>
-        <div class="col-lg-2 hade-show">ตำแหน่ง</div>
-        <div class="col-lg-2 hade-show">แสดงข้อมูล</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-1 hade-show">ลบข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">นามสกุล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ตำแหน่ง</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show">ลบข้อมูล</div>
       </div>
       <?php foreach($management_positions as $key=>$value): ?>
         <div class="row">
-          <div class="col-lg-1 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['MANAGEMENT_NAME'];?></div>
-          <div class="col-lg-2 hade-show">แสดงข้อมูล</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show"><?php echo $value['MANAGEMENT_NAME'];?></div>
 
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_management_positions( 
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_management_positions(
               '<?php echo $value['MANAGEMENT_POSITION_ID'];?>',
               '<?php echo $value['MANAGEMENT_ID'];?>',
               '<?php echo $value['PERSONNEL_ID'];?>',
               '<?php echo $value['DEPARTMENT_ID'];?>');">
               แก้ไขข้อมูล
-            </button>
+            </a>
           </div>
 
-          <div class="col-lg-1 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_management_positions('<?php echo $value['MANAGEMENT_POSITION_ID'];?>')">ลบข้อมูล</button>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show  box-btn-center">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_management_positions(
+              '<?php echo $value['MANAGEMENT_POSITION_ID'];?>');">
+              ลบข้อมูล
+            </a>
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_management_positions').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
+ 
     </div>
   </div>
 </div>
@@ -140,12 +150,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล บุคลากร</h5>
+        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล ตำแหน่งผู้บริหาร</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body abc"  data-tes="1">
         <div class="form-group">
           <label for="formGroupExampleInput">ตำแหน่งผู้บริหาร</label>
           <select class="form-control" name="MANAGEMENT_ID" >
