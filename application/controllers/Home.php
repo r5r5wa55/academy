@@ -9,8 +9,7 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->model('Home_model','mhome');
-		
-		
+	
 	}  
 	public function check_login_session(){
 	
@@ -551,16 +550,16 @@ class Home extends CI_Controller {
 		// exit(); 
 
 		if($_FILES["files"]["name"] != '')
-      $output = '';
+      		$output = '';
 			$config['image_library'] = 'gd2';
-      $config["upload_path"] = './images/services_file/';
-      $config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
+     	 	$config["upload_path"] = './images/services_file/';
+      		$config["allowed_types"] = './jpg|jpeg|png|gif|pdf';
 			// $config['encrypt_name'] = FALSE;
 			$config['create_thumb'] = TRUE;
 			$config['maintain_ratio'] = TRUE;
-      $this->load->library('upload', $config);
+      		$this->load->library('upload', $config);
 			$this->load->library('image_lib', $config);
-      $this->upload->initialize($config);
+      		$this->upload->initialize($config);
 
 			$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
 			$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
@@ -1394,17 +1393,19 @@ class Home extends CI_Controller {
 	
 	public function upload_profile(){
 
-    	if($_FILES["files"]["name"] != '')
-		$output = '';
+
+
+				if($_FILES["files"]["name"] != '')
+				$output = '';
 				$config['image_library'] = 'gd2';
-		$config["upload_path"] = './images/profile/';
-		$config["allowed_types"] = './jpg|jpeg|png|gif';
+				$config["upload_path"] = './images/profile/';
+				$config["allowed_types"] = './gif|jpg|png';
 				// $config['encrypt_name'] = FALSE;
 				$config['create_thumb'] = TRUE;
 				$config['maintain_ratio'] = TRUE;
-		$this->load->library('upload', $config);
+				$this->load->library('upload', $config);
 				$this->load->library('image_lib', $config);
-		$this->upload->initialize($config);
+				$this->upload->initialize($config);
 
 				$_FILES["file"]["name"] = $_FILES["files"]["name"][0];
 				$_FILES["file"]["type"] = $_FILES["files"]["type"][0];
@@ -2010,16 +2011,12 @@ class Home extends CI_Controller {
 
 
 	
-		$data = $this->mhome->select_test();
-
-		// $data = $this->mhome->select_academics();
-
-		//  echo '<pre>';'
-		//  echo </pre>'
-
+		// setcookie('we', 'b');
+		// echo $_COOKIE['we'];
+		// exit;
 		
 		
-		$this->load->view('tem/test',$data); 
+		$this->load->view('tem/test'); 
 	
 	}
 } 

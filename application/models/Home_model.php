@@ -4548,41 +4548,41 @@ class Home_model extends CI_Model {
    
 
   
-    $we[] = array(
-      '*',
-      '*',
-      '',
-      '',
-      '',
-      '',
-      ''
-    );
-    $we2 = array(
-      '*',
-      '*',
-      '',
-      '',
-      '',
-      '*'
-    );
+    // $we[] = array(
+    //   '**    ****',
+    //   '*',
+    //   '',
+    //   '',
+    //   '',
+    //   '',
+    //   ''
+    // );
+    // $we2 = array(
+    //   '*',
+    //   '*',
+    //   '',
+    //   '',
+    //   '',
+    //   '*'
+    // );
 
   
-    $DATA = array(
-      'we'=>$we,
-      'we2'=>$we2
+    // $DATA = array(
+    //   'we'=>$we,
+    //   'we2'=>$we2
 
-    );
+    // );
    
 
 
-    echo "<pre>";
-    print_r($DATA);
-    echo "</pre>";
-    exit();
+    // echo "<pre>";
+    // print_r($DATA);
+    // echo "</pre>";
+    // exit();
 
 
-    
-
+    setcookie(asdasd);
+    exit;
 
 
     return $DATA;

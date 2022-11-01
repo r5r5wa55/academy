@@ -914,3 +914,6 @@ span.header {
 span.color-b {
   color: #000;
 }
+button.btn.btn-success.btn-edit {
+  width: 100%;
+}

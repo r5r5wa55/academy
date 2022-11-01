@@ -107,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <td>  <?php echo $key+1?></td>
                     <td><img src="/images/services_img/<?php echo $value['PIC_GARRY']?>" class="img-thumbnail" width="150px" height="150px"></td>
 
-                    <!-- <td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id="<?php echo $value['ID_S_P']?>">แก้ไข</button></td> -->
+                    <td><button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#exampleModal' data-id="<?php echo $value['ID_S_P']?>">แก้ไข</button></td>
 			              <td><button type='button' class='btn btn-danger btn-sm delete-btn' data-id="<?php echo $value['ID_S_P']?>">ลบ</button></td>
 
                 

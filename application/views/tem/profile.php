@@ -56,7 +56,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <input type="file" name="files" id="files">
+                  <div class="upload-btn-wrapper">
+                          <button class="btn btn-success btn-sm">แก้ไขรูปภาพ</button>
+                             <input type="file" name="files" id="files">
+                          
+                  </div>
+              
                   <input type="hidden" name="PERSONNEL_ID"/>
                   <div class="box-img">
                     <img src="<?php echo base_url("/images/profile/".$_SESSION['PIC']);?>" class="img-reponsive img-thumbnail img-profile" alt="กรุณาใส่รูป">
@@ -448,6 +453,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   }
 </script>
+
+
+<script type="text/javascript">
+  
+$(document).ready(function(){
+  // Edit Data from Database
+  $(document).on("click",".btn-success", function(){
+    var editId = $(this).data('id');
+    // console.log(editId);
+    $.ajax({
+      url  :window.location.origin+"/index.php/Home/edit",
+      type : "POST",
+      cache: false,
+      data : {editId:editId},
+      success:function(data){
+       
+        $("#editForm").html(data);
+      
+      }
+      
+    });
+    
+  });
+
+
+
+
+  // Update Data from database
+  $(document).on("submit", "#editForm", function(e){
+    e.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+      url  :window.location.origin+"/index.php/Home/update",
+    
+      type : "POST",
+      cache: false,
+      contentType : false, // you can also use multipart/form-data replace of false
+      processData : false,
+      data: formData,
+      success:function(response){
+        location.reload();
+        $("#exampleModal").modal();
+        alert("Image updated successfully");
+       
+        fetchData();
+       
+      }
+    });
+  });
+});
+
+
+
+</script>
+
+
 
 </body>
 </html>
