@@ -127,7 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <div class="form-group row we">
                         <img src="/backg/researchers.png" class="img-resear">
                         <div class="col-md-12 front-we">
-                          <a href="<?php echo base_url()?>index.php/Home/test"><span class="text-resear">งานวิจัย</span></a>
+                          <a href="<?php echo base_url()?>index.php/Home/researchs"><span class="text-resear">งานวิจัย</span></a>
                         </div>
                         <div class="col-md-12 front-we1">
                           <span href="">งานวิจัยล่าสุด 
