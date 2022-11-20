@@ -912,6 +912,7 @@ class Home_model extends CI_Model {
       $this->db->set('PERSONNEL_TYPE_ID', $data['PERSONNEL_TYPE_ID']);
       $this->db->set('PERSONNEL_USERNAME', $data['PERSONNEL_USERNAME']);
       $this->db->set('PERSONNEL_PASSWORD', $data['PERSONNEL_PASSWORD']);
+      $this->db->set('level', $data['level']);
       $this->db->set('PERSONNEL_LINE', $data['PERSONNEL_LINE']);
       $this->db->set('PERSONNEL_FACEBOOK', $data['PERSONNEL_FACEBOOK']);
       $this->db->update('personnels');

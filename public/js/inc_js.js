@@ -1214,7 +1214,7 @@ var main = {
 
       
    
-    // console.log(PIC);
+    // console.log(level);
     // return false;
 
 
@@ -1413,8 +1413,11 @@ var main = {
     var PERSONNEL_TYPE_ID = $('#edit_personnels [name=PERSONNEL_TYPE_ID] option:selected').val();
     var PERSONNEL_CATEGORY_ID = $('#edit_personnels [name=PERSONNEL_CATEGORY_ID] option:selected').val();
     var DEPARTMENT_ID = $('#edit_personnels [name=DEPARTMENT_ID] option:selected').val();
+    var level = $('#edit_personnels [name=level] option:selected').val();
     var PERSONNEL_LINE = $('#edit_personnels [name=PERSONNEL_LINE]').val();
     var PERSONNEL_FACEBOOK = $('#edit_personnels [name=PERSONNEL_FACEBOOK]').val();
+
+
     var url = window.location.origin+"/index.php/Home/edit_personnels";
     // console.log(window.location.origin);
     // return false;
@@ -1489,6 +1492,7 @@ var main = {
       'PERSONNEL_TYPE_ID':PERSONNEL_TYPE_ID,
       'PERSONNEL_CATEGORY_ID':PERSONNEL_CATEGORY_ID,
       'DEPARTMENT_ID':DEPARTMENT_ID,
+      'level':level,
       'PERSONNEL_LINE':PERSONNEL_LINE,
       'PERSONNEL_FACEBOOK':PERSONNEL_FACEBOOK
     }
