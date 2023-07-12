@@ -14,11 +14,13 @@
 <script src="<?php echo base_url()."public/"?>plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
 <script src="<?php echo base_url()."public/"?>plugins/jqvmap/jquery.vmap.min.js"></script>
+
 <script src="<?php echo base_url()."public/"?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?php echo base_url()."public/"?>plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
 <script src="<?php echo base_url()."public/"?>plugins/moment/moment.min.js"></script>
+
 <script src="<?php echo base_url()."public/"?>plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="<?php echo base_url()."public/"?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
@@ -30,7 +32,19 @@
 <script src="<?php echo base_url()."public/"?>dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()."public/"?>dist/js/demo.js"></script>
+
+
+<script src="<?php echo base_url()."public/"?>js\inc_js.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url()."public/"?>dist/js/pages/dashboard.js"></script>
-C:\xampp\htdocs\academy\public\js\inc_js.js
-<script src="<?php echo base_url()."public/"?>js\inc_js.js"></script>
+
+<!-- C:\xampp\htdocs\academy\public\js\inc_js.js -->
+<!-- <script src="<?php echo base_url()."public/"?>js\jquery-1.8.3.min.js"></script> -->
+
+<script src="<?php echo base_url()."public/"?>js\jquery.datetimepicker.full.min.js"></script>
+
+<script src="<?php echo base_url()."public/"?>js\jquery.datetimepicker.js"></script>
+
+
+
+

@@ -8,7 +8,7 @@ application/logs/*
 
 !application/*/.htaccess
 
-composer.lock
+# composer.lock
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
@@ -29,3 +29,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+/academy/upload

@@ -7,7 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>AdminLTE 3 |</title>
+  
   <?php 
     $this->load->view('tem/inc_css');
   ?>
@@ -44,47 +45,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+   
 
     <div class="content">
       <div class="row">
-    
-        <div class="col-lg-1 hade-show">รหัส</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">ขื่อ</div>
-        <div class="col-lg-2 hade-show">แสดงข้อมูล</div>
-        <div class="col-lg-2 hade-show">แก้ไขข้อมูล</div>
-        <div class="col-lg-1 hade-show">ลบข้อมูล</div>
-       
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 box-btn-center text-long">
+          <a href="javascript:void(0)" class="box-btn-add" onclick="$('#add_academic_positions').modal('show');">
+          เพิ่มข้อมูล
+          </a>
+        </div> 
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">รหัส</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">ขื่อ</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">แก้ไขข้อมูล</div>
+        <div class="col-lg-2 col-md-2 col-sm-2 hade-show text-long">ลบข้อมูล</div> 
       </div>
       <?php foreach($academic_positions as $key=>$value): ?>
-        <div class="row">
-          <div class="col-lg-1 body-show"><?php echo $value['PERSONNEL_ID'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['ACADEMIC_NAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_NAME'];?></div>
-          <div class="col-lg-2 body-show"><?php echo $value['PERSONNEL_SURNAME'];?></div>
-          <div class="col-lg-2 hade-show">แสดงข้อมูล</div>
-
-          <div class="col-lg-2 body-show">
-            <button type="button" class="btn btn-block btn-success" onclick="main.get_edit_academic_positions(
+        <div class="row body-show-long">
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long"><?php echo $value['PERSONNEL_ID'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long"><?php echo $value['ACADEMIC_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long"><?php echo $value['PERSONNEL_NAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show text-long"><?php echo $value['PERSONNEL_SURNAME'];?></div>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
+            <a href="javascript:void(0)" class="btn-edit" onclick="main.get_edit_academic_positions(
               '<?php echo $value['ACADEMIC_POSITION_ID'];?>',
               '<?php echo $value['ACADEMIC_ID'];?>',
               '<?php echo $value['PERSONNEL_ID'];?>',
               '<?php echo $value['START_DATE'];?>',
               '<?php echo $value['END_DATE'];?>');">
               แก้ไขข้อมูล
-            </button>
+            </a>
           </div>
-          <div class="col-lg-1 body-show">
-            <button type="button" class="btn btn-block btn-danger" onclick="main.delete_academic_positions('<?php echo $value['ACADEMIC_POSITION_ID'];?>')">ลบข้อมูล</button>
+          <div class="col-lg-2 col-md-2 col-sm-2 body-show box-btn-center text-long">
+            <a href="javascript:void(0)" class="btn-delete" onclick="main.delete_academic_positions(
+              '<?php echo $value['ACADEMIC_POSITION_ID'];?>');">
+              ลบข้อมูล
+            </a>
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4"> <button type="button" class="btn btn-block btn-outline-primary btn-lg m-3 p-3" onclick="$('#add_academic_positions').modal('show');">เพิ่มข้อมูล</button></div>
-        <div class="col-lg-4"></div>
-      </div>
     </div>
   </div>
 </div>
@@ -94,7 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล คณะ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">เเก้ไขข้อมูล คณตำแหน่งทางวิชาการ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -133,21 +140,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล คณะ</h5>
+        <h5 class="modal-title exampleModalLongTitle" id="exampleModalLongTitle" >เเก้ไขข้อมูล ตำแหน่งทางวิชาการ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-        <label for="formGroupExampleInput">ACADEMIC_ID</label>
+        <label for="formGroupExampleInput">กรุณาเลือก ตำแหน่งทางวิชาการ</label>
           <select class="form-control" name="ACADEMIC_ID" >
             <option value="">กรุณาเลือก</option>
             <?php foreach($academics as $key=>$value): ?>
               <option value="<?php echo $value['ACADEMIC_ID'];?>"><?php echo $value['ACADEMIC_NAME'];?></option>
             <?php endforeach; ?>
           </select>
-          <label for="formGroupExampleInput">PERSONNEL_ID</label>
+          <label for="formGroupExampleInput">กรุณาเลือก ชิ่อ-นามสกุล</label>
           <select class="form-control" name="PERSONNEL_ID" >
             <option value="">กรุณาเลือก</option>
             <?php foreach($personnels as $key=>$value): ?>
@@ -175,3 +182,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </script>
 </body>
 </html>
+
+
+

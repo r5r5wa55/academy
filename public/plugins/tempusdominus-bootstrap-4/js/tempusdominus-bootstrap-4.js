@@ -472,6 +472,7 @@ var DateTimePicker = function ($, moment) {
       this.initDate = void 0;
       this._notifyChangeEventContext = void 0;
       this._currentPromptTimeTimeout = null;
+      this._disabledWeekDays:[0]
 
       this._int();
     }
